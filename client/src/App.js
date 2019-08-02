@@ -4,12 +4,14 @@ import React, { Component } from "react";
 import FilesAndFolders from "./components/FilesAndFolders.js";
 import actualizeIcon from "./img/actualize.svg";
 import backIcon from "./img/arrow_back.svg";
+import downloadIcon from "./img/download.svg";
 import octopus from "./img/baby-octopus.jpg";
 import trashcan from "./img/trashcan.svg";
 import folderIcon from "./img/folder.svg";
 import fileIcon from "./img/file.svg";
 import headphones from "./img/headphones.svg";
 import photoIcon from "./img/photo.svg";
+import uploadIcon from "./img/upload.svg";
 import waitIcon from "./img/wait.gif";
 import "./App.css";
 
@@ -429,7 +431,7 @@ class App extends Component {
 					})()}
 				</section>
 				<section id='App-controlFooter'>
-					<button>Upload file to current location...</button>
+					<img src={uploadIcon} alt=':(' className='App-listIcon' />
 					<input id='App-folderInput' placeholder='create new folder...' />
 				</section>
 				<br />
