@@ -6,7 +6,6 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const upload = require("./upload");
-const zip = require("express-zip");
 const https = require("https");
 const rimraf = require("rimraf");
 

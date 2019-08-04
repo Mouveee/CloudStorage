@@ -1,11 +1,11 @@
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
-import FilesAndFolders from "./components/FilesAndFolders.js";
+
+import Avatar from "./components/avatar.js";
 import actualizeIcon from "./img/actualize.svg";
 import backIcon from "./img/arrow_back.svg";
 import downloadIcon from "./img/download.svg";
-import octopus from "./img/baby-octopus.jpg";
 import trashcan from "./img/trashcan.svg";
 import folderIcon from "./img/folder.svg";
 import fileIcon from "./img/file.svg";
@@ -28,6 +28,38 @@ class App extends Component {
 
 	actualize = () => {
 		this.requestFolder(this.state.currentFolder);
+	};
+
+	callBackendAPI = async (content, destination) => {
+		let requestBody = {};
+		requestBody.content = content;
+
+		if (!destination) destination = "./external";
+
+		console.log(
+			`func callBackendAPI request body folder: ${JSON.stringify(requestBody)}`
+		);
+
+		const response = await fetch(destination, {
+			method: "POST", // *GET, POST, PUT, DELETE, etc.
+			mode: "cors", // no-cors, cors, *same-origin
+			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+			credentials: "same-origin", // include, *same-origin, omit
+			headers: {
+				"Content-Type": `application/json`,
+				Accept: "*/*"
+				// 'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			redirect: "follow", // manual, *follow, error
+			referrer: "no-referrer", // no-referrer, *client
+			body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
+		});
+		const body = await response.json();
+
+		if (response.status !== 200) {
+			throw Error(body.message);
+		}
+		return body;
 	};
 
 	createFolder = async inputFolder => {
@@ -233,38 +265,6 @@ class App extends Component {
 			});
 	};
 
-	callBackendAPI = async (content, destination) => {
-		let requestBody = {};
-		requestBody.content = content;
-
-		if (!destination) destination = "./external";
-
-		console.log(
-			`func callBackendAPI request body folder: ${JSON.stringify(requestBody)}`
-		);
-
-		const response = await fetch(destination, {
-			method: "POST", // *GET, POST, PUT, DELETE, etc.
-			mode: "cors", // no-cors, cors, *same-origin
-			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-			credentials: "same-origin", // include, *same-origin, omit
-			headers: {
-				"Content-Type": `application/json`,
-				Accept: "*/*"
-				// 'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			redirect: "follow", // manual, *follow, error
-			referrer: "no-referrer", // no-referrer, *client
-			body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
-		});
-		const body = await response.json();
-
-		if (response.status !== 200) {
-			throw Error(body.message);
-		}
-		return body;
-	};
-
 	componentDidMount() {
 		const inputFolder = document.getElementById("App-folderInput");
 
@@ -288,7 +288,7 @@ class App extends Component {
 			<div className='App'>
 				<header className='App-header'>
 					<h1 className='App-title'>
-						<img src={octopus} id='App-octopus' alt=':(' />
+						<Avatar />
 						OKTODRIVE <em>...just so cute...</em>
 					</h1>
 				</header>
@@ -298,7 +298,6 @@ class App extends Component {
 						if (this.state.currentFolder !== "") {
 							return (
 								<section id='App-info'>
-									<FilesAndFolders />
 									<nav className='App-navBar'>
 										<img
 											src={backIcon}
@@ -385,7 +384,7 @@ class App extends Component {
 										})}
 										{this.state.fileList.map((item, index) => {
 											let fileSplit = item.split(".");
-											let fileEnding = fileSplit.pop();
+											const fileEnding = fileSplit.pop();
 											return (
 												<tr key={"tr-file-" + index}>
 													<td className='App-smallSpan'>

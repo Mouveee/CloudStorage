@@ -87,6 +87,7 @@ th.App-columnName:hover {
 	height: 1em;
 	transition: 300ms;
 	user-select: none;
+	float: left;
 }
 
 .App-listIcon:hover {
