@@ -2,16 +2,17 @@ import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
 
+//custom components, hopefully well written
 import Avatar from "./components/avatar.js";
-import actualizeIcon from "./img/actualize.svg";
-import backIcon from "./img/arrow_back.svg";
+import ControlFooter from "./components/ControlFooter.js";
+import ControlHeader from "./components/ControlHeader.js";
+
 import downloadIcon from "./img/download.svg";
 import trashcan from "./img/trashcan.svg";
 import folderIcon from "./img/folder.svg";
 import fileIcon from "./img/file.svg";
 import headphones from "./img/headphones.svg";
 import photoIcon from "./img/photo.svg";
-import uploadIcon from "./img/upload.svg";
 import waitIcon from "./img/wait.gif";
 import "./App.css";
 
@@ -72,14 +73,19 @@ class App extends Component {
 		}
 	};
 
-	deleteItem = item => {
+	deleteItem = async item => {
 		const content = {};
 		content.item = item.target.dataset.item;
 		content.type = item.target.dataset.type;
 		content.location = this.state.currentFolder;
 
+		this.setState({ updating: true });
+
 		this.callBackendAPI(content, "/delete");
-		this.requestFolder(this.state.currentFolder);
+
+		this.setState({ updating: false });
+
+		this.actualize();
 	};
 
 	getFileIcon(ending) {
@@ -179,6 +185,10 @@ class App extends Component {
 		}
 	};
 
+	uploadFile = () => {
+		alert("soon this will work...");
+	};
+
 	handleFolderClick = e => {
 		let prev = [...this.state.prevFolder, this.state.currentFolder];
 
@@ -267,11 +277,9 @@ class App extends Component {
 
 	componentDidMount() {
 		const inputFolder = document.getElementById("App-folderInput");
-
 		this.requestFolder();
-		this.setState({ rendered: this.state.rendered + 1 });
 
-		//create a folder by pressing return
+		//create a folder by pressing return, remove event listener when unfocused
 		inputFolder.onfocus = () =>
 			(document.onkeypress = e => {
 				if (e.keyCode === 13) {
@@ -291,37 +299,16 @@ class App extends Component {
 						<Avatar />
 						OKTODRIVE <em>...just so cute...</em>
 					</h1>
+
+					<ControlHeader
+						currentFolder={this.state.currentFolder}
+						navigateBack={this.navigateBack}
+						actualize={this.actualize}
+						root={this.state.currentFolder === "" ? true : false}
+					/>
 				</header>
 
 				<section id='App-container'>
-					{(() => {
-						if (this.state.currentFolder !== "") {
-							return (
-								<section id='App-info'>
-									<nav className='App-navBar'>
-										<img
-											src={backIcon}
-											alt='<-'
-											onClick={this.navigateBack}
-											class='App-listIcon'
-										/>
-										<img
-											src={actualizeIcon}
-											alt='<-->'
-											onClick={this.actualize}
-											class='App-listIcon'
-										/>
-									</nav>
-									<div className='App-infoItem'>
-										Current Folder: {this.state.currentFolder}
-									</div>{" "}
-								</section>
-							);
-						} else {
-							return <p />;
-						}
-					})()}
-
 					{(() => {
 						if (this.state.updating) {
 							return (
@@ -428,20 +415,9 @@ class App extends Component {
 							return <div>This folder is empty :(</div>;
 						}
 					})()}
-				</section>
-				<section id='App-controlFooter'>
-					<img src={uploadIcon} alt=':(' className='App-listIcon' />
-					<input id='App-folderInput' placeholder='create new folder...' />
+					<ControlFooter uploadFile={this.uploadFile} />
 				</section>
 				<br />
-				<div className='Upload'>
-					<span className='Title'>Upload Files</span>
-					<div className='Content'>
-						<div />
-						<div className='Files' />
-					</div>
-					<div className='Actions' />
-				</div>
 			</div>
 		);
 	}

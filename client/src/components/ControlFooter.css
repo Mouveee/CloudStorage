@@ -1,0 +1,23 @@
+#App-controlFooter {
+	position: fixed;
+	bottom: 2em;
+	text-align: center;
+	width: 50%;
+	height: 1.7em;
+	background-color: cornSilk;
+	border: solid black 1px;
+	left: 25%;
+	right: 25%;
+}
+
+.App-controlElement {
+	vertical-align: middle;
+	margin-left: 1em;
+	margin-right: 1em;
+	/* height: 1.5em; */
+}
+
+img.App-controlElement:hover {
+	cursor: pointer;
+	fill: black;
+}

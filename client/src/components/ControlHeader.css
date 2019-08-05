@@ -1,0 +1,16 @@
+.App-navBar {
+	text-align: center;
+	height: 2.2em;
+	border-bottom: solid black 0.1px;
+}
+
+.App-navItem {
+	vertical-align: center;
+	height: 1em;
+	margin: 2em;
+	display: inline-block;
+}
+
+img.App-navItem:hover {
+	cursor: pointer;
+}

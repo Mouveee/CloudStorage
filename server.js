@@ -84,8 +84,12 @@ app.post("/createfolder", (req, res) => {
 	if (req.body.content && !fs.existsSync(`./external/${req.body.content}`)) {
 		fs.mkdirSync(`./external/${req.body.content}`);
 		objectToSend = getFolderContent(`./external/` + req.body.content);
+	} else if (fs.existsSync(`./external/${req.body.content}`)) {
+		res.setHeader("folder already existing, name conflict", 409);
+		res.send("folder already existing...");
 	}
 
+	res.setHeader("", 200);
 	res.send(JSON.stringify(objectToSend));
 });
 
@@ -103,6 +107,9 @@ app.post("/delete", (req, res) => {
 		});
 	} else {
 		rimraf.sync(`./external/${content.location}${content.item}`);
+		console.log("job SHOULD be done... _%_/");
+		res.statusCode = 200;
+		res.send("your server did it, take more care of him");
 	}
 });
 
