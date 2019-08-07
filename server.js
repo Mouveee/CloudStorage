@@ -32,6 +32,48 @@ function getFolderContent(folder) {
 	return objectToSend;
 }
 
+app.post("/createfolder", (req, res) => {
+	let objectToSend = {};
+
+	console.log(
+		`${process.env.DOTS}\nsomebody wants me to create folder ./external/${
+			req.body.content
+		}`
+	);
+	if (req.body.content && !fs.existsSync(`./external/${req.body.content}`)) {
+		console.log(`no naming conflict, creating folder: ${req.body.content}`);
+
+		fs.mkdirSync(`./external/${req.body.content}`);
+		objectToSend = getFolderContent(`./external/` + req.body.content);
+		res.statusCode = 200;
+		res.send(JSON.stringify(objectToSend));
+	} else if (fs.existsSync(`./external/${req.body.content}`)) {
+		console.log(`naming conflict, folder ${req.body.content}`);
+		res.statusCode = 409;
+		res.send(JSON.stringify("name conflict"));
+	}
+});
+
+app.post("/delete", (req, res) => {
+	let content = req.body.content;
+
+	if (content.type === "file") {
+		fs.unlink(`./external/${content.location}${content.item}`, e => {
+			if (e) {
+				let error = {};
+				error.message = e.message;
+			} else {
+				console.log("job done!");
+			}
+		});
+	} else {
+		rimraf.sync(`./external/${content.location}${content.item}`);
+		console.log("job SHOULD be done... _%_/");
+		res.statusCode = 200;
+		res.send("your server did it, take more care of him");
+	}
+});
+
 app.post("/download", async function(req, res) {
 	console.log(`${process.env.DOTS}\nsomebody requested: ${req.body.file}`);
 	let file = new Promise((resolve, reject) => {
@@ -73,46 +115,6 @@ app.post("/download", async function(req, res) {
 
 app.post("/upload", upload);
 
-app.post("/createfolder", (req, res) => {
-	let objectToSend = {};
-
-	console.log(
-		`${process.env.DOTS}\nsomebody wants me to create folder ./external/${
-			req.body.content
-		}`
-	);
-	if (req.body.content && !fs.existsSync(`./external/${req.body.content}`)) {
-		fs.mkdirSync(`./external/${req.body.content}`);
-		objectToSend = getFolderContent(`./external/` + req.body.content);
-	} else if (fs.existsSync(`./external/${req.body.content}`)) {
-		res.setHeader("folder already existing, name conflict", 409);
-		res.send("folder already existing...");
-	}
-
-	res.setHeader("", 200);
-	res.send(JSON.stringify(objectToSend));
-});
-
-app.post("/delete", (req, res) => {
-	let content = req.body.content;
-
-	if (content.type === "file") {
-		fs.unlink(`./external/${content.location}${content.item}`, e => {
-			if (e) {
-				let error = {};
-				error.message = e.message;
-			} else {
-				console.log("job done!");
-			}
-		});
-	} else {
-		rimraf.sync(`./external/${content.location}${content.item}`);
-		console.log("job SHOULD be done... _%_/");
-		res.statusCode = 200;
-		res.send("your server did it, take more care of him");
-	}
-});
-
 //list file content
 app.post("/external", (req, res) => {
 	let objectToSend = {};
@@ -124,6 +126,7 @@ app.post("/external", (req, res) => {
 
 	objectToSend = getFolderContent(dir);
 
+	res.statusCode = 200;
 	res.send(JSON.stringify(objectToSend));
 });
 

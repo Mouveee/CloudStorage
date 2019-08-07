@@ -37,10 +37,6 @@ class App extends Component {
 
 		if (!destination) destination = "./external";
 
-		console.log(
-			`func callBackendAPI request body folder: ${JSON.stringify(requestBody)}`
-		);
-
 		const response = await fetch(destination, {
 			method: "POST", // *GET, POST, PUT, DELETE, etc.
 			mode: "cors", // no-cors, cors, *same-origin
@@ -55,19 +51,22 @@ class App extends Component {
 			referrer: "no-referrer", // no-referrer, *client
 			body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
 		});
-		const body = await response.json();
+
+		const bodyPromise = await response.json();
 
 		if (response.status !== 200) {
-			throw Error(body.message);
+			throw new Error(response.message);
 		}
-		return body;
+
+		return bodyPromise;
 	};
 
 	createFolder = async inputFolder => {
 		const folder = this.state.currentFolder + inputFolder.value;
 
 		if (folder.length > 0) {
-			this.callBackendAPI(folder, "/createfolder");
+			let response = this.callBackendAPI(folder, "/createfolder");
+			console.log(`server respondes with status: ${response.status}`);
 			this.requestFolder(this.state.currentFolder);
 			inputFolder.value = "";
 		}
@@ -75,17 +74,23 @@ class App extends Component {
 
 	deleteItem = async item => {
 		const content = {};
+		let confirmed = false;
+
 		content.item = item.target.dataset.item;
 		content.type = item.target.dataset.type;
 		content.location = this.state.currentFolder;
 
-		this.setState({ updating: true });
+		confirmed = window.confirm(`really delete ${content.item}?`);
 
-		this.callBackendAPI(content, "/delete");
+		if (confirmed) {
+			this.setState({ updating: true });
 
-		this.setState({ updating: false });
+			this.callBackendAPI(content, "/delete");
 
-		this.actualize();
+			this.setState({ updating: false });
+
+			this.actualize();
+		}
 	};
 
 	getFileIcon(ending) {
@@ -141,6 +146,8 @@ class App extends Component {
 
 		this.callBackendAPI(targetFolder)
 			.then(res => {
+				console.log(`res.data: ${res.status}`);
+
 				let folders = JSON.parse(res.folders);
 
 				this.setState({ updating: false });
@@ -297,7 +304,7 @@ class App extends Component {
 				<header className='App-header'>
 					<h1 className='App-title'>
 						<Avatar />
-						OKTODRIVE <em>...just so cute...</em>
+						OKTODRIVE <em>...praise the octopus baby...</em>
 					</h1>
 
 					<ControlHeader

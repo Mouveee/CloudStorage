@@ -8,7 +8,6 @@ function ControlHeader(props) {
 
 	return (
 		<section id='App-info'>
-			<div>Current Folder: {props.currentFolder}</div>{" "}
 			<nav className='App-navBar'>
 				{!props.root ? (
 					<img
@@ -26,6 +25,11 @@ function ControlHeader(props) {
 					onClick={props.actualize}
 					className='App-navItem'
 				/>
+				{!props.root ? (
+					<div>Current Folder: {props.currentFolder}</div>
+				) : (
+					<div>Welcome</div>
+				)}
 			</nav>
 		</section>
 	);

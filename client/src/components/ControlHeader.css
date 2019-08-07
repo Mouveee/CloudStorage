@@ -1,7 +1,9 @@
 .App-navBar {
 	text-align: center;
-	height: 2.2em;
+	height: auto;
 	border-bottom: solid black 0.1px;
+	overflow: hidden;
+	font-size: 0.7em;
 }
 
 .App-navItem {
