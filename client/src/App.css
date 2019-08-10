@@ -110,8 +110,8 @@ th.App-columnName:hover {
 }
 
 .App-listIconNonClickable {
-	width: 1em;
-	height: 1em;
+	width: 0.8em;
+	height: 0.8em;
 	transition: 400ms;
 	opacity: 0.5;
 	user-select: none;

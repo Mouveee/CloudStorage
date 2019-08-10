@@ -1,0 +1,7 @@
+.App-itemInfo {
+	font-size: 0.8em;
+	color: lightgray;
+	overflow: hidden;
+	line-break: strict;
+	text-align: left;
+}

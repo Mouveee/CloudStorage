@@ -21,9 +21,27 @@ function getFolderContent(folder) {
 	let folders = [];
 
 	dirContent.map(object => {
-		fs.statSync(folder + "/" + object).isDirectory()
-			? folders.push(object)
-			: files.push(object);
+		let current = folder + "/" + object;
+
+		if (fs.statSync(current).isDirectory()) {
+			let folderObject = {};
+
+			folderObject.name = object;
+			folderObject.modified = fs.statSync(current).mtime;
+			console.log(`modified: ${folderObject.modified}`);
+			folders.push(folderObject);
+		} else {
+			let newFile = {};
+
+			newFile.name = object;
+			newFile.size = fs.statSync(current).size;
+			newFile.modified = fs.statSync(current).mtime;
+			files.push(newFile);
+
+			console.log(
+				`content of files array: ${JSON.stringify(files[files.length - 1])}`
+			);
+		}
 	});
 
 	objectToSend.files = JSON.stringify(files);
@@ -113,8 +131,6 @@ app.post("/download", async function(req, res) {
 		});
 });
 
-app.post("/upload", upload);
-
 //list file content
 app.post("/external", (req, res) => {
 	let objectToSend = {};
@@ -129,6 +145,8 @@ app.post("/external", (req, res) => {
 	res.statusCode = 200;
 	res.send(JSON.stringify(objectToSend));
 });
+
+app.post("/upload", upload);
 
 const server = app.listen(5000, "127.0.0.1", function() {
 	const host = server.address().address;

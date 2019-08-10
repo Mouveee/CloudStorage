@@ -6,13 +6,11 @@ import React, { Component } from "react";
 import Avatar from "./components/avatar.js";
 import ControlFooter from "./components/ControlFooter.js";
 import ControlHeader from "./components/ControlHeader.js";
+import ListItem from "./components/ListItem.js";
 
 import downloadIcon from "./img/download.svg";
+
 import trashcan from "./img/trashcan.svg";
-import folderIcon from "./img/folder.svg";
-import fileIcon from "./img/file.svg";
-import headphones from "./img/headphones.svg";
-import photoIcon from "./img/photo.svg";
 import waitIcon from "./img/wait.gif";
 import "./App.css";
 
@@ -66,7 +64,7 @@ class App extends Component {
 
 		if (folder.length > 0) {
 			let response = this.callBackendAPI(folder, "/createfolder");
-			console.log(`server respondes with status: ${response.status}`);
+			console.log(`response: ${JSON.stringify(response)}`);
 			this.requestFolder(this.state.currentFolder);
 			inputFolder.value = "";
 		}
@@ -90,138 +88,6 @@ class App extends Component {
 			this.setState({ updating: false });
 
 			this.actualize();
-		}
-	};
-
-	getFileIcon(ending) {
-		let returnValue = fileIcon;
-		console.log(`file ending: ${ending}`);
-		switch (ending) {
-			case "ogg":
-			case "flac":
-			case "mp3":
-			case "wav":
-				returnValue = headphones;
-				break;
-			case "jpg":
-			case "svg":
-				returnValue = photoIcon;
-				break;
-			default:
-				returnValue = fileIcon;
-				break;
-		}
-		return returnValue;
-	}
-
-	itemSelect = async e => {
-		const item = e.target.dataset.item;
-		if (e.target.checked) {
-			await this.setState({
-				selectedItems: [...this.state.selectedItems, item]
-			});
-		} else {
-			await this.setState({
-				selectedItems: this.state.selectedItems.filter((i, index) => {
-					return i !== item;
-				})
-			});
-		}
-	};
-
-	normalizeItem = item => {
-		item = item
-			.replace(/\[/g, "")
-			.replace(/"/g, "")
-			.replace(/\]/g, "")
-			.replace(/\//g, "");
-		return item;
-	};
-
-	requestFolder = folder => {
-		// Call our fetch function below once the component mounts
-		let targetFolder = "./external/";
-		folder ? (targetFolder += folder) : console.log(`sending ${targetFolder}`);
-		this.setState({ updating: true });
-
-		this.callBackendAPI(targetFolder)
-			.then(res => {
-				console.log(`res.data: ${res.status}`);
-
-				let folders = JSON.parse(res.folders);
-
-				this.setState({ updating: false });
-
-				folders = folders.map(item => {
-					item = this.normalizeItem(item);
-					return item;
-				});
-
-				let files = JSON.parse(res.files);
-
-				files = files.map(item => {
-					item = this.normalizeItem(item);
-					return item;
-				});
-
-				this.setState({ folderList: folders });
-				this.setState({ fileList: files });
-			})
-			.catch(err => console.log(`error in catch: ${err}`));
-	};
-
-	sortBy = e => {
-		console.log(`sorting by ${e.target.dataset.sort}`);
-		console.log(`state: ${this.state.fileList}`);
-		let newFolderList = [];
-		let newFileList = [];
-
-		switch (e.target.dataset.sort) {
-			case "name":
-				newFolderList = this.state.folderList.reverse();
-				newFileList = this.state.fileList.reverse();
-				this.setState({
-					sorting: e.target.dataset.sort,
-					folderList: newFolderList,
-					fileList: newFileList
-				});
-				break;
-
-			default:
-				return;
-		}
-	};
-
-	uploadFile = () => {
-		alert("soon this will work...");
-	};
-
-	handleFolderClick = e => {
-		let prev = [...this.state.prevFolder, this.state.currentFolder];
-
-		this.setState({
-			currentFolder: this.state.currentFolder + e.target.textContent + "/",
-			prevFolder: prev,
-			selectedItems: []
-		});
-
-		this.requestFolder(this.state.currentFolder + e.target.textContent);
-	};
-
-	navigateBack = () => {
-		if (this.state.prevFolder.length > 0) {
-			let folder = this.state.prevFolder[this.state.prevFolder.length - 1];
-			let prevFolder = new Array(...this.state.prevFolder);
-
-			prevFolder.pop();
-
-			this.setState({
-				currentFolder: folder,
-				prevFolder: prevFolder,
-				selectedItems: []
-			});
-
-			this.requestFolder(folder);
 		}
 	};
 
@@ -280,6 +146,118 @@ class App extends Component {
 			.catch(e => {
 				console.log(`error in promise: ${e}`);
 			});
+	};
+
+	handleFolderClick = e => {
+		let prev = [...this.state.prevFolder, this.state.currentFolder];
+
+		this.setState({
+			currentFolder: this.state.currentFolder + e.target.textContent + "/",
+			prevFolder: prev,
+			selectedItems: []
+		});
+
+		this.requestFolder(this.state.currentFolder + e.target.textContent);
+	};
+
+	itemSelect = async e => {
+		const item = e.target.dataset.item;
+		if (e.target.checked) {
+			await this.setState({
+				selectedItems: [...this.state.selectedItems, item]
+			});
+		} else {
+			await this.setState({
+				selectedItems: this.state.selectedItems.filter((i, index) => {
+					return i !== item;
+				})
+			});
+		}
+	};
+
+	normalizeItem = item => {
+		item = item
+			// .replace(/\[/g, "")
+			.replace(/"/g, "")
+			// .replace(/\]/g, "")
+			.replace(/\//g, "");
+		return item;
+	};
+
+	requestFolder = folder => {
+		// Call our fetch function below once the component mounts
+		let targetFolder = "./external/";
+		folder ? (targetFolder += folder) : console.log(`sending ${targetFolder}`);
+		this.setState({ updating: true });
+
+		let response = this.callBackendAPI(targetFolder);
+		console.log(`response status: ${response.statusCode}`);
+
+		response
+			.then(res => {
+				console.log(`typeof res: ${JSON.stringify(res)}`);
+
+				let folders = JSON.parse(res.folders);
+
+				this.setState({ updating: false });
+
+				folders = folders.map(item => {
+					item.name = this.normalizeItem(item.name);
+					return item;
+				});
+
+				let files = JSON.parse(res.files);
+
+				files = files.map(item => {
+					item.name = this.normalizeItem(item.name);
+					return item;
+				});
+
+				this.setState({ folderList: folders });
+				this.setState({ fileList: files });
+			})
+			.catch(err => console.log(`error in catch: ${err}`));
+	};
+
+	sortBy = e => {
+		let newFolderList = [];
+		let newFileList = [];
+
+		switch (e.target.dataset.sort) {
+			case "name":
+				newFolderList = this.state.folderList.reverse();
+				newFileList = this.state.fileList.reverse();
+				this.setState({
+					sorting: e.target.dataset.sort,
+					folderList: newFolderList,
+					fileList: newFileList
+				});
+				break;
+
+			default:
+				return;
+		}
+	};
+
+	uploadFile = () => {
+		alert("soon this will work...");
+	};
+
+	navigateBack = () => {
+		if (this.state.prevFolder.length > 0) {
+			let folder = this.state.prevFolder[this.state.prevFolder.length - 1];
+			let prevFolder = new Array(...this.state.prevFolder);
+
+			prevFolder.pop();
+
+			this.setState({
+				currentFolder: folder,
+				prevFolder: prevFolder,
+				selectedItems: []
+			});
+
+			this.requestFolder(folder);
+		}
 	};
 
 	componentDidMount() {
@@ -344,82 +322,48 @@ class App extends Component {
 											</th>
 										</tr>
 									</thead>
-									<tbody>
-										{this.state.folderList.map((item, index) => {
-											return (
-												<tr key={"tr-folder-" + index}>
-													<td className='App-smallSpan' />
-													<td className='App-smallSpan'>
-														<img
-															src={folderIcon}
-															className='App-listIconNonClickable'
-															alt=''
-														/>
-													</td>
-													<td
-														onClick={this.handleFolderClick}
-														className='App-listItem App-bigSpan'
-														key={item}
-													>
-														{item}
-													</td>
-													<td className='App-smallSpan'>
-														<img
-															src={trashcan}
-															className='App-listIcon'
-															onClick={this.deleteItem}
-															data-item={item}
-															data-type='folder'
-															alt='KILL'
-														/>
-													</td>
-												</tr>
-											);
-										})}
-										{this.state.fileList.map((item, index) => {
-											let fileSplit = item.split(".");
-											const fileEnding = fileSplit.pop();
-											return (
-												<tr key={"tr-file-" + index}>
-													<td className='App-smallSpan'>
-														<input
-															type='checkbox'
-															data-item={item}
-															onChange={this.itemSelect}
-														/>
-													</td>
-													<td className='App-smallSpan '>
-														<img
-															src={this.getFileIcon(fileEnding)}
-															alt=''
-															className='App-listIconNonClickable'
-														/>
-													</td>
-													<td
-														className='App-listItem App-bigSpan'
-														onClick={this.handleFileClick}
-														key={item}
-													>
-														{item}
-													</td>
-													<td className='App-smallSpan'>
-														<img
-															className='App-listIcon'
-															src={trashcan}
-															onClick={this.deleteItem}
-															data-item={item}
-															data-type='file'
-															alt='KILL'
-														/>
-													</td>
-												</tr>
-											);
-										})}
-									</tbody>
+									{this.state.folderList.map((item, index) => {
+										return (
+											<ListItem
+												item={item}
+												index={index}
+												deleteItem={this.deleteItem}
+												handleClick={this.handleFolderClick}
+												type='folder'
+											/>
+										);
+									})}
+									{this.state.fileList.map((item, index) => {
+										let fileSplit = item.name.split(".");
+										const fileEnding = fileSplit.pop();
+										return (
+											<ListItem
+												item={item}
+												index={index}
+												deleteItem={this.deleteItem}
+												fileEnding={fileEnding}
+												handleClick={this.handleFileClick}
+												itemSelect={this.itemSelect}
+												type='file'
+											/>
+										);
+									})}
 								</table>
 							);
 						} else {
-							return <div>This folder is empty :(</div>;
+							return (
+								<div>
+									This folder is empty :(
+									<br />
+									<a
+										href='http://www.assoass.com'
+										target='_blank'
+										rel='noopener noreferrer'
+									>
+										WATCH PORN INSTEAD!
+									</a>
+								</div>
+							);
 						}
 					})()}
 					<ControlFooter uploadFile={this.uploadFile} />
