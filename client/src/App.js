@@ -85,14 +85,7 @@ class App extends Component {
 
 	handleFileClick = async e => {
 		let fileName = "unknown.dat";
-		let message = document.createElement("p");
-		message.innerText = "DOWNLOAD STARTED, PATIENCE PLEASE";
-		let domNode = document.getElementById("App-info");
-		domNode.append(message);
-
-		setTimeout(() => {
-			domNode.removeChild(message);
-		}, 2000);
+		alert ('this must get better...')
 
 		new Promise(async (resolve, reject) => {
 			let answer = await fetch("/download", {
