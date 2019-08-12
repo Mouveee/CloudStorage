@@ -28,7 +28,6 @@ function getFolderContent(folder) {
 
 			folderObject.name = object;
 			folderObject.modified = fs.statSync(current).mtime;
-			console.log(`modified: ${folderObject.modified}`);
 			folders.push(folderObject);
 		} else {
 			let newFile = {};
