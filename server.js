@@ -36,10 +36,6 @@ function getFolderContent(folder) {
 			newFile.size = fs.statSync(current).size;
 			newFile.modified = fs.statSync(current).mtime;
 			files.push(newFile);
-
-			console.log(
-				`content of files array: ${JSON.stringify(files[files.length - 1])}`
-			);
 		}
 	});
 
