@@ -1,3 +1,8 @@
+@font-face {
+	font-family: fancyFont;
+	src: url("./fonts/Breakable.ttf");
+}
+
 button:hover {
 	cursor: pointer;
 }
@@ -39,8 +44,20 @@ th.App-columnName:hover {
 	float: left;
 	border-radius: 100%;
 	height: 3em;
+	width: 3em;
 	padding: 0.5em;
 	vertical-align: middle;
+}
+
+#App-fileList {
+	margin: auto;
+}
+
+#App-folderList {
+	margin: auto;
+	color: darkgray;
+	display: inherit;
+	border-bottom: 1px solid black;
 }
 
 #App-info {
@@ -53,41 +70,12 @@ th.App-columnName:hover {
 	padding-right: 1em;
 }
 
-.App-navBar {
-	display: flexbox;
-}
-
 .App-onlyNonRootVisible {
 	display: none;
 }
 
-.App-title {
-	background-color: black;
-	color: white;
-	height: 10%;
-	text-align: center;
-	padding: 0.5em;
-	margin: 0;
-	user-select: none;
-}
-
 .App {
 	text-align: center;
-}
-
-#App-fileList {
-	margin: auto;
-}
-
-.App-folderList {
-	margin: auto;
-	color: darkgray;
-}
-
-.App-listItem {
-	color: darkgray;
-	transition: 300ms;
-	user-select: none;
 }
 
 .App-listItem:hover {
@@ -117,24 +105,6 @@ th.App-columnName:hover {
 	user-select: none;
 	vertical-align: middle;
 }
-
-*/
-
-/* 
-
-#App-info {
-	margin: auto;
-	padding: 1em;
-	display: flex;
-	flex-direction: row;
-	justify-content: left;
-}
-
-.App-link {
-	color: #61dafb;
-}
-
-
 
 /* NOT WRITTEN BY MYSELF!!!! */
 .Upload {

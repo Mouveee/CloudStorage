@@ -1,12 +1,56 @@
 import React from "react";
 
 import trashcan from "../img/trashcan.svg";
+import downloadIcon from "../img/download.svg";
 import folderIcon from "../img/folder.svg";
 import fileIcon from "../img/file.svg";
 import headphones from "../img/headphones.svg";
 import photoIcon from "../img/photo.svg";
 
 import "./ListItem.css";
+
+function formatDate(dateString) {
+	const date = new Date(dateString);
+
+	const day = date.getDate();
+	const month = date.getMonth();
+	const year = date.getFullYear();
+	const weekDay = date.getDay();
+
+	return `|| modified: ${getWeekDay(weekDay)} ${day + 1}.${month + 1}.${year}`;
+}
+
+function getWeekDay(day) {
+	let dayName;
+
+	switch (day) {
+		case 0:
+			dayName = "Monday";
+			break;
+		case 1:
+			dayName = "Tuesday";
+			break;
+		case 2:
+			dayName = "Wednesday";
+			break;
+		case 3:
+			dayName = "Thursday";
+			break;
+		case 4:
+			dayName = "Friday";
+			break;
+		case 5:
+			dayName = "Saturday";
+			break;
+		case 6:
+			dayName = "Sunday";
+			break;
+		default:
+			dayName = "your clock is fucked!";
+			break;
+	}
+	return dayName;
+}
 
 function getFileIcon(ending) {
 	let returnValue = fileIcon;
@@ -30,6 +74,7 @@ function getFileIcon(ending) {
 }
 
 function ListItem(props) {
+	console.log(`typeof modified: ${typeof Date(props.item.modified)}`);
 	return (
 		<tbody>
 			<tr key={"tr-" + props.type + "-" + props.index}>
@@ -64,6 +109,15 @@ function ListItem(props) {
 				</td>
 				<td className='App-smallSpan'>
 					<img
+						src={downloadIcon}
+						className='App-listIcon'
+						data-item={props.item.name}
+						data-type={props.type}
+						alt='KILL'
+					/>
+				</td>
+				<td className='App-smallSpan'>
+					<img
 						src={trashcan}
 						className='App-listIcon'
 						onClick={props.deleteItem}
@@ -81,8 +135,9 @@ function ListItem(props) {
 						{Math.round(props.item.size / 1048576, 4) +
 							" mb" +
 							" " +
-							props.item.modified}
+							formatDate(props.item.modified)}
 					</td>
+					<td />
 					<td />
 					<td />
 				</tr>
@@ -91,8 +146,9 @@ function ListItem(props) {
 					<td />
 					<td />
 					<td className='App-itemInfo'>
-						Download Folder {props.item.modified}
+						Folder {formatDate(props.item.modified)}
 					</td>
+					<td />
 					<td />
 					<td />
 				</tr>

@@ -4,4 +4,5 @@
 	overflow: hidden;
 	line-break: strict;
 	text-align: left;
+	user-select: none;
 }

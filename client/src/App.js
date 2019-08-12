@@ -3,14 +3,10 @@ import "react-app-polyfill/stable";
 import React, { Component } from "react";
 
 //custom components, hopefully well written
-import Avatar from "./components/avatar.js";
 import ControlFooter from "./components/ControlFooter.js";
-import ControlHeader from "./components/ControlHeader.js";
+import Header from "./components/Header.js";
 import ListItem from "./components/ListItem.js";
 
-import downloadIcon from "./img/download.svg";
-
-import trashcan from "./img/trashcan.svg";
 import waitIcon from "./img/wait.gif";
 import "./App.css";
 
@@ -51,10 +47,6 @@ class App extends Component {
 		});
 
 		const bodyPromise = await response.json();
-
-		if (response.status !== 200) {
-			throw new Error(response.message);
-		}
 
 		return bodyPromise;
 	};
@@ -176,11 +168,7 @@ class App extends Component {
 	};
 
 	normalizeItem = item => {
-		item = item
-			// .replace(/\[/g, "")
-			.replace(/"/g, "")
-			// .replace(/\]/g, "")
-			.replace(/\//g, "");
+		item = item.replace(/"/g, "").replace(/\//g, "");
 		return item;
 	};
 
@@ -279,13 +267,8 @@ class App extends Component {
 	render() {
 		return (
 			<div className='App'>
-				<header className='App-header'>
-					<h1 className='App-title'>
-						<Avatar />
-						OKTODRIVE <em>...praise the octopus baby...</em>
-					</h1>
-
-					<ControlHeader
+				<header>
+					<Header
 						currentFolder={this.state.currentFolder}
 						navigateBack={this.navigateBack}
 						actualize={this.actualize}

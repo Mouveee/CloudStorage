@@ -1,0 +1,39 @@
+#App-header {
+	font-family: fancyFont;
+	background-color: black;
+	color: pink;
+	height: 2em;
+	width: 100%;
+	text-align: center;
+	padding: 0.5em;
+	margin: 0;
+	position: fixed;
+	top: 0px;
+	user-select: none;
+}
+
+.App-listItem {
+	color: darkgray;
+	transition: 300ms;
+	user-select: none;
+}
+
+.App-navBar {
+	font-family: "Courier New", Courier, monospace;
+	text-align: center;
+	height: 4em;
+	border-bottom: solid black 0.1px;
+	overflow: hidden;
+	font-size: 0.7em;
+}
+
+.App-navItem {
+	vertical-align: middle;
+	height: 1em;
+	margin: 2em;
+	display: inline-block;
+}
+
+img.App-navItem:hover {
+	cursor: pointer;
+}

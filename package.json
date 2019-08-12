@@ -18,9 +18,9 @@
 		"express": "^4.17.1",
 		"file-saver": "^2.0.2",
 		"formidable": "^1.2.1",
-		"node": "^12.7.0",
+		"node": "^12.8.0",
 		"payload-validator": "^1.0.4",
-		"react-app-polyfill": "^1.0.1",
+		"react-app-polyfill": "^1.0.2",
 		"rimraf": "^2.6.3",
 		"save-file": "^2.3.1"
 	},
