@@ -1,15 +1,21 @@
 @font-face {
 	font-family: fancyFont;
-	src: url("./fonts/Breakable.ttf");
+	src: url("./fonts/Cout-Regular.ttf");
 }
 
 button:hover {
 	cursor: pointer;
 }
 
-table {
+table#App-folderList {
 	margin: auto;
 	width: 75%;
+	position: fixed;
+	top: 8em;
+	left: 20%;
+	margin: auto;
+	color: darkgray;
+	display: inherit;
 }
 
 td {
@@ -51,13 +57,6 @@ th.App-columnName:hover {
 
 #App-fileList {
 	margin: auto;
-}
-
-#App-folderList {
-	margin: auto;
-	color: darkgray;
-	display: inherit;
-	border-bottom: 1px solid black;
 }
 
 #App-info {

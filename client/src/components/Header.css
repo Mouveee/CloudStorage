@@ -5,11 +5,12 @@
 	height: 2em;
 	width: 100%;
 	text-align: center;
-	padding: 0.5em;
 	margin: 0;
 	position: fixed;
 	top: 0px;
 	user-select: none;
+	left: 0px;
+	right: 0px;
 }
 
 .App-listItem {
@@ -20,20 +21,40 @@
 
 .App-navBar {
 	font-family: "Courier New", Courier, monospace;
+	font-size: 0.5em;
 	text-align: center;
-	height: 4em;
+	height: 2.5em;
+	width: 100%;
 	border-bottom: solid black 0.1px;
-	overflow: hidden;
-	font-size: 0.7em;
+	position: fixed;
+	top: 4em;
+	left: 0px;
+	right: 0px;
+	color: black;
 }
 
 .App-navItem {
 	vertical-align: middle;
+	width: 0.7em;
+	height: 0.7em;
 	height: 1em;
-	margin: 2em;
+	margin-left: 2em;
+	margin-right: 2em;
 	display: inline-block;
 }
 
 img.App-navItem:hover {
 	cursor: pointer;
+}
+
+.App-subHeader {
+	display: block;
+	font-size: 0.7em;
+	margin-block-start: 0.67em;
+	margin-block-end: 0.67em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+	margin: -0.5em;
+
+	font-weight: bold;
 }

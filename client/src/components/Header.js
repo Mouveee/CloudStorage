@@ -11,7 +11,8 @@ function ControlHeader(props) {
 	return (
 		<h1 id='App-header'>
 			<Avatar />
-			OKTODRIVE <em>...praise the octopus baby...</em>
+			OKTODRIVE
+			<h1 className='App-subHeader'>...praise the Octopus Baby...</h1>
 			<nav className='App-navBar'>
 				{!props.root ? (
 					<img
@@ -20,9 +21,7 @@ function ControlHeader(props) {
 						onClick={props.navigateBack}
 						className='App-navItem'
 					/>
-				) : (
-					<p />
-				)}
+				) : null}
 				<img
 					src={actualizeIcon}
 					alt='<-->'

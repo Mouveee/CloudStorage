@@ -1,0 +1,12 @@
+#App-sideBar {
+	position: fixed;
+	left: 5%;
+	top: 10em;
+	width: 10%;
+	transition: 500ms;
+}
+
+.App-sideBarItem:hover {
+	cursor: pointer;
+	color: pink;
+}

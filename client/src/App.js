@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import ControlFooter from "./components/ControlFooter.js";
 import Header from "./components/Header.js";
 import ListItem from "./components/ListItem.js";
+import SideBar from "./components/Sidebar.js";
 
 import waitIcon from "./img/wait.gif";
 import "./App.css";
@@ -46,9 +47,9 @@ class App extends Component {
 			body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
 		});
 
-		const bodyPromise = await response.json();
+		// const bodyPromise = await response.json();
 
-		return bodyPromise;
+		return response;
 	};
 
 	createFolder = async inputFolder => {
@@ -85,7 +86,7 @@ class App extends Component {
 
 	handleFileClick = async e => {
 		let fileName = "unknown.dat";
-		alert ('this must get better...')
+		alert("this must get better...");
 
 		new Promise(async (resolve, reject) => {
 			let answer = await fetch("/download", {
@@ -165,16 +166,20 @@ class App extends Component {
 		return item;
 	};
 
-	requestFolder = folder => {
+	requestFolder = async folder => {
 		// Call our fetch function below once the component mounts
 		let targetFolder = "./external/";
 		folder ? (targetFolder += folder) : console.log(`sending ${targetFolder}`);
 		this.setState({ updating: true });
 
-		let response = this.callBackendAPI(targetFolder);
-		console.log(`response status: ${response.statusCode}`);
+		let response = await this.callBackendAPI(targetFolder);
+		console.log(
+			`response status: ${response.status}\nresponse type: ${typeof response}`
+		);
 
-		response
+		let parsedResponse = response.json();
+
+		parsedResponse
 			.then(res => {
 				console.log(`typeof res: ${JSON.stringify(res)}`);
 
@@ -270,10 +275,11 @@ class App extends Component {
 				</header>
 
 				<section id='App-container'>
+					<SideBar />
 					{(() => {
 						if (this.state.updating) {
 							return (
-								<div>
+								<div id='App-folderList'>
 									<img src={waitIcon} alt='loading...' />
 								</div>
 							);
