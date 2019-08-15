@@ -10,12 +10,14 @@ button:hover {
 table#App-folderList {
 	margin: auto;
 	width: 75%;
+	height: 80%;
 	position: fixed;
 	top: 8em;
-	left: 20%;
+	left: 15%;
 	margin: auto;
 	color: darkgray;
 	display: inherit;
+	overflow-y: scroll;
 }
 
 td {

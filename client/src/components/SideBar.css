@@ -3,7 +3,11 @@
 	left: 5%;
 	top: 10em;
 	width: 10%;
-	transition: 500ms;
+	user-select: none;
+}
+
+.App-sideBarItem {
+	transition: 400ms;
 }
 
 .App-sideBarItem:hover {
