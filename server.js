@@ -9,9 +9,14 @@ const upload = require("./upload");
 const https = require("https");
 const rimraf = require("rimraf");
 
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+}
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, "external")));
 
 function getFolderContent(folder) {

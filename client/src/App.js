@@ -4,6 +4,7 @@ import React, { Component } from "react";
 
 //custom components, hopefully well written
 import ControlFooter from "./components/ControlFooter.js";
+import FileUpload from "./components/FileUpoad.js";
 import Header from "./components/Header.js";
 import ListItem from "./components/ListItem.js";
 import SideBar from "./components/Sidebar.js";
@@ -12,6 +13,11 @@ import waitIcon from "./img/wait.gif";
 import "./App.css";
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.changeUploadVisibility.bind(this);
+	}
+
 	state = {
 		currentFolder: "",
 		prevFolder: [],
@@ -19,6 +25,7 @@ class App extends Component {
 		folderList: [],
 		selectedItems: [],
 		updating: false,
+		uploadMenuVisible: false,
 		sorting: "name" //possible so far: 'name',
 	};
 
@@ -50,6 +57,11 @@ class App extends Component {
 		// const bodyPromise = await response.json();
 
 		return response;
+	};
+
+	changeUploadVisibility = () => {
+		console.log(`it is being fired`);
+		this.setState({ uploadMenuVisible: false });
 	};
 
 	createFolder = async inputFolder => {
@@ -226,7 +238,7 @@ class App extends Component {
 	};
 
 	uploadFile = () => {
-		alert("soon this will work...");
+		this.setState({ uploadMenuVisible: true });
 	};
 
 	navigateBack = () => {
@@ -263,6 +275,8 @@ class App extends Component {
 	}
 
 	render() {
+		console.log(`state of upload: ${this.state.uploadMenuVisible}`);
+
 		return (
 			<div className='App'>
 				<header>
@@ -276,6 +290,9 @@ class App extends Component {
 
 				<section id='App-container'>
 					<SideBar />
+					{this.state.uploadMenuVisible ? (
+						<FileUpload changeState={this.changeUploadVisibility} />
+					) : null}
 					{(() => {
 						if (this.state.updating) {
 							return (
@@ -334,7 +351,7 @@ class App extends Component {
 							);
 						} else {
 							return (
-								<div>
+								<div id='App-folderList'>
 									This folder is empty :(
 									<br />
 									<a
@@ -348,7 +365,10 @@ class App extends Component {
 							);
 						}
 					})()}
-					<ControlFooter uploadFile={this.uploadFile} />
+					<ControlFooter
+						uploadFile={this.uploadFile}
+						itemsSelected={this.state.selectedItems.length > 0 ? true : false}
+					/>
 				</section>
 				<br />
 			</div>

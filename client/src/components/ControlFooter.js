@@ -2,11 +2,15 @@ import React from "react";
 
 import "./ControlFooter.css";
 
+import downloadIcon from "../img/download.svg";
 import uploadIcon from "../img/upload.svg";
 
 function ControlFooter(props) {
 	return (
 		<nav id='App-controlFooter'>
+			{props.itemsSelected ? (
+				<img src={downloadIcon} alt=':(' className='App-controlElement' />
+			) : null}
 			<img
 				src={uploadIcon}
 				alt=':('
