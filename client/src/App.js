@@ -1,10 +1,11 @@
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
+import { FilePond } from "react-filepond";
+import "filepond/dist/filepond.min.css";
 
 //custom components, hopefully well written
 import ControlFooter from "./components/ControlFooter.js";
-import FileUpload from "./components/FileUpoad.js";
 import Header from "./components/Header.js";
 import ListItem from "./components/ListItem.js";
 import SideBar from "./components/Sidebar.js";
@@ -60,8 +61,7 @@ class App extends Component {
 	};
 
 	changeUploadVisibility = () => {
-		console.log(`it is being fired`);
-		this.setState({ uploadMenuVisible: false });
+		this.setState({ uploadMenuVisible: !this.state.uploadMenuVisible });
 	};
 
 	createFolder = async inputFolder => {
@@ -238,7 +238,7 @@ class App extends Component {
 	};
 
 	uploadFile = () => {
-		this.setState({ uploadMenuVisible: true });
+		this.setState({ uploadMenuVisible: !this.state.uploadMenuVisible });
 	};
 
 	navigateBack = () => {
@@ -275,8 +275,6 @@ class App extends Component {
 	}
 
 	render() {
-		console.log(`state of upload: ${this.state.uploadMenuVisible}`);
-
 		return (
 			<div className='App'>
 				<header>
@@ -289,10 +287,17 @@ class App extends Component {
 				</header>
 
 				<section id='App-container'>
-					<SideBar />
 					{this.state.uploadMenuVisible ? (
-						<FileUpload changeState={this.changeUploadVisibility} />
+						<FilePond
+							allowMultiple={true}
+							name={"file"}
+							server={"./upload"}
+							className='App-filePond'
+						/>
 					) : null}
+
+					<SideBar />
+
 					{(() => {
 						if (this.state.updating) {
 							return (
@@ -365,6 +370,7 @@ class App extends Component {
 							);
 						}
 					})()}
+
 					<ControlFooter
 						uploadFile={this.uploadFile}
 						itemsSelected={this.state.selectedItems.length > 0 ? true : false}

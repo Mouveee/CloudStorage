@@ -12,11 +12,7 @@ function FileUpload(props) {
 	return (
 		<div id='App-fileUpload'>
 			<form onSubmit={uploadFile}>
-				<input
-					name='uploadFile'
-					type='file'
-					placeholder='choose File to upload...'
-				/>
+				<input name='uploadFile' type='file' />
 				<input type='submit' value='uploadFile' ref='thisFileInput' />
 			</form>
 			<img
@@ -24,6 +20,7 @@ function FileUpload(props) {
 				src={closeIcon}
 				alt='X'
 				onClick={e => {
+					//stopPropagation seems to to the same as cancelBubble...
 					e.stopPropagation();
 					props.changeState();
 				}}

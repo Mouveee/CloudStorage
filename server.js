@@ -4,20 +4,21 @@ const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const app = express();
+const fileUpload = require("express-fileupload");
 const cors = require("cors");
-const upload = require("./upload");
 const https = require("https");
 const rimraf = require("rimraf");
 
 const corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-}
+	origin: "*",
+	optionsSuccessStatus: 200
+};
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, "external")));
+app.use(fileUpload());
 
 function getFolderContent(folder) {
 	let objectToSend = {};
@@ -146,7 +147,12 @@ app.post("/external", (req, res) => {
 	res.send(JSON.stringify(objectToSend));
 });
 
-app.post("/upload", upload);
+app.post("/upload", (req, res) => {
+	const uploadedFile = req.files.file;
+	uploadedFile.mv(`./external/${req.files.file.name}`);
+	console.log(`received request!`);
+	console.log(`received req: ${req.files.file.name}`);
+});
 
 const server = app.listen(5000, "127.0.0.1", function() {
 	const host = server.address().address;

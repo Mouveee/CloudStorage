@@ -74,7 +74,6 @@ function getFileIcon(ending) {
 }
 
 function ListItem(props) {
-	console.log(`typeof modified: ${typeof Date(props.item.modified)}`);
 	return (
 		<tbody>
 			<tr key={"tr-" + props.type + "-" + props.index}>

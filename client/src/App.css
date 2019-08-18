@@ -91,6 +91,15 @@ th.App-columnName:hover {
 	padding-right: 1em;
 }
 
+.App-filePond {
+	background-color: black;
+	color: white;
+	position: fixed;
+	width: 100%;
+	bottom: 6em;
+	z-index: 999;
+}
+
 .App-onlyNonRootVisible {
 	display: none;
 }
