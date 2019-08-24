@@ -1,16 +1,16 @@
 #App-controlFooter {
 	position: fixed;
-	bottom: 1em;
+	bottom: 0.5em;
 	text-align: center;
 	width: inherit;
 	height: 1.7em;
 	background-color: black;
 	color: white;
-	border: solid black 1px;
+	border: solid white 1px;
 	left: 25%;
 	right: 25%;
 	user-select: none;
-	border-radius: 10%;
+	border-radius: 60px;
 }
 
 .App-controlElement {

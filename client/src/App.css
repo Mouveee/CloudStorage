@@ -28,16 +28,19 @@ button:hover {
 }
 
 #App-folderList {
+	border-bottom: 1px solid lightgray;
+	border-top: 1px solid lightgray;
 	margin: auto;
-	width: 75%;
-	height: 80%;
+	width: 83%;
+	height: 75%;
 	position: fixed;
-	top: 8em;
+	top: 7em;
 	left: 15%;
 	margin: auto;
 	color: darkgray;
 	display: inherit;
 	overflow-y: scroll;
+	vertical-align: middle;
 }
 
 td {
@@ -98,6 +101,10 @@ th.App-columnName:hover {
 	width: 100%;
 	bottom: 6em;
 	z-index: 999;
+}
+
+.filepond--file {
+	color: white;
 }
 
 .App-onlyNonRootVisible {

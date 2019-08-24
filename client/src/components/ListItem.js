@@ -112,6 +112,13 @@ function ListItem(props) {
 						className='App-listIcon'
 						data-item={props.item.name}
 						data-type={props.type}
+						onClick={
+							props.type === "file"
+								? () => {
+										props.handleClick(props.item.name);
+								  }
+								: null
+						}
 						alt='KILL'
 					/>
 				</td>

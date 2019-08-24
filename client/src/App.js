@@ -97,6 +97,12 @@ class App extends Component {
 	};
 
 	handleFileClick = async e => {
+		let fileToDownload;
+
+		typeof e === "string"
+			? (fileToDownload = e)
+			: (fileToDownload = e.target.textContent);
+
 		let fileName = "unknown.dat";
 		alert("this must get better...");
 
@@ -115,7 +121,7 @@ class App extends Component {
 				referrer: "no-referrer", // no-referrer, *client
 				body: JSON.stringify({
 					folder: this.state.currentFolder,
-					file: e.target.textContent
+					file: fileToDownload
 				}) // body data type must match "Content-Type" header
 			});
 

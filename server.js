@@ -55,9 +55,7 @@ app.post("/createfolder", (req, res) => {
 	let objectToSend = {};
 
 	console.log(
-		`${process.env.DOTS}\nsomebody wants me to create folder ./external/${
-			req.body.content
-		}`
+		`${process.env.DOTS}\nsomebody wants me to create folder ./external/${req.body.content}`
 	);
 	if (req.body.content && !fs.existsSync(`./external/${req.body.content}`)) {
 		console.log(`no naming conflict, creating folder: ${req.body.content}`);
@@ -151,7 +149,7 @@ app.post("/upload", (req, res) => {
 	const uploadedFile = req.files.file;
 	uploadedFile.mv(`./external/${req.files.file.name}`);
 	console.log(`received request!`);
-	console.log(`received req: ${req.files.file.name}`);
+	console.log(`received req file name: ${req.files.file.name}`);
 });
 
 const server = app.listen(5000, "127.0.0.1", function() {
