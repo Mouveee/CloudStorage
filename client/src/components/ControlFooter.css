@@ -2,13 +2,12 @@
 	position: fixed;
 	bottom: 0.5em;
 	text-align: center;
-	width: inherit;
+	width: 75%;
 	height: 1.7em;
 	background-color: black;
 	color: white;
 	border: solid white 1px;
-	left: 25%;
-	right: 25%;
+	left: 20%;
 	user-select: none;
 	border-radius: 60px;
 }

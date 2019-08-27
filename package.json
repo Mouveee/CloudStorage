@@ -19,7 +19,7 @@
 		"express-fileupload": "^1.1.5",
 		"file-saver": "^2.0.2",
 		"formidable": "^1.2.1",
-		"node": "^12.8.1",
+		"node": "^12.9.0",
 		"payload-validator": "^1.0.4",
 		"react-app-polyfill": "^1.0.2",
 		"rimraf": "^2.7.1",

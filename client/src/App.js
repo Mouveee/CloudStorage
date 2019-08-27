@@ -17,12 +17,14 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.changeUploadVisibility.bind(this);
+		this.setFileBeingDragged.bind(this);
 	}
 
 	state = {
 		currentFolder: "",
 		prevFolder: [],
 		fileList: [],
+		fileBeingDragged: "test",
 		folderList: [],
 		selectedItems: [],
 		updating: false,
@@ -140,11 +142,11 @@ class App extends Component {
 				const link = document.createElement("a");
 				link.href = url;
 				link.setAttribute("download", fileName);
-				// 3. Append to html page
+				//Append to html page
 				document.body.appendChild(link);
-				// 4. Force download
+				//Force download
 				link.click();
-				// 5. Clean up and remove the link
+				//Clean up and remove the link
 				link.parentNode.removeChild(link);
 			})
 			.catch(e => {
@@ -221,6 +223,11 @@ class App extends Component {
 				this.setState({ fileList: files });
 			})
 			.catch(err => console.log(`error in catch: ${err}`));
+	};
+
+	setFileBeingDragged = fileName => {
+		console.log(`setting dragged file name to ${fileName}`);
+		this.setState({ fileBeingDragged: fileName });
 	};
 
 	sortBy = e => {
@@ -335,10 +342,14 @@ class App extends Component {
 									{this.state.folderList.map((item, index) => {
 										return (
 											<ListItem
+												callBackendAPI={this.callBackendAPI}
+												currentFolder={this.state.currentFolder}
 												item={item}
 												index={index}
 												deleteItem={this.deleteItem}
+												fileBeingDragged={this.state.fileBeingDragged}
 												handleClick={this.handleFolderClick}
+												setFileBeingDragged={this.setFileBeingDragged}
 												type='folder'
 											/>
 										);
@@ -348,12 +359,16 @@ class App extends Component {
 										const fileEnding = fileSplit.pop();
 										return (
 											<ListItem
+												callBackendAPI={this.callBackendAPI}
+												currentFolder={this.state.currentFolder}
 												item={item}
 												index={index}
 												deleteItem={this.deleteItem}
+												fileBeingDragged={this.state.fileBeingDragged}
 												fileEnding={fileEnding}
 												handleClick={this.handleFileClick}
 												itemSelect={this.itemSelect}
+												setFileBeingDragged={this.setFileBeingDragged}
 												type='file'
 											/>
 										);

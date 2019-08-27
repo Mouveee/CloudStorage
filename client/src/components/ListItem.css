@@ -6,3 +6,7 @@
 	text-align: left;
 	user-select: none;
 }
+
+.App-beingDraggedOver {
+	background-color: pink;
+}

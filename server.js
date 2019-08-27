@@ -36,12 +36,12 @@ function getFolderContent(folder) {
 			folderObject.modified = fs.statSync(current).mtime;
 			folders.push(folderObject);
 		} else {
-			let newFile = {};
+			let file = {};
 
-			newFile.name = object;
-			newFile.size = fs.statSync(current).size;
-			newFile.modified = fs.statSync(current).mtime;
-			files.push(newFile);
+			file.name = object;
+			file.size = fs.statSync(current).size;
+			file.modified = fs.statSync(current).mtime;
+			files.push(file);
 		}
 	});
 
@@ -145,11 +145,22 @@ app.post("/external", (req, res) => {
 	res.send(JSON.stringify(objectToSend));
 });
 
+app.post("/move", (req, res) => {
+	console.log(
+		`moving request received, moving ${req.body.content.itemToMove} to ${req.body.content.targetFolder}`
+	);
+	res.statusCode = 200;
+	res.send(JSON.stringify({ message: "you are a weirdo" }));
+});
+
 app.post("/upload", (req, res) => {
 	const uploadedFile = req.files.file;
 	uploadedFile.mv(`./external/${req.files.file.name}`);
-	console.log(`received request!`);
-	console.log(`received req file name: ${req.files.file.name}`);
+
+	console.log(`uploaded file name: ${req.files.file.name}`);
+
+	res.statusCode = 200;
+	res.send("1234");
 });
 
 const server = app.listen(5000, "127.0.0.1", function() {
