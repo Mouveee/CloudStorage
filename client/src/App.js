@@ -24,7 +24,7 @@ class App extends Component {
 		currentFolder: "",
 		prevFolder: [],
 		fileList: [],
-		fileBeingDragged: "test",
+		fileBeingDragged: '',
 		folderList: [],
 		selectedItems: [],
 		updating: false,
@@ -201,8 +201,6 @@ class App extends Component {
 
 		parsedResponse
 			.then(res => {
-				console.log(`typeof res: ${JSON.stringify(res)}`);
-
 				let folders = JSON.parse(res.folders);
 
 				this.setState({ updating: false });
@@ -272,6 +270,8 @@ class App extends Component {
 	};
 
 	componentDidMount() {
+		document.title = 'Octodrive';
+
 		const inputFolder = document.getElementById("App-folderInput");
 		this.requestFolder();
 
@@ -342,6 +342,7 @@ class App extends Component {
 									{this.state.folderList.map((item, index) => {
 										return (
 											<ListItem
+												actualize={this.actualize}
 												callBackendAPI={this.callBackendAPI}
 												currentFolder={this.state.currentFolder}
 												item={item}
@@ -359,6 +360,7 @@ class App extends Component {
 										const fileEnding = fileSplit.pop();
 										return (
 											<ListItem
+												actualize={this.actualize}
 												callBackendAPI={this.callBackendAPI}
 												currentFolder={this.state.currentFolder}
 												item={item}

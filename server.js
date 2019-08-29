@@ -91,7 +91,7 @@ app.post("/delete", (req, res) => {
 	}
 });
 
-app.post("/download", async function(req, res) {
+app.post("/download", async function (req, res) {
 	console.log(`${process.env.DOTS}\nsomebody requested: ${req.body.file}`);
 	let file = new Promise((resolve, reject) => {
 		fs.readFile(
@@ -146,9 +146,15 @@ app.post("/external", (req, res) => {
 });
 
 app.post("/move", (req, res) => {
+	const source = './external/' + req.body.content.itemToMove;
+	const target = './external/' + req.body.content.targetFolder;
+
 	console.log(
-		`moving request received, moving ${req.body.content.itemToMove} to ${req.body.content.targetFolder}`
+		`moving request received, moving ${source} to ${target}`
 	);
+
+	fs.renameSync(source, target + '/' + req.body.content.itemToMove)
+
 	res.statusCode = 200;
 	res.send(JSON.stringify({ message: "you are a weirdo" }));
 });
@@ -163,7 +169,7 @@ app.post("/upload", (req, res) => {
 	res.send("1234");
 });
 
-const server = app.listen(5000, "127.0.0.1", function() {
+const server = app.listen(5000, "127.0.0.1", function () {
 	const host = server.address().address;
 	const port = server.address().port;
 	console.log(`Example app listening at http://${host}:${port}`);

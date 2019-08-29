@@ -83,63 +83,71 @@ class ListItem extends React.Component {
 	}
 
 	render() {
+		window.chrome ? console.log(' YYYYYYEEEEEES') : console.log('NOOOOOOOOOOOOOO');
 		return (
 			<tbody>
 				<tr
 					key={"tr-" + this.props.type + "-" + this.props.index}
-					draggable
+					draggable="true"
 					onDragStart={e => {
+						// e.preventDefault();
+
+						e.dataTransfer.setData('text/plain', 'assoass');
+
+						// e.stopPropagation();
 						this.props.setFileBeingDragged(this.props.item.name);
 						console.log(
 							"you dragged an item of name " + this.props.fileBeingDragged
 						);
 					}}
 					onDragOver={e => {
-						if (this.props.type === "folder") {
+						e.preventDefault();
+
+						if (this.props.type === 'folder' && this.props.fileBeingDragged !== this.props.item.name) {
 							e.target.style.backgroundColor = "pink";
-							console.log(
-								`dragging ${this.props.fileBeingDragged} over ${this.props.item.name}`
-							);
-							e.preventDefault();
 						}
+						e.preventDefault();
 					}}
 					onDragLeave={e => {
-						if (this.props.type === "folder") {
-							e.target.style.backgroundColor = "white";
-						}
+						e.preventDefault();
+						e.target.style.backgroundColor = "white";
 					}}
 					onDrop={async e => {
-						e.target.style.backgroundColor = "white";
-						console.log(
-							`you dropped ${this.props.fileBeingDragged} on ${this.props.item.name}`
-						);
-						if (this.props.fileBeingDragged === this.props.item.name) {
-							alert("Naming conflict you idiot");
-						} else {
-							const content = {};
-							content.itemToMove = this.props.fileBeingDragged;
-							content.targetFolder = this.props.item.name;
-							this.props.setFileBeingDragged({ fileBeingDragged: "" });
-							let responsePromise = await this.props.callBackendAPI(
-								content,
-								"/move"
-							);
-							const response = responsePromise.json();
-							response.then(resolved => alert("did it!"));
+						e.preventDefault();
+						if (this.props.type === 'folder') {
+							e.target.style.backgroundColor = "white";
+
+							if (this.props.fileBeingDragged === this.props.item.name) {
+								alert("Naming conflict you idiot");
+							} else {
+								const content = {};
+								content.itemToMove = this.props.currentFolder + this.props.fileBeingDragged;
+								content.targetFolder = this.props.currentFolder + this.props.item.name;
+
+								console.log(`JSON: ${JSON.stringify(content)}`)
+
+								this.props.setFileBeingDragged({ fileBeingDragged: "" });
+								let responsePromise = await this.props.callBackendAPI(
+									content,
+									"/move"
+								);
+								const response = responsePromise.json();
+								response.then(resolved => this.props.actualize());
+							}
 						}
 					}}
 				>
 					{this.props.type === "folder" ? (
 						<td className='App-smallSpan' />
 					) : (
-						<td>
-							<input
-								type='checkbox'
-								data-item={this.props.item.name}
-								onChange={this.props.itemSelect}
-							/>
-						</td>
-					)}
+							<td>
+								<input
+									type='checkbox'
+									data-item={this.props.item.name}
+									onChange={this.props.itemSelect}
+								/>
+							</td>
+						)}
 					<td className='App-smallSpan'>
 						<img
 							src={
@@ -167,8 +175,8 @@ class ListItem extends React.Component {
 							onClick={
 								this.props.type === "file"
 									? () => {
-											this.props.handleClick(this.props.item.name);
-									  }
+										this.props.handleClick(this.props.item.name);
+									}
 									: null
 							}
 							alt='KILL'
@@ -200,17 +208,17 @@ class ListItem extends React.Component {
 						<td />
 					</tr>
 				) : (
-					<tr className='App-itemInfo'>
-						<td />
-						<td />
-						<td className='App-itemInfo'>
-							Folder {formatDate(this.props.item.modified)}
-						</td>
-						<td />
-						<td />
-						<td />
-					</tr>
-				)}
+						<tr className='App-itemInfo'>
+							<td />
+							<td />
+							<td className='App-itemInfo'>
+								Folder {formatDate(this.props.item.modified)}
+							</td>
+							<td />
+							<td />
+							<td />
+						</tr>
+					)}
 			</tbody>
 		);
 	}
