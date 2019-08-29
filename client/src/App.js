@@ -11,7 +11,7 @@ import ListItem from "./components/ListItem.js";
 import SideBar from "./components/Sidebar.js";
 
 import waitIcon from "./img/wait.gif";
-import "./App.css";
+import "./App.scss";
 
 class App extends Component {
 	constructor(props) {

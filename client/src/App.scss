@@ -1,0 +1,189 @@
+@font-face {
+	font-family: fancyFont;
+	src: url("./fonts/Cout-Regular.ttf");
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+#App-folderList {
+	border-bottom: 1px solid lightgray;
+	border-top: 1px solid lightgray;
+	margin: auto;
+	width: 83%;
+	height: 75%;
+	position: fixed;
+	top: 7em;
+	left: 15%;
+	margin: auto;
+	color: darkgray;
+	display: inherit;
+	overflow-y: scroll;
+	vertical-align: middle;
+}
+
+td {
+	padding-bottom: 0.1em;
+	padding-top: 0.1em;
+}
+
+table td.App-smallSpan {
+	table-layout: fixed;
+	width: 5%;
+	overflow: hidden;
+	word-wrap: break-word;
+}
+
+table td.App-bigSpan {
+	table-layout: fixed;
+	width: 85%;
+	overflow: hidden;
+	word-wrap: break-word;
+	text-align: left;
+}
+
+th.App-columnName {
+	text-align: left;
+}
+
+th.App-columnName:hover {
+	cursor: pointer;
+}
+
+#App-avatar {
+	float: left;
+	border-radius: 100%;
+	height: 3em;
+	width: 3em;
+	padding: 0.5em;
+	vertical-align: middle;
+}
+
+#App-fileList {
+	margin: auto;
+}
+
+#App-info {
+	display: inline-block;
+}
+
+.App-infoItem {
+	display: flexbox;
+	padding: 1em;
+	padding-right: 1em;
+}
+
+.App-filePond {
+	background-color: black;
+	color: white;
+	position: fixed;
+	width: 100%;
+	bottom: 6em;
+	z-index: 999;
+}
+
+.filepond--file {
+	color: white;
+}
+
+.App-onlyNonRootVisible {
+	display: none;
+}
+
+.App {
+	text-align: center;
+}
+
+.App-listItem:hover {
+	color: black;
+	cursor: pointer;
+	font: size 1.1em;
+}
+
+.App-listIcon {
+	width: 0.8em;
+	height: 0.8em;
+	transition: 300ms;
+	user-select: none;
+	float: left;
+	vertical-align: center;
+}
+
+.App-listIcon:hover {
+	cursor: pointer;
+}
+
+.App-listIconNonClickable {
+	width: 0.8em;
+	height: 0.8em;
+	transition: 400ms;
+	opacity: 0.5;
+	user-select: none;
+	vertical-align: middle;
+}
+
+/* NOT WRITTEN BY MYSELF!!!! */
+.Upload {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	align-items: flex-start;
+	text-align: left;
+	overflow: hidden;
+	background-color: lightblue;
+}
+
+.Content {
+	display: flex;
+	flex-direction: row;
+	padding-top: 16px;
+	box-sizing: border-box;
+	width: 100%;
+	background-color: lightblue;
+}
+
+.Files {
+	margin-left: 32px;
+	align-items: flex-start;
+	justify-items: flex-start;
+	flex: 1;
+	overflow-y: auto;
+	background-color: lightblue;
+}
+
+.Actions {
+	display: flex;
+	flex: 1;
+	width: 100%;
+	align-items: flex-end;
+	flex-direction: column;
+	margin-top: 32px;
+	background-color: lightblue;
+}
+
+.Title {
+	margin-bottom: 32px;
+	color: #555;
+	background-color: lightblue;
+}

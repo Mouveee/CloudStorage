@@ -1,7 +1,7 @@
 import React from "react";
 import actualizeIcon from "../img/actualize.svg";
 import backIcon from "../img/arrow_back.svg";
-import "./Header.css";
+import "./Header.scss";
 
 import Avatar from "./avatar.js";
 
