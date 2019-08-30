@@ -1,6 +1,12 @@
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
+import {
+	BrowserView,
+	MobileView,
+	isBrowser,
+	isMobile
+} from "react-device-detect";
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 
@@ -309,7 +315,8 @@ class App extends Component {
 						/>
 					) : null}
 
-					<SideBar />
+					isMobile ?
+					null : <SideBar />;
 
 					{(() => {
 						if (this.state.updating) {
