@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./SidaBar.scss";
+import "./SideBar.css";
 
 function SideBar(props) {
 	return (

@@ -9,7 +9,7 @@ import fileIcon from "../img/file.svg";
 import headphones from "../img/headphones.svg";
 import photoIcon from "../img/photo.svg";
 
-import "./ListItem.scss";
+import "./ListItem.css";
 
 //TODO: make this useful
 const TableRow = posed.tr(

@@ -19,7 +19,7 @@ import SideBar from "./components/Sidebar.js";
 import StatusOverlay from "./components/StatusOverlay.js"
 
 import waitIcon from "./img/wait.gif";
-import "./App.scss";
+import "./App.css";
 
 const MainTable = posed.table();
 

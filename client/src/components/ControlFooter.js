@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./ControlFooter.scss";
+import "./ControlFooter.css";
 
 import downloadIcon from "../img/download.svg";
 import uploadIcon from "../img/upload.svg";
