@@ -9,15 +9,19 @@ import {
 } from "react-device-detect";
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
+import posed from 'react-pose';
 
 //custom components, hopefully well written
 import ControlFooter from "./components/ControlFooter.js";
 import Header from "./components/Header.js";
 import ListItem from "./components/ListItem.js";
 import SideBar from "./components/Sidebar.js";
+import StatusOverlay from "./components/StatusOverlay.js"
 
 import waitIcon from "./img/wait.gif";
 import "./App.scss";
+
+const MainTable = posed.table();
 
 class App extends Component {
 	constructor(props) {
@@ -33,6 +37,8 @@ class App extends Component {
 		fileBeingDragged: '',
 		folderList: [],
 		selectedItems: [],
+		statusOverlayVisible: true,
+		statusOverlayMessage: 'Please Wait...',
 		updating: false,
 		uploadMenuVisible: false,
 		sorting: "name" //possible so far: 'name',
@@ -103,6 +109,14 @@ class App extends Component {
 			this.actualize();
 		}
 	};
+
+	downloadFolder = async folder => {
+		const content = {};
+		content.folder = folder;
+
+		let res = await this.callBackendAPI(content, '/downloadFolder');
+		console.log(`resposne.status : ${res.status}`)
+	}
 
 	handleFileClick = async e => {
 		let fileToDownload;
@@ -294,6 +308,8 @@ class App extends Component {
 	}
 
 	render() {
+		window.chrome ? console.log('Running on chrome...') : console.log('');
+
 		return (
 			<div className='App'>
 				<header>
@@ -306,6 +322,12 @@ class App extends Component {
 				</header>
 
 				<section id='App-container'>
+					{this.state.statusOverlayVisible ?
+						<StatusOverlay
+							onClick={() => this.setState({ statusOverlayVisible: false })
+							} />
+						: null
+					}
 					{this.state.uploadMenuVisible ? (
 						<FilePond
 							allowMultiple={true}
@@ -332,7 +354,7 @@ class App extends Component {
 							)
 						) {
 							return (
-								<table id='App-folderList'>
+								<MainTable id='App-folderList'>
 									<thead>
 										<tr>
 											<th />
@@ -349,9 +371,11 @@ class App extends Component {
 									{this.state.folderList.map((item, index) => {
 										return (
 											<ListItem
+												key={'li-' + index}
 												actualize={this.actualize}
 												callBackendAPI={this.callBackendAPI}
 												currentFolder={this.state.currentFolder}
+												downloadFolder={this.downloadFolder}
 												item={item}
 												index={index}
 												deleteItem={this.deleteItem}
@@ -367,6 +391,7 @@ class App extends Component {
 										const fileEnding = fileSplit.pop();
 										return (
 											<ListItem
+												key={'li-' + index}
 												actualize={this.actualize}
 												callBackendAPI={this.callBackendAPI}
 												currentFolder={this.state.currentFolder}
@@ -382,7 +407,7 @@ class App extends Component {
 											/>
 										);
 									})}
-								</table>
+								</MainTable>
 							);
 						} else {
 							return (

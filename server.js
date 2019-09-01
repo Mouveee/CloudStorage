@@ -9,6 +9,9 @@ const cors = require("cors");
 const https = require("https");
 const rimraf = require("rimraf");
 
+var archiver = require('archiver');
+
+
 const corsOptions = {
 	origin: "*",
 	optionsSuccessStatus: 200
@@ -129,6 +132,29 @@ app.post("/download", async function (req, res) {
 			res.send(JSON.toString({ error: "error :(" }));
 		});
 });
+
+app.post('/downloadFolder', (req, res) => {
+	let splitted = req.body.content.folder.split('./');
+	const fileName = splitted.pop() + '.zip';
+
+	console.log(`download folder: ${'./external/' + req.body.content.folder}\nfile: ${`./external/zipped/${fileName}`}`);
+
+	// zip a folder
+	console.log("zip a folder");
+
+	var archive = archiver.create('zip', {});
+	var output = fs.createWriteStream(`./external/zipped/${fileName}`);
+	archive.pipe(output);
+
+	archive
+		.directory('./external/' + req.body.content.folder)
+		.finalize();
+
+	console.log('zipping should have worked')
+
+	res.statusCode = 200;
+	res.send(JSON.stringify({ message: 'you lucky motherfucker' }))
+})
 
 //list file content
 app.post("/external", (req, res) => {

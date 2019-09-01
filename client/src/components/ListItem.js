@@ -1,5 +1,7 @@
 import React from "react";
 
+import posed, { PoseGroup } from 'react-pose';
+
 import trashcan from "../img/trashcan.svg";
 import downloadIcon from "../img/download.svg";
 import folderIcon from "../img/folder.svg";
@@ -8,6 +10,14 @@ import headphones from "../img/headphones.svg";
 import photoIcon from "../img/photo.svg";
 
 import "./ListItem.scss";
+
+//TODO: make this useful
+const TableRow = posed.tr(
+	{
+		enter: { opacity: 1, delay: 300 },
+		exit: { opacity: 0 },
+	});
+
 
 function formatDate(dateString) {
 	const date = new Date(dateString);
@@ -78,147 +88,157 @@ class ListItem extends React.Component {
 		super(props);
 
 		this.state = {
-			fileBeingDragged: ""
+			fileBeingDragged: "",
+			visible: false
 		};
 	}
 
 	render() {
-		window.chrome ? console.log(' YYYYYYEEEEEES') : console.log('NOOOOOOOOOOOOOO');
+		let i = this.props.index * 1000;
+
 		return (
-			<tbody>
-				<tr
-					key={"tr-" + this.props.type + "-" + this.props.index}
-					draggable="true"
-					onDragStart={e => {
-						// e.preventDefault();
+			<tbody key={'body- ' + i++}>
+				<PoseGroup>
+					<tr
+						key={"tr-" + this.props.type + "-" + i}
+						draggable="true"
+						onDragStart={e => {
+							// e.preventDefault();
 
-						e.dataTransfer.setData('text/plain', 'assoass');
+							e.dataTransfer.setData('text/plain', 'assoass');
 
-						// e.stopPropagation();
-						this.props.setFileBeingDragged(this.props.item.name);
-						console.log(
-							"you dragged an item of name " + this.props.fileBeingDragged
-						);
-					}}
-					onDragOver={e => {
-						e.preventDefault();
+							// e.stopPropagation();
+							this.props.setFileBeingDragged(this.props.item.name);
+							console.log(
+								"you dragged an item of name " + this.props.fileBeingDragged
+							);
+						}}
+						onDragOver={e => {
+							e.preventDefault();
 
-						if (this.props.type === 'folder' && this.props.fileBeingDragged !== this.props.item.name) {
-							e.target.style.backgroundColor = "pink";
-						}
-						e.preventDefault();
-					}}
-					onDragLeave={e => {
-						e.preventDefault();
-						e.target.style.backgroundColor = "white";
-					}}
-					onDrop={async e => {
-						e.preventDefault();
-						if (this.props.type === 'folder') {
+							if (this.props.type === 'folder' && this.props.fileBeingDragged !== this.props.item.name) {
+								e.target.style.backgroundColor = "pink";
+							}
+							e.preventDefault();
+						}}
+						onDragLeave={e => {
+							e.preventDefault();
 							e.target.style.backgroundColor = "white";
+						}}
+						onDrop={async e => {
+							e.preventDefault();
+							if (this.props.type === 'folder') {
+								e.target.style.backgroundColor = "white";
 
-							if (this.props.fileBeingDragged === this.props.item.name) {
-								alert("Naming conflict you idiot");
-							} else {
-								const content = {};
-								content.itemToMove = this.props.currentFolder + this.props.fileBeingDragged;
-								content.targetFolder = this.props.currentFolder + this.props.item.name;
+								if (this.props.fileBeingDragged === this.props.item.name) {
+									alert("Naming conflict you idiot");
+								} else {
+									const content = {};
+									content.itemToMove = this.props.currentFolder + this.props.fileBeingDragged;
+									content.targetFolder = this.props.currentFolder + this.props.item.name;
 
-								console.log(`JSON: ${JSON.stringify(content)}`)
+									console.log(`JSON: ${JSON.stringify(content)}`)
 
-								this.props.setFileBeingDragged({ fileBeingDragged: "" });
-								let responsePromise = await this.props.callBackendAPI(
-									content,
-									"/move"
-								);
-								const response = responsePromise.json();
-								response.then(resolved => this.props.actualize());
+									this.props.setFileBeingDragged({ fileBeingDragged: "" });
+									let responsePromise = await this.props.callBackendAPI(
+										content,
+										"/move"
+									);
+									const response = responsePromise.json();
+									response.then(resolved => this.props.actualize());
+								}
 							}
-						}
-					}}
-				>
-					{this.props.type === "folder" ? (
-						<td className='App-smallSpan' />
-					) : (
-							<td>
-								<input
-									type='checkbox'
-									data-item={this.props.item.name}
-									onChange={this.props.itemSelect}
-								/>
-							</td>
-						)}
-					<td className='App-smallSpan'>
-						<img
-							src={
-								this.props.type === "folder"
-									? folderIcon
-									: getFileIcon(this.props.fileEnding)
-							}
-							className='App-listIconNonClickable'
-							alt=''
-						/>
-					</td>
-					<td
-						onClick={this.props.handleClick}
-						className='App-listItem App-bigSpan'
-						key={this.props.item.name}
+						}}
 					>
-						{this.props.item.name}
-					</td>
-					<td className='App-smallSpan'>
-						<img
-							src={downloadIcon}
-							className='App-listIcon'
-							data-item={this.props.item.name}
-							data-type={this.props.type}
-							onClick={
-								this.props.type === "file"
-									? () => {
-										this.props.handleClick(this.props.item.name);
-									}
-									: null
-							}
-							alt='KILL'
-						/>
-					</td>
-					<td className='App-smallSpan'>
-						<img
-							src={trashcan}
-							className='App-listIcon'
-							onClick={this.props.deleteItem}
-							data-item={this.props.item.name}
-							data-type={this.props.type}
-							alt='KILL'
-						/>
-					</td>
-				</tr>
-				{this.props.type === "file" ? (
-					<tr className='App-itemInfo'>
-						<td />
-						<td />
-						<td className='App-itemInfo'>
-							{Math.round(this.props.item.size / 1048576, 4) +
-								" mb" +
-								" " +
-								formatDate(this.props.item.modified)}
+						{this.props.type === "folder" ? (
+							<td className='App-smallSpan' />
+						) : (
+								<td key={'td- ' + i++}>
+									<input
+										type='checkbox'
+										data-item={this.props.item.name}
+										onChange={this.props.itemSelect}
+									/>
+								</td>
+							)}
+						<td className='App-smallSpan' key={'td- ' + i++}>
+							<img
+								src={
+									this.props.type === "folder"
+										? folderIcon
+										: getFileIcon(this.props.fileEnding)
+								}
+								className='App-listIconNonClickable'
+								alt=''
+							/>
 						</td>
-						<td />
-						<td />
-						<td />
+						<td
+							onClick={this.props.handleClick}
+							className='App-listItem App-bigSpan'
+							key={this.props.item.name}
+						>
+							{this.props.item.name}
+						</td>
+						<td className='App-smallSpan' key={'td- ' + i++}>
+							<img
+								key={'td- ' + i++}
+								src={downloadIcon}
+								className='App-listIcon'
+								data-item={this.props.item.name}
+								data-type={this.props.type}
+								onClick={
+									this.props.type === "file"
+										? () => {
+											this.props.handleClick(this.props.item.name);
+										}
+										: () => {
+											this.props.downloadFolder(this.props.currentFolder + this.props.item.name);
+										}
+								}
+								alt='KILL'
+							/>
+						</td>
+						<td className='App-smallSpan' key={'td- ' + i++}>
+							<img
+								src={trashcan}
+								className='App-listIcon'
+								onClick={this.props.deleteItem}
+								data-item={this.props.item.name}
+								data-type={this.props.type}
+								alt='KILL'
+							/>
+						</td>
 					</tr>
-				) : (
-						<tr className='App-itemInfo'>
-							<td />
-							<td />
-							<td className='App-itemInfo'>
-								Folder {formatDate(this.props.item.modified)}
+					{this.props.type === "file" ? (
+						<tr key={"tr-" + this.props.type + "-" + this.props.index}
+							className='App-itemInfo'
+						>
+							<td key={'td- ' + i++} />
+							<td key={'td- ' + i++} />
+							<td className='App-itemInfo' key={'td- ' + i++}>
+								{Math.round(this.props.item.size / 1048576, 4) +
+									" mb" +
+									" " +
+									formatDate(this.props.item.modified)}
 							</td>
-							<td />
-							<td />
-							<td />
+							<td key={'td- ' + i++} />
+							<td key={'td- ' + i++} />
+							<td key={'td- ' + i++} />
 						</tr>
-					)}
+					) : (
+							<tr className='App-itemInfo'
+								key={"tr-sub-" + this.props.type + "-" + this.props.index}>
+								<td key={'td- ' + i++} />
+								<td key={'td- ' + i++} />
+								<td className='App-itemInfo'>
+									Folder {formatDate(this.props.item.modified)}
+								</td>
+								<td key={'td- ' + i++} />
+								<td key={'td- ' + i++} />
+								<td key={'td- ' + i++} />
+							</tr>
+						)}
+				</PoseGroup>
 			</tbody>
 		);
 	}

@@ -12,7 +12,7 @@ function ControlHeader(props) {
 		<h1 id='App-header'>
 			<Avatar />
 			OKTODRIVE
-			<h1 className='App-subHeader'>...praise the Octopus Baby...</h1>
+			<small className='App-subHeader'>...praise the Octopus Baby...</small>
 			<nav className='App-navBar'>
 				{!props.root ? (
 					<img
@@ -31,8 +31,8 @@ function ControlHeader(props) {
 				{!props.root ? (
 					<div>Current Folder: {props.currentFolder}</div>
 				) : (
-					<div>Welcome</div>
-				)}
+						<div>Welcome</div>
+					)}
 			</nav>
 		</h1>
 	);
