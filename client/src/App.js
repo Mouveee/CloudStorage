@@ -334,6 +334,11 @@ class App extends Component {
 							name={"file"}
 							server={"./upload"}
 							className='App-filePond'
+							onprocessfiles={() => {
+								this.setState({ uploadMenuVisible: false });
+								this.requestFolder(this.state.currentFolder);
+							}
+							}
 						/>
 					) : null}
 

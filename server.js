@@ -9,7 +9,7 @@ const cors = require("cors");
 const https = require("https");
 const rimraf = require("rimraf");
 
-var archiver = require('archiver');
+const archiver = require('archiver');
 
 
 const corsOptions = {
@@ -129,7 +129,7 @@ app.post("/download", async function (req, res) {
 		.catch(e => {
 			console.log(`promise itemHandler catched: ${e}`);
 			res.statusCode = 404;
-			res.send(JSON.toString({ error: "error :(" }));
+			res.send(JSON.toString({ error: "file not found" }));
 		});
 });
 
