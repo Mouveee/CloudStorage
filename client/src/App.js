@@ -1,12 +1,6 @@
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
-import {
-	BrowserView,
-	MobileView,
-	isBrowser,
-	isMobile
-} from "react-device-detect";
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import posed from 'react-pose';
@@ -334,6 +328,7 @@ class App extends Component {
 							name={"file"}
 							server={"./upload"}
 							className='App-filePond'
+							oninit={() => { alert('right event triggered') }}
 							onprocessfiles={() => {
 								this.setState({ uploadMenuVisible: false });
 								this.requestFolder(this.state.currentFolder);
@@ -342,9 +337,8 @@ class App extends Component {
 						/>
 					) : null}
 
-					isMobile ?
-					null : <SideBar />;
-
+					<SideBar />;
+				 
 					{(() => {
 						if (this.state.updating) {
 							return (
