@@ -1,3 +1,12 @@
+tbody{
+	transition: 1000ms;
+	opacity : 1;
+}
+
+tBody.visible{
+	opacity: 0;
+}
+
 .App-itemInfo {
 	font-size: 0.8em;
 	color: lightgray;
@@ -5,6 +14,34 @@
 	line-break: strict;
 	text-align: left;
 	user-select: none;
+}
+
+.App-listItem:hover {
+	color: black;
+	cursor: pointer;
+	font: size 1.1em;
+}
+
+.App-listIcon {
+	width: 0.8em;
+	height: 0.8em;
+	transition: 300ms;
+	user-select: none;
+	float: left;
+	vertical-align: center;
+}
+
+.App-listIcon:hover {
+	cursor: pointer;
+}
+
+.App-listIconNonClickable {
+	width: 0.8em;
+	height: 0.8em;
+	transition: 400ms;
+	opacity: 0.5;
+	user-select: none;
+	vertical-align: middle;
 }
 
 .App-beingDraggedOver {

@@ -93,62 +93,78 @@ class ListItem extends React.Component {
 		};
 	}
 
+
+	onDragOver = e => {
+		console.log('TRIGGERED!!!!!!!!!!!!!!!!!!!!!!!!!')
+
+		e.preventDefault();
+
+		if (this.props.type === 'folder' && this.props.fileBeingDragged !== this.props.item.name) {
+			e.target.style.backgroundColor = "pink";
+		}
+		e.preventDefault();
+	}
+
+	onDragLeave = e => {
+		e.preventDefault();
+		e.target.style.backgroundColor = "white";
+	}
+
+	onDragStart = e => {
+		// e.preventDefault();
+
+		e.dataTransfer.setData('text/plain', 'assoass');
+
+		// e.stopPropagation();
+		this.props.setFileBeingDragged(this.props.item.name);
+		console.log(
+			"you dragged an item of name " + this.props.fileBeingDragged
+		);
+	}
+
+	onDrop = async e => {
+		e.preventDefault();
+		if (this.props.type === 'folder') {
+			e.target.style.backgroundColor = "white";
+
+			if (this.props.fileBeingDragged === this.props.item.name) {
+				alert("Naming conflict you idiot");
+			} else {
+				const content = {};
+
+				content.itemToMove = this.props.currentFolder + this.props.fileBeingDragged;
+				content.targetFolder = this.props.currentFolder + this.props.item.name;
+
+				console.log(`JSON: ${JSON.stringify(content)}`)
+
+				this.props.setFileBeingDragged({ fileBeingDragged: "" });
+				let responsePromise = await this.props.callBackendAPI(
+					content,
+					"/move"
+				);
+				const response = responsePromise.json();
+
+				//reload folder
+				response.then(resolved => this.props.actualize());
+			}
+		}
+	}
+
 	render() {
 		let i = this.props.index * 1000;
+		let classVisible = this.state.visible ? 'dididi' : 'visible';
+		setTimeout(() => this.setState({ visible: true }))
 
 		return (
-			<tbody key={'body- ' + i++}>
+			<tbody key={'body- ' + i++} className={classVisible}>
 				<PoseGroup>
 					<tr
 						key={"tr-" + this.props.type + "-" + i}
 						draggable="true"
-						onDragStart={e => {
-							// e.preventDefault();
-
-							e.dataTransfer.setData('text/plain', 'assoass');
-
-							// e.stopPropagation();
-							this.props.setFileBeingDragged(this.props.item.name);
-							console.log(
-								"you dragged an item of name " + this.props.fileBeingDragged
-							);
-						}}
-						onDragOver={e => {
-							e.preventDefault();
-
-							if (this.props.type === 'folder' && this.props.fileBeingDragged !== this.props.item.name) {
-								e.target.style.backgroundColor = "pink";
-							}
-							e.preventDefault();
-						}}
-						onDragLeave={e => {
-							e.preventDefault();
-							e.target.style.backgroundColor = "white";
-						}}
-						onDrop={async e => {
-							e.preventDefault();
-							if (this.props.type === 'folder') {
-								e.target.style.backgroundColor = "white";
-
-								if (this.props.fileBeingDragged === this.props.item.name) {
-									alert("Naming conflict you idiot");
-								} else {
-									const content = {};
-									content.itemToMove = this.props.currentFolder + this.props.fileBeingDragged;
-									content.targetFolder = this.props.currentFolder + this.props.item.name;
-
-									console.log(`JSON: ${JSON.stringify(content)}`)
-
-									this.props.setFileBeingDragged({ fileBeingDragged: "" });
-									let responsePromise = await this.props.callBackendAPI(
-										content,
-										"/move"
-									);
-									const response = responsePromise.json();
-									response.then(resolved => this.props.actualize());
-								}
-							}
-						}}
+						onDragStart={e => this.onDragStart(e)}
+						onDragOver={e => this.onDragOver(e)}
+						onDragLeave={e => this.onDragLeave(e)}
+						onDrop={e => this.onDrop(e)}
 					>
 						{this.props.type === "folder" ? (
 							<td className='App-smallSpan' />
@@ -239,7 +255,7 @@ class ListItem extends React.Component {
 							</tr>
 						)}
 				</PoseGroup>
-			</tbody>
+			</tbody >
 		);
 	}
 }

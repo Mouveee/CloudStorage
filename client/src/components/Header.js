@@ -31,7 +31,7 @@ function ControlHeader(props) {
 				{!props.root ? (
 					<div>Current Folder: {props.currentFolder}</div>
 				) : (
-						<div>Welcome</div>
+						<div>Root Folder</div>
 					)}
 			</nav>
 		</h1>

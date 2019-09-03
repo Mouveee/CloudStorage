@@ -133,7 +133,7 @@ app.post("/download", async function (req, res) {
 		});
 });
 
-app.post('/downloadFolder', (req, res) => {
+app.post('/downloadFolder', async (req, res) => {
 	let splitted = req.body.content.folder.split('./');
 	const fileName = splitted.pop() + '.zip';
 
@@ -146,7 +146,7 @@ app.post('/downloadFolder', (req, res) => {
 	var output = fs.createWriteStream(`./external/zipped/${fileName}`);
 	archive.pipe(output);
 
-	archive
+	await archive
 		.directory('./external/' + req.body.content.folder)
 		.finalize();
 
