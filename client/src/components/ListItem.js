@@ -7,6 +7,7 @@ import downloadIcon from "../img/download.svg";
 import folderIcon from "../img/folder.svg";
 import fileIcon from "../img/file.svg";
 import headphones from "../img/headphones.svg";
+import penIcon from "../img/pen.svg"
 import photoIcon from "../img/photo.svg";
 
 import "./ListItem.css";
@@ -194,6 +195,17 @@ class ListItem extends React.Component {
 							key={this.props.item.name}
 						>
 							{this.props.item.name}
+						</td>
+						<td className='App-smallSpan' key={'td- ' + i++}>
+							<img
+								key={'td- ' + i++}
+								src={penIcon}
+								className='App-listIcon'
+								data-item={this.props.item.name}
+								data-type={this.props.type}
+								onClick={() => this.props.renameItem(this.props.currentFolder + this.props.item.name)}
+								alt='KILL'
+							/>
 						</td>
 						<td className='App-smallSpan' key={'td- ' + i++}>
 							<img

@@ -69,8 +69,9 @@ app.post("/createfolder", (req, res) => {
 		res.send(JSON.stringify(objectToSend));
 	} else if (fs.existsSync(`./external/${req.body.content}`)) {
 		console.log(`naming conflict, folder ${req.body.content}`);
+
 		res.statusCode = 409;
-		res.send(JSON.stringify("name conflict"));
+		res.send(JSON.stringify({ message: "folder already exists" }));
 	}
 });
 
@@ -137,28 +138,38 @@ app.post('/downloadFolder', async (req, res) => {
 	let splitted = req.body.content.folder.split('./');
 	const fileName = splitted.pop();
 
-	console.log(`download folder: ${'./external/' + req.body.content.folder}\nfile: ${`./external/zipped/${fileName + '.zip'}`}`);
+	console.log('check if ' + `./external/zipped/${req.body.content.folder + '.zip'}` + 'already exists...')
 
-	// zip a folder
-	console.log("zip a folder");
+	if (fs.existsSync(`./external/zipped/${req.body.content.folder + '.zip'}`)) {
+		console.log('this folder has already been zipped');
 
-	var archive = archiver.create('zip', {});
-	var output = fs.createWriteStream(`./external/zipped/${fileName + '.zip'}`);
-	archive.pipe(output);
+		res.status = 409;
+		res.send(JSON.stringify({ message: 'folder has alredy been zipped, please delete first' }))
+	} else {
 
-	archive
-		.directory('./external/' + req.body.content.folder, false);
+		console.log(`download folder: ${'./external/' + req.body.content.folder}\nfile: ${`./external/zipped/${fileName + '.zip'}`}`);
+
+		// zip a folder
+		console.log("zip a folder");
+
+		var archive = archiver.create('zip', {});
+		var output = fs.createWriteStream(`./external/zipped/${fileName + '.zip'}`);
+		archive.pipe(output);
+
+		archive
+			.directory('./external/' + req.body.content.folder, false);
 
 
-	output.on('finish', function () {
-		console.log('zipping should have worked')
+		output.on('finish', function () {
+			console.log('zipping should have worked')
 
-		res.statusCode = 200;
-		res.send(JSON.stringify({ message: 'you lucky motherfucker' }))
-		console.log('Data has been drained');
-	});
+			res.statusCode = 200;
+			res.send(JSON.stringify({ message: 'you lucky motherfucker' }))
+			console.log('Data has been drained');
+		});
 
-	archive.finalize();
+		archive.finalize();
+	}
 })
 
 //list file content

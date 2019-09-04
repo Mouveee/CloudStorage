@@ -20,7 +20,11 @@ const MainTable = posed.table();
 class App extends Component {
 	constructor(props) {
 		super(props);
+
+		//toggles FilePond Menus visibility
 		this.changeUploadVisibility.bind(this);
+
+		//sets the file being dragged to parents state
 		this.setFileBeingDragged.bind(this);
 	}
 
@@ -31,11 +35,11 @@ class App extends Component {
 		fileBeingDragged: '',
 		folderList: [],
 		selectedItems: [],
-		statusOverlayVisible: true,
+		sorting: "name", //possible so far: 'name',
+		statusOverlayVisible: false,
 		statusOverlayMessage: 'Please Wait...',
 		updating: false,
 		uploadMenuVisible: false,
-		sorting: "name", //possible so far: 'name',
 		//TODO factorize the whole table
 		tableHeadVisible: false
 	};
@@ -202,6 +206,10 @@ class App extends Component {
 		return item;
 	};
 
+	renameItem = item => {
+		console.log('renaming item ' + item);
+	}
+
 	requestFolder = async folder => {
 		// Call our fetch function below once the component mounts
 		let targetFolder = "./external/";
@@ -323,8 +331,8 @@ class App extends Component {
 				<section id='App-container'>
 					{this.state.statusOverlayVisible ?
 						<StatusOverlay
-							onClick={() => this.setState({ statusOverlayVisible: false })
-							} />
+							message={this.state.statusOverlayMessage}
+						/>
 						: null
 					}
 					{this.state.uploadMenuVisible ? (
@@ -385,6 +393,7 @@ class App extends Component {
 												deleteItem={this.deleteItem}
 												fileBeingDragged={this.state.fileBeingDragged}
 												handleClick={this.handleFolderClick}
+												renameItem={this.renameItem}
 												setFileBeingDragged={this.setFileBeingDragged}
 												type='folder'
 											/>
@@ -406,6 +415,7 @@ class App extends Component {
 												fileEnding={fileEnding}
 												handleClick={this.handleFileClick}
 												itemSelect={this.itemSelect}
+												renameItem={this.renameItem}
 												setFileBeingDragged={this.setFileBeingDragged}
 												type='file'
 											/>
