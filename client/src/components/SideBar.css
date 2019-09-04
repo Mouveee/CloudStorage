@@ -4,10 +4,15 @@
 	top: 10em;
 	width: 10%;
 	user-select: none;
+	opacity: 0;
+	transition: 400ms;
+}
+#App-sideBar.visible {
+	opacity: 1;
 }
 
 .App-sideBarItem {
-	transition: 400ms;
+	transition: 300ms;
 }
 
 .App-sideBarItem:hover {

@@ -93,10 +93,10 @@ class ListItem extends React.Component {
 		};
 	}
 
+	componentWillUnmount() { this.setState({ visible: false }) }
+
 
 	onDragOver = e => {
-		console.log('TRIGGERED!!!!!!!!!!!!!!!!!!!!!!!!!')
-
 		e.preventDefault();
 
 		if (this.props.type === 'folder' && this.props.fileBeingDragged !== this.props.item.name) {
@@ -152,7 +152,7 @@ class ListItem extends React.Component {
 
 	render() {
 		let i = this.props.index * 1000;
-		let classVisible = this.state.visible ? 'dididi' : 'visible';
+		let classVisible = this.state.visible ? 'visible' : 'dididi';
 		setTimeout(() => this.setState({ visible: true }))
 
 		return (

@@ -147,7 +147,7 @@ app.post('/downloadFolder', async (req, res) => {
 	archive.pipe(output);
 
 	await archive
-		.directory('./external/' + req.body.content.folder)
+		.directory('./' + fileName.split('.')[0])
 		.finalize();
 
 	console.log('zipping should have worked')

@@ -41,7 +41,20 @@ button:hover {
 	display: inherit;
 	overflow-y: scroll;
 	vertical-align: middle;
+	transition: 1500ms;
+	opacity: 0;
 }
+
+#App-folderList.visible {
+	opacity : 1;
+}
+
+#App-tableHead {
+	opacity : 1;
+	transition : 1000ms;
+}
+
+
 
 td {
 	padding-bottom: 0.1em;

@@ -1,10 +1,10 @@
 tbody{
-	transition: 1000ms;
-	opacity : 1;
+	transition: 500ms;
+	opacity : 0;
 }
 
 tBody.visible{
-	opacity: 0;
+	opacity: 1;
 }
 
 .App-itemInfo {

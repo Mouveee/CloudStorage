@@ -35,7 +35,9 @@ class App extends Component {
 		statusOverlayMessage: 'Please Wait...',
 		updating: false,
 		uploadMenuVisible: false,
-		sorting: "name" //possible so far: 'name',
+		sorting: "name", //possible so far: 'name',
+		//TODO factorize the whole table
+		tableHeadVisible: false
 	};
 
 	actualize = () => {
@@ -304,6 +306,9 @@ class App extends Component {
 	render() {
 		window.chrome ? console.log('Running on chrome...') : console.log('');
 
+		let tableHeadClass = this.state.tableHeadVisible ? 'visible' : 'fuck your mom';
+		setTimeout(() => this.setState({ tableHeadVisible: true }))
+
 		return (
 			<div className='App'>
 				<header>
@@ -338,7 +343,7 @@ class App extends Component {
 					) : null}
 
 					<SideBar />;
-				 
+
 					{(() => {
 						if (this.state.updating) {
 							return (
@@ -353,9 +358,9 @@ class App extends Component {
 							)
 						) {
 							return (
-								<MainTable id='App-folderList'>
-									<thead>
-										<tr>
+								<table id='App-folderList' className={tableHeadClass}>
+									<thead id='App-tableHead' >
+										<tr >
 											<th />
 											<th />
 											<th
@@ -406,7 +411,7 @@ class App extends Component {
 											/>
 										);
 									})}
-								</MainTable>
+								</table>
 							);
 						} else {
 							return (

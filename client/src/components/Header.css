@@ -6,17 +6,17 @@
 	width: 100%;
 	text-align: center;
 	margin: 0;
+	opacity: 0;
 	position: fixed;
 	top: 0px;
 	user-select: none;
 	left: 0px;
 	right: 0px;
+	transition: 1000ms;
 }
 
-.App-listItem {
-	color: darkgray;
-	transition: 300ms;
-	user-select: none;
+#App-header.visible {
+	opacity: 1;
 }
 
 .App-navBar {
