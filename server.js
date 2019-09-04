@@ -135,25 +135,30 @@ app.post("/download", async function (req, res) {
 
 app.post('/downloadFolder', async (req, res) => {
 	let splitted = req.body.content.folder.split('./');
-	const fileName = splitted.pop() + '.zip';
+	const fileName = splitted.pop();
 
-	console.log(`download folder: ${'./external/' + req.body.content.folder}\nfile: ${`./external/zipped/${fileName}`}`);
+	console.log(`download folder: ${'./external/' + req.body.content.folder}\nfile: ${`./external/zipped/${fileName + '.zip'}`}`);
 
 	// zip a folder
 	console.log("zip a folder");
 
 	var archive = archiver.create('zip', {});
-	var output = fs.createWriteStream(`./external/zipped/${fileName}`);
+	var output = fs.createWriteStream(`./external/zipped/${fileName + '.zip'}`);
 	archive.pipe(output);
 
-	await archive
-		.directory('./' + fileName.split('.')[0])
-		.finalize();
+	archive
+		.directory('./external/' + req.body.content.folder, false);
 
-	console.log('zipping should have worked')
 
-	res.statusCode = 200;
-	res.send(JSON.stringify({ message: 'you lucky motherfucker' }))
+	output.on('finish', function () {
+		console.log('zipping should have worked')
+
+		res.statusCode = 200;
+		res.send(JSON.stringify({ message: 'you lucky motherfucker' }))
+		console.log('Data has been drained');
+	});
+
+	archive.finalize();
 })
 
 //list file content
