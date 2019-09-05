@@ -275,6 +275,12 @@ class App extends Component {
 			case "name":
 				newFolderList = this.state.folderList.reverse();
 				newFileList = this.state.fileList.reverse();
+
+				this.setState({
+					fileList: [],
+					folderList: []
+				})
+
 				this.setState({
 					sorting: e.target.dataset.sort,
 					folderList: newFolderList,
