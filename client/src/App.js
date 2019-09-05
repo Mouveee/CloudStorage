@@ -12,6 +12,7 @@ import ListItem from "./components/ListItem.js";
 import SideBar from "./components/Sidebar.js";
 import StatusOverlay from "./components/StatusOverlay.js";
 import TableHead from './components/TableHead.js';
+import WaitingScreen from './components/WaitingScreen.js';
 
 import waitIcon from "./img/wait.gif";
 import "./App.css";
@@ -208,7 +209,7 @@ class App extends Component {
 		return item;
 	};
 
-	renameItem = (item) => {
+	renameItem = async item => {
 		console.log('renaming item ' + item);
 
 		let newName = prompt('Enter the new name', item);
@@ -217,7 +218,11 @@ class App extends Component {
 		content.oldName = this.state.currentFolder + item;
 		content.newName = this.state.currentFolder + newName;
 
-		this.callBackendAPI(content, '/rename')
+		let answer = await this.callBackendAPI(content, '/rename');
+
+		answer.status === 200 ?
+			this.actualize()
+			: console.log('something went wrong, server status: ' + answer.status);
 	}
 
 	requestFolder = async folder => {
@@ -336,19 +341,21 @@ class App extends Component {
 				</header>
 
 				<section id='App-container'>
+					{/* TODO: everything */}
 					{this.state.statusOverlayVisible ?
 						<StatusOverlay
 							message={this.state.statusOverlayMessage}
 						/>
 						: null
 					}
+
 					{this.state.uploadMenuVisible ? (
 						<FilePond
 							allowMultiple={true}
 							name={"file"}
 							server={"./upload"}
 							className='App-filePond'
-							oninit={() => { alert('right event triggered') }}
+							oninit={() => { console.log('right event triggered, create an overlay TODO') }}
 							onprocessfiles={() => {
 								this.setState({ uploadMenuVisible: false });
 								this.requestFolder(this.state.currentFolder);
@@ -362,9 +369,9 @@ class App extends Component {
 					{(() => {
 						if (this.state.updating) {
 							return (
-								<div id='App-folderList'>
-									<img src={waitIcon} alt='loading...' />
-								</div>
+								<WaitingScreen
+									waitIcon={waitIcon}
+								/>
 							);
 						} else if (
 							!(
@@ -374,7 +381,12 @@ class App extends Component {
 						) {
 							return (
 								<table id='App-folderList'>
-									<TableHead sortBy={this.sortBy} />
+									<TableHead
+										sortBy={this.sortBy}
+										navigateBack={this.navigateBack}
+										root={this.state.currentFolder === "" ? true : false}
+									/>
+
 									{this.state.folderList.map((item, index) => {
 										return (
 											<ListItem
@@ -394,6 +406,7 @@ class App extends Component {
 											/>
 										);
 									})}
+
 									{this.state.fileList.map((item, index) => {
 										let fileSplit = item.name.split(".");
 										const fileEnding = fileSplit.pop();

@@ -27,6 +27,19 @@ class TableHead extends React.Component {
             Name
           </th>
         </tr>
+        {!this.props.root ?
+          <tr >
+            <th />
+            <th />
+            <th
+              className='App-columnName'
+              onClick={this.props.navigateBack}
+            >
+              ...
+          </th>
+          </tr>
+          : null
+        }
       </thead>)
   }
 }
