@@ -178,10 +178,18 @@ app.post("/external", (req, res) => {
 	let dir = req.body.content || "./external/";
 
 	console.log(process.env.DOTS);
-	console.log(`received POST request with params: ${req.body.content}`);
-	console.log(`scanning for dir:  ${dir}`);
+	console.log(`received POST request (get folder) with params: ${req.body.content}`);
 
-	objectToSend = getFolderContent(dir);
+	try {
+		objectToSend = getFolderContent(dir);
+	}
+	catch (e) {
+		console.log(`couldn't find folder ${req.content.folder}`);
+
+		res.statusCode = 404;
+		res.send(JSON.stringify({ message: 'folder not found' }))
+	}
+
 
 	res.statusCode = 200;
 	res.send(JSON.stringify(objectToSend));
@@ -213,6 +221,18 @@ app.post("/upload", (req, res) => {
 	res.statusCode = 200;
 	res.send("1234");
 });
+
+app.post('/rename', (req, res) => {
+	console.log(`renaming ${req.body.content.oldName} to ${req.body.content.newName}`);
+
+	let source = './external/' + req.body.content.oldName;
+	let target = './external/' + req.body.content.newName
+
+	fs.renameSync(source, target);
+
+	res.statusCode = 200;
+	res.send(JSON.stringify({ message: 'naming successfully' }));
+})
 
 const server = app.listen(5000, "127.0.0.1", function () {
 	const host = server.address().address;

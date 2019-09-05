@@ -10,7 +10,8 @@ import ControlFooter from "./components/ControlFooter.js";
 import Header from "./components/Header.js";
 import ListItem from "./components/ListItem.js";
 import SideBar from "./components/Sidebar.js";
-import StatusOverlay from "./components/StatusOverlay.js"
+import StatusOverlay from "./components/StatusOverlay.js";
+import TableHead from './components/TableHead.js';
 
 import waitIcon from "./img/wait.gif";
 import "./App.css";
@@ -26,22 +27,24 @@ class App extends Component {
 
 		//sets the file being dragged to parents state
 		this.setFileBeingDragged.bind(this);
-	}
 
-	state = {
-		currentFolder: "",
-		prevFolder: [],
-		fileList: [],
-		fileBeingDragged: '',
-		folderList: [],
-		selectedItems: [],
-		sorting: "name", //possible so far: 'name',
-		statusOverlayVisible: false,
-		statusOverlayMessage: 'Please Wait...',
-		updating: false,
-		uploadMenuVisible: false,
-		//TODO factorize the whole table
-	};
+		this.sortBy.bind(this);
+
+		this.state = {
+			currentFolder: "",
+			prevFolder: [],
+			fileList: [],
+			fileBeingDragged: '',
+			folderList: [],
+			selectedItems: [],
+			sorting: "name", //possible so far: 'name',
+			statusOverlayVisible: false,
+			statusOverlayMessage: 'Please Wait...',
+			updating: false,
+			uploadMenuVisible: false,
+			//TODO factorize the whole table
+		};
+	}
 
 	actualize = () => {
 		this.requestFolder(this.state.currentFolder);
@@ -205,17 +208,16 @@ class App extends Component {
 		return item;
 	};
 
-	renameItem = item => {
+	renameItem = (item) => {
 		console.log('renaming item ' + item);
-
 
 		let newName = prompt('Enter the new name', item);
 
 		const content = {};
-		content.itemToMove = item;
-		content.targetFolder = this.state.currentFolder + newName;
+		content.oldName = this.state.currentFolder + item;
+		content.newName = this.state.currentFolder + newName;
 
-		this.callBackendAPI(content, '/move')
+		this.callBackendAPI(content, '/rename')
 	}
 
 	requestFolder = async folder => {
@@ -372,19 +374,7 @@ class App extends Component {
 						) {
 							return (
 								<table id='App-folderList'>
-									<thead id='App-tableHead' >
-										<tr >
-											<th />
-											<th />
-											<th
-												className='App-columnName'
-												onClick={this.sortBy}
-												data-sort='name'
-											>
-												Name
-											</th>
-										</tr>
-									</thead>
+									<TableHead sortBy={this.sortBy} />
 									{this.state.folderList.map((item, index) => {
 										return (
 											<ListItem

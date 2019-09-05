@@ -1,0 +1,8 @@
+#App-tableHead { 
+  opacity: 0;
+  transition: 500ms;
+}
+
+#App-tableHead.visible{
+  opacity: 1;
+}

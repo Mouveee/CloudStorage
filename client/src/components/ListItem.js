@@ -204,7 +204,7 @@ class ListItem extends React.Component {
 								className='App-listIcon'
 								data-item={this.props.item.name}
 								data-type={this.props.type}
-								onClick={() => this.props.renameItem(this.props.currentFolder + this.props.item.name)}
+								onClick={() => this.props.renameItem(this.props.item.name)}
 								alt='KILL'
 							/>
 						</td>

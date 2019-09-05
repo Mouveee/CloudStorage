@@ -5,7 +5,7 @@
 	width: 10%;
 	user-select: none;
 	opacity: 0;
-	transition: 400ms;
+	transition: 1000ms;
 }
 #App-sideBar.visible {
 	opacity: 1;
