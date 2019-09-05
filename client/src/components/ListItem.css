@@ -16,6 +16,10 @@ tBody.visible{
 	user-select: none;
 }
 
+.App-listItem{
+	transition: 350ms;
+}
+
 .App-listItem:hover {
 	color: black;
 	cursor: pointer;

@@ -1,0 +1,204 @@
+Exact Audio Copy V0.99 prebeta 3 from 28. July 2007
+
+EAC extraction logfile from 8. May 2009, 20:44
+
+Stieber Twins / Fenster zum Hof
+
+Used drive  : TSSTcorpCDDVDW SH-S203B   Adapter: 5  ID: 1
+
+Read mode               : Secure
+Utilize accurate stream : Yes
+Defeat audio cache      : Yes
+Make use of C2 pointers : No
+
+Read offset correction                      : 6
+Overread into Lead-In and Lead-Out          : No
+Fill up missing offset samples with silence : Yes
+Delete leading and trailing silent blocks   : No
+Null samples used in CRC calculations       : Yes
+Used interface                              : Native Win32 interface for Win NT & 2000
+Gap handling                                : Appended to previous track
+
+Used output format              : User Defined Encoder
+Selected bitrate                : 768 kBit/s
+Quality                         : High
+Add ID3 tag                     : No
+Command line compressor         : C:\Programme\FLAC\FLAC.EXE
+Additional command line options : -8 -A tukey(0.25) -A gauss(0.1875) -b 4096 -V -T "ARTIST=%a" -T "TITLE=%t" -T "ALBUM=%g" -T "DATE=%y" -T "TRACKNUMBER=%n" -T "GENRE=%m" %s -o %d --sector-align
+
+
+TOC of the extracted CD
+
+     Track |   Start  |  Length  | Start sector | End sector 
+    ---------------------------------------------------------
+        1  |  0:00.00 |  1:29.64 |         0    |     6738   
+        2  |  1:29.64 |  6:03.16 |      6739    |    33979   
+        3  |  7:33.05 |  4:03.16 |     33980    |    52220   
+        4  | 11:36.21 |  3:41.04 |     52221    |    68799   
+        5  | 15:17.25 |  0:44.65 |     68800    |    72164   
+        6  | 16:02.15 |  4:13.34 |     72165    |    91173   
+        7  | 20:15.49 |  4:33.10 |     91174    |   111658   
+        8  | 24:48.59 |  0:41.61 |    111659    |   114794   
+        9  | 25:30.45 |  4:09.38 |    114795    |   133507   
+       10  | 29:40.08 |  1:24.19 |    133508    |   139826   
+       11  | 31:04.27 |  2:59.66 |    139827    |   153317   
+       12  | 34:04.18 |  4:44.54 |    153318    |   174671   
+       13  | 38:48.72 |  1:21.45 |    174672    |   180791   
+
+
+Track  1
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(01) Stieber Twins - Intro.wav
+
+     Pre-gap length  0:00:02.00
+
+     Peak level 98.0 %
+     Track quality 100.0 %
+     Test CRC 5B652067
+     Copy CRC 5B652067
+     Cannot be verified as accurate (confidence 2)  [BF4B1CEB], AccurateRip returned [AF8F5986]
+     Copy OK
+
+Track  2
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(02) Stieber Twins - Fenster zum Hof.wav
+
+     Peak level 98.8 %
+     Track quality 100.0 %
+     Test CRC B3E8F471
+     Copy CRC B3E8F471
+     Cannot be verified as accurate (confidence 2)  [D117FB74], AccurateRip returned [EAD10F43]
+     Copy OK
+
+Track  3
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(03) Stieber Twins - Allein zu zweit Remixx.wav
+
+     Peak level 98.0 %
+     Track quality 100.0 %
+     Test CRC 37B8C5E7
+     Copy CRC 37B8C5E7
+     Cannot be verified as accurate (confidence 2)  [467401C1], AccurateRip returned [24B232AF]
+     Copy OK
+
+Track  4
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(04) Stieber Twins feat. Cora E - Einmal Macco, Zweimal Stieber.wav
+
+     Peak level 98.0 %
+     Track quality 100.0 %
+     Test CRC D0E4725F
+     Copy CRC D0E4725F
+     Cannot be verified as accurate (confidence 2)  [818822C2], AccurateRip returned [5F39F41C]
+     Copy OK
+
+Track  5
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(05) Stieber Twins - Chris' Interlude.wav
+
+     Peak level 98.0 %
+     Track quality 100.0 %
+     Test CRC 62EC9EA7
+     Copy CRC 62EC9EA7
+     Cannot be verified as accurate (confidence 2)  [835A6A6A], AccurateRip returned [F59F63BE]
+     Copy OK
+
+Track  6
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(06) Stieber Twins - Fahrenheit 72.wav
+
+     Peak level 100.0 %
+     Track quality 100.0 %
+     Test CRC 5DDC6F36
+     Copy CRC 5DDC6F36
+     Cannot be verified as accurate (confidence 2)  [F68643DE], AccurateRip returned [8E98176A]
+     Copy OK
+
+Track  7
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(07) Stieber Twins - Doppelt nicht Stereo.wav
+
+     Pre-gap length  0:00:02.00
+
+     Peak level 98.0 %
+     Track quality 100.0 %
+     Test CRC 0B90DD05
+     Copy CRC 0B90DD05
+     Cannot be verified as accurate (confidence 2)  [780024AB], AccurateRip returned [5CF426C7]
+     Copy OK
+
+Track  8
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(08) Stieber Twins - Mar'lude.wav
+
+     Peak level 98.0 %
+     Track quality 100.0 %
+     Test CRC 252F8CA2
+     Copy CRC 252F8CA2
+     Cannot be verified as accurate (confidence 2)  [BD2DF980], AccurateRip returned [58B44848]
+     Copy OK
+
+Track  9
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(09) Stieber Twins - Fenster zum Hof Mario's Remixx.wav
+
+     Peak level 98.0 %
+     Track quality 100.0 %
+     Test CRC CF8E890E
+     Copy CRC CF8E890E
+     Cannot be verified as accurate (confidence 2)  [B4D236E9], AccurateRip returned [79D72EB6]
+     Copy OK
+
+Track 10
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(10) Stieber Twins - Fünfzig Fünf.wav
+
+     Peak level 99.2 %
+     Track quality 100.0 %
+     Test CRC 17B036B0
+     Copy CRC 17B036B0
+     Cannot be verified as accurate (confidence 2)  [B95F981B], AccurateRip returned [C6AAB45C]
+     Copy OK
+
+Track 11
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(11) Stieber Twins - PBB gets physical.wav
+
+     Pre-gap length  0:00:01.00
+
+     Peak level 98.0 %
+     Track quality 100.0 %
+     Test CRC 627A6A14
+     Copy CRC 627A6A14
+     Cannot be verified as accurate (confidence 2)  [99CAD079], AccurateRip returned [AB7B9763]
+     Copy OK
+
+Track 12
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(12) Stieber Twins feat. Scopemann, Fast Forward, Aphroe, Tatwaffe, Curse - Tausend MC's.wav
+
+     Peak level 98.8 %
+     Track quality 100.0 %
+     Test CRC 14CCE1EA
+     Copy CRC 14CCE1EA
+     Cannot be verified as accurate (confidence 2)  [3FAC042B], AccurateRip returned [81EA99D3]
+     Copy OK
+
+Track 13
+
+     Filename D:\Downloads\P2P\Torrents\seeds\Alben\FLAC\Fenster zum Hof\(13) Stieber Twins - Outro - the key to all forms of rockin'.wav
+
+     Peak level 98.0 %
+     Track quality 100.0 %
+     Test CRC 7D78AEA7
+     Copy CRC 7D78AEA7
+     Cannot be verified as accurate (confidence 2)  [8155A7A5], AccurateRip returned [386368CC]
+     Copy OK
+
+
+No tracks could be verified as accurate
+You may have a different pressing from the one(s) in the database
+
+No errors occurred
+
+End of status report

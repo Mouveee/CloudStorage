@@ -41,7 +41,6 @@ class App extends Component {
 		updating: false,
 		uploadMenuVisible: false,
 		//TODO factorize the whole table
-		tableHeadVisible: false
 	};
 
 	actualize = () => {
@@ -208,6 +207,15 @@ class App extends Component {
 
 	renameItem = item => {
 		console.log('renaming item ' + item);
+
+
+		let newName = prompt('Enter the new name', item);
+
+		const content = {};
+		content.itemToMove = item;
+		content.targetFolder = this.state.currentFolder + newName;
+
+		this.callBackendAPI(content, '/move')
 	}
 
 	requestFolder = async folder => {
@@ -314,9 +322,6 @@ class App extends Component {
 	render() {
 		window.chrome ? console.log('Running on chrome...') : console.log('');
 
-		let tableHeadClass = this.state.tableHeadVisible ? 'visible' : 'fuck your mom';
-		setTimeout(() => this.setState({ tableHeadVisible: true }))
-
 		return (
 			<div className='App'>
 				<header>
@@ -366,7 +371,7 @@ class App extends Component {
 							)
 						) {
 							return (
-								<table id='App-folderList' className={tableHeadClass}>
+								<table id='App-folderList'>
 									<thead id='App-tableHead' >
 										<tr >
 											<th />

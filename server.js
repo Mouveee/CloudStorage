@@ -191,11 +191,14 @@ app.post("/move", (req, res) => {
 	const source = './external/' + req.body.content.itemToMove;
 	const target = './external/' + req.body.content.targetFolder;
 
+	let sourceSplitted = source.split('/');
+	let item = sourceSplitted.pop();
+
 	console.log(
 		`moving request received, moving ${source} to ${target}`
 	);
 
-	fs.renameSync(source, target + '/' + req.body.content.itemToMove)
+	fs.renameSync(source, target + '/' + item)
 
 	res.statusCode = 200;
 	res.send(JSON.stringify({ message: "you are a weirdo" }));

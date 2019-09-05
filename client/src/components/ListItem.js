@@ -74,6 +74,7 @@ function getFileIcon(ending) {
 			returnValue = headphones;
 			break;
 		case "jpg":
+		case "jpeg":
 		case "svg":
 			returnValue = photoIcon;
 			break;
