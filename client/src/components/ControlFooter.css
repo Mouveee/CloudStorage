@@ -10,6 +10,12 @@
 	left: 20%;
 	user-select: none;
 	border-radius: 60px;
+	opacity: 0;
+	transition: 1400ms;
+}
+
+#App-controlFooter.App-footerVisible{
+	opacity: 1;
 }
 
 .App-controlElement {

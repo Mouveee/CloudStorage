@@ -5,6 +5,7 @@
 	"proxy": "http://localhost:5000/",
 	"dependencies": {
 		"filepond": "^4.6.1",
+		"mobile-detect": "^1.4.3",
 		"react": "^16.9.0",
 		"react-dom": "^16.9.0",
 		"react-filepond": "^7.0.1",

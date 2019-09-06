@@ -3,12 +3,14 @@ import "react-app-polyfill/stable";
 import React, { Component } from "react";
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
+import MobileDetect from 'mobile-detect';
 import posed from 'react-pose';
 
 //custom components, hopefully well written
 import ControlFooter from "./components/ControlFooter.js";
 import Header from "./components/Header.js";
 import ListItem from "./components/ListItem.js";
+import ProgressIndicator from './components/ProgressIndicator.js';
 import SideBar from "./components/Sidebar.js";
 import StatusOverlay from "./components/StatusOverlay.js";
 import TableHead from './components/TableHead.js';
@@ -37,6 +39,7 @@ class App extends Component {
 			fileList: [],
 			fileBeingDragged: '',
 			folderList: [],
+			inProgress: [],
 			selectedItems: [],
 			sorting: "name", //possible so far: 'name',
 			statusOverlayVisible: false,
@@ -117,8 +120,15 @@ class App extends Component {
 		const content = {};
 		content.folder = folder;
 
+		this.setState({ inProgress: [...this.state.inProgress, 'zipping your folder'] })
+
 		let res = await this.callBackendAPI(content, '/downloadFolder');
-		console.log(`resposne.status : ${res.status}`)
+		console.log(`response.status : ${res.status}`);
+
+		res.json().then(response => {
+			this.setState({ inProgress: [] });
+			console.log(`zipping success, progress should disappear...`)
+		})
 	}
 
 	handleFileClick = async e => {
@@ -129,7 +139,7 @@ class App extends Component {
 			: (fileToDownload = e.target.textContent);
 
 		let fileName = "unknown.dat";
-		alert("this must get better...");
+		this.setState({ inProgress: [...this.state.inProgress, 'downLoading'] })
 
 		new Promise(async (resolve, reject) => {
 			let answer = await fetch("/download", {
@@ -171,6 +181,7 @@ class App extends Component {
 				link.click();
 				//Clean up and remove the link
 				link.parentNode.removeChild(link);
+				this.setState({ inProgress: [] })
 			})
 			.catch(e => {
 				console.log(`error in promise: ${e}`);
@@ -335,8 +346,28 @@ class App extends Component {
 	render() {
 		window.chrome ? console.log('Running on chrome...') : console.log('');
 
+		const md = new MobileDetect(
+			window.navigator.userAgent
+		);
+
+		// more typically we would instantiate with 'window.navigator.userAgent'
+		// as user-agent; this string literal is only for better understanding
+
+		// console.log(md.mobile() ? 'running on mobile ' + md.mobile() : 'no mobile');          // 'Sony'
+		// console.log(md.phone() ? 'phone type: ' + md.phone() : 'this is not a telephone');           // 'Sony'
+		// console.log(md.tablet());          // null
+		// console.log(md.userAgent());       // 'Safari'
+		// console.log(md.os() ? 'os: ' + md.os() : `couldn't determine os...`);              // 'AndroidOS'
+		// console.log(md.is('iPhone'));      // false
+		// console.log(md.is('bot'));         // false
+		// console.log(md.version('Webkit'));         // 534.3
+		// console.log(md.versionStr('Build'));       // '4.1.A.0.562'
+		// console.log(md.match('playstation|xbox')); // false
+		console.log(`monitoring prev: ${this.state.prevFolder}`)
+
 		return (
-			<div className='App'>
+
+			< div className='App' >
 				<header>
 					<Header
 						currentFolder={this.state.currentFolder}
@@ -347,6 +378,11 @@ class App extends Component {
 				</header>
 
 				<section id='App-container'>
+					{this.state.inProgress.length > 0 ?
+						<ProgressIndicator message={this.state.inProgress[this.state.inProgress.length - 1]} />
+						: null
+					}
+
 					{/* TODO: everything */}
 					{this.state.statusOverlayVisible ?
 						<StatusOverlay
@@ -370,7 +406,10 @@ class App extends Component {
 						/>
 					) : null}
 
-					<SideBar />;
+					{!md.mobile() ?
+						<SideBar />
+						: null
+					}
 
 					{(() => {
 						if (this.state.updating) {
@@ -388,6 +427,12 @@ class App extends Component {
 							return (
 								<table id='App-folderList'>
 									<TableHead
+										actualize={this.actualize}
+										callBackendAPI={this.callBackendAPI}
+										currentFolder={this.state.currentFolder}
+										fileBeingDragged={this.state.fileBeingDragged}
+										prevFolder={this.state.prevFolder}
+										setFileBeingDragged={this.setFileBeingDragged}
 										sortBy={this.sortBy}
 										navigateBack={this.navigateBack}
 										root={this.state.currentFolder === "" ? true : false}
@@ -460,7 +505,7 @@ class App extends Component {
 					/>
 				</section>
 				<br />
-			</div>
+			</div >
 		);
 	}
 }

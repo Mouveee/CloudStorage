@@ -23,6 +23,7 @@ class TableHead extends React.Component {
             className='App-columnName'
             onClick={this.props.sortBy}
             data-sort='name'
+
           >
             Name
           </th>
@@ -34,6 +35,33 @@ class TableHead extends React.Component {
             <th
               className='App-columnName'
               onClick={this.props.navigateBack}
+              draggable='false'
+              onDragOver={e => {
+                e.preventDefault();
+                console.log('being triggered')
+              }}
+              onDrop={async e => {
+                e.preventDefault();
+
+                console.log(`triggered, file ${this.props.fileBeingDragged}`)
+                console.log(`prevFolder: ${this.props.prevFolder}`)
+
+                const content = {};
+
+                content.itemToMove = this.props.currentFolder + this.props.fileBeingDragged;
+                content.targetFolder = this.props.prevFolder;
+
+                this.props.setFileBeingDragged({ fileBeingDragged: "" });
+                let responsePromise = await this.props.callBackendAPI(
+                  content,
+                  "/move"
+                );
+                const response = responsePromise.json();
+
+                //reload folder
+                response.then(resolved => this.props.actualize());
+              }
+              }
             >
               ...
           </th>

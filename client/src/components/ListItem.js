@@ -245,7 +245,7 @@ class ListItem extends React.Component {
 							<td key={'td- ' + i++} />
 							<td key={'td- ' + i++} />
 							<td className='App-itemInfo' key={'td- ' + i++}>
-								{Math.round(this.props.item.size / 1048576, 4) +
+								{Math.round((this.props.item.size / 1048576 * 100)) / 100 +
 									" mb" +
 									" " +
 									formatDate(this.props.item.modified)}
