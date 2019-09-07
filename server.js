@@ -184,7 +184,7 @@ app.post("/external", (req, res) => {
 		objectToSend = getFolderContent(dir);
 	}
 	catch (e) {
-		console.log(`couldn't find folder ${req.content.folder}`);
+		console.log(`couldn't find folder, e.message ${e.message}`);
 
 		res.statusCode = 404;
 		res.send(JSON.stringify({ message: 'folder not found' }))

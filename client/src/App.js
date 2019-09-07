@@ -34,7 +34,7 @@ class App extends Component {
 		this.sortBy.bind(this);
 
 		this.state = {
-			currentFolder: "",
+			currentFolder: "./",
 			prevFolder: [],
 			fileList: [],
 			fileBeingDragged: '',
@@ -74,8 +74,6 @@ class App extends Component {
 			referrer: "no-referrer", // no-referrer, *client
 			body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
 		});
-
-		// const bodyPromise = await response.json();
 
 		return response;
 	};
@@ -189,7 +187,9 @@ class App extends Component {
 	};
 
 	handleFolderClick = e => {
-		let prev = [...this.state.prevFolder, this.state.currentFolder];
+		let prev = [...this.state.prevFolder, this.state.currentFolder]
+
+		console.log('prev before setting state: ' + prev + 'of length' + prev.length + '\ncurrent: ' + this.state.currentFolder)
 
 		this.setState({
 			currentFolder: this.state.currentFolder + e.target.textContent + "/",
@@ -215,6 +215,23 @@ class App extends Component {
 		}
 	};
 
+	navigateBack = async () => {
+		console.log('clicked navigateBack...');
+
+		if (this.state.prevFolder.length > 0) {
+			let prevFolder = [...this.state.prevFolder];
+			prevFolder.pop();
+
+			await this.setState({
+				currentFolder: this.state.prevFolder[this.state.prevFolder.length - 1],
+				prevFolder: prevFolder,
+				selectedItems: []
+			});
+
+			this.actualize();
+		}
+	};
+
 	normalizeItem = item => {
 		item = item.replace(/"/g, "").replace(/\//g, "");
 		return item;
@@ -237,15 +254,13 @@ class App extends Component {
 	}
 
 	requestFolder = async folder => {
-		// Call our fetch function below once the component mounts
 		let targetFolder = "./external/";
-		folder ? (targetFolder += folder) : console.log(`sending ${targetFolder}`);
+		folder ? (targetFolder += folder.slice(2)) : console.log(`sending ${targetFolder}`);
 		this.setState({ updating: true });
 
-		let response = await this.callBackendAPI(targetFolder);
-		console.log(
-			`response status: ${response.status}\nresponse type: ${typeof response}`
-		);
+		console.log('requested folder folder sliced: ' + folder.slice(2))
+
+		let response = await this.callBackendAPI(targetFolder, '/external');
 
 		let parsedResponse = response.json();
 
@@ -308,28 +323,12 @@ class App extends Component {
 		this.setState({ uploadMenuVisible: !this.state.uploadMenuVisible });
 	};
 
-	navigateBack = () => {
-		if (this.state.prevFolder.length > 0) {
-			let folder = this.state.prevFolder[this.state.prevFolder.length - 1];
-			let prevFolder = new Array(...this.state.prevFolder);
-
-			prevFolder.pop();
-
-			this.setState({
-				currentFolder: folder,
-				prevFolder: prevFolder,
-				selectedItems: []
-			});
-
-			this.requestFolder(folder);
-		}
-	};
 
 	componentDidMount() {
 		document.title = 'Octodrive';
 
 		const inputFolder = document.getElementById("App-folderInput");
-		this.requestFolder();
+		this.requestFolder(this.state.currentFolder);
 
 		//create a folder by pressing return, remove event listener when unfocused
 		inputFolder.onfocus = () =>
@@ -344,7 +343,7 @@ class App extends Component {
 	}
 
 	render() {
-		window.chrome ? console.log('Running on chrome...') : console.log('');
+		// window.chrome ? console.log('Running on chrome...') : console.log('');
 
 		const md = new MobileDetect(
 			window.navigator.userAgent
@@ -363,7 +362,6 @@ class App extends Component {
 		// console.log(md.version('Webkit'));         // 534.3
 		// console.log(md.versionStr('Build'));       // '4.1.A.0.562'
 		// console.log(md.match('playstation|xbox')); // false
-		console.log(`monitoring prev: ${this.state.prevFolder}`)
 
 		return (
 
@@ -373,7 +371,7 @@ class App extends Component {
 						currentFolder={this.state.currentFolder}
 						navigateBack={this.navigateBack}
 						actualize={this.actualize}
-						root={this.state.currentFolder === "" ? true : false}
+						root={this.state.currentFolder === "./" ? true : false}
 					/>
 				</header>
 
@@ -435,7 +433,7 @@ class App extends Component {
 										setFileBeingDragged={this.setFileBeingDragged}
 										sortBy={this.sortBy}
 										navigateBack={this.navigateBack}
-										root={this.state.currentFolder === "" ? true : false}
+										root={this.state.currentFolder === "./" ? true : false}
 									/>
 
 									{this.state.folderList.map((item, index) => {
@@ -484,17 +482,32 @@ class App extends Component {
 							);
 						} else {
 							return (
-								<div id='App-folderList'>
-									This folder is empty :(
-									<br />
-									<a
-										href='http://www.assoass.com'
-										target='_blank'
-										rel='noopener noreferrer'
-									>
-										WATCH PORN INSTEAD!
-									</a>
-								</div>
+								<table id='App-folderList'>
+									<TableHead
+										actualize={this.actualize}
+										callBackendAPI={this.callBackendAPI}
+										currentFolder={this.state.currentFolder}
+										fileBeingDragged={this.state.fileBeingDragged}
+										prevFolder={this.state.prevFolder}
+										setFileBeingDragged={this.setFileBeingDragged}
+										sortBy={this.sortBy}
+										navigateBack={this.navigateBack}
+										root={this.state.currentFolder === "./" ? true : false}
+									/>
+									<tr>
+										<td />
+										<td>this folder is empty...</td>
+										<td>
+											<a
+												href='http://www.assoass.com'
+												target='_blank'
+												rel='noopener noreferrer'
+											>
+												WATCH PORN INSTEAD!
+											</a>
+										</td>
+									</tr>
+								</table>
 							);
 						}
 					})()}

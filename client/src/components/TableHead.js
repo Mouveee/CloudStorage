@@ -44,12 +44,12 @@ class TableHead extends React.Component {
                 e.preventDefault();
 
                 console.log(`triggered, file ${this.props.fileBeingDragged}`)
-                console.log(`prevFolder: ${this.props.prevFolder}`)
+                console.log(`prevFolder: ${this.props.prevFolder[this.props.prevFolder.length - 1]}`)
 
                 const content = {};
 
                 content.itemToMove = this.props.currentFolder + this.props.fileBeingDragged;
-                content.targetFolder = this.props.prevFolder;
+                content.targetFolder = this.props.prevFolder[this.props.prevFolder.length - 1];
 
                 this.props.setFileBeingDragged({ fileBeingDragged: "" });
                 let responsePromise = await this.props.callBackendAPI(

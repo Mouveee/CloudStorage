@@ -12,8 +12,6 @@ class ControlHeader extends Component {
 		this.state = { visible: false }
 	}
 
-
-
 	render() {
 		let classVisibility = this.state.visible ? 'visible' : '';;
 
