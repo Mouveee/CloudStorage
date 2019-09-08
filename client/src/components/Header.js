@@ -5,7 +5,7 @@ import "./Header.css";
 
 import Avatar from "./avatar.js";
 
-class ControlHeader extends Component {
+class Header extends Component {
 	constructor(props) {
 		super(props);
 
@@ -18,7 +18,7 @@ class ControlHeader extends Component {
 		setTimeout(() => this.setState({ visible: true }))
 
 		return (
-			<h1 id='App-header' className={classVisibility}>
+			<h1 id='App-header' className={this.props.isMobile ? classVisibility + ' mobileHeader' : classVisibility}>
 				<Avatar />
 				OKTODRIVE
 			<small className='App-subHeader' >...praise the Octopus Baby...</small>
@@ -48,4 +48,4 @@ class ControlHeader extends Component {
 	}
 }
 
-export default ControlHeader;
+export default Header;

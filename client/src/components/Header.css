@@ -15,6 +15,10 @@
 	transition: 1000ms;
 }
 
+#App-header.mobileHeader{
+	font-size: 1em;
+}
+
 #App-header.visible {
 	opacity: 1;
 }

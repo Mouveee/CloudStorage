@@ -380,6 +380,7 @@ class App extends Component {
 				<header>
 					<Header
 						currentFolder={this.state.currentFolder}
+						isMobile={md.phone() ? true : false}
 						navigateBack={this.navigateBack}
 						actualize={this.actualize}
 						root={this.state.currentFolder === "./" ? true : false}
