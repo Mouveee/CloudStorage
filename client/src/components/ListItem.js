@@ -174,8 +174,7 @@ class ListItem extends React.Component {
 								<td key={'td- ' + i++}>
 									<input
 										type='checkbox'
-										data-item={this.props.item.name}
-										onChange={this.props.itemSelect}
+										onChange={e => this.props.itemSelect(e, this.props.item.name, this.props.item.type)}
 									/>
 								</td>
 							)}
@@ -231,9 +230,7 @@ class ListItem extends React.Component {
 							<img
 								src={trashcan}
 								className='App-listIcon'
-								onClick={this.props.deleteItem}
-								data-item={this.props.item.name}
-								data-type={this.props.type}
+								onClick={() => this.props.deleteItem(this.props.item.name, this.props.type)}
 								alt='KILL'
 							/>
 						</td>

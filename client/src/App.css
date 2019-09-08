@@ -44,6 +44,11 @@ button:hover {
 	opacity: 1;
 }
 
+#App-folderList.folderListMobile{
+	left: 0;
+	width: 90%;
+}
+
 td {
 	padding-bottom: 0.1em;
 	padding-top: 0.1em;
@@ -106,6 +111,14 @@ th.App-columnName:hover {
 
 .filepond--file {
 	color: white;
+}
+
+.filepond--item {
+	width: calc(25% - .5em);
+}
+
+.filepond--item-panel {
+	border-radius: 0.5em;
 }
 
 .App-onlyNonRootVisible {

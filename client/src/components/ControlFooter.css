@@ -23,7 +23,8 @@
 	margin-left: 1em;
 	margin-right: 1em;
 
-	/* height: 1.5em; */
+	height: 1em;
+	/* width: 1em; */
 }
 
 input.App-controlElement {

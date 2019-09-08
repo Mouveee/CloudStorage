@@ -3,6 +3,7 @@ import React from "react";
 import "./ControlFooter.css";
 
 import downloadIcon from "../img/download.svg";
+import trashIcon from "../img/trashcan.svg";
 import uploadIcon from "../img/upload.svg";
 
 class ControlFooter extends React.Component {
@@ -18,15 +19,30 @@ class ControlFooter extends React.Component {
 
 		return (
 			<nav id='App-controlFooter' className={visibleFooter}>
-				{this.props.itemsSelected ? (
+				{this.props.selectedItems.length > 0 ? (
 					<img src={downloadIcon} alt=':(' className='App-controlElement' />
-				) : null}
+					) 
+					: null
+				}
+
 				<img
 					src={uploadIcon}
 					alt=':('
 					className='App-controlElement'
 					onClick={this.props.uploadFile}
 				/>
+
+				{this.props.selectedItems.length > 0 ? (
+					<img 
+						src={trashIcon} 
+						alt=':(' 
+						className='App-controlElement' 
+						onClick={()=>{this.props.deleteMultipleItems(this.props.selectedItems)}}
+					/>
+					) 
+				: null
+				}
+
 				<input
 					id='App-folderInput'
 					placeholder='create new folder...'

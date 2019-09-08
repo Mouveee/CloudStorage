@@ -93,15 +93,14 @@ class App extends Component {
 		}
 	};
 
-	deleteItem = async item => {
+	deleteItem = async (name, type, confirmed) => {
 		const content = {};
-		let confirmed = false;
 
-		content.item = item.target.dataset.item;
-		content.type = item.target.dataset.type;
+		content.item = name;
+		content.type = type;
 		content.location = this.state.currentFolder;
 
-		confirmed = window.confirm(`really delete ${content.item}?`);
+		confirmed = confirmed ? true : window.confirm(`really delete ${content.item}?`);
 
 		if (confirmed) {
 			this.setState({ updating: true });
@@ -112,6 +111,14 @@ class App extends Component {
 
 			this.actualize();
 		}
+	};
+
+	deleteMultipleItems = items => {
+		const confirmed = prompt(`Delete ${this.state.selectedItems.length} files?`);
+
+		this.setState({ actualize: true });
+		items.map(item => this.deleteItem(item.name, item.type, true))
+		this.setState({ actualize: false })
 	};
 
 	downloadFolder = async folder => {
@@ -200,8 +207,12 @@ class App extends Component {
 		this.requestFolder(this.state.currentFolder + e.target.textContent);
 	};
 
-	itemSelect = async e => {
-		const item = e.target.dataset.item;
+	itemSelect = async (e, name, type) => {
+		const item = {}
+
+		item.name = name;
+		item.type = type;
+
 		if (e.target.checked) {
 			await this.setState({
 				selectedItems: [...this.state.selectedItems, item]
@@ -423,7 +434,7 @@ class App extends Component {
 							)
 						) {
 							return (
-								<table id='App-folderList'>
+								<table id='App-folderList' className={md.phone() ? 'folderListMobile' : 'folderListBig'}>
 									<TableHead
 										actualize={this.actualize}
 										callBackendAPI={this.callBackendAPI}
@@ -494,27 +505,31 @@ class App extends Component {
 										navigateBack={this.navigateBack}
 										root={this.state.currentFolder === "./" ? true : false}
 									/>
-									<tr>
-										<td />
-										<td>this folder is empty...</td>
-										<td>
-											<a
-												href='http://www.assoass.com'
-												target='_blank'
-												rel='noopener noreferrer'
-											>
-												WATCH PORN INSTEAD!
+									<tbody>
+										<tr>
+											<td />
+											<td>this folder is empty...</td>
+											<td>
+												<a
+													href='http://www.assoass.com'
+													target='_blank'
+													rel='noopener noreferrer'
+												>
+													WATCH PORN INSTEAD!
 											</a>
-										</td>
-									</tr>
+											</td>
+										</tr>
+									</tbody>
 								</table>
 							);
 						}
 					})()}
 
 					<ControlFooter
+						deleteMultipleItems={this.deleteMultipleItems}
+						selectedItems={this.state.selectedItems}
+						updating={this.state.updating}
 						uploadFile={this.uploadFile}
-						itemsSelected={this.state.selectedItems.length > 0 ? true : false}
 					/>
 				</section>
 				<br />
