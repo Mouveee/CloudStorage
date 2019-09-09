@@ -99,11 +99,12 @@ class ListItem extends React.Component {
 
 
 	onDragOver = e => {
-		e.preventDefault();
+		// e.preventDefault();
 
 		if (this.props.type === 'folder' && this.props.fileBeingDragged !== this.props.item.name) {
 			e.target.style.backgroundColor = "pink";
 		}
+
 		e.preventDefault();
 	}
 
@@ -113,8 +114,6 @@ class ListItem extends React.Component {
 	}
 
 	onDragStart = e => {
-		// e.preventDefault();
-
 		e.dataTransfer.setData('text/plain', 'assoass');
 
 		this.props.setFileBeingDragged(this.props.item.name);
@@ -130,7 +129,18 @@ class ListItem extends React.Component {
 			} else {
 				const content = {};
 
-				content.itemToMove = './external/' + this.props.currentFolder.slice(2) + this.props.fileBeingDragged;
+				alert(`last item: ${JSON.stringify(this.props.selectedItems[this.props.selectedItems.length - 1])}`)
+
+				if (this.props.selectedItems.length === 0) {
+					content.itemToMove = './external/' + this.props.currentFolder.slice(2) + this.props.fileBeingDragged
+				} else {
+					this.props.selectedItems.map(item => {
+						item.name = './external/' + this.props.currentFolder.slice(2) + item.name;
+						console.log('selectedItems: ' + item.name)
+					});
+					content.itemToMove = this.props.selectedItems;
+				}
+
 				content.targetFolder = './external/' + this.props.currentFolder.slice(2) + this.props.item.name;
 
 				this.props.setFileBeingDragged({ fileBeingDragged: "" });

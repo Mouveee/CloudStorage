@@ -461,10 +461,12 @@ class App extends Component {
 												downloadFolder={this.downloadFolder}
 												item={item}
 												index={index}
+												isMobile={md.phone() ? true : false}
 												deleteItem={this.deleteItem}
 												fileBeingDragged={this.state.fileBeingDragged}
 												handleClick={this.handleFolderClick}
 												renameItem={this.renameItem}
+												selectedItems={this.state.selectedItems}
 												setFileBeingDragged={this.setFileBeingDragged}
 												type='folder'
 											/>
@@ -486,8 +488,10 @@ class App extends Component {
 												fileBeingDragged={this.state.fileBeingDragged}
 												fileEnding={fileEnding}
 												handleClick={this.handleFileClick}
+												isMobile={md.phone() ? true : false}
 												itemSelect={this.itemSelect}
 												renameItem={this.renameItem}
+												selectedItems={this.state.selectedItems}
 												setFileBeingDragged={this.setFileBeingDragged}
 												type='file'
 											/>

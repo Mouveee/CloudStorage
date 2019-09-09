@@ -196,14 +196,18 @@ app.post("/move", (req, res) => {
 	const source = req.body.content.itemToMove;
 	const target = req.body.content.targetFolder;
 
-	let sourceSplitted = source.split('/');
-	let item = sourceSplitted.pop();
+	if (typeof source === 'string') {
+		let sourceSplitted = source.split('/');
+		let item = sourceSplitted.pop();
 
-	console.log(
-		`moving request received, moving ${source} to ${target}`
-	);
+		fs.renameSync(source, target + '/' + item)
 
-	fs.renameSync(source, target + '/' + item)
+	} else {
+		console.log(
+			`I cant handle this`
+		);
+		source.map(item => { console.log('moving request for: ' + item.name) })
+	}
 
 	res.statusCode = 200;
 	res.send(JSON.stringify({ message: "you are a weirdo" }));
