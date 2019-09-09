@@ -47,6 +47,7 @@ class ControlFooter extends React.Component {
 					id='App-folderInput'
 					placeholder='create new folder...'
 					className='App-controlElement'
+					autoComplete='false'
 				/>
 			</nav>
 		)

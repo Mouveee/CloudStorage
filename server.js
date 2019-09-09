@@ -149,11 +149,8 @@ app.post('/downloadFolder', async (req, res) => {
 
 		console.log(`download folder: ${'./external/' + req.body.content.folder}\nfile: ${`./external/zipped/${fileName + '.zip'}`}`);
 
-		// zip a folder
-		console.log("zip a folder");
-
-		var archive = archiver.create('zip', {});
-		var output = fs.createWriteStream(`./external/zipped/${fileName + '.zip'}`);
+		let archive = archiver.create('zip', {});
+		let output = fs.createWriteStream(`./external/zipped/${fileName + '.zip'}`);
 		archive.pipe(output);
 
 		archive
@@ -196,8 +193,8 @@ app.post("/external", (req, res) => {
 });
 
 app.post("/move", (req, res) => {
-	const source = './external/' + req.body.content.itemToMove;
-	const target = './external/' + req.body.content.targetFolder;
+	const source = req.body.content.itemToMove;
+	const target = req.body.content.targetFolder;
 
 	let sourceSplitted = source.split('/');
 	let item = sourceSplitted.pop();

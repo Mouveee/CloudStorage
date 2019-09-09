@@ -42,11 +42,11 @@ button:hover {
 	overflow-y: scroll;
 	vertical-align: middle;
 	opacity: 1;
-	font-size: 17px;
+	font-size: 18px;
 }
 
 #App-folderList.folderListMobile{
-	left: 1em;
+	left: 0;
 	right: 1em;
 	width: 100%;
 	top: 5em;

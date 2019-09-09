@@ -15,11 +15,11 @@ class SideBar extends React.Component {
 
 		return (
 			<nav id='App-sideBar' className={faderClass}>
-				<div className='App-sideBarItem'>about</div>
+				<div className='App-sideBarItem'>About me</div>
 				<div>...</div>
-				<div className='App-sideBarItem'>credits</div>
+				<div className='App-sideBarItem'>File Storage</div>
 				<div>...</div>
-				<div className='App-sideBarItem'>porn</div>
+				<div className='App-sideBarItem'>Static</div>
 			</nav>
 		);
 	}

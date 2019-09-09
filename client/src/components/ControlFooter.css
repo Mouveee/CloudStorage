@@ -9,7 +9,7 @@
 	border: solid white 1px;
 	left: 20%;
 	user-select: none;
-	border-radius: 60px;
+	border-radius: 90px;
 	opacity: 0;
 	transition: 1400ms;
 }

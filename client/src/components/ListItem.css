@@ -8,7 +8,7 @@ tBody.visible{
 }
 
 .App-itemInfo {
-	font-size: 0.8em;
+	font-size: 14px;
 	color: lightgray;
 	overflow: hidden;
 	line-break: strict;
@@ -16,14 +16,14 @@ tBody.visible{
 	user-select: none;
 }
 
-.App-listItem{
+.App-bigSpan{
 	transition: 350ms;
+	font-size: 10px;
 }
 
-.App-listItem:hover {
+.App-bigSpan:hover {
 	color: black;
 	cursor: pointer;
-	font: size 1.1em;
 }
 
 .App-listIcon {

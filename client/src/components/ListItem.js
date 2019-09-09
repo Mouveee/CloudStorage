@@ -117,11 +117,7 @@ class ListItem extends React.Component {
 
 		e.dataTransfer.setData('text/plain', 'assoass');
 
-		// e.stopPropagation();
 		this.props.setFileBeingDragged(this.props.item.name);
-		console.log(
-			"you dragged an item of name " + this.props.fileBeingDragged
-		);
 	}
 
 	onDrop = async e => {
@@ -134,10 +130,8 @@ class ListItem extends React.Component {
 			} else {
 				const content = {};
 
-				content.itemToMove = this.props.currentFolder + this.props.fileBeingDragged;
-				content.targetFolder = this.props.currentFolder + this.props.item.name;
-
-				console.log(`JSON: ${JSON.stringify(content)}`)
+				content.itemToMove = './external/' + this.props.currentFolder.slice(2) + this.props.fileBeingDragged;
+				content.targetFolder = './external/' + this.props.currentFolder.slice(2) + this.props.item.name;
 
 				this.props.setFileBeingDragged({ fileBeingDragged: "" });
 				let responsePromise = await this.props.callBackendAPI(

@@ -114,11 +114,13 @@ class App extends Component {
 	};
 
 	deleteMultipleItems = items => {
-		const confirmed = prompt(`Delete ${this.state.selectedItems.length} files?`);
+		const confirmed = window.confirm(`Delete ${this.state.selectedItems.length} files?`);
 
-		this.setState({ actualize: true });
-		items.map(item => this.deleteItem(item.name, item.type, true))
-		this.setState({ actualize: false })
+		if (confirmed) {
+			this.setState({ actualize: true })
+			items.map(item => this.deleteItem(item.name, item.type, true))
+			this.setState({ actualize: false })
+		}
 	};
 
 	downloadFolder = async folder => {

@@ -38,7 +38,6 @@ class TableHead extends React.Component {
               draggable='false'
               onDragOver={e => {
                 e.preventDefault();
-                console.log('being triggered')
               }}
               onDrop={async e => {
                 e.preventDefault();
@@ -48,8 +47,8 @@ class TableHead extends React.Component {
 
                 const content = {};
 
-                content.itemToMove = this.props.currentFolder + this.props.fileBeingDragged;
-                content.targetFolder = this.props.prevFolder[this.props.prevFolder.length - 1];
+                content.itemToMove = './external/' + this.props.currentFolder.slice(2) + this.props.fileBeingDragged;
+                content.targetFolder = './external/' + this.props.prevFolder[this.props.prevFolder.length - 1].slice(2);
 
                 this.props.setFileBeingDragged({ fileBeingDragged: "" });
                 let responsePromise = await this.props.callBackendAPI(
