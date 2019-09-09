@@ -34,7 +34,7 @@ button:hover {
 	width: 83%;
 	height: 75%;
 	position: fixed;
-	top: 7em;
+	top: 6em;
 	left: 15%;
 	margin: auto;
 	color: darkgray;
@@ -42,17 +42,20 @@ button:hover {
 	overflow-y: scroll;
 	vertical-align: middle;
 	opacity: 1;
+	font-size: 17px;
 }
 
 #App-folderList.folderListMobile{
-	left: 0;
+	left: 1em;
+	right: 1em;
 	width: 100%;
 	top: 5em;
+	font-size: 14px;
+	overflow: hidden;
 }
 
 td {
-	padding-bottom: 0.1em;
-	padding-top: 0.1em;
+	padding: 0.1em;
 }
 
 table td.App-smallSpan {
@@ -60,10 +63,13 @@ table td.App-smallSpan {
 	width: 5%;
 	overflow: hidden;
 	word-wrap: break-word;
+	padding-left:2px;
+	padding-right: 2px;
 }
 
 table td.App-bigSpan {
 	table-layout: fixed;
+	font-size: 16px;
 	width: 85%;
 	overflow: hidden;
 	word-wrap: break-word;
@@ -72,6 +78,7 @@ table td.App-bigSpan {
 
 th.App-columnName {
 	text-align: left;
+	text-overflow: hidden;
 }
 
 th.App-columnName:hover {

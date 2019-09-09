@@ -15,7 +15,7 @@ class TableHead extends React.Component {
     setTimeout(() => this.setState({ visible: true }))
 
     return (
-      <thead id='App-tableHead' className={visibility}>
+      <thead id='App-tableHead' className={this.props.isMobile ? visibility + ' mobileTableHead' : visibility}>
         <tr >
           <th />
           <th />

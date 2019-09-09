@@ -18,10 +18,10 @@ class ControlFooter extends React.Component {
 		setTimeout(() => this.setState({ visible: true }));
 
 		return (
-			<nav id='App-controlFooter' className={visibleFooter}>
+			<nav id='App-controlFooter' className={this.props.isMobile ? visibleFooter + ' mobileControlFooter' : visibleFooter}>
 				{this.props.selectedItems.length > 0 ? (
 					<img src={downloadIcon} alt=':(' className='App-controlElement' />
-					) 
+				)
 					: null
 				}
 
@@ -33,14 +33,14 @@ class ControlFooter extends React.Component {
 				/>
 
 				{this.props.selectedItems.length > 0 ? (
-					<img 
-						src={trashIcon} 
-						alt=':(' 
-						className='App-controlElement' 
-						onClick={()=>{this.props.deleteMultipleItems(this.props.selectedItems)}}
+					<img
+						src={trashIcon}
+						alt=':('
+						className='App-controlElement'
+						onClick={() => { this.props.deleteMultipleItems(this.props.selectedItems) }}
 					/>
-					) 
-				: null
+				)
+					: null
 				}
 
 				<input

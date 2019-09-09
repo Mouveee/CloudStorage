@@ -441,6 +441,7 @@ class App extends Component {
 										callBackendAPI={this.callBackendAPI}
 										currentFolder={this.state.currentFolder}
 										fileBeingDragged={this.state.fileBeingDragged}
+										isMobile={md.phone() ? true : false}
 										prevFolder={this.state.prevFolder}
 										setFileBeingDragged={this.setFileBeingDragged}
 										sortBy={this.sortBy}
@@ -528,6 +529,7 @@ class App extends Component {
 
 					<ControlFooter
 						deleteMultipleItems={this.deleteMultipleItems}
+						isMobile={md.phone() ? true : false}
 						selectedItems={this.state.selectedItems}
 						updating={this.state.updating}
 						uploadFile={this.uploadFile}

@@ -3,6 +3,11 @@
   transition: 500ms;
 }
 
+#App-tableHead.mobileTableHead{
+  font-size: 14px;
+}
+
 #App-tableHead.visible{
   opacity: 1;
 }
+
