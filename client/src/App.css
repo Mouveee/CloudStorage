@@ -60,7 +60,7 @@ td {
 
 table td.App-smallSpan {
 	table-layout: fixed;
-	width: 5%;
+	width: auto;
 	overflow: hidden;
 	word-wrap: break-word;
 	padding-left:2px;

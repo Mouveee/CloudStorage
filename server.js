@@ -203,13 +203,16 @@ app.post("/move", (req, res) => {
 		let sourceSplitted = source.split('/');
 		let item = sourceSplitted.pop();
 
-		fs.renameSync(source, target + '/' + item)
+		fs.renameSync(source, target + '/' + item);
 
 	} else {
-		console.log(
-			`I cant handle this`
-		);
-		source.map(item => { console.log('moving request for: ' + item.name) })
+		source.map(item => {
+			console.log('moving request for: ' + item.name);
+			let splittedItemName = item.name.split('/');
+			let itemName = splittedItemName.pop();
+
+			fs.renameSync(item.name, target + '/' + itemName);
+		})
 	}
 
 	res.statusCode = 200;

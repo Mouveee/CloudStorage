@@ -28,6 +28,9 @@ class App extends Component {
 		//toggles FilePond Menus visibility
 		this.changeUploadVisibility.bind(this);
 
+		//clears selected item array after moving of multiple files
+		this.clearSelectedItems.bind(this);
+
 		//sets the file being dragged to parents state
 		this.setFileBeingDragged.bind(this);
 
@@ -82,6 +85,10 @@ class App extends Component {
 		this.setState({ uploadMenuVisible: !this.state.uploadMenuVisible });
 	};
 
+	clearSelectedItems = () => {
+		this.setState({ selectedItems: [] })
+	}
+
 	createFolder = async inputFolder => {
 		const folder = this.state.currentFolder + inputFolder.value;
 
@@ -119,7 +126,7 @@ class App extends Component {
 		if (confirmed) {
 			this.setState({ actualize: true })
 			items.map(item => this.deleteItem(item.name, item.type, true))
-			this.setState({ actualize: false })
+			this.setState({ actualize: false, selectedItems: [] })
 		}
 	};
 
@@ -198,8 +205,6 @@ class App extends Component {
 	handleFolderClick = e => {
 		let prev = [...this.state.prevFolder, this.state.currentFolder]
 
-		console.log('prev before setting state: ' + prev + 'of length' + prev.length + '\ncurrent: ' + this.state.currentFolder)
-
 		this.setState({
 			currentFolder: this.state.currentFolder + e.target.textContent + "/",
 			prevFolder: prev,
@@ -229,8 +234,6 @@ class App extends Component {
 	};
 
 	navigateBack = async () => {
-		console.log('clicked navigateBack...');
-
 		if (this.state.prevFolder.length > 0) {
 			let prevFolder = [...this.state.prevFolder];
 			prevFolder.pop();
@@ -441,10 +444,12 @@ class App extends Component {
 									<TableHead
 										actualize={this.actualize}
 										callBackendAPI={this.callBackendAPI}
+										clearSelectedItems={this.clearSelectedItems}
 										currentFolder={this.state.currentFolder}
 										fileBeingDragged={this.state.fileBeingDragged}
 										isMobile={md.phone() ? true : false}
 										prevFolder={this.state.prevFolder}
+										selectedItems={this.state.selectedItems}
 										setFileBeingDragged={this.setFileBeingDragged}
 										sortBy={this.sortBy}
 										navigateBack={this.navigateBack}
@@ -457,6 +462,7 @@ class App extends Component {
 												key={'li-' + index}
 												actualize={this.actualize}
 												callBackendAPI={this.callBackendAPI}
+												clearSelectedItems={this.clearSelectedItems}
 												currentFolder={this.state.currentFolder}
 												downloadFolder={this.downloadFolder}
 												item={item}
@@ -481,6 +487,7 @@ class App extends Component {
 												key={'li-' + index}
 												actualize={this.actualize}
 												callBackendAPI={this.callBackendAPI}
+												clearSelectedItems={this.clearSelectedItems}
 												currentFolder={this.state.currentFolder}
 												item={item}
 												index={index}

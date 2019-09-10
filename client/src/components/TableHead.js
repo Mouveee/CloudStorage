@@ -47,10 +47,16 @@ class TableHead extends React.Component {
 
                 const content = {};
 
-                content.itemToMove = './external/' + this.props.currentFolder.slice(2) + this.props.fileBeingDragged;
+                let selectedItems = this.props.selectedItems.map(item => item.name = './external' + item.name.slice(2))
+
+                content.itemToMove = this.props.selectedItems.length === 0 ?
+                  './external/' + this.props.currentFolder.slice(2) + this.props.fileBeingDragged
+                  : this.props.selectedItems;
                 content.targetFolder = './external/' + this.props.prevFolder[this.props.prevFolder.length - 1].slice(2);
 
                 this.props.setFileBeingDragged({ fileBeingDragged: "" });
+                this.props.clearSelectedItems();
+
                 let responsePromise = await this.props.callBackendAPI(
                   content,
                   "/move"

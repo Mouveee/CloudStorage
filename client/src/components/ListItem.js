@@ -122,6 +122,9 @@ class ListItem extends React.Component {
 
 	onDrop = async e => {
 		e.preventDefault();
+
+		console.log('selected Items: ' + this.props.selectedItems);
+
 		if (this.props.type === 'folder') {
 			e.target.style.color = "gray";
 
@@ -144,6 +147,8 @@ class ListItem extends React.Component {
 				content.targetFolder = './external/' + this.props.currentFolder.slice(2) + this.props.item.name;
 
 				this.props.setFileBeingDragged({ fileBeingDragged: "" });
+				this.props.clearSelectedItems();
+
 				let responsePromise = await this.props.callBackendAPI(
 					content,
 					"/move"
@@ -175,7 +180,7 @@ class ListItem extends React.Component {
 						{this.props.type === "folder" ? (
 							<td className='App-smallSpan' />
 						) : (
-								<td key={'td- ' + i++}>
+								<td key={'td- ' + i++} className='App-smallSpan'>
 									<input
 										type='checkbox'
 										onChange={e => this.props.itemSelect(e, this.props.item.name, this.props.item.type)}
