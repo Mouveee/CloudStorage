@@ -90,19 +90,20 @@ class ListItem extends React.Component {
 		super(props);
 
 		this.state = {
-			fileBeingDragged: "",
 			visible: false
 		};
 	}
 
-	componentWillUnmount() { this.setState({ visible: false }) }
+	componentWillUnmount() { 
+		this.setState({ visible: false }) 
+	}
 
 
 	onDragOver = e => {
 		// e.preventDefault();
 
 		if (this.props.type === 'folder' && this.props.fileBeingDragged !== this.props.item.name) {
-			e.target.style.backgroundColor = "pink";
+			e.target.style.color = "pink";
 		}
 
 		e.preventDefault();
@@ -110,7 +111,7 @@ class ListItem extends React.Component {
 
 	onDragLeave = e => {
 		e.preventDefault();
-		e.target.style.backgroundColor = "white";
+		e.target.style.color = "gray";
 	}
 
 	onDragStart = e => {
@@ -122,15 +123,14 @@ class ListItem extends React.Component {
 	onDrop = async e => {
 		e.preventDefault();
 		if (this.props.type === 'folder') {
-			e.target.style.backgroundColor = "white";
+			e.target.style.color = "gray";
 
 			if (this.props.fileBeingDragged === this.props.item.name) {
-				alert("Naming conflict you idiot");
+				alert("Naming conflict");
 			} else {
 				const content = {};
 
-				alert(`last item: ${JSON.stringify(this.props.selectedItems[this.props.selectedItems.length - 1])}`)
-
+				//check if multiple files are selected so they are sent as an array to the 'move' function in app.js
 				if (this.props.selectedItems.length === 0) {
 					content.itemToMove = './external/' + this.props.currentFolder.slice(2) + this.props.fileBeingDragged
 				} else {

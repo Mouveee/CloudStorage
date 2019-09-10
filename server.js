@@ -174,6 +174,8 @@ app.post("/external", (req, res) => {
 	let objectToSend = {};
 	let dir = req.body.content || "./external/";
 
+	let noError = true;
+
 	console.log(process.env.DOTS);
 	console.log(`received POST request (get folder) with params: ${req.body.content}`);
 
@@ -181,15 +183,16 @@ app.post("/external", (req, res) => {
 		objectToSend = getFolderContent(dir);
 	}
 	catch (e) {
-		console.log(`couldn't find folder, e.message ${e.message}`);
+		console.log(`e.message: ${e.message}`);
+		noError = !noError;
 
 		res.statusCode = 404;
 		res.send(JSON.stringify({ message: 'folder not found' }))
 	}
-
-
-	res.statusCode = 200;
-	res.send(JSON.stringify(objectToSend));
+	if (noError) {
+		res.statusCode = 200;
+		res.send(JSON.stringify(objectToSend));
+	}
 });
 
 app.post("/move", (req, res) => {
