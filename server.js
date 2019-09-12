@@ -194,7 +194,7 @@ app.post("/external", (req, res) => {
 	}
 });
 
-app.post("/move", (req, res) => {
+app.post("/move", async (req, res) => {
 	const source = req.body.content.itemToMove;
 	const target = req.body.content.targetFolder;
 
@@ -210,7 +210,7 @@ app.post("/move", (req, res) => {
 		fs.renameSync(source, target + '/' + item);
 
 	} else {
-		source.map(item => {
+		await source.map(item => {
 			console.log('moving request for: ' + item.name);
 			let splittedItemName = item.name.split('/');
 			let itemName = splittedItemName.pop();
