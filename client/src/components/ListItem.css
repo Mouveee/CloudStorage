@@ -27,12 +27,13 @@ tBody.visible{
 }
 
 .App-listIcon {
-	width: 0.8em;
-	height: 0.8em;
+	width: 14px;
+	height: 14px;
 	transition: 300ms;
 	user-select: none;
-	float: left;
+	float: right;
 	vertical-align: center;
+	margin-left: 12px;
 }
 
 .App-listIcon:hover {
@@ -40,12 +41,12 @@ tBody.visible{
 }
 
 .App-listIconNonClickable {
-	width: 0.8em;
-	height: 0.8em;
+	width: 10px;
+	height: 10px;
 	transition: 400ms;
 	opacity: 0.5;
 	user-select: none;
-	vertical-align: middle;
+	vertical-align: inherit;
 }
 
 .App-beingDraggedOver {

@@ -99,11 +99,11 @@ app.post("/download", async function (req, res) {
 	console.log(`${process.env.DOTS}\nsomebody requested: ${req.body.file}`);
 	let file = new Promise((resolve, reject) => {
 		fs.readFile(
-			`./external/${req.body.folder}${req.body.file}`,
+			`${req.body.folder}${req.body.file}`,
 			(err, content) => {
 				if (err) {
 					reject(
-						`error finding ./external/${req.body.folder}${req.body.file} :( `
+						`error finding ${req.body.folder}${req.body.file} :( `
 					);
 				} else {
 					resolve(content);
@@ -117,7 +117,7 @@ app.post("/download", async function (req, res) {
 			res.setHeader("File", req.body.file);
 			await res.download(
 				path.normalize(
-					`${__dirname}/external/${req.body.folder}/${req.body.file}`
+					`${__dirname}/${req.body.folder}/${req.body.file}`
 				),
 				req.body.file,
 				e => {
@@ -135,22 +135,22 @@ app.post("/download", async function (req, res) {
 });
 
 app.post('/downloadFolder', async (req, res) => {
-	let splitted = req.body.content.folder.split('./');
+	let splitted = req.body.content.folder.split('/');
 	const fileName = splitted.pop();
 
-	console.log('check if ' + `./external/zipped/${req.body.content.folder + '.zip'}` + 'already exists...')
+	console.log('check if ' + `./internal/${req.body.content.folder + '.zip'}` + ' already exists...')
 
-	if (fs.existsSync(`./external/zipped/${req.body.content.folder + '.zip'}`)) {
+	if (fs.existsSync(`./internal/${req.body.content.folder + '.zip'}`)) {
 		console.log('this folder has already been zipped');
 
 		res.status = 409;
-		res.send(JSON.stringify({ message: 'folder has alredy been zipped, please delete first' }))
+		res.send(JSON.stringify({ message: 'folder has alredy been zipped, please delete first' }));
+
+		return;
 	} else {
-
-		console.log(`download folder: ${'./external/' + req.body.content.folder}\nfile: ${`./external/zipped/${fileName + '.zip'}`}`);
-
+		console.log('it doesn`t')
 		let archive = archiver.create('zip', {});
-		let output = fs.createWriteStream(`./external/zipped/${fileName + '.zip'}`);
+		let output = fs.createWriteStream(`./internal/${fileName + '.zip'}`);
 		archive.pipe(output);
 
 		archive
@@ -203,6 +203,11 @@ app.post("/move", (req, res) => {
 		let sourceSplitted = source.split('/');
 		let item = sourceSplitted.pop();
 
+		if (fs.existsSync(target + '/' + item)) {
+			res.statusCode = 409;
+			res.send(JSON.stringify({ message: `${item} already exists in target location...` }));
+		}
+
 		fs.renameSync(source, target + '/' + item);
 
 	} else {
@@ -216,7 +221,7 @@ app.post("/move", (req, res) => {
 	}
 
 	res.statusCode = 200;
-	res.send(JSON.stringify({ message: "you are a weirdo" }));
+	res.send(JSON.stringify({ message: "moving succesful" }));
 });
 
 app.post("/upload", (req, res) => {
@@ -244,5 +249,9 @@ app.post('/rename', (req, res) => {
 const server = app.listen(5000, "127.0.0.1", function () {
 	const host = server.address().address;
 	const port = server.address().port;
+
+	fs.existsSync('./external') ? null : fs.mkdirSync('./external');
+	fs.existsSync('./internal') ? null : fs.mkdirSync('./internal');
+
 	console.log(`Example app listening at http://${host}:${port}`);
 });

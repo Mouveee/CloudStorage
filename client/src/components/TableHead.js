@@ -42,16 +42,7 @@ class TableHead extends React.Component {
               onDrop={async e => {
                 e.preventDefault();
 
-
-                console.log(`triggered, file ${this.props.fileBeingDragged}`)
-                console.log(`prevFolder: ${this.props.prevFolder[this.props.prevFolder.length - 1]}`)
-
                 const content = {};
-
-                let selectedItems = this.props.selectedItems.map(item => {
-                  item.name = './external/' + this.props.currentFolder.slice(2) + item.name;
-                  console.log('file to move back: ' + item.name);
-                })
 
                 content.itemToMove = this.props.selectedItems.length === 0 ?
                   './external/' + this.props.currentFolder.slice(2) + this.props.fileBeingDragged

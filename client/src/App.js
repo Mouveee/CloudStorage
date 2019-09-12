@@ -41,6 +41,7 @@ class App extends Component {
 			prevFolder: [],
 			fileList: [],
 			fileBeingDragged: '',
+			finishedItems: [], //to display for download
 			folderList: [],
 			inProgress: [],
 			selectedItems: [],
@@ -132,28 +133,21 @@ class App extends Component {
 
 	downloadFolder = async folder => {
 		const content = {};
-		content.folder = folder;
+		content.folder = folder.slice(2);
 
-		this.setState({ inProgress: [...this.state.inProgress, 'zipping your folder'] })
+		this.setState({ inProgress: [...this.state.inProgress, folder] })
 
 		let res = await this.callBackendAPI(content, '/downloadFolder');
 		console.log(`response.status : ${res.status}`);
 
 		res.json().then(response => {
-			this.setState({ inProgress: [] });
+			this.setState({ finishedItems: [...this.state.finishedItems, this.state.inProgress[this.state.inProgress.length - 1]], inProgress: [] });
 			console.log(`zipping success, progress should disappear...`)
 		})
 	}
 
-	handleFileClick = async e => {
-		let fileToDownload;
-
-		typeof e === "string"
-			? (fileToDownload = e)
-			: (fileToDownload = e.target.textContent);
-
+	handleFileClick = async (file, folder) => {
 		let fileName = "unknown.dat";
-		this.setState({ inProgress: [...this.state.inProgress, 'downLoading'] })
 
 		new Promise(async (resolve, reject) => {
 			let answer = await fetch("/download", {
@@ -169,8 +163,8 @@ class App extends Component {
 				redirect: "follow", // manual, *follow, error
 				referrer: "no-referrer", // no-referrer, *client
 				body: JSON.stringify({
-					folder: this.state.currentFolder,
-					file: fileToDownload
+					folder: folder,
+					file: file
 				}) // body data type must match "Content-Type" header
 			});
 
@@ -203,6 +197,8 @@ class App extends Component {
 	};
 
 	handleFolderClick = e => {
+		console.log('clicked folder');
+
 		let prev = [...this.state.prevFolder, this.state.currentFolder]
 
 		this.setState({
@@ -217,9 +213,11 @@ class App extends Component {
 	itemSelect = async (e, name, type) => {
 		const item = {}
 
-		item.name = name;
+		item.name = './external/' + this.state.currentFolder.slice(2) + name;
 		item.type = type;
 
+
+		console.log('setting: ' + item.name)
 		if (e.target.checked) {
 			await this.setState({
 				selectedItems: [...this.state.selectedItems, item]
@@ -393,8 +391,12 @@ class App extends Component {
 				</header>
 
 				<section id='App-container'>
-					{this.state.inProgress.length > 0 ?
-						<ProgressIndicator message={this.state.inProgress[this.state.inProgress.length - 1]} />
+					{this.state.inProgress.length > 0 || this.state.finishedItems.length > 0 ?
+						<ProgressIndicator
+							handleFileClick={this.handleFileClick}
+							inProgress={this.state.inProgress}
+							finishedItems={this.state.finishedItems}
+						/>
 						: null
 					}
 

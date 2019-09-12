@@ -94,8 +94,8 @@ class ListItem extends React.Component {
 		};
 	}
 
-	componentWillUnmount() { 
-		this.setState({ visible: false }) 
+	componentWillUnmount() {
+		this.setState({ visible: false })
 	}
 
 
@@ -134,15 +134,9 @@ class ListItem extends React.Component {
 				const content = {};
 
 				//check if multiple files are selected so they are sent as an array to the 'move' function in app.js
-				if (this.props.selectedItems.length === 0) {
+				this.props.selectedItems.length === 0 ?
 					content.itemToMove = './external/' + this.props.currentFolder.slice(2) + this.props.fileBeingDragged
-				} else {
-					this.props.selectedItems.map(item => {
-						item.name = './external/' + this.props.currentFolder.slice(2) + item.name;
-						console.log('selectedItems: ' + item.name)
-					});
-					content.itemToMove = this.props.selectedItems;
-				}
+					: content.itemToMove = this.props.selectedItems;
 
 				content.targetFolder = './external/' + this.props.currentFolder.slice(2) + this.props.item.name;
 
@@ -199,7 +193,12 @@ class ListItem extends React.Component {
 							/>
 						</td>
 						<td
-							onClick={this.props.handleClick}
+							onClick={e => {
+								console.log(`name: ${this.props.item.name}\nfolder: ${'./external/' + this.props.currentFolder.slice(2)}`)
+								this.props.type === 'file' ?
+									this.props.handleClick(this.props.item.name, './external/' + this.props.currentFolder.slice(2))
+									: this.props.handleClick(e);
+							}}
 							className='App-listItem App-bigSpan'
 							key={this.props.item.name}
 						>
@@ -215,8 +214,7 @@ class ListItem extends React.Component {
 								onClick={() => this.props.renameItem(this.props.item.name)}
 								alt='KILL'
 							/>
-						</td>
-						<td className='App-smallSpan' key={'td- ' + i++}>
+
 							<img
 								key={'td- ' + i++}
 								src={downloadIcon}
@@ -226,16 +224,15 @@ class ListItem extends React.Component {
 								onClick={
 									this.props.type === "file"
 										? () => {
-											this.props.handleClick(this.props.item.name);
+											this.props.handleClick(this.props.item.name, './external/' + this.props.currentFolder.slice(2));
 										}
 										: () => {
-											this.props.downloadFolder(this.props.currentFolder + this.props.item.name);
+											this.props.downloadFolder('./external' + this.props.currentFolder.slice(2) + this.props.item.name);
 										}
 								}
 								alt='KILL'
 							/>
-						</td>
-						<td className='App-smallSpan' key={'td- ' + i++}>
+
 							<img
 								src={trashcan}
 								className='App-listIcon'
