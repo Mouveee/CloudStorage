@@ -140,13 +140,12 @@ app.post('/downloadFolder', async (req, res) => {
 
 	console.log('check if ' + `./internal/${req.body.content.folder + '.zip'}` + ' already exists...')
 
-	if (fs.existsSync(`./internal/${req.body.content.folder + '.zip'}`)) {
+	if (fs.existsSync(`./internal/${fileName + '.zip'}`)) {
 		console.log('this folder has already been zipped');
 
 		res.status = 409;
 		res.send(JSON.stringify({ message: 'folder has alredy been zipped, please delete first' }));
-
-		return;
+		console.log('sent the sad news')
 	} else {
 		console.log('it doesn`t')
 		let archive = archiver.create('zip', {});
@@ -154,7 +153,7 @@ app.post('/downloadFolder', async (req, res) => {
 		archive.pipe(output);
 
 		archive
-			.directory('./external/' + req.body.content.folder, false);
+			.directory(req.body.content.folder, false);
 
 
 		output.on('finish', function () {

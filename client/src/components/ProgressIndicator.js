@@ -10,7 +10,17 @@ class ProgressIndicator extends React.Component {
     this.state = { visible: false }
   }
 
-  clickFunction = item => alert(this.props.finishedItems.length > 0 ? this.props.handleFileClick(item) : 'unarmed')
+  clickFunction = async item => {
+    console.log(item)
+
+    if (this.props.finishedItems.length > 0) {
+      let file = item.split('/').pop() + '.zip';
+      let folder = './internal/';
+
+      this.props.handleFileClick(file, folder);
+      this.props.finishZipping();
+    }
+  }
 
   render() {
     let myClass = this.state.visible ?
@@ -34,7 +44,7 @@ class ProgressIndicator extends React.Component {
       >
         {message}
         {/* TODO: Add deletion icon */}
-        {this.props.finishedItems.length < 0 ?
+        {this.props.finishedItems.length === 0 ?
           <img src={progressIcon} alt='processing' className='App-progressIcon'></img> : null
         }
       </div>

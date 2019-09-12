@@ -227,7 +227,7 @@ class ListItem extends React.Component {
 											this.props.handleClick(this.props.item.name, './external/' + this.props.currentFolder.slice(2));
 										}
 										: () => {
-											this.props.downloadFolder('./external' + this.props.currentFolder.slice(2) + this.props.item.name);
+											this.props.downloadFolder('./external/' + this.props.currentFolder.slice(2) + this.props.item.name);
 										}
 								}
 								alt='KILL'

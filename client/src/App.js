@@ -36,6 +36,8 @@ class App extends Component {
 
 		this.sortBy.bind(this);
 
+		this.setState.bind(this);
+
 		this.state = {
 			currentFolder: "./",
 			prevFolder: [],
@@ -144,6 +146,10 @@ class App extends Component {
 			this.setState({ finishedItems: [...this.state.finishedItems, this.state.inProgress[this.state.inProgress.length - 1]], inProgress: [] });
 			console.log(`zipping success, progress should disappear...`)
 		})
+	}
+
+	finishZipping = () => {
+		this.setState({ inProgress: [], finishedItems: [] })
 	}
 
 	handleFileClick = async (file, folder) => {
@@ -396,6 +402,8 @@ class App extends Component {
 							handleFileClick={this.handleFileClick}
 							inProgress={this.state.inProgress}
 							finishedItems={this.state.finishedItems}
+							finishZipping={this.finishZipping}
+							setState={this.setState}
 						/>
 						: null
 					}
