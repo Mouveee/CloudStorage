@@ -1,2 +1,4 @@
 #ignore this because it contains blob files
 external/
+
+internal/
