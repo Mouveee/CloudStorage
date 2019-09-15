@@ -103,35 +103,19 @@ class App extends Component {
 		}
 	};
 
-	deleteItem = async (name, type, confirmed) => {
-		const content = {};
+	//item is exprcted to be an array to allow mullitple deletions at once
+	deleteItem = async (items) => {
+		const confirmed = window.confirm(items.length === 1 ? `delete ${items[0].name}?` : `delete ${items.length} items?`);
 
-		content.item = name;
-		content.type = type;
-		content.location = this.state.currentFolder;
-
-		confirmed = confirmed ? true : window.confirm(`really delete ${content.item}?`);
+		this.setState({ updating: true, selectedItems: [] });
 
 		if (confirmed) {
-			this.setState({ updating: true });
-
-			this.callBackendAPI(content, "/delete");
-
-			this.setState({ updating: false });
-
-			this.actualize();
+			await this.callBackendAPI(items, "/delete");
 		}
-	};
+		this.actualize();
 
-	deleteMultipleItems = items => {
-		const confirmed = window.confirm(`Delete ${this.state.selectedItems.length} files?`);
-
-		if (confirmed) {
-			this.setState({ actualize: true })
-			items.map(item => this.deleteItem(item.name, item.type, true))
-			this.setState({ actualize: false, selectedItems: [] })
-		}
-	};
+		this.setState({ updating: false });
+	}
 
 	downloadFolder = async folder => {
 		const content = {};
@@ -222,8 +206,6 @@ class App extends Component {
 		item.name = './external/' + this.state.currentFolder.slice(2) + name;
 		item.type = type;
 
-
-		console.log('setting: ' + item.name)
 		if (e.target.checked) {
 			await this.setState({
 				selectedItems: [...this.state.selectedItems, item]
@@ -343,7 +325,6 @@ class App extends Component {
 		this.setState({ uploadMenuVisible: !this.state.uploadMenuVisible });
 	};
 
-
 	componentDidMount() {
 		document.title = 'Octodrive';
 
@@ -428,6 +409,7 @@ class App extends Component {
 								this.requestFolder(this.state.currentFolder);
 							}
 							}
+							setMetaData={{ 'folder': this.state.currentFolder }}
 						/>
 					) : null}
 
@@ -551,7 +533,7 @@ class App extends Component {
 					})()}
 
 					<ControlFooter
-						deleteMultipleItems={this.deleteMultipleItems}
+						deleteItem={this.deleteItem}
 						isMobile={md.phone() ? true : false}
 						selectedItems={this.state.selectedItems}
 						updating={this.state.updating}

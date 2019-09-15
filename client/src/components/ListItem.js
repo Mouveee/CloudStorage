@@ -73,6 +73,7 @@ function getFileIcon(ending) {
 		case "wav":
 			returnValue = headphones;
 			break;
+		case 'gif':
 		case "jpg":
 		case "jpeg":
 		case "svg":
@@ -90,7 +91,8 @@ class ListItem extends React.Component {
 		super(props);
 
 		this.state = {
-			visible: false
+			visible: false,
+			checked: false
 		};
 	}
 
@@ -177,7 +179,11 @@ class ListItem extends React.Component {
 								<td key={'td- ' + i++} className='App-smallSpan'>
 									<input
 										type='checkbox'
-										onChange={e => this.props.itemSelect(e, this.props.item.name, this.props.item.type)}
+										onChange={e => {
+											this.props.itemSelect(e, this.props.item.name, this.props.item.type);
+											this.setState({ checked: !this.state.checked })
+										}}
+										value={this.state.checked}
 									/>
 								</td>
 							)}
@@ -236,7 +242,13 @@ class ListItem extends React.Component {
 							<img
 								src={trashcan}
 								className='App-listIcon'
-								onClick={() => this.props.deleteItem(this.props.item.name, this.props.type)}
+								onClick={() => {
+									this.props.selectedItems.length > 0 ?
+										//the horror, check if clicked item is in selected items, should work for now...
+										this.props.deleteItem(this.state.checked ? this.props.selectedItems:[...this.props.selectedItems,{ name: './external/' + this.props.currentFolder + this.props.item.name, type: this.props.type }])
+										: this.props.deleteItem([{ name: `./external/${this.props.currentFolder + this.props.item.name}`, type: this.props.type }])
+								}
+								}
 								alt='KILL'
 							/>
 						</td>

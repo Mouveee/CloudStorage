@@ -4,14 +4,14 @@
 	"private": true,
 	"proxy": "http://localhost:5000/",
 	"dependencies": {
-		"filepond": "^4.6.1",
+		"filepond": "^4.7.1",
 		"mobile-detect": "^1.4.3",
 		"react": "^16.9.0",
 		"react-dom": "^16.9.0",
 		"react-filepond": "^7.0.1",
 		"react-pose": "^4.0.8",
 		"react-scripts": "3.0.1",
-		"typescript": "^3.6.2"
+		"typescript": "^3.6.3"
 	},
 	"scripts": {
 		"start": "react-scripts start",

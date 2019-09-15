@@ -78,22 +78,28 @@ app.post("/createfolder", (req, res) => {
 app.post("/delete", (req, res) => {
 	let content = req.body.content;
 
-	if (content.type === "file") {
-		fs.unlink(`./external/${content.location}${content.item}`, e => {
-			if (e) {
-				let error = {};
-				error.message = e.message;
-			} else {
-				console.log("job done!");
-			}
-		});
-	} else {
-		rimraf.sync(`./external/${content.location}${content.item}`);
-		console.log("job SHOULD be done... _%_/");
-		res.statusCode = 200;
-		res.send("your server did it, take more care of him");
-	}
-});
+	console.log(`deletion of ${content.length} items...`)
+
+	content.map(item => {
+		console.log(`item: ${Object.keys(item)}\nname: ${item.name}`);
+		if (item.type === "file") {
+			fs.unlink(item.name, e => {
+				if (e) {
+					let error = {};
+					error.message = e.message;
+				} else {
+					console.log("job done!");
+				}
+			});
+		} else {
+			rimraf.sync(item.name);
+			console.log("deletion SHOULD be done... \\_%_/");
+		}
+	})
+
+	res.statusCode = 200;
+	res.send(JSON.stringify({ message: "your server did it, take more care of him" }));
+})
 
 app.post("/download", async function (req, res) {
 	console.log(`${process.env.DOTS}\nsomebody requested: ${req.body.file}`);
@@ -225,8 +231,15 @@ app.post("/move", async (req, res) => {
 
 app.post("/upload", (req, res) => {
 	const uploadedFile = req.files.file;
-	uploadedFile.mv(`./external/${req.files.file.name}`);
 
+	try {
+		uploadedFile.mv(`./external/${req.files.file.name}`);
+	} catch (e) {
+		res.status = 500;
+		res.send(JSON.stringify({ message: e.message }))
+	}
+
+	console.log('string of object: ' + Object.keys(req.files.file));
 	console.log(`uploaded file name: ${req.files.file.name}`);
 
 	res.statusCode = 200;

@@ -37,7 +37,7 @@ class ControlFooter extends React.Component {
 						src={trashIcon}
 						alt=':('
 						className='App-controlElement'
-						onClick={() => { this.props.deleteMultipleItems(this.props.selectedItems) }}
+						onClick={() => { this.props.deleteItem(this.props.selectedItems) }}
 					/>
 				)
 					: null
