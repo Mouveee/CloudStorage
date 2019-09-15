@@ -107,14 +107,12 @@ class App extends Component {
 	deleteItem = async (items) => {
 		const confirmed = window.confirm(items.length === 1 ? `delete ${items[0].name}?` : `delete ${items.length} items?`);
 
-		this.setState({ updating: true, selectedItems: [] });
-
 		if (confirmed) {
+			this.setState({ updating: true, selectedItems: [] });
 			await this.callBackendAPI(items, "/delete");
+			this.actualize();
+			this.setState({ updating: false, selectedItems: [] });
 		}
-		this.actualize();
-
-		this.setState({ updating: false });
 	}
 
 	downloadFolder = async folder => {
