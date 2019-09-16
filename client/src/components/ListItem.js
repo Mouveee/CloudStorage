@@ -19,7 +19,6 @@ const TableRow = posed.tr(
 		exit: { opacity: 0 },
 	});
 
-
 function formatDate(dateString) {
 	const date = new Date(dateString);
 
@@ -100,7 +99,6 @@ class ListItem extends React.Component {
 		this.setState({ visible: false })
 	}
 
-
 	onDragOver = e => {
 		// e.preventDefault();
 
@@ -173,20 +171,21 @@ class ListItem extends React.Component {
 						onDragLeave={e => this.onDragLeave(e)}
 						onDrop={e => this.onDrop(e)}
 					>
-						{this.props.type === "folder" ? (
-							<td className='App-smallSpan' />
-						) : (
-								<td key={'td- ' + i++} className='App-smallSpan'>
-									<input
-										type='checkbox'
-										onChange={e => {
-											this.props.itemSelect(e, this.props.item.name, this.props.item.type);
-											this.setState({ checked: !this.state.checked })
-										}}
-										value={this.state.checked}
-									/>
-								</td>
-							)}
+						<td key={'td- ' + i++} className='App-smallSpan'>
+							<label className="App-listBoxContainer">
+								<input
+									className="App-listCheckbox"
+									type='checkbox'
+									onChange={e => {
+										this.props.itemSelect(e, this.props.item.name, this.props.item.type);
+										this.setState({ checked: !this.state.checked })
+									}}
+									value={this.state.checked}
+								/>
+								<span className='App-listCustomCheckbox' />
+							</label>
+						</td>
+
 						<td className='App-smallSpan' key={'td- ' + i++}>
 							<img
 								src={
@@ -245,7 +244,7 @@ class ListItem extends React.Component {
 								onClick={() => {
 									this.props.selectedItems.length > 0 ?
 										//the horror, check if clicked item is in selected items, should work for now...
-										this.props.deleteItem(this.state.checked ? this.props.selectedItems:[...this.props.selectedItems,{ name: './external/' + this.props.currentFolder + this.props.item.name, type: this.props.type }])
+										this.props.deleteItem(this.state.checked ? this.props.selectedItems : [...this.props.selectedItems, { name: './external/' + this.props.currentFolder + this.props.item.name, type: this.props.type }])
 										: this.props.deleteItem([{ name: `./external/${this.props.currentFolder + this.props.item.name}`, type: this.props.type }])
 								}
 								}

@@ -204,6 +204,8 @@ class App extends Component {
 		item.name = './external/' + this.state.currentFolder.slice(2) + name;
 		item.type = type;
 
+		console.log(`item: ${JSON.stringify(item)}`)
+
 		if (e.target.checked) {
 			await this.setState({
 				selectedItems: [...this.state.selectedItems, item]
@@ -211,10 +213,12 @@ class App extends Component {
 		} else {
 			await this.setState({
 				selectedItems: this.state.selectedItems.filter((i, index) => {
-					return i !== item;
+					return JSON.stringify(i) !== JSON.stringify(item);
 				})
 			});
 		}
+
+		console.log(`selected Items: ${this.state.selectedItems}`)
 	};
 
 	navigateBack = async () => {
@@ -407,7 +411,6 @@ class App extends Component {
 								this.requestFolder(this.state.currentFolder);
 							}
 							}
-							setMetaData={{ 'folder': this.state.currentFolder }}
 						/>
 					) : null}
 
@@ -456,6 +459,7 @@ class App extends Component {
 												currentFolder={this.state.currentFolder}
 												downloadFolder={this.downloadFolder}
 												item={item}
+												itemSelect={this.itemSelect}
 												index={index}
 												isMobile={md.phone() ? true : false}
 												deleteItem={this.deleteItem}

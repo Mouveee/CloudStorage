@@ -7,8 +7,44 @@ tBody.visible{
 	opacity: 1;
 }
 
+.App-listBoxContainer{
+	display: block;
+  position: relative;
+  /* padding-left: 35px;
+  margin-bottom: 12px; */
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+	user-select: none;
+	top: 4px;
+}
+
+.App-listCheckbox{
+	opacity: 0;
+}
+
+.App-listCustomCheckbox{
+	position: absolute;
+  top: 0;
+  left: 0;
+  height: 14px;
+  width: 14px;
+	background-color: #eee;
+	transition: 350ms;
+}
+
+.App-listBoxContainer:hover input ~ .App-listCustomCheckbox{
+  background-color: #ccc;
+}
+
+.App-listBoxContainer input:checked ~ .App-listCustomCheckbox {
+  background-color: pink;
+}
+
 .App-itemInfo {
-	font-size: 14px;
+	font-size: 12px;
 	color: lightgray;
 	overflow: hidden;
 	line-break: strict;
