@@ -2,9 +2,9 @@ import React from "react";
 
 import "./ControlFooter.css";
 
-import downloadIcon from "../img/download.svg";
-import trashIcon from "../img/trashcan.svg";
-import uploadIcon from "../img/upload.svg";
+import downloadIcon from "../../img/download.svg";
+import trashIcon from "../../img/trashcan.svg";
+import uploadIcon from "../../img/upload.svg";
 
 class ControlFooter extends React.Component {
 	constructor(props) {

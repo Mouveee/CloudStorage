@@ -22,27 +22,6 @@ class Header extends Component {
 				<Avatar />
 				OKTODRIVE
 			<small className='App-subHeader' >...praise the Octopus Baby...</small>
-				<nav className='App-navBar'>
-					{!this.props.root ? (
-						<img
-							src={backIcon}
-							alt='<-'
-							onClick={this.props.navigateBack}
-							className='App-navItem'
-						/>
-					) : null}
-					<img
-						src={actualizeIcon}
-						alt='<-->'
-						onClick={this.props.actualize}
-						className='App-navItem'
-					/>
-					{!this.props.root ? (
-						<div>Current Folder: {this.props.currentFolder}</div>
-					) : (
-							<div>Root Folder</div>
-						)}
-				</nav>
 			</h1 >
 		);
 	}

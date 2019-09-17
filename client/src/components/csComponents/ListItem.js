@@ -2,13 +2,13 @@ import React from "react";
 
 import posed, { PoseGroup } from 'react-pose';
 
-import trashcan from "../img/trashcan.svg";
-import downloadIcon from "../img/download.svg";
-import folderIcon from "../img/folder.svg";
-import fileIcon from "../img/file.svg";
-import headphones from "../img/headphones.svg";
-import penIcon from "../img/pen.svg"
-import photoIcon from "../img/photo.svg";
+import trashcan from "../../img/trashcan.svg";
+import downloadIcon from "../../img/download.svg";
+import folderIcon from "../../img/folder.svg";
+import fileIcon from "../../img/file.svg";
+import headphones from "../../img/headphones.svg";
+import penIcon from "../../img/pen.svg"
+import photoIcon from "../../img/photo.svg";
 
 import "./ListItem.css";
 

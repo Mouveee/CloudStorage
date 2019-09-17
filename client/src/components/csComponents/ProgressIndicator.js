@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './ProgressIndicator.css';
-import progressIcon from '../img/actualize.gif';
+import progressIcon from '../../img/actualize.gif';
 
 class ProgressIndicator extends React.Component {
   constructor(props) {
