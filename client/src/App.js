@@ -204,8 +204,6 @@ class App extends Component {
 		item.name = './external/' + this.state.currentFolder.slice(2) + name;
 		item.type = type;
 
-		console.log(`item: ${JSON.stringify(item)}`)
-
 		if (e.target.checked) {
 			await this.setState({
 				selectedItems: [...this.state.selectedItems, item]
@@ -272,8 +270,6 @@ class App extends Component {
 			.then(res => {
 				let folders = JSON.parse(res.folders);
 
-				this.setState({ updating: false });
-
 				folders = folders.map(item => {
 					item.name = this.normalizeItem(item.name);
 					return item;
@@ -286,8 +282,12 @@ class App extends Component {
 					return item;
 				});
 
-				this.setState({ folderList: folders });
-				this.setState({ fileList: files });
+				this.setState({
+					folderList: folders,
+					fileList: files,
+					updating: false,
+					selectedItems: []
+				});
 			})
 			.catch(err => console.log(`error in catch: ${err}`));
 	};
@@ -401,11 +401,24 @@ class App extends Component {
 
 					{this.state.uploadMenuVisible ? (
 						<FilePond
+							fileMetadataObject={{
+								'hello': 'world'
+							}
+							}
 							allowMultiple={true}
+							allowFileMetadata={true}
 							name={"file"}
 							server={"./upload"}
+							instantUpload={false}
 							className='App-filePond'
 							oninit={() => { console.log('right event triggered, create an overlay TODO') }}
+							onaddfile={(e, file) => {
+								console.log('adding metadata ' + './external/' + this.state.currentFolder.slice(2));
+								console.log(Object.keys(file) + `of file: ${file.filename}`)
+								file.setMetadata('folder', './external/' + this.state.currentFolder.slice(2));
+								// file.fileMetadataObject = ({ folder: './external/' + this.state.currentFolder.slice(2) })
+								console.log(`file: ${Object.keys(file)}`)
+							}}
 							onprocessfiles={() => {
 								this.setState({ uploadMenuVisible: false });
 								this.requestFolder(this.state.currentFolder);

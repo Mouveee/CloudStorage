@@ -1,0 +1,17 @@
+#App-tableHead { 
+  opacity: 0;
+  transition: 500ms;
+}
+
+#App-tableHead.mobileTableHead{
+  font-size: 12px;
+}
+
+#App-tableHead.visible{
+  opacity: 1;
+}
+
+#App-tableHead th {
+  font-size: 16px;
+}
+

@@ -229,8 +229,13 @@ app.post("/move", async (req, res) => {
 	res.send(JSON.stringify({ message: "moving succesful" }));
 });
 
+
+let uploadCalled = 0;
 app.post("/upload", (req, res) => {
 	const uploadedFile = req.files.file;
+
+	console.log('called upload: ' + ++uploadCalled)
+	console.log('req.rawheaders: ' + Object.keys(req.body.file));
 
 	try {
 		uploadedFile.mv(`./external/${req.files.file.name}`);
@@ -239,7 +244,8 @@ app.post("/upload", (req, res) => {
 		res.send(JSON.stringify({ message: e.message }))
 	}
 
-	console.log('string of object: ' + Object.keys(req.files.file));
+
+	console.log('req keys: ' + Object.keys(req));
 	console.log(`uploaded file name: ${req.files.file.name}`);
 
 	res.statusCode = 200;

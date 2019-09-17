@@ -1,0 +1,8 @@
+#App-waitIcon{
+  opacity: 0;
+  transition: 800ms;
+}
+
+#App-waitIcon.visible{
+  opacity: 1;
+}
