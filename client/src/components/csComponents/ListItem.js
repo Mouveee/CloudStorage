@@ -225,7 +225,6 @@ class ListItem extends React.Component {
 						</td>
 						<td
 							onClick={e => {
-								console.log(`name: ${this.props.item.name}\nfolder: ${'./external/' + this.props.currentFolder.slice(2)}`)
 								this.props.type === 'file' ?
 									this.props.handleClick(this.props.item.name, './external/' + this.props.currentFolder.slice(2))
 									: this.props.handleClick(e);

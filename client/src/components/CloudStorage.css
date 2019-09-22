@@ -16,24 +16,6 @@
 	font-size: 18px;
 }
 
-#App-folderList.react-grid-layout {
-	border-bottom: 1px solid lightgray;
-	border-top: 1px solid lightgray;
-	margin: auto;
-	width: 83%;
-	height: 75%;
-	position: fixed;
-	top: 6em;
-	left: 15%;
-	margin: auto;
-	color: darkgray;
-	display: inherit;
-	overflow-y: scroll;
-	vertical-align: middle;
-	opacity: 1;
-	font-size: 18px;
-}
-
 #App-folderList.folderListMobile{
 	left: 0;
 	right: 1em;
@@ -109,6 +91,7 @@ th.App-columnName:hover {
 }
 
 .App-setViewItem{
+	font-size: 14px;
   margin: 4px;
   transition:300ms;
   user-select: none;

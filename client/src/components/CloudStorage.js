@@ -87,7 +87,6 @@ class CloudStorage extends React.Component {
 
   changeView = viewType => {
     this.setState({ view: viewType });
-    console.log(`changed view to ${this.state.view}`)
   }
 
   clearSelectedItems = () => {
@@ -106,9 +105,8 @@ class CloudStorage extends React.Component {
   };
 
   //item is exprcted to be an array to allow mullitple deletions at once
-  deleteItem = async (items) => {
-    console.log(`deleting ${JSON.stringify(items)}`)
-    const confirmed = window.confirm(Object.keys(items).length === 1 ?
+  deleteItem = async (items, preconfirmed) => {
+    const confirmed = preconfirmed || window.confirm(Object.keys(items).length === 1 ?
       `delete ${items[Object.keys(items)[0]].name}?` :
       `delete ${Object.keys(items).length} items?`);
 
@@ -121,6 +119,12 @@ class CloudStorage extends React.Component {
   }
 
   downloadFolder = async folder => {
+    // TODO: put open download requests in a stack
+    if (this.state.inProgress.length > 0) {
+      alert('please wait, already zipping');
+      return;
+    }
+
     const content = {};
     content.folder = folder.slice(2);
 
@@ -187,6 +191,8 @@ class CloudStorage extends React.Component {
       .catch(e => {
         console.log(`error in promise: ${e}`);
       });
+
+    return true;
   };
 
   handleFolderClick = e => {
@@ -362,6 +368,7 @@ class CloudStorage extends React.Component {
       <section id='App-container'>
         {this.state.inProgress.length > 0 || this.state.finishedItems.length > 0 ?
           <ProgressIndicator
+            deleteItem={this.deleteItem}
             handleFileClick={this.handleFileClick}
             inProgress={this.state.inProgress}
             finishedItems={this.state.finishedItems}

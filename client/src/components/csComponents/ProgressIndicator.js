@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './ProgressIndicator.css';
+import closeIcon from '../../img/close.svg';
 import progressIcon from '../../img/actualize.gif';
 
 class ProgressIndicator extends React.Component {
@@ -10,15 +11,27 @@ class ProgressIndicator extends React.Component {
     this.state = { visible: false }
   }
 
-  clickFunction = async item => {
-    console.log(item)
+  cancelAndDelete = e => {
+    e.cancelBubble = true;
+    alert('event fired!')
+  };
 
+  clickFunction = async item => {
+    alert('download will start')
     if (this.props.finishedItems.length > 0) {
       let file = item.split('/').pop() + '.zip';
       let folder = './internal/';
 
-      this.props.handleFileClick(file, folder);
-      this.props.finishZipping();
+      let content = {
+        key: { name: folder + file, type: 'file' }
+      }
+
+      new Promise((res, rej) => {
+        res(this.props.handleFileClick(file, folder));
+      }).then(res => {
+        this.props.deleteItem(content, true);
+        this.props.finishZipping();
+      })
     }
   }
 
@@ -45,7 +58,8 @@ class ProgressIndicator extends React.Component {
         {message}
         {/* TODO: Add deletion icon */}
         {this.props.finishedItems.length === 0 ?
-          <img src={progressIcon} alt='processing' className='App-progressIcon'></img> : null
+          <img src={progressIcon} alt='processing' className='App-progressIcon'></img>
+          : <img src={closeIcon} alt='close' onClick={this.cancelAndDelete} className='App-progressIcon'></img>
         }
       </div>
     )

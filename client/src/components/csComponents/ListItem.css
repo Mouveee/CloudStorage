@@ -1,6 +1,8 @@
 tbody{
 	transition: 600ms;
-	opacity : 0;
+	opacity: 0;
+	display: block;
+	width: 100%;
 }
 
 tBody.visible{
@@ -19,6 +21,7 @@ tBody.visible{
   -ms-user-select: none;
 	user-select: none;
 	top: 4px;
+	width: 100%;
 }
 
 .App-listCheckbox{

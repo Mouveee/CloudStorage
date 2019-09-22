@@ -87,7 +87,7 @@ app.post("/delete", (req, res) => {
 					let error = {};
 					error.message = e.message;
 				} else {
-					console.log("job done!");
+					console.log(`deleted ${content[key].name}`);
 				}
 			});
 		} else {
