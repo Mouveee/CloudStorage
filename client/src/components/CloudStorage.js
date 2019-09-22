@@ -3,7 +3,10 @@ import * as React from 'react';
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 
+import './CloudStorage.css';
+
 import ControlFooter from "./csComponents/ControlFooter.js";
+import GridContainer from './csComponents/GridContainer.js';
 import ListItem from "./csComponents/ListItem.js";
 import ProgressIndicator from './csComponents/ProgressIndicator.js';
 import SideBar from "./csComponents/Sidebar.js";
@@ -39,7 +42,7 @@ class CloudStorage extends React.Component {
       finishedItems: [], //to display for download
       folderList: [],
       inProgress: [],
-      selectedItems: [],
+      selectedItems: {},
       sorting: "name", //possible so far: 'name',
       statusOverlayVisible: false,
       statusOverlayMessage: 'Please Wait...',
@@ -82,8 +85,13 @@ class CloudStorage extends React.Component {
     this.setState({ uploadMenuVisible: !this.state.uploadMenuVisible });
   };
 
+  changeView = viewType => {
+    this.setState({ view: viewType });
+    console.log(`changed view to ${this.state.view}`)
+  }
+
   clearSelectedItems = () => {
-    this.setState({ selectedItems: [] })
+    this.setState({ selectedItems: {} })
   }
 
   createFolder = async inputFolder => {
@@ -99,13 +107,16 @@ class CloudStorage extends React.Component {
 
   //item is exprcted to be an array to allow mullitple deletions at once
   deleteItem = async (items) => {
-    const confirmed = window.confirm(items.length === 1 ? `delete ${items[0].name}?` : `delete ${items.length} items?`);
+    console.log(`deleting ${JSON.stringify(items)}`)
+    const confirmed = window.confirm(Object.keys(items).length === 1 ?
+      `delete ${items[Object.keys(items)[0]].name}?` :
+      `delete ${Object.keys(items).length} items?`);
 
     if (confirmed) {
-      this.setState({ updating: true, selectedItems: [] });
+      this.setState({ updating: true, selectedItems: {} });
       await this.callBackendAPI(items, "/delete");
       this.actualize();
-      this.setState({ updating: false, selectedItems: [] });
+      this.setState({ updating: false, selectedItems: {} });
     }
   }
 
@@ -186,7 +197,7 @@ class CloudStorage extends React.Component {
     this.setState({
       currentFolder: this.state.currentFolder + e.target.textContent + "/",
       prevFolder: prev,
-      selectedItems: []
+      selectedItems: {}
     });
 
     this.requestFolder(this.state.currentFolder + e.target.textContent);
@@ -195,22 +206,29 @@ class CloudStorage extends React.Component {
   itemSelect = async (e, name, type) => {
     const item = {}
 
+    console.log(`type received: ${e}`)
+
     item.name = './external/' + this.state.currentFolder.slice(2) + name;
     item.type = type;
 
+    let copiedSelectedItems = {};
+    Object.assign(copiedSelectedItems, this.state.selectedItems);
+
     if (e.target.checked) {
+      copiedSelectedItems[item.name] = item;
+
       await this.setState({
-        selectedItems: [...this.state.selectedItems, item]
+        selectedItems: copiedSelectedItems
       });
     } else {
+      copiedSelectedItems[item.name] = undefined;
+
       await this.setState({
-        selectedItems: this.state.selectedItems.filter((i, index) => {
-          return JSON.stringify(i) !== JSON.stringify(item);
-        })
+        selectedItems: copiedSelectedItems
       });
     }
 
-    console.log(`selected Items: ${this.state.selectedItems}`)
+    console.log(`selected Items: ${JSON.stringify(this.state.selectedItems)}`)
   };
 
   navigateBack = async () => {
@@ -221,7 +239,7 @@ class CloudStorage extends React.Component {
       await this.setState({
         currentFolder: this.state.prevFolder[this.state.prevFolder.length - 1],
         prevFolder: prevFolder,
-        selectedItems: []
+        selectedItems: {}
       });
 
       this.actualize();
@@ -280,15 +298,15 @@ class CloudStorage extends React.Component {
           folderList: folders,
           fileList: files,
           updating: false,
-          selectedItems: []
+          selectedItems: {}
         });
       })
       .catch(err => console.log(`error in catch: ${err}`));
   };
 
-  setFileBeingDragged = fileName => {
-    console.log(`setting dragged file name to ${fileName}`);
-    this.setState({ fileBeingDragged: fileName });
+  setFileBeingDragged = file => {
+    console.log(`setting dragged file name to ${JSON.stringify(file)}`);
+    this.setState({ fileBeingDragged: file });
   };
 
   sortBy = e => {
@@ -353,6 +371,21 @@ class CloudStorage extends React.Component {
           : null
         }
 
+        <div id='App-setViewMenu'>
+          <span
+            className='App-setViewItem'
+            onClick={() => this.changeView('list')}
+          >
+            LIST
+        </span>
+          <span
+            className='App-setViewItem'
+            onClick={() => this.changeView('grid')}
+          >
+            GRID
+            </span>
+        </div>
+
         {/* TODO: everything */}
         {this.state.statusOverlayVisible ?
           <StatusOverlay
@@ -361,34 +394,7 @@ class CloudStorage extends React.Component {
           : null
         }
 
-        {this.state.uploadMenuVisible ? (
-          <FilePond
-            fileMetadataObject={{
-              'hello': 'world'
-            }
-            }
-            allowMultiple={true}
-            allowFileMetadata={true}
-            name={"file"}
-            server={"./upload"}
-            instantUpload={false}
-            className='App-filePond'
-            oninit={() => { console.log('right event triggered, create an overlay TODO') }}
-            onaddfile={(e, file) => {
-              console.log('adding metadata ' + './external/' + this.state.currentFolder.slice(2));
-              console.log(Object.keys(file) + `of file: ${file.filename}`)
-              file.setMetadata('folder', './external/' + this.state.currentFolder.slice(2));
-              // file.fileMetadataObject = ({ folder: './external/' + this.state.currentFolder.slice(2) })
-              console.log(`file: ${Object.keys(file)}`)
-            }}
-            onprocessfiles={() => {
-              this.setState({ uploadMenuVisible: false });
-              this.requestFolder(this.state.currentFolder);
-            }
-            }
-          />
-        ) : null}
-
+        {/* //sidebar only visible on desktop, no functions so far */}
         {!this.props.isMobile ?
           <SideBar />
           : null
@@ -407,74 +413,79 @@ class CloudStorage extends React.Component {
               this.state.fileList.length === 0
             )
           ) {
-            return (
-              <table id='App-folderList' className={this.props.isMobile ? 'folderListMobile' : 'folderListBig'}>
-                <TableHead
-                  actualize={this.actualize}
-                  callBackendAPI={this.callBackendAPI}
-                  clearSelectedItems={this.clearSelectedItems}
-                  currentFolder={this.state.currentFolder}
-                  fileBeingDragged={this.state.fileBeingDragged}
-                  isMobile={this.props.isMobile ? true : false}
-                  prevFolder={this.state.prevFolder}
-                  selectedItems={this.state.selectedItems}
-                  setFileBeingDragged={this.setFileBeingDragged}
-                  sortBy={this.sortBy}
-                  navigateBack={this.navigateBack}
-                  root={this.state.currentFolder === "./" ? true : false}
-                />
 
-                {this.state.folderList.map((item, index) => {
-                  return (
-                    <ListItem
-                      key={'li-' + index}
-                      actualize={this.actualize}
-                      callBackendAPI={this.callBackendAPI}
-                      clearSelectedItems={this.clearSelectedItems}
-                      currentFolder={this.state.currentFolder}
-                      downloadFolder={this.downloadFolder}
-                      item={item}
-                      itemSelect={this.itemSelect}
-                      index={index}
-                      isMobile={this.props.isMobile ? true : false}
-                      deleteItem={this.deleteItem}
-                      fileBeingDragged={this.state.fileBeingDragged}
-                      handleClick={this.handleFolderClick}
-                      renameItem={this.renameItem}
-                      selectedItems={this.state.selectedItems}
-                      setFileBeingDragged={this.setFileBeingDragged}
-                      type='folder'
-                    />
-                  );
-                })}
+            if (this.state.view === 'list') {
+              return (
+                <table id='App-folderList' className={this.props.isMobile ? 'folderListMobile' : 'folderListBig'}>
+                  <TableHead
+                    actualize={this.actualize}
+                    callBackendAPI={this.callBackendAPI}
+                    clearSelectedItems={this.clearSelectedItems}
+                    currentFolder={this.state.currentFolder}
+                    fileBeingDragged={this.state.fileBeingDragged}
+                    isMobile={this.props.isMobile ? true : false}
+                    prevFolder={this.state.prevFolder}
+                    selectedItems={this.state.selectedItems}
+                    setFileBeingDragged={this.setFileBeingDragged}
+                    sortBy={this.sortBy}
+                    navigateBack={this.navigateBack}
+                    root={this.state.currentFolder === "./" ? true : false}
+                  />
 
-                {this.state.fileList.map((item, index) => {
-                  let fileSplit = item.name.split(".");
-                  const fileEnding = fileSplit.pop();
-                  return (
-                    <ListItem
-                      key={'li-' + index}
-                      actualize={this.actualize}
-                      callBackendAPI={this.callBackendAPI}
-                      clearSelectedItems={this.clearSelectedItems}
-                      currentFolder={this.state.currentFolder}
-                      item={item}
-                      index={index}
-                      deleteItem={this.deleteItem}
-                      fileBeingDragged={this.state.fileBeingDragged}
-                      fileEnding={fileEnding}
-                      handleClick={this.handleFileClick}
-                      isMobile={this.props.isMobile ? true : false}
-                      itemSelect={this.itemSelect}
-                      renameItem={this.renameItem}
-                      selectedItems={this.state.selectedItems}
-                      setFileBeingDragged={this.setFileBeingDragged}
-                      type='file'
-                    />
-                  );
-                })}
-              </table>
-            );
+                  {this.state.folderList.map((item, index) => {
+                    return (
+                      <ListItem
+                        key={'li-' + index}
+                        actualize={this.actualize}
+                        callBackendAPI={this.callBackendAPI}
+                        clearSelectedItems={this.clearSelectedItems}
+                        currentFolder={this.state.currentFolder}
+                        downloadFolder={this.downloadFolder}
+                        item={item}
+                        itemSelect={this.itemSelect}
+                        index={index}
+                        isMobile={this.props.isMobile ? true : false}
+                        deleteItem={this.deleteItem}
+                        fileBeingDragged={this.state.fileBeingDragged}
+                        handleClick={this.handleFolderClick}
+                        renameItem={this.renameItem}
+                        selectedItems={this.state.selectedItems}
+                        setFileBeingDragged={this.setFileBeingDragged}
+                        type='folder'
+                      />
+                    );
+                  })}
+
+                  {this.state.fileList.map((item, index) => {
+                    let fileSplit = item.name.split(".");
+                    const fileEnding = fileSplit.pop();
+                    return (
+                      <ListItem
+                        key={'li-' + index}
+                        actualize={this.actualize}
+                        callBackendAPI={this.callBackendAPI}
+                        clearSelectedItems={this.clearSelectedItems}
+                        currentFolder={this.state.currentFolder}
+                        item={item}
+                        index={index}
+                        deleteItem={this.deleteItem}
+                        fileBeingDragged={this.state.fileBeingDragged}
+                        fileEnding={fileEnding}
+                        handleClick={this.handleFileClick}
+                        isMobile={this.props.isMobile ? true : false}
+                        itemSelect={this.itemSelect}
+                        renameItem={this.renameItem}
+                        selectedItems={this.state.selectedItems}
+                        setFileBeingDragged={this.setFileBeingDragged}
+                        type='file'
+                      />
+                    );
+                  })}
+                </table>
+              )
+            } else {
+              return (<GridContainer state={this.state} />);
+            }
           } else {
             return (
               <table id='App-folderList'>
@@ -516,6 +527,34 @@ class CloudStorage extends React.Component {
           updating={this.state.updating}
           uploadFile={this.uploadFile}
         />
+
+        {this.state.uploadMenuVisible ? (
+          <FilePond
+            fileMetadataObject={{
+              'hello': 'world'
+            }
+            }
+            allowMultiple={true}
+            allowFileMetadata={true}
+            name={"file"}
+            server={"./upload"}
+            instantUpload={false}
+            className='App-filePond'
+            oninit={() => { console.log('right event triggered, create an overlay TODO') }}
+            onaddfile={(e, file) => {
+              console.log('adding metadata ' + './external/' + this.state.currentFolder.slice(2));
+              console.log(Object.keys(file) + `of file: ${file.filename}`)
+              file.setMetadata('folder', './external/' + this.state.currentFolder.slice(2));
+              // file.fileMetadataObject = ({ folder: './external/' + this.state.currentFolder.slice(2) })
+              console.log(`file: ${Object.keys(file)}`)
+            }}
+            onprocessfiles={() => {
+              this.setState({ uploadMenuVisible: false });
+              this.requestFolder(this.state.currentFolder);
+            }
+            }
+          />
+        ) : null}-
       </section>)
   }
 }

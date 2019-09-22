@@ -24,36 +24,6 @@
 	opacity: 1;
 }
 
-.App-navBar {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-		sans-serif;
-	font-size: 16px;
-	font-weight: normal;
-	text-align: center;
-	height: 3em;
-	width: 100%;
-	position: fixed;
-	top: 4em;
-	left: 0px;
-	right: 0px;
-	color: gray;
-}
-
-.App-navItem {
-	vertical-align: middle;
-	width: 0.7em;
-	height: 0.7em;
-	height: 1em;
-	margin-left: 2em;
-	margin-right: 2em;
-	display: inline-block;
-}
-
-img.App-navItem:hover {
-	cursor: pointer;
-}
-
 .App-subHeader {
 	display: block;
 	font-size: 14px;

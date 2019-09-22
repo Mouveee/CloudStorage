@@ -5,10 +5,11 @@
 	"proxy": "http://localhost:5000/",
 	"dependencies": {
 		"filepond": "^4.7.1",
-		"mobile-detect": "^1.4.3",
+		"mobile-detect": "^1.4.4",
 		"react": "^16.9.0",
 		"react-dom": "^16.9.0",
 		"react-filepond": "^7.0.1",
+		"react-player": "^1.13.0",
 		"react-pose": "^4.0.8",
 		"react-scripts": "3.0.1",
 		"typescript": "^3.6.3"

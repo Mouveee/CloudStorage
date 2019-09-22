@@ -2,6 +2,7 @@ import React from "react";
 
 import posed, { PoseGroup } from 'react-pose';
 
+import cameraIcon from "../../img/camera.svg";
 import trashcan from "../../img/trashcan.svg";
 import downloadIcon from "../../img/download.svg";
 import folderIcon from "../../img/folder.svg";
@@ -9,6 +10,7 @@ import fileIcon from "../../img/file.svg";
 import headphones from "../../img/headphones.svg";
 import penIcon from "../../img/pen.svg"
 import photoIcon from "../../img/photo.svg";
+import playIcon from '../../img/play.svg'
 
 import "./ListItem.css";
 
@@ -78,6 +80,11 @@ function getFileIcon(ending) {
 		case "svg":
 			returnValue = photoIcon;
 			break;
+		case 'avi':
+		case 'mov':
+		case 'mp4':
+			returnValue = cameraIcon;
+			break;
 		default:
 			returnValue = fileIcon;
 			break;
@@ -117,37 +124,55 @@ class ListItem extends React.Component {
 	onDragStart = e => {
 		e.dataTransfer.setData('text/plain', 'assoass');
 
-		this.props.setFileBeingDragged(this.props.item.name);
+		let key = this.props.item.name;
+
+		let fileBeingDragged = {
+			key: {
+				name: './external/' + this.props.currentFolder.slice(2) + `${this.props.item.name}`,
+				type: this.props.type
+			}
+		};
+
+		this.props.setFileBeingDragged(fileBeingDragged);
 	}
 
 	onDrop = async e => {
-		e.preventDefault();
+		//TODO: make actualize screen visible shile moving folders
 
-		console.log('selected Items: ' + this.props.selectedItems);
+		e.preventDefault();
 
 		if (this.props.type === 'folder') {
 			e.target.style.color = "gray";
 
-			if (this.props.fileBeingDragged === this.props.item.name || this.state.checked) {
+			if (this.props.fileBeingDragged.key.name === this.props.item.name || this.state.checked) {
 				alert("Naming conflict");
 			} else {
 				const content = {};
 
+				console.log(`file being dragged before sending: ${JSON.stringify(this.props.fileBeingDragged)}`)
+
 				//check if multiple files are selected so they are sent as an array to the 'move' function in app.js
-				this.props.selectedItems.length === 0 ?
-					content.itemToMove = './external/' + this.props.currentFolder.slice(2) + this.props.fileBeingDragged
-					: content.itemToMove = this.props.selectedItems;
+				if (Object.keys(this.props.selectedItems).length === 0) {
+					console.log('trying to move a single file')
+					content.itemToMove = this.props.fileBeingDragged
+					console.log(`set content.itemToMove to ${content.itemToMove}`)
+				} else {
+					console.log('tring to move several files...')
+					content.itemToMove = this.props.selectedItems;
+				}
+
+				console.log(`itemToMove being sent to server: ${JSON.stringify(content)}`)
 
 				content.targetFolder = './external/' + this.props.currentFolder.slice(2) + this.props.item.name;
-
-				this.props.setFileBeingDragged({ fileBeingDragged: "" });
-				this.props.clearSelectedItems();
 
 				let responsePromise = await this.props.callBackendAPI(
 					content,
 					"/move"
 				);
 				const response = responsePromise.json();
+
+				this.props.setFileBeingDragged({ fileBeingDragged: {} });
+				this.props.clearSelectedItems();
 
 				//reload folder
 				response.then(resolved => this.props.actualize());
@@ -177,7 +202,8 @@ class ListItem extends React.Component {
 									className="App-listCheckbox"
 									type='checkbox'
 									onChange={e => {
-										this.props.itemSelect(e, this.props.item.name, this.props.item.type);
+										console.log(`passing: ${this.props.type}`)
+										this.props.itemSelect(e, this.props.item.name, this.props.type);
 										this.setState({ checked: !this.state.checked })
 									}}
 									value={this.state.checked}
@@ -210,6 +236,19 @@ class ListItem extends React.Component {
 							{this.props.item.name}
 						</td>
 						<td className='App-smallSpan' key={'td- ' + i++}>
+							{/* mp4? ad a player icon */}
+							{this.props.fileEnding === 'mp4' ?
+								<img
+									key={'td- ' + i++}
+									src={playIcon}
+									className='App-listIcon'
+									data-item={this.props.item.name}
+									data-type={this.props.type}
+									onClick={() => alert('soon to be streamed')}
+									alt='KILL'
+								/>
+								: null}
+
 							<img
 								key={'td- ' + i++}
 								src={penIcon}
@@ -242,12 +281,21 @@ class ListItem extends React.Component {
 								src={trashcan}
 								className='App-listIcon'
 								onClick={() => {
-									this.props.selectedItems.length > 0 ?
-										//the horror, check if clicked item is in selected items, should work for now...
-										this.props.deleteItem(this.state.checked ? this.props.selectedItems : [...this.props.selectedItems, { name: './external/' + this.props.currentFolder + this.props.item.name, type: this.props.type }])
-										: this.props.deleteItem([{ name: `./external/${this.props.currentFolder + this.props.item.name}`, type: this.props.type }])
-								}
-								}
+									if (Object.keys(this.props.selectedItems).length > 0) {
+										this.props.deleteItem(this.props.selectedItems)
+									} else {
+										let item = {};
+										item.name = './external/' + this.props.currentFolder.slice(2) + this.props.item.name
+										item.type = this.props.type;
+
+										let container = {};
+										container[this.props.item.name] = item;
+
+										console.log(`composed: ${JSON.stringify(this.props.item)}`)
+
+										this.props.deleteItem(container);
+									}
+								}}
 								alt='KILL'
 							/>
 						</td>

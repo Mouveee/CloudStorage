@@ -78,12 +78,11 @@ app.post("/createfolder", (req, res) => {
 app.post("/delete", (req, res) => {
 	let content = req.body.content;
 
-	console.log(`deletion of ${content.length} items...`)
+	for (key in content) {
+		console.log(`item: ${JSON.stringify(content[key])}`);
 
-	content.map(item => {
-		console.log(`item: ${Object.keys(item)}\nname: ${item.name}`);
-		if (item.type === "file") {
-			fs.unlink(item.name, e => {
+		if (content[key].type === "file") {
+			fs.unlink(content[key].name, e => {
 				if (e) {
 					let error = {};
 					error.message = e.message;
@@ -92,10 +91,10 @@ app.post("/delete", (req, res) => {
 				}
 			});
 		} else {
-			rimraf.sync(item.name);
+			rimraf.sync(content[key].name);
 			console.log("deletion SHOULD be done... \\_%_/");
 		}
-	})
+	}
 
 	res.statusCode = 200;
 	res.send(JSON.stringify({ message: "your server did it, take more care of him" }));
@@ -202,27 +201,19 @@ app.post("/external", (req, res) => {
 
 app.post("/move", async (req, res) => {
 	const source = req.body.content.itemToMove;
+	const type = req.body.content.type;
 	const target = req.body.content.targetFolder;
 
-	if (typeof source === 'string') {
-		let sourceSplitted = source.split('/');
-		let item = sourceSplitted.pop();
+	console.log(`body content: ${JSON.stringify(req.body.content)}`)
 
-		if (fs.existsSync(target + '/' + item)) {
-			res.statusCode = 409;
-			res.send(JSON.stringify({ message: `${item} already exists in target location...` }));
-		}
+	let i = 0;
+	for (let index in source) {
+		console.log(`value of item: ${source[index].name}`);
 
-		fs.renameSync(source, target + '/' + item);
+		let splittedItemName = source[index].name.split('/');
+		let itemName = splittedItemName.pop();
 
-	} else {
-		await source.map(item => {
-			console.log('moving request for: ' + item.name);
-			let splittedItemName = item.name.split('/');
-			let itemName = splittedItemName.pop();
-
-			fs.renameSync(item.name, target + '/' + itemName);
-		})
+		fs.renameSync(source[index].name, target + '/' + itemName);
 	}
 
 	res.statusCode = 200;

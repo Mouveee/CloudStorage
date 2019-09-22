@@ -1,0 +1,145 @@
+#App-folderList {
+	border-bottom: 1px solid lightgray;
+	border-top: 1px solid lightgray;
+	margin: auto;
+	width: 83%;
+	height: 75%;
+	position: fixed;
+	top: 6em;
+	left: 15%;
+	margin: auto;
+	color: darkgray;
+	display: inherit;
+	overflow-y: scroll;
+	vertical-align: middle;
+	opacity: 1;
+	font-size: 18px;
+}
+
+#App-folderList.react-grid-layout {
+	border-bottom: 1px solid lightgray;
+	border-top: 1px solid lightgray;
+	margin: auto;
+	width: 83%;
+	height: 75%;
+	position: fixed;
+	top: 6em;
+	left: 15%;
+	margin: auto;
+	color: darkgray;
+	display: inherit;
+	overflow-y: scroll;
+	vertical-align: middle;
+	opacity: 1;
+	font-size: 18px;
+}
+
+#App-folderList.folderListMobile{
+	left: 0;
+	right: 1em;
+	width: 100%;
+	top: 5em;
+	font-size: 14px;
+	overflow: hidden;
+}
+
+td {
+	padding: 0.1em;
+}
+
+table td.App-smallSpan {
+	table-layout: fixed;
+	width: auto;
+	overflow: hidden;
+	word-wrap: break-word;
+	padding-left:2px;
+	padding-right: 2px;
+}
+
+table td.App-bigSpan {
+	table-layout: fixed;
+	font-size: 16px;
+	width: 85%;
+	overflow: hidden;
+	word-wrap: break-word;
+	text-align: left;
+}
+
+th.App-columnName {
+	text-align: left;
+	text-overflow: hidden;
+}
+
+th.App-columnName:hover {
+	cursor: pointer;
+}
+
+#App-avatar {
+	float: left;
+	border-radius: 100%;
+	height: 3em;
+	width: 3em;
+	padding: 0.5em;
+	vertical-align: middle;
+}
+
+#App-fileList {
+	margin: auto;
+}
+
+#App-info {
+	display: inline-block;
+}
+
+.App-infoItem {
+	display: flexbox;
+	padding: 1em;
+	padding-right: 1em;
+}
+
+#App-setViewMenu{
+  position: fixed;
+  top:4.5em;
+  right:2em;
+  color:white;
+  background-color: black;
+  border-radius:30px;
+  padding:3px;
+  z-index: 999;
+}
+
+.App-setViewItem{
+  margin: 4px;
+  transition:300ms;
+  user-select: none;
+}
+
+.App-setViewItem:hover{
+  cursor: pointer;
+  color:#DA87B6;
+}
+
+.App-filePond {
+	background-color: black;
+	color: white;
+	position: fixed;
+	width: 100%;
+	bottom: 6em;
+	z-index: 999;
+}
+
+.filepond--file {
+	color: white;
+}
+
+.filepond--item {
+	width: calc(25% - .5em);
+}
+
+.filepond--item-panel {
+	border-radius: 0.5em;
+}
+
+.App-onlyNonRootVisible {
+	display: none;
+}

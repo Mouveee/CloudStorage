@@ -7,8 +7,8 @@ import posed from 'react-pose';
 
 //custom components, hopefully well written
 import CloudStorage from './components/CloudStorage.js'
-import Header from "./components/Header.js";
-
+import Header from './components/Header.js';
+import Navbar from './components/Navbar.js';
 
 import "./App.css";
 
@@ -19,7 +19,7 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-
+			route: 'cloudStorage' //
 		};
 	}
 
@@ -52,6 +52,10 @@ class App extends Component {
 						isMobile={md.phone() ? true : false}
 					/>
 				</header>
+
+				<Navbar
+					isMobile={md.phone() ? true : false}
+				/>
 
 				<CloudStorage
 					isMobile={md.phone() ? true : false}
