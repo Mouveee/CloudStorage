@@ -11,7 +11,6 @@ const rimraf = require("rimraf");
 
 const archiver = require('archiver');
 
-
 const corsOptions = {
 	origin: "*",
 	optionsSuccessStatus: 200
@@ -102,41 +101,58 @@ app.post("/delete", (req, res) => {
 
 app.post("/download", async function (req, res) {
 	console.log(`${process.env.DOTS}\nsomebody requested: ${req.body.file}`);
-	let file = new Promise((resolve, reject) => {
-		fs.readFile(
-			`${req.body.folder}${req.body.file}`,
-			(err, content) => {
-				if (err) {
-					reject(
-						`error finding ${req.body.folder}${req.body.file} :( `
-					);
-				} else {
-					resolve(content);
-				}
-			}
-		);
-	})
-		.then(async content => {
-			content = { content: content.slice(2) };
+	const file = `${req.body.folder}${req.body.file}`;
 
-			res.setHeader("File", req.body.file);
-			await res.download(
-				path.normalize(
-					`${__dirname}/${req.body.folder}/${req.body.file}`
-				),
-				req.body.file,
-				e => {
-					if (e) {
-						console.log(`error sending file: ${e}`);
-					}
-				}
-			);
-		})
-		.catch(e => {
-			console.log(`promise itemHandler catched: ${e}`);
+	console.log(`file set to: ${file}`);
+
+	res.setHeader("File", req.body.file);
+
+	res.statusCode = 200;
+	res.download(file, req.body.file, err => {
+		if (err) {
+			console.log('file seems to be missing');
+
 			res.statusCode = 404;
-			res.send(JSON.toString({ error: "file not found" }));
-		});
+			res.send(JSON.stringify({ message: 'missing file ' + file }));
+		}
+	});
+
+	//OLD METHOD, KEEP FOR NOW~~~~~~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// let file = new Promise((resolve, reject) => {
+	// 	fs.readFile(
+	// 		`${req.body.folder}${req.body.file}`,
+	// 		(err, content) => {
+	// 			if (err) {
+	// 				reject(
+	// 					`error finding ${req.body.folder}${req.body.file} :( `
+	// 				);
+	// 			} else {
+	// 				resolve(content);
+	// 			}
+	// 		}
+	// 	);
+	// })
+	// 	.then(async content => {
+	// 		content = { content: content.slice(2) };
+
+	// 		res.setHeader("File", req.body.file);
+	// 		await res.download(
+	// 			path.normalize(
+	// 				`${__dirname}/${req.body.folder}/${req.body.file}`
+	// 			),
+	// 			req.body.file,
+	// 			e => {
+	// 				if (e) {
+	// 					console.log(`error sending file: ${e}`);
+	// 				}
+	// 			}
+	// 		);
+	// 	})
+	// 	.catch(e => {
+	// 		console.log(`promise itemHandler catched: ${e}`);
+	// 		res.statusCode = 404;
+	// 		res.send(JSON.toString({ error: "file not found" }));
+	// 	});
 });
 
 app.post('/downloadFolder', async (req, res) => {
@@ -150,7 +166,6 @@ app.post('/downloadFolder', async (req, res) => {
 
 		res.status = 409;
 		res.send(JSON.stringify({ message: 'folder has alredy been zipped, please delete first' }));
-		console.log('sent the sad news')
 	} else {
 		console.log('it doesn`t')
 		let archive = archiver.create('zip', {});
@@ -166,7 +181,6 @@ app.post('/downloadFolder', async (req, res) => {
 
 			res.statusCode = 200;
 			res.send(JSON.stringify({ message: 'you lucky motherfucker' }))
-			console.log('Data has been drained');
 		});
 
 		archive.finalize();
@@ -225,19 +239,12 @@ let uploadCalled = 0;
 app.post("/upload", (req, res) => {
 	const uploadedFile = req.files.file;
 
-	console.log('called upload: ' + ++uploadCalled)
-	console.log('req.rawheaders: ' + Object.keys(req.body.file));
-
 	try {
 		uploadedFile.mv(`./external/${req.files.file.name}`);
 	} catch (e) {
 		res.status = 500;
 		res.send(JSON.stringify({ message: e.message }))
 	}
-
-
-	console.log('req keys: ' + Object.keys(req));
-	console.log(`uploaded file name: ${req.files.file.name}`);
 
 	res.statusCode = 200;
 	res.send("1234");

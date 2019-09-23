@@ -98,8 +98,11 @@ class CloudStorage extends React.Component {
 
     if (folder.length > 0) {
       let response = this.callBackendAPI(folder, "/createfolder");
+
       console.log(`response: ${JSON.stringify(response)}`);
+
       this.requestFolder(this.state.currentFolder);
+
       inputFolder.value = "";
     }
   };
@@ -134,7 +137,10 @@ class CloudStorage extends React.Component {
     console.log(`response.status : ${res.status}`);
 
     res.json().then(response => {
-      this.setState({ finishedItems: [...this.state.finishedItems, this.state.inProgress[this.state.inProgress.length - 1]], inProgress: [] });
+      this.setState({
+        finishedItems: [...this.state.finishedItems, this.state.inProgress[this.state.inProgress.length - 1]],
+        inProgress: []
+      });
       console.log(`zipping success, progress should disappear...`)
     })
   }
@@ -165,14 +171,11 @@ class CloudStorage extends React.Component {
         }) // body data type must match "Content-Type" header
       });
 
-      if (answer.headers.get("File")) {
-        resolve(answer);
-      } else {
-        reject("this is not good :( REJECTED");
-      }
+      resolve(answer)
     })
       .then(response => {
         fileName = response.headers.get("File");
+        console.log(JSON.stringify(response.headers))
         return response.blob();
       })
       .then(blob => {
@@ -187,12 +190,11 @@ class CloudStorage extends React.Component {
         //Clean up and remove the link
         link.parentNode.removeChild(link);
         this.setState({ inProgress: [] })
+        return true;
       })
       .catch(e => {
         console.log(`error in promise: ${e}`);
       });
-
-    return true;
   };
 
   handleFolderClick = e => {
