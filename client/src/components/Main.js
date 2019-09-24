@@ -10,16 +10,21 @@ class Main extends React.Component {
   }
 
   render() {
-    const visibility = this.state.visible ? 'App-mainVisibile' : 'dummyClass';
-    this.props.mobile ? visibility += ' mobile' : console.log('');
+    let classMain = this.state.visible ? 'App-mainVisibile' : 'dummyClass';
+    let classHead = this.props.isMobile ? 'App-headMobile' : 'App-head';
+
+    if (this.props.isMobile) {
+      classMain += ' mobile';
+    };
+
     setTimeout(() => this.setState({ visible: true }))
 
     return (
       <div
         id='App-mainPage'
-        className={visibility}
+        className={classMain}
       >
-        <h1>
+        <h1 className={classHead} id='App-mainHeader'>
           Welcome
         </h1>
         <div className='App-mainText'>Hi there,<br></br> my name is Marco Huwig, I'm a middle-aged Web Developer from Saarland, Germany. I've created this page to show

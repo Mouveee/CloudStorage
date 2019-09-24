@@ -1,14 +1,16 @@
 #App-mainPage{
-  font-size: 18px;
+  font-size: 16px;
   transition: 400ms;
   opacity: 0;
   margin: auto;
-	width: 75%;
+	width: 80%;
 	height: 75%;
-	position: fixed;
-	top: 6em;
-  left: 15%;
+  top: 6em;
+  left: 8em;
   user-select: none;
+  position: fixed;
+  padding: 1em;
+  z-index: -999;
 }
 
 #App-mainPage.App-mainVisibile {
@@ -16,9 +18,18 @@
 }
 
 #App-mainPage.mobile{
-  font-size: 16px;
+  font-size: 14px;
+  left: 1em;
 }
 
 .App-mainText{
   text-align: justify
+}
+
+#App-mainHeader{
+  font-size: 16px;
+}
+
+#App-mainHeader.App-headMobile{
+  font-size: 14px;
 }

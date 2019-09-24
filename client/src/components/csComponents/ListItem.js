@@ -182,7 +182,14 @@ class ListItem extends React.Component {
 
 	render() {
 		let i = this.props.index * 1000;
-		let classVisible = this.state.visible ? 'visible' : 'dididi';
+		let classVisible = this.state.visible ? 'App-listBody visible' : 'dididi';
+		let classItemInfo = 'App-itemInfo';
+
+		if (this.props.isMobile) {
+			classVisible += ' App-liMobile';
+			classItemInfo += ' App-liMobile';
+		}
+
 		setTimeout(() => this.setState({ visible: true }))
 
 		return (
@@ -301,11 +308,11 @@ class ListItem extends React.Component {
 					</tr>
 					{this.props.type === "file" ? (
 						<tr key={"tr-" + this.props.type + "-" + this.props.index}
-							className='App-itemInfo'
+							className={classItemInfo}
 						>
 							<td key={'td- ' + i++} />
 							<td key={'td- ' + i++} />
-							<td className='App-itemInfo' key={'td- ' + i++}>
+							<td className={classItemInfo} key={'td- ' + i++}>
 								{Math.round((this.props.item.size / 1048576 * 100)) / 100 +
 									" mb" +
 									" " +
@@ -316,11 +323,11 @@ class ListItem extends React.Component {
 							<td key={'td- ' + i++} />
 						</tr>
 					) : (
-							<tr className='App-itemInfo'
+							<tr className={classItemInfo}
 								key={"tr-sub-" + this.props.type + "-" + this.props.index}>
 								<td key={'td- ' + i++} />
 								<td key={'td- ' + i++} />
-								<td className='App-itemInfo'>
+								<td className={classItemInfo}>
 									Folder {formatDate(this.props.item.modified)}
 								</td>
 								<td key={'td- ' + i++} />

@@ -2,7 +2,7 @@
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
 		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
 		sans-serif;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: normal;
 	text-align: center;
 	height: 3em;
@@ -21,8 +21,8 @@
 }
 
 .App-navBar.App-navBarMobile {
-	font-size: 14px;
-	top: 2.5em;
+	font-size: 16px;
+	top: 2.6em;
 }
 
 

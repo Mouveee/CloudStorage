@@ -2,7 +2,7 @@
 	border-bottom: 1px solid lightgray;
 	border-top: 1px solid lightgray;
 	margin: auto;
-	width: 83%;
+	width: 86%;
 	height: 75%;
 	position: fixed;
 	top: 6em;
@@ -25,36 +25,7 @@
 	overflow: hidden;
 }
 
-td {
-	padding: 0.1em;
-}
 
-table td.App-smallSpan {
-	table-layout: fixed;
-	width: auto;
-	overflow: hidden;
-	word-wrap: break-word;
-	padding-left:2px;
-	padding-right: 2px;
-}
-
-table td.App-bigSpan {
-	table-layout: fixed;
-	font-size: 16px;
-	width: 85%;
-	overflow: hidden;
-	word-wrap: break-word;
-	text-align: left;
-}
-
-th.App-columnName {
-	text-align: left;
-	text-overflow: hidden;
-}
-
-th.App-columnName:hover {
-	cursor: pointer;
-}
 
 #App-avatar {
 	float: left;

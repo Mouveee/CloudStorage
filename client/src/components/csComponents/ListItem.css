@@ -27,7 +27,8 @@ tBody.visible{
 .App-listCheckbox{
 	opacity: 0;
 	height: 14px;
-  width: 14px;
+	width: 14px;
+	visibility: hidden;
 }
 
 .App-listCustomCheckbox{
@@ -50,6 +51,15 @@ tBody.visible{
 
 .App-itemInfo {
 	font-size: 12px;
+	color: lightgray;
+	overflow: hidden;
+	line-break: strict;
+	text-align: left;
+	user-select: none;
+}
+
+.App-itemInfo.App-liMobile {
+	font-size: 10px;
 	color: lightgray;
 	overflow: hidden;
 	line-break: strict;
@@ -92,4 +102,35 @@ tBody.visible{
 
 .App-beingDraggedOver {
 	background-color: pink;
+}
+
+td {
+	padding: 0.1em;
+}
+
+table td.App-smallSpan {
+	table-layout: fixed;
+	width: auto;
+	overflow: hidden;
+	word-wrap: break-word;
+	padding-left:2px;
+	padding-right: 2px;
+}
+
+table td.App-bigSpan {
+	table-layout: fixed;
+	font-size: 16px;
+	width: 85%;
+	overflow: hidden;
+	word-wrap: break-word;
+	text-align: left;
+}
+
+th.App-columnName {
+	text-align: left;
+	text-overflow: hidden;
+}
+
+th.App-columnName:hover {
+	cursor: pointer;
 }
