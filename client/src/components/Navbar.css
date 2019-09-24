@@ -12,7 +12,19 @@
 	left: 0px;
 	right: 0px;
 	color: gray;
+	opacity: 0;
+	transition: 400ms;
 }
+
+.App-navBar.App-navBarVisible{
+	opacity: 1;
+}
+
+.App-navBar.App-navBarMobile {
+	font-size: 14px;
+	top: 2.5em;
+}
+
 
 .App-navItem {
 	vertical-align: middle;

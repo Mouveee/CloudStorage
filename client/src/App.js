@@ -68,7 +68,9 @@ class App extends Component {
 						isMobile={md.phone() ? true : false}
 					/>
 					:
-					<Main />
+					<Main
+						isMobile={md.phone() ? true : false}
+					/>
 				}
 			</div >
 		);

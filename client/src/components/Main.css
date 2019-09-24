@@ -7,9 +7,18 @@
 	height: 75%;
 	position: fixed;
 	top: 6em;
-	left: 15%;
+  left: 15%;
+  user-select: none;
 }
 
 #App-mainPage.App-mainVisibile {
   opacity: 1;
+}
+
+#App-mainPage.mobile{
+  font-size: 16px;
+}
+
+.App-mainText{
+  text-align: justify
 }
