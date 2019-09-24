@@ -103,8 +103,6 @@ app.post("/download", async function (req, res) {
 	console.log(`${process.env.DOTS}\nsomebody requested: ${req.body.file}`);
 	const file = `${req.body.folder}${req.body.file}`;
 
-	console.log(`file set to: ${file}`);
-
 	res.setHeader("File", req.body.file);
 
 	res.statusCode = 200;
@@ -215,15 +213,10 @@ app.post("/external", (req, res) => {
 
 app.post("/move", async (req, res) => {
 	const source = req.body.content.itemToMove;
-	const type = req.body.content.type;
 	const target = req.body.content.targetFolder;
-
-	console.log(`body content: ${JSON.stringify(req.body.content)}`)
 
 	let i = 0;
 	for (let index in source) {
-		console.log(`value of item: ${source[index].name}`);
-
 		let splittedItemName = source[index].name.split('/');
 		let itemName = splittedItemName.pop();
 

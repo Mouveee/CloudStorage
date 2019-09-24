@@ -1,0 +1,15 @@
+#App-mainPage{
+  font-size: 18px;
+  transition: 400ms;
+  opacity: 0;
+  margin: auto;
+	width: 75%;
+	height: 75%;
+	position: fixed;
+	top: 6em;
+	left: 15%;
+}
+
+#App-mainPage.App-mainVisibile {
+  opacity: 1;
+}

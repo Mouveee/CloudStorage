@@ -2,12 +2,14 @@ import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
 
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import MobileDetect from 'mobile-detect';
 import posed from 'react-pose';
 
 //custom components, hopefully well written
 import CloudStorage from './components/CloudStorage.js'
 import Header from './components/Header.js';
+import Main from './components/Main.js';
 import Navbar from './components/Navbar.js';
 
 import "./App.css";
@@ -19,9 +21,13 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			route: 'cloudStorage' //
+			route: 'cloudStorage' //main, cloudStorage so far
 		};
+
+		this.changeRoute.bind(this);
 	}
+
+	changeRoute = route => this.setState({ route: route });
 
 	render() {
 		// window.chrome ? console.log('Running on chrome...') : console.log('');
@@ -44,8 +50,8 @@ class App extends Component {
 		// console.log(md.versionStr('Build'));       // '4.1.A.0.562'
 		// console.log(md.match('playstation|xbox')); // false
 
-		return (
 
+		return (
 			< div className='App' >
 				<header>
 					<Header
@@ -55,11 +61,15 @@ class App extends Component {
 
 				<Navbar
 					isMobile={md.phone() ? true : false}
+					changeRoute={this.changeRoute}
 				/>
-
-				<CloudStorage
-					isMobile={md.phone() ? true : false}
-				/>
+				{this.state.route === 'cloudStorage' ?
+					<CloudStorage
+						isMobile={md.phone() ? true : false}
+					/>
+					:
+					<Main />
+				}
 			</div >
 		);
 	}

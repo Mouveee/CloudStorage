@@ -14,8 +14,8 @@ class Navbar extends React.Component {
   render() {
     return (
       <nav className='App-navBar'>
-        <span className='App-navItem'>Main</span>
-        <span className='App-navItem'>Files</span>
+        <span className='App-navItem' onClick={() => this.props.changeRoute('main')}>Main</span>
+        <span className='App-navItem' onClick={() => this.props.changeRoute('cloudStorage')}> Files</span>
         <span className='App-navItem'>About</span>
       </nav>
     )
