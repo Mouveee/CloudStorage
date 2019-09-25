@@ -2,15 +2,17 @@ import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import MobileDetect from 'mobile-detect';
 import posed from 'react-pose';
 
 //custom components, hopefully well written
+import About from './components/About.js';
 import CloudStorage from './components/CloudStorage.js'
 import Header from './components/Header.js';
 import Main from './components/Main.js';
 import Navbar from './components/Navbar.js';
+import NotFound from './components/NotFound.js';
 
 import "./App.css";
 
@@ -21,7 +23,7 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			route: 'cloudStorage' //main, cloudStorage so far
+			route: 'main' //main, cloudStorage or about
 		};
 
 		this.changeRoute.bind(this);
@@ -62,16 +64,30 @@ class App extends Component {
 				<Navbar
 					isMobile={md.phone() ? true : false}
 					changeRoute={this.changeRoute}
+					NavLink={NavLink}
 				/>
-				{this.state.route === 'cloudStorage' ?
-					<CloudStorage
-						isMobile={md.phone() ? true : false}
-					/>
-					:
-					<Main
-						isMobile={md.phone() ? true : false}
-					/>
-				}
+
+				{(() => {
+					switch (this.state.route) {
+						case 'cloudStorage': return (
+							<CloudStorage
+								isMobile={md.phone() ? true : false}
+							/>);
+							break;
+						case 'main': return (
+							<Main
+								isMobile={md.phone() ? true : false}
+							/>)
+							break;
+						case 'about': return (
+							<About
+								isMobile={md.phone() ? true : false}
+							/>
+						)
+						default: return (<NotFound />)
+					}
+				})()}
+
 			</div >
 		);
 	}

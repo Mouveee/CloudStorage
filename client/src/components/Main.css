@@ -1,11 +1,11 @@
 #App-mainPage{
   font-size: 16px;
-  transition: 400ms;
+  transition: 3000ms;
   opacity: 0;
   margin: auto;
 	width: 80%;
 	height: 75%;
-  top: 6em;
+  top: 6.1em;
   left: 8em;
   user-select: none;
   position: fixed;
@@ -28,8 +28,15 @@
 
 #App-mainHeader{
   font-size: 16px;
+  transition: 3500ms;
 }
 
 #App-mainHeader.App-headMobile{
   font-size: 14px;
+}
+
+#myself{
+  height: 110px;
+  width: 110px;
+  border-radius: 100%;
 }
