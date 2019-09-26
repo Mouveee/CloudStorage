@@ -2,7 +2,6 @@ import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
 
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import MobileDetect from 'mobile-detect';
 import posed from 'react-pose';
 
@@ -64,7 +63,6 @@ class App extends Component {
 				<Navbar
 					isMobile={md.phone() ? true : false}
 					changeRoute={this.changeRoute}
-					NavLink={NavLink}
 				/>
 
 				{(() => {

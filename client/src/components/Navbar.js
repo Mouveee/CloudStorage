@@ -14,8 +14,13 @@ class Navbar extends React.Component {
 
   render() {
     let navBarClass = 'App-navBar';
-    this.state.visible ? navBarClass += ' App-navBarVisible' : console.log('');
-    this.props.isMobile ? navBarClass += ' App-navBarMobile' : console.log('');
+    if (this.state.visible) {
+      navBarClass += ' App-navBarVisible';
+    }
+
+    if (this.props.isMobile) {
+      navBarClass += ' App-navBarMobile'
+    }
 
     setTimeout(() => this.setState({ visible: true }));
 

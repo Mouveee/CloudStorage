@@ -1,5 +1,6 @@
 import React from "react";
 
+import MobileButton from './MobileButton';
 import posed, { PoseGroup } from 'react-pose';
 
 import cameraIcon from "../../img/camera.svg";
@@ -149,19 +150,10 @@ class ListItem extends React.Component {
 			} else {
 				const content = {};
 
-				console.log(`file being dragged before sending: ${JSON.stringify(this.props.fileBeingDragged)}`)
-
 				//check if multiple files are selected so they are sent as an array to the 'move' function in app.js
 				if (Object.keys(this.props.selectedItems).length === 0) {
-					console.log('trying to move a single file')
 					content.itemToMove = this.props.fileBeingDragged
-					console.log(`set content.itemToMove to ${content.itemToMove}`)
-				} else {
-					console.log('tring to move several files...')
-					content.itemToMove = this.props.selectedItems;
 				}
-
-				console.log(`itemToMove being sent to server: ${JSON.stringify(content)}`)
 
 				content.targetFolder = './external/' + this.props.currentFolder.slice(2) + this.props.item.name;
 
@@ -230,6 +222,7 @@ class ListItem extends React.Component {
 								alt=''
 							/>
 						</td>
+
 						<td
 							onClick={e => {
 								this.props.type === 'file' ?
@@ -241,70 +234,75 @@ class ListItem extends React.Component {
 						>
 							{this.props.item.name}
 						</td>
-						<td className='App-smallSpan' key={'td- ' + i++}>
-							{/* mp4? ad a player icon */}
-							{this.props.fileEnding === 'mp4' ?
+
+						{!this.props.isMobile ?
+							<td className='App-smallSpan' key={'td- ' + i++}>
+								{/* mp4? ad a player icon */}
+								{this.props.fileEnding === 'mp4' ?
+									<img
+										key={'td- ' + i++}
+										src={playIcon}
+										className='App-listIcon'
+										data-item={this.props.item.name}
+										data-type={this.props.type}
+										onClick={() => alert('soon to be streamed')}
+										alt='KILL'
+									/>
+									: null}
+
 								<img
 									key={'td- ' + i++}
-									src={playIcon}
+									src={penIcon}
 									className='App-listIcon'
 									data-item={this.props.item.name}
 									data-type={this.props.type}
-									onClick={() => alert('soon to be streamed')}
+									onClick={() => this.props.renameItem(this.props.item.name)}
 									alt='KILL'
 								/>
-								: null}
 
-							<img
-								key={'td- ' + i++}
-								src={penIcon}
-								className='App-listIcon'
-								data-item={this.props.item.name}
-								data-type={this.props.type}
-								onClick={() => this.props.renameItem(this.props.item.name)}
-								alt='KILL'
-							/>
-
-							<img
-								key={'td- ' + i++}
-								src={downloadIcon}
-								className='App-listIcon'
-								data-item={this.props.item.name}
-								data-type={this.props.type}
-								onClick={
-									this.props.type === "file"
-										? () => {
-											this.props.handleClick(this.props.item.name, './external/' + this.props.currentFolder.slice(2));
-										}
-										: () => {
-											this.props.downloadFolder('./external/' + this.props.currentFolder.slice(2) + this.props.item.name);
-										}
-								}
-								alt='KILL'
-							/>
-
-							<img
-								src={trashcan}
-								className='App-listIcon'
-								onClick={() => {
-									if (Object.keys(this.props.selectedItems).length > 0) {
-										this.props.deleteItem(this.props.selectedItems)
-									} else {
-										let item = {};
-										item.name = './external/' + this.props.currentFolder.slice(2) + this.props.item.name
-										item.type = this.props.type;
-
-										let container = {};
-										container[this.props.item.name] = item;
-
-										console.log(`composed: ${JSON.stringify(this.props.item)}`)
-
-										this.props.deleteItem(container);
+								<img
+									key={'td- ' + i++}
+									src={downloadIcon}
+									className='App-listIcon'
+									data-item={this.props.item.name}
+									data-type={this.props.type}
+									onClick={
+										this.props.type === "file"
+											? () => {
+												this.props.handleClick(this.props.item.name, './external/' + this.props.currentFolder.slice(2));
+											}
+											: () => {
+												this.props.downloadFolder('./external/' + this.props.currentFolder.slice(2) + this.props.item.name);
+											}
 									}
-								}}
-								alt='KILL'
-							/>
-						</td>
+									alt='KILL'
+								/>
+
+								<img
+									src={trashcan}
+									className='App-listIcon'
+									onClick={() => {
+										if (Object.keys(this.props.selectedItems).length > 0) {
+											this.props.deleteItem(this.props.selectedItems)
+										} else {
+											let item = {};
+											item.name = './external/' + this.props.currentFolder.slice(2) + this.props.item.name
+											item.type = this.props.type;
+
+											let container = {};
+											container[this.props.item.name] = item;
+
+											console.log(`composed: ${JSON.stringify(this.props.item)}`)
+
+											this.props.deleteItem(container);
+										}
+									}}
+									alt='KILL'
+								/>
+							</td>
+							: <MobileButton />
+						}
+
 					</tr>
 					{this.props.type === "file" ? (
 						<tr key={"tr-" + this.props.type + "-" + this.props.index}

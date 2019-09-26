@@ -1,6 +1,6 @@
 #App-mainPage{
   font-size: 16px;
-  transition: 3000ms;
+  transition: 2000ms;
   opacity: 0;
   margin: auto;
 	width: 80%;
@@ -28,15 +28,24 @@
 
 #App-mainHeader{
   font-size: 16px;
-  transition: 3500ms;
+  transition: 2100ms;
 }
 
 #App-mainHeader.App-headMobile{
   font-size: 14px;
 }
 
-#myself{
+#App-myself{
+  object-fit: cover;
+  position: fixed;
+  left: 14px;
   height: 110px;
   width: 110px;
   border-radius: 100%;
+}
+
+#App-myself.App-myMobile{
+  height: 50px;
+  width: 50px;
+  left: 2px;
 }

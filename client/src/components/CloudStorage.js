@@ -551,11 +551,8 @@ class CloudStorage extends React.Component {
             className='App-filePond'
             oninit={() => { console.log('right event triggered, create an overlay TODO') }}
             onaddfile={(e, file) => {
-              console.log('adding metadata ' + './external/' + this.state.currentFolder.slice(2));
-              console.log(Object.keys(file) + `of file: ${file.filename}`)
+              //why does this exist? can't retrieve shit in the backend :(
               file.setMetadata('folder', './external/' + this.state.currentFolder.slice(2));
-              // file.fileMetadataObject = ({ folder: './external/' + this.state.currentFolder.slice(2) })
-              console.log(`file: ${Object.keys(file)}`)
             }}
             onprocessfiles={() => {
               this.setState({ uploadMenuVisible: false });
