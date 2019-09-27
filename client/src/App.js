@@ -10,8 +10,8 @@ import About from './components/About.js';
 import CloudStorage from './components/CloudStorage.js'
 import Header from './components/Header.js';
 import Main from './components/Main.js';
-import Navbar from './components/Navbar.js';
 import NotFound from './components/NotFound.js';
+import Skills from './components/Skills.js';
 
 import "./App.css";
 
@@ -37,9 +37,6 @@ class App extends Component {
 			window.navigator.userAgent
 		);
 
-		// more typically we would instantiate with 'window.navigator.userAgent'
-		// as user-agent; this string literal is only for better understanding
-
 		// console.log(md.mobile() ? 'running on mobile ' + md.mobile() : 'no mobile');          // 'Sony'
 		// console.log(md.phone() ? 'phone type: ' + md.phone() : 'this is not a telephone');           // 'Sony'
 		// console.log(md.tablet());          // null
@@ -57,25 +54,21 @@ class App extends Component {
 				<header>
 					<Header
 						isMobile={md.phone() ? true : false}
+						changeRoute={this.changeRoute}
 					/>
 				</header>
 
-				<Navbar
-					isMobile={md.phone() ? true : false}
-					changeRoute={this.changeRoute}
-				/>
-
 				{(() => {
 					switch (this.state.route) {
-						case 'cloudStorage': return (
-							<CloudStorage
-								isMobile={md.phone() ? true : false}
-							/>);
-							break;
 						case 'main': return (
 							<Main
 								isMobile={md.phone() ? true : false}
 							/>)
+							break;
+						case 'cloudStorage': return (
+							<CloudStorage
+								isMobile={md.phone() ? true : false}
+							/>);
 							break;
 						case 'about': return (
 							<About

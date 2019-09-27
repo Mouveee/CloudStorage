@@ -1,36 +1,123 @@
 #App-header {
-	font-family: fancyFont;
-	font-size: 30px;
+	/* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
 	background-color: black;
-	color: #DA87B6;
-	height: 2em;
-	width: 100%;
-	text-align: center;
-	margin: 0;
+	color: white;
+	font-size: calc(32px + 1vmin);
+	height: calc(213px + 1vmin);
+	width: 100vw;
+	text-align: left;
 	opacity: 0;
-	position: fixed;
+	position: relative;
 	top: 0px;
 	user-select: none;
-	left: 0px;
-	right: 0px;
+	left:50%;
+	transform: translateX(-50%);
 	transition: 1000ms;
 }
 
 #App-header.mobileHeader{
-	font-size: 18px;
+	font-size: calc(72px + 0.5vmin);
+	height: calc(58px + 10vmin);
 }
+
+#App-avatar {
+	left: 5%;
+	position: fixed;
+	border-radius: 100%;
+	height: calc(136px + 0.5vmin);
+	width: calc(136px + 0.5vmin);
+	padding: 1vmin;
+	object-fit: cover;
+	top: 6%;
+	vertical-align: middle;
+}
+
+#App-avatar.mobileHeader{
+	height: calc(64px + 0.5vmin);
+	width: calc(64px + 0.5vmin);
+	left: 1%;
+	top: 8%;
+}
+
 
 #App-header.visible {
 	opacity: 1;
 }
 
-.App-subHeader {
-	display: block;
-	font-size: 14px;
-	margin-block-start: 0.67em;
-	margin-block-end: 0.67em;
-	margin-inline-start: 0px;
-	margin-inline-end: 0px;
-	margin: -0.5em;
-	font-weight: bold;
+.App-caption{
+	font-family: fancyFont;
+	position: absolute;
+	left: 50%;
+	font-size: calc(100px + 1vmin);
+	transform: translateX(-50%);
+	top: 0;
+	margin: auto;
+	display: inline-block;
 }
+
+.App-caption.mobileHeader{
+	font-size: calc(25px + 1vmin);
+	left: 48%;
+	top: 1vh;
+}
+
+/* all about Navigation Bar */
+.App-navBar {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	position: absolute;
+	font-size: calc(18px + 1vmin);
+	font-weight: normal;
+	/* text-align: center; */
+	height: calc(26px + 2vmin);
+	width: 100%;
+	color: gray;
+	opacity: 0;
+	transition: 400ms;
+	top: 88%;
+	background-color:white;
+	padding-top: 1vmin;
+}
+
+.App-navBar.App-navBarVisible{
+	opacity: 1;
+}
+
+.App-navBar.mobileHeader {
+	font-size: calc(12px + 1vmin);
+	top: 100px;
+}
+
+
+.App-navItem {
+	vertical-align: middle;
+	margin-left: 2em;
+	margin-right: 2em;
+	display: inline-block;
+	user-select: none;
+	transition: 300ms;
+}
+
+.App-navItem:hover {
+	color: #DA87B6;
+	cursor: pointer;
+}
+
+.App-subHeader{
+	display: inline-block;
+	font-family: fancyFont;
+	position: absolute;
+	font-size: calc(16px + 1vmin);
+	top: 112px;
+	left: 30%;
+	transform: translateX(-50%);
+}
+
+.App-subHeader.mobileHeader{
+	font-size: calc(10px + 1vmin);
+	top: 5vh;
+	left: 24%;
+	transform: translateX(-30%);
+}
+

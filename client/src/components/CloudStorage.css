@@ -2,10 +2,10 @@
 	border-bottom: 1px solid lightgray;
 	border-top: 1px solid lightgray;
 	margin: auto;
-	width: 86%;
-	height: 75%;
+	width: 86vw;
+	height: calc(350px + 5vmin);
 	position: fixed;
-	top: 6em;
+	top: 250px;
 	left: 15%;
 	margin: auto;
 	color: darkgray;
@@ -13,27 +13,18 @@
 	overflow-y: scroll;
 	vertical-align: middle;
 	opacity: 1;
-	font-size: 18px;
+	font-size: calc(16px + 0.5vh);
 }
 
 #App-folderList.folderListMobile{
 	left: 0;
 	right: 1em;
-	width: 100%;
-	top: 5em;
-	font-size: 14px;
+	width: 95%;
+	top: 8em;
+	font-size: 5vw;
 	overflow: hidden;
-}
-
-
-
-#App-avatar {
-	float: left;
-	border-radius: 100%;
-	height: 3em;
-	width: 3em;
-	padding: 0.5em;
-	vertical-align: middle;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 #App-fileList {

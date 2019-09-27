@@ -201,7 +201,6 @@ class ListItem extends React.Component {
 									className="App-listCheckbox"
 									type='checkbox'
 									onChange={e => {
-										console.log(`passing: ${this.props.type}`)
 										this.props.itemSelect(e, this.props.item.name, this.props.type);
 										this.setState({ checked: !this.state.checked })
 									}}

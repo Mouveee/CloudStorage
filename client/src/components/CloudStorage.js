@@ -141,7 +141,6 @@ class CloudStorage extends React.Component {
         finishedItems: [...this.state.finishedItems, this.state.inProgress[this.state.inProgress.length - 1]],
         inProgress: []
       });
-      console.log(`zipping success, progress should disappear...`)
     })
   }
 
@@ -235,8 +234,6 @@ class CloudStorage extends React.Component {
         selectedItems: copiedSelectedItems
       });
     }
-
-    console.log(`selected Items: ${JSON.stringify(this.state.selectedItems)}`)
   };
 
   navigateBack = async () => {
