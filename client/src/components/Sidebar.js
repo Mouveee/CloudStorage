@@ -37,7 +37,10 @@ class SideBar extends React.Component {
 
 				<div>...</div>
 
-				<div className='App-sideBarItem'>
+				<div
+					className='App-sideBarItem'
+					onClick={() => this.changeView('biography')}
+				>
 					Lebenslauf
 				</div>
 			</nav>

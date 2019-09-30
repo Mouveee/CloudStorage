@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import Biography from './Biography.js';
+import EntryPage from './EntryPage.js';
 import SideBar from './Sidebar.js';
 import Skills from './Skills.js';
 
@@ -33,65 +35,88 @@ class Main extends React.Component {
 
     setTimeout(() => this.setState({ visible: true }))
 
-    return ((() => {
-      switch (this.state.route) {
-        case 'main':
-          return (
-            <div
-              id='App-mainPage'
-              className={classMain}
-            >
+    return (
 
-              <h1 className={classHead} id='App-mainHeader'>
-                Welcome
-              </h1>
 
-              <SideBar
+      <div
+        id='App-mainPage'
+        className={classMain}
+      >
+        <SideBar
+          isMobile={this.props.isMobile}
+          setVisiblePage={this.setVisiblePage}
+        />
+
+        {/* self invoking function, switch handles routing */}
+        {(() => {
+          switch (this.state.route) {
+            case 'main':
+              return <EntryPage
                 isMobile={this.props.isMobile}
-                setVisiblePage={this.setVisiblePage}
               />
-
-              <div className='App-mainText'>
-                Hi there,
-                <br></br>
-                <br></br>
-                my name is Marco Huwig, I'm a middle-aged Web Developer from Saarland, Germany. I've created this page to show
-                you my skills in developing web presences. In this case, I used the probably most popular Javascript-Frontend Library there is now,
-                <em> ReactJS</em>. Additionally, you'll find my Lebenslauf and some of my knowlodge I've gained so far...
-
-              </div>
-
-            </ div>
-          );
-          break;
-        case 'skills':
-          return (
-            <div
-              id='App-mainPage'
-              className={classMain}
-            >
-              <SideBar
+              break;
+            case 'skills':
+              return <Skills
                 isMobile={this.props.isMobile}
-                setVisiblePage={this.setVisiblePage}
               />
-              <Skills />
-            </div>
-          );
-        default:
-          return (
-            <div id='App-mainPage'
-              className={classMain}
-            >
-              <SideBar
+              break;
+            case 'biography':
+              return <Biography
                 isMobile={this.props.isMobile}
-                setVisiblePage={this.setVisiblePage}
               />
-              Page not found :(
-            </div>
-          );
-      }
-    })())
+              break;
+            default: return (<div>Page not found :(</div>)
+          }
+        })()
+        }
+
+      </div>
+    );
   }
 }
 
 export default Main;
+/* return ((() => {
+        //   switch (this.state.route) {
+        //     case 'main':
+        //       return (
+        //         <div
+        //           id='App-mainPage'
+        //           className={classMain}
+        //         >
+
+
+        //       break;
+        //     case 'skills':
+        //       return (
+        //         <div
+        //           id='App-mainPage'
+        //           className={classMain}
+        //         >
+        //           <SideBar
+        //             isMobile={this.props.isMobile}
+        //             setVisiblePage={this.setVisiblePage}
+        //           />
+        //           <Skills />
+        //         </div>
+        //       );
+        //     case 'biography':
+        //       return <Biography />
+        //       break;
+        //     default:
+        //       return (
+        //         <div id='App-mainPage'
+        //           className={classMain}
+        //         >
+        //           <SideBar
+        //             isMobile={this.props.isMobile}
+        //             setVisiblePage={this.setVisiblePage}
+        //           />
+        //           Page not found :(
+        //         </div>
+        //       );
+        //   }
+        // })())
+      } */
+
+

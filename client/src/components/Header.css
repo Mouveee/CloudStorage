@@ -47,7 +47,7 @@
 .App-caption{
 	font-family: fancyFont;
 	position: absolute;
-	left: 30%;
+	left: 40%;
 	font-size: calc(100px + 1vmin);
 	transform: translateX(-40%);
 	top: 0;

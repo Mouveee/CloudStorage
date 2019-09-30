@@ -37,6 +37,23 @@ class Skills extends React.Component {
         <li>
           HTML
         </li>
+        <li>
+          MS Cloud Services
+          <ul>
+            <li>
+              SharePoint
+            </li>
+            <li>
+              MS PowerApps (Canvas)
+            </li>
+          </ul>
+        </li>
+        <li>
+          C++
+        </li>
+        <li>
+          C#
+        </li>
       </ul>);
   }
 }
