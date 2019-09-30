@@ -13,6 +13,17 @@
 
 #App-sideBar.mobileSideBar{
 	font-size: calc(12px + 1vmin);
+	display: inline-block;
+	width: 95%;
+	height: 20px;
+	color: white;
+	background-color:black;
+	text-align: center;
+	top: auto;
+	bottom: 2vh;
+	border-radius: 30px;
+	position: fixed;
+	padding: 0.2em;
 }
 
 #App-sideBar.visible {

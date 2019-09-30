@@ -15,9 +15,11 @@ class SideBar extends React.Component {
 
 	render() {
 		let faderClass = this.state.visible ? 'visible' : 'bullshitClass';
-		setTimeout(() => this.setState({ visible: true }))
+		setTimeout(() => this.setState({ visible: true }));
+
 
 		return (
+		!this.props.isMobile ?
 			<nav id='App-sideBar' className={faderClass}>
 				<div
 					className='App-sideBarItem'
@@ -44,7 +46,34 @@ class SideBar extends React.Component {
 					Lebenslauf
 				</div>
 			</nav>
-		);
+		:
+			<nav id='App-sideBar' className={faderClass  += ' mobileSideBar'}>
+				<span
+					className='App-sideBarItem'
+					onClick={() => this.changeView('main')}
+				>
+					Über mich
+				</span>
+
+				<span>||</span>
+
+				<span
+					className='App-sideBarItem'
+					onClick={() => this.changeView('skills')}
+				>
+					Kenntnisse
+				</span>
+
+				<span>||</span>
+
+				<span
+					className='App-sideBarItem'
+					onClick={() => this.changeView('biography')}
+				>
+					Lebenslauf
+				</span>
+			</nav>
+		)
 	}
 }
 
