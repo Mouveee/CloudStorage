@@ -9,7 +9,6 @@ import ControlFooter from "./csComponents/ControlFooter.js";
 import GridContainer from './csComponents/GridContainer.js';
 import ListItem from "./csComponents/ListItem.js";
 import ProgressIndicator from './csComponents/ProgressIndicator.js';
-import SideBar from "./csComponents/Sidebar.js";
 import StatusOverlay from "./csComponents/StatusOverlay.js";
 import TableHead from './csComponents/TableHead.js';
 import WaitingScreen from './csComponents/WaitingScreen.js';
@@ -98,8 +97,6 @@ class CloudStorage extends React.Component {
 
     if (folder.length > 0) {
       let response = this.callBackendAPI(folder, "/createfolder");
-
-      console.log(`response: ${JSON.stringify(response)}`);
 
       this.requestFolder(this.state.currentFolder);
 
@@ -397,12 +394,6 @@ class CloudStorage extends React.Component {
           <StatusOverlay
             message={this.state.statusOverlayMessage}
           />
-          : null
-        }
-
-        {/* //sidebar only visible on desktop, no functions so far */}
-        {!this.props.isMobile ?
-          <SideBar />
           : null
         }
 

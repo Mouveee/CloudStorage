@@ -18,10 +18,22 @@ class Skills extends React.Component {
       <ul id='App-mainPage' className={this.state.visible ? 'App-mainVisibile' : ''}>
         <li>
           Javascript
+          <ul>
+            <li>React, ES6, Jquery</li>
+            <li>NodeJS, Express</li>
+          </ul>
         </li>
         <li>
           CSS
-          </li>
+          <ul>
+            <li>
+              Bootstrap
+            </li>
+            <li>
+              Sass, Less
+            </li>
+          </ul>
+        </li>
         <li>
           HTML
         </li>

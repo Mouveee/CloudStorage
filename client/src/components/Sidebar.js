@@ -9,17 +9,37 @@ class SideBar extends React.Component {
 		this.state = { visible: false }
 	}
 
+	changeView = route => {
+		this.props.setVisiblePage(route);
+	}
+
 	render() {
 		let faderClass = this.state.visible ? 'visible' : 'bullshitClass';
 		setTimeout(() => this.setState({ visible: true }))
 
 		return (
 			<nav id='App-sideBar' className={faderClass}>
-				<div className='App-sideBarItem'>About me</div>
+				<div
+					className='App-sideBarItem'
+					onClick={() => this.changeView('main')}
+				>
+					Über mich
+				</div>
+
 				<div>...</div>
-				<div className='App-sideBarItem'>File Storage</div>
+
+				<div
+					className='App-sideBarItem'
+					onClick={() => this.changeView('skills')}
+				>
+					Kenntnisse
+				</div>
+
 				<div>...</div>
-				<div className='App-sideBarItem'>Static</div>
+
+				<div className='App-sideBarItem'>
+					Lebenslauf
+				</div>
 			</nav>
 		);
 	}

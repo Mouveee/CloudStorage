@@ -21,7 +21,7 @@
 }
 
 #App-avatar {
-	left: 5%;
+	left: 3%;
 	position: fixed;
 	border-radius: 100%;
 	height: calc(136px + 0.5vmin);
@@ -47,9 +47,9 @@
 .App-caption{
 	font-family: fancyFont;
 	position: absolute;
-	left: 50%;
+	left: 30%;
 	font-size: calc(100px + 1vmin);
-	transform: translateX(-50%);
+	transform: translateX(-40%);
 	top: 0;
 	margin: auto;
 	display: inline-block;
@@ -69,8 +69,8 @@
 	position: absolute;
 	font-size: calc(18px + 1vmin);
 	font-weight: normal;
-	/* text-align: center; */
-	height: calc(26px + 2vmin);
+	text-align: center;
+	height: calc(28px + 2vmin);
 	width: 100%;
 	color: gray;
 	opacity: 0;
@@ -108,10 +108,11 @@
 	display: inline-block;
 	font-family: fancyFont;
 	position: absolute;
-	font-size: calc(16px + 1vmin);
+	font-size: calc(33px + 1vmin);
+	line-break: strict;
 	top: 112px;
 	left: 30%;
-	transform: translateX(-50%);
+	transform: translateX(-40%);
 }
 
 .App-subHeader.mobileHeader{

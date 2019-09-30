@@ -22,7 +22,8 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			route: 'main' //main, cloudStorage or about
+			route: 'main', //main, cloudStorage or about,
+			userRole: 'admin' //admin, user, guest 
 		};
 
 		this.changeRoute.bind(this);

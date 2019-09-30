@@ -1,17 +1,26 @@
 #App-sideBar {
+	display: inline-block;
+	font-size: calc(14px + 1vmin);
 	position: fixed;
 	left: 2%;
-	top: 10em;
+	top: 400px;
+	transform: translateY(-50%);
 	width: 10%;
 	user-select: none;
 	opacity: 0;
 	transition: 1000ms;
 }
+
+#App-sideBar.mobileSideBar{
+	font-size: calc(12px + 1vmin);
+}
+
 #App-sideBar.visible {
 	opacity: 1;
 }
 
 .App-sideBarItem {
+	display: inline;
 	transition: 300ms;
 }
 

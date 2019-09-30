@@ -36,7 +36,7 @@ class Header extends Component {
 				<h1 className={classCaption += this.props.isMobile ? ' mobileHeader' : ''}>
 					MARCO HUWIG
 				<small className={classSubHeader += this.props.isMobile ? ' mobileHeader' : ''} >
-						Web Developer Extraordinaire
+						Web Developer
 					</small>
 				</h1>
 
