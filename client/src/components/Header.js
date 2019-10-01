@@ -19,6 +19,7 @@ class Header extends Component {
 		setTimeout(() => this.setState({ visible: true }))
 
 		let navBarClass = 'App-navBar';
+
 		if (this.state.visible) {
 			navBarClass += ' App-navBarVisible';
 			navBarClass += this.props.isMobile ? ' mobileHeader' : '';
@@ -29,7 +30,6 @@ class Header extends Component {
 		let classSubHeader = 'App-subHeader';
 
 		return (
-
 			<header id='App-header' className={this.props.isMobile ? classVisibility + ' mobileHeader' : classVisibility}>
 				<img src={octopus} id='App-avatar' className={classAvatar} alt=':(' />
 
@@ -46,14 +46,14 @@ class Header extends Component {
 						onClick={() => this.props.changeRoute('main')}
 					>
 						Main
-        </span>
+        	</span>
 
 					<span
 						className='App-navItem'
 						onClick={() => this.props.changeRoute('cloudStorage')}
 					>
 						Files
-        </span>
+        	</span>
 
 					<span
 						className='App-navItem'

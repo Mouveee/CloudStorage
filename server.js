@@ -205,6 +205,7 @@ app.post("/external", (req, res) => {
 		res.statusCode = 404;
 		res.send(JSON.stringify({ message: 'folder not found' }))
 	}
+
 	if (noError) {
 		res.statusCode = 200;
 		res.send(JSON.stringify(objectToSend));

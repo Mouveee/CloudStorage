@@ -400,9 +400,11 @@ class CloudStorage extends React.Component {
         {(() => {
           if (this.state.updating) {
             return (
-              <WaitingScreen
-                waitIcon={waitIcon}
-              />
+              <div id='App-folderList'>
+                <WaitingScreen
+                  waitIcon={waitIcon}
+                />
+              </div>
             );
           } else if (
             !(
