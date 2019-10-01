@@ -41,10 +41,16 @@ class Skills extends React.Component {
           MS Cloud Services
           <ul>
             <li>
-              SharePoint
+              MS Azure
+            </li>
+            <li>
+              MS SharePoint
             </li>
             <li>
               MS PowerApps (Canvas)
+            </li>
+            <li>
+              MS Flow
             </li>
           </ul>
         </li>

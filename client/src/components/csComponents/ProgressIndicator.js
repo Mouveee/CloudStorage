@@ -45,9 +45,9 @@ class ProgressIndicator extends React.Component {
       'App-progressVisible'
       : '';
 
-    this.props.finishedItems.length > 0 ?
-      myClass += ' App-itemFinished'
-      : myClass = myClass;
+    if (this.props.finishedItems.length > 0) {
+      myClass += ' App-itemFinished';
+    }
 
     let message = this.props.inProgress.length > 0 ?
       'zipping your folder...'

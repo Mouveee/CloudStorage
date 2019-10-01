@@ -17,7 +17,11 @@ class Main extends React.Component {
     }
 
     this.setVisiblePage.bind(this);
+
+    this.timeOut = null;
   }
+
+  componentWillUnmount = () => { clearTimeout(this.timeOut) }
 
   setVisiblePage = route => {
     if (this.state.route !== route) {
@@ -33,7 +37,7 @@ class Main extends React.Component {
       classMain += ' mobile';
     };
 
-    setTimeout(() => this.setState({ visible: true }))
+    this.timeOut = setTimeout(() => this.setState({ visible: true }));
 
     return (
 
@@ -47,24 +51,21 @@ class Main extends React.Component {
           setVisiblePage={this.setVisiblePage}
         />
 
-        {/* self invoking function, switch handles routing */}
+        {/* self invoking function, switch cases handle routing */}
         {(() => {
           switch (this.state.route) {
             case 'main':
               return <EntryPage
                 isMobile={this.props.isMobile}
               />
-              break;
             case 'skills':
               return <Skills
                 isMobile={this.props.isMobile}
               />
-              break;
             case 'biography':
               return <Biography
                 isMobile={this.props.isMobile}
               />
-              break;
             default: return (<div>Page not found :(</div>)
           }
         })()
@@ -76,47 +77,5 @@ class Main extends React.Component {
 }
 
 export default Main;
-/* return ((() => {
-        //   switch (this.state.route) {
-        //     case 'main':
-        //       return (
-        //         <div
-        //           id='App-mainPage'
-        //           className={classMain}
-        //         >
-
-
-        //       break;
-        //     case 'skills':
-        //       return (
-        //         <div
-        //           id='App-mainPage'
-        //           className={classMain}
-        //         >
-        //           <SideBar
-        //             isMobile={this.props.isMobile}
-        //             setVisiblePage={this.setVisiblePage}
-        //           />
-        //           <Skills />
-        //         </div>
-        //       );
-        //     case 'biography':
-        //       return <Biography />
-        //       break;
-        //     default:
-        //       return (
-        //         <div id='App-mainPage'
-        //           className={classMain}
-        //         >
-        //           <SideBar
-        //             isMobile={this.props.isMobile}
-        //             setVisiblePage={this.setVisiblePage}
-        //           />
-        //           Page not found :(
-        //         </div>
-        //       );
-        //   }
-        // })())
-      } */
 
 

@@ -1,0 +1,25 @@
+.App-bioEntry{
+  background-color: ghostwhite;
+  border-left: 1px solid ghostwhite;
+  margin-bottom: 2.5em;
+  padding: 0.1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  text-align: center;
+}
+
+.App-bioTitle{
+  font-weight: bold;
+
+  float: left;
+  text-align: left;
+
+  position: relative;
+}
+
+.App-bioContent{
+  float: right;
+  text-align: right;
+  margin-bottom: 0.5em;
+  position: relative;
+}

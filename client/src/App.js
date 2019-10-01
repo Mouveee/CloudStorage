@@ -11,7 +11,6 @@ import CloudStorage from './components/CloudStorage.js'
 import Header from './components/Header.js';
 import Main from './components/Main.js';
 import NotFound from './components/NotFound.js';
-import Skills from './components/Skills.js';
 
 import "./App.css";
 
@@ -51,7 +50,7 @@ class App extends Component {
 
 
 		return (
-			< div className='App' >
+			<div className='App' >
 				<header>
 					<Header
 						isMobile={md.phone() ? true : false}
@@ -65,12 +64,10 @@ class App extends Component {
 							<Main
 								isMobile={md.phone() ? true : false}
 							/>)
-							break;
 						case 'cloudStorage': return (
 							<CloudStorage
 								isMobile={md.phone() ? true : false}
 							/>);
-							break;
 						case 'about': return (
 							<About
 								isMobile={md.phone() ? true : false}

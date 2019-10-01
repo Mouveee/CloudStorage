@@ -17,17 +17,18 @@ class EntryPage extends React.Component {
         className={this.state.visible ? 'App-mainVisibile' : ''}
       >
         <h1 className={classHead} id='App-mainHeader'>
-          Welcome
-      </h1>
 
-        <div className='App-mainText'>
-          Hi there,
-        <br></br>
+        </h1>
+
+        <section className='App-mainText'>
+          Hallo,
           <br></br>
-          my name is Marco Huwig, I'm a middle-aged Web Developer from Saarland, Germany. I've created this page to show
-          you my skills in developing web presences. In this case, I used the probably most popular Javascript-Frontend Library there is now,
-        <em> ReactJS</em>. Additionally, you'll find my Lebenslauf and some of my knowlodge I've gained so far...
-      </div>
+          <br></br>
+          mein Name ist Marco Huwig und ich bin begeisterter Junior Devoper im Bereich Web Development.
+          Nach einem längeren Ausflug in die Welt der Gastronomie habe ich beschlossen, die von mir im Studium erworbenen
+          Fähigkeiten weiter auszubauen und eine berufsqualifizierende Maßnahme bei der Taylorix e.V. zu starten.
+          Diese habe ich dieses Jahr erfolgreich beendet und mich dabei auf den Bereich Web Development spezialisiert.
+        </section>
       </ section>
     )
   }
