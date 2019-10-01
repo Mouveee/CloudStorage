@@ -19,60 +19,60 @@ class SideBar extends React.Component {
 
 
 		return (
-		!this.props.isMobile ?
-			<nav id='App-sideBar' className={faderClass}>
-				<div
-					className='App-sideBarItem'
-					onClick={() => this.changeView('main')}
-				>
-					Über mich
+			!this.props.isMobile ?
+				<nav id='App-sideBar' className={faderClass}>
+					<div
+						className='App-sideBarItem'
+						onClick={() => this.changeView('main')}
+					>
+						Über mich
 				</div>
 
-				<div>...</div>
+					<div>...</div>
 
-				<div
-					className='App-sideBarItem'
-					onClick={() => this.changeView('skills')}
-				>
-					Kenntnisse
+					<div
+						className='App-sideBarItem'
+						onClick={() => this.changeView('skills')}
+					>
+						Kenntnisse
 				</div>
 
-				<div>...</div>
+					<div>...</div>
 
-				<div
-					className='App-sideBarItem'
-					onClick={() => this.changeView('biography')}
-				>
-					Lebenslauf
+					<div
+						className='App-sideBarItem'
+						onClick={() => this.changeView('biography')}
+					>
+						Lebenslauf
 				</div>
-			</nav>
-		:
-			<nav id='App-sideBar' className={faderClass  += ' mobileSideBar'}>
-				<span
-					className='App-sideBarItem'
-					onClick={() => this.changeView('main')}
-				>
-					Über mich
+				</nav>
+				:
+				<nav id='App-sideBar' className={faderClass += ' mobileSideBar'}>
+					<span
+						className='App-sideBarItem'
+						onClick={() => this.changeView('main')}
+					>
+						Über mich
 				</span>
 
-				<span>||</span>
+					<span> || </span>
 
-				<span
-					className='App-sideBarItem'
-					onClick={() => this.changeView('skills')}
-				>
-					Kenntnisse
+					<span
+						className='App-sideBarItem'
+						onClick={() => this.changeView('skills')}
+					>
+						Kenntnisse
 				</span>
 
-				<span>||</span>
+					<span> || </span>
 
-				<span
-					className='App-sideBarItem'
-					onClick={() => this.changeView('biography')}
-				>
-					Lebenslauf
+					<span
+						className='App-sideBarItem'
+						onClick={() => this.changeView('biography')}
+					>
+						Lebenslauf
 				</span>
-			</nav>
+				</nav>
 		)
 	}
 }

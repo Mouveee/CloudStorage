@@ -1,6 +1,8 @@
+a { text-decoration: none;}
+
 #App-mainPage{
   font-size: calc(16px + 0.5vh);
-  transition: 2000ms;
+  transition: 1200ms;
   opacity: 0;
   margin: auto;
 	width: 80vw;
@@ -13,6 +15,7 @@
   padding: 1em;
   z-index: -999;
   list-style-type: none;
+  list-style: none;
   overflow-y:scroll;
 }
 
@@ -23,8 +26,22 @@
 #App-mainPage.mobile{
   top:112px;
 
-  font-size: 14px;
+  left: 50%;
+  /* transform: translateX(-50%); */
+
+  font-size: calc(12px + 0.5vmin);
   left: 1em;
+
+  -ms-overflow-style: none; 
+  /* // IE 10+ */
+  
+  scrollbar-width: none;  
+  /* // Firefox */
+}
+
+#App-mainPage.mobile::-webkit-scrollbar { 
+  /* // Safari and Chrome */
+  display: none;  
 }
 
 .App-mainText{

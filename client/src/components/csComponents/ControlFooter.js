@@ -19,7 +19,7 @@ class ControlFooter extends React.Component {
 
 		return (
 			<nav id='App-controlFooter' className={this.props.isMobile ? visibleFooter + ' mobileControlFooter' : visibleFooter}>
-				{this.props.selectedItems.length > 0 ? (
+				{Object.keys(this.props.selectedItems).length > 0 ? (
 					<img src={downloadIcon} alt=':(' className='App-controlElement' />
 				)
 					: null
@@ -32,7 +32,7 @@ class ControlFooter extends React.Component {
 					onClick={this.props.uploadFile}
 				/>
 
-				{this.props.selectedItems.length > 0 ? (
+				{Object.keys(this.props.selectedItems).length > 0 ? (
 					<img
 						src={trashIcon}
 						alt=':('

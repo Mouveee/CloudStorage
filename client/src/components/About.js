@@ -10,7 +10,11 @@ class About extends React.Component {
   }
 
   render() {
-    let classMain = this.state.visible ? 'App-mainVisibile' : 'dummyClass';
+    let classMain = this.state.visible ? 'App-mainVisibile' : '';
+
+    if (this.props.isMobile) {
+      classMain += ' mobile';
+    }
 
     setTimeout(() => {
       this.setState({ visible: true });
@@ -18,11 +22,16 @@ class About extends React.Component {
 
     return (
       <section id='App-mainPage' className={classMain}>
+        <h1></h1>
+
         <div>Marco Huwig</div>
-        <div>GaerntnerStrasse 31</div>
+        <div>Gärtnerstraße 31</div>
         <div><br></br></div>
-        <div>66117 Saarbrooklyn</div>
-        <div><small>2019, year of the weasel</small></div>
+        <div>66117 Saarbrücken</div>
+
+        <div><small>2019</small></div>
+
+        <a href='mailto:huwig.marco@gmail.com'>huwig.marco@gmail.com</a>
       </section>
     )
   }

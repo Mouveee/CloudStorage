@@ -11,10 +11,19 @@ class EntryPage extends React.Component {
     let classHead = this.props.isMobile ? 'App-headMobile' : 'App-head';
     setTimeout(() => this.setState({ visible: true }));
 
+    let mainClass = '';
+    if (this.state.visible) {
+      mainClass += 'App-mainVisibile';
+    }
+
+    if (this.props.isMobile) {
+      mainClass += ' mobile';
+    }
+
     return (
       <section
         id='App-mainPage'
-        className={this.state.visible ? 'App-mainVisibile' : ''}
+        className={mainClass}
       >
         <h1 className={classHead} id='App-mainHeader'>
 

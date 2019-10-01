@@ -18,8 +18,18 @@ class Biography extends React.Component {
   render() {
     this.timeOut = setTimeout(() => this.setState({ visible: true }));
 
+    let classOfContainer = '';
+
+    if (this.state.visible) {
+      classOfContainer += 'App-mainVisibile';
+    }
+
+    if (this.props.isMobile) {
+      classOfContainer += ' mobile'
+    }
+
     return (
-      <div id='App-mainPage' className={this.state.visible ? 'App-mainVisibile' : ''}>
+      <div id='App-mainPage' className={classOfContainer}>
         <section>
           <h2>Allgemein</h2>
           <div>

@@ -16,7 +16,7 @@
 }
 
 #App-header.mobileHeader{
-	font-size: calc(72px + 0.5vmin);
+	font-size: calc(80px + 0.5vmin);
 	height: calc(58px + 10vmin);
 }
 
@@ -33,10 +33,10 @@
 }
 
 #App-avatar.mobileHeader{
-	height: calc(64px + 0.5vmin);
-	width: calc(64px + 0.5vmin);
-	left: 1%;
-	top: 8%;
+	height: calc(50px + 0.5vmin);
+	width: calc(50px + 0.5vmin);
+	left: 6%;
+	top: 12%;
 }
 
 
@@ -47,7 +47,7 @@
 .App-caption{
 	font-family: fancyFont;
 	position: absolute;
-	left: 40%;
+	left: 33%;
 	font-size: calc(100px + 1vmin);
 	transform: translateX(-40%);
 	top: 0;
@@ -56,9 +56,28 @@
 }
 
 .App-caption.mobileHeader{
-	font-size: calc(25px + 1vmin);
-	left: 48%;
-	top: 1vh;
+	font-size: calc(28px + 0.1vmin);
+	left: 47%;
+	top: 8%;
+	display: inline-block;
+}
+
+.App-subHeader{
+	display: inline-block;
+	font-family: fancyFont;
+	position: absolute;
+	font-size: calc(33px + 1vmin);
+	line-break: strict;
+	top: 32%;
+	left: 25%;
+	transform: translateX(-40%);
+}
+
+.App-subHeader.mobileHeader{
+	font-size: calc(10px + 1vmin);
+	top: 38%;
+	left: 36%;
+	transform: translateX(-30%);
 }
 
 /* all about Navigation Bar */
@@ -104,21 +123,5 @@
 	cursor: pointer;
 }
 
-.App-subHeader{
-	display: inline-block;
-	font-family: fancyFont;
-	position: absolute;
-	font-size: calc(33px + 1vmin);
-	line-break: strict;
-	top: 112px;
-	left: 30%;
-	transform: translateX(-40%);
-}
 
-.App-subHeader.mobileHeader{
-	font-size: calc(10px + 1vmin);
-	top: 5vh;
-	left: 24%;
-	transform: translateX(-30%);
-}
 

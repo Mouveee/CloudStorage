@@ -30,8 +30,9 @@ class Main extends React.Component {
   }
 
   render() {
-    let classMain = this.state.visible ? 'App-mainVisibile' : 'dummyClass';
-    let classHead = this.props.isMobile ? 'App-headMobile' : 'App-head';
+    let classMain = '';
+
+    if (this.state.visible) { classMain += 'App-mainVisibile' };
 
     if (this.props.isMobile) {
       classMain += ' mobile';
@@ -40,10 +41,8 @@ class Main extends React.Component {
     this.timeOut = setTimeout(() => this.setState({ visible: true }));
 
     return (
-
-
       <div
-        id='App-mainPage'
+        // id='App-mainPage'
         className={classMain}
       >
         <SideBar
