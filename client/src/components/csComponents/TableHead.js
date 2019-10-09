@@ -9,10 +9,12 @@ class TableHead extends React.Component {
     this.state = { visible: false };
   }
 
+  componentDidMount = () => {
+    setTimeout(() => this.setState({ visible: true }))
+  }
 
   render() {
     const visibility = this.state.visible ? 'visible' : 'chica';
-    setTimeout(() => this.setState({ visible: true }))
 
     return (
       <thead id='App-tableHead' className={this.props.isMobile ? visibility + ' mobileTableHead' : visibility}>
@@ -23,7 +25,6 @@ class TableHead extends React.Component {
             className='App-columnName'
             onClick={this.props.sortBy}
             data-sort='name'
-
           >
             Name
           </th>

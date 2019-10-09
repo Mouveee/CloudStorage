@@ -2,8 +2,6 @@ import React, { Component } from "react";
 
 import "./Header.css";
 
-import Avatar from "./avatar.js";
-
 import octopus from "../img/myself.jpg";
 
 class Header extends Component {
@@ -13,10 +11,14 @@ class Header extends Component {
 		this.state = { visible: false }
 	}
 
-	render() {
-		let classVisibility = this.state.visible ? 'visible' : '';;
-
+	componentDidMount = () => {
 		setTimeout(() => this.setState({ visible: true }))
+	}
+
+	render() {
+		let classVisibility = this.state.visible ? 'visible' : '';
+
+
 
 		let navBarClass = 'App-navBar';
 

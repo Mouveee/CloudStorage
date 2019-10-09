@@ -14,6 +14,7 @@ import photoIcon from "../../img/photo.svg";
 import playIcon from '../../img/play.svg'
 
 import "./ListItem.css";
+import { timingSafeEqual } from "crypto";
 
 //TODO: make this useful
 const TableRow = posed.tr(
@@ -103,8 +104,12 @@ class ListItem extends React.Component {
 		};
 	}
 
+	componentDidMount = () => {
+		this.setState({ visible: true });
+	}
+
 	componentWillUnmount() {
-		this.setState({ visible: false })
+		this.setState({ visible: false });
 	}
 
 	onDragOver = e => {
@@ -181,8 +186,6 @@ class ListItem extends React.Component {
 			classVisible += ' App-liMobile';
 			classItemInfo += ' App-liMobile';
 		}
-
-		setTimeout(() => this.setState({ visible: true }))
 
 		return (
 			<tbody key={'body- ' + i++} className={classVisible}>

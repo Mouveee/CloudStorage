@@ -9,16 +9,18 @@ class About extends React.Component {
     this.state = { visible: false }
   }
 
+  componentDidMount = () => {
+    setTimeout(() => {
+      this.setState({ visible: true });
+    });
+  }
+
   render() {
     let classMain = this.state.visible ? 'App-mainVisibile' : '';
 
     if (this.props.isMobile) {
       classMain += ' mobile';
     }
-
-    setTimeout(() => {
-      this.setState({ visible: true });
-    });
 
     return (
       <section id='App-mainPage' className={classMain}>

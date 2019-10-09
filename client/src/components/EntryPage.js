@@ -7,9 +7,12 @@ class EntryPage extends React.Component {
     this.state = { visible: false }
   }
 
+  componentDidMount = () => {
+    this.setState({ visible: true });
+  }
+
   render() {
     let classHead = this.props.isMobile ? 'App-headMobile' : 'App-head';
-    setTimeout(() => this.setState({ visible: true }));
 
     let mainClass = '';
     if (this.state.visible) {

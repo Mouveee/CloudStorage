@@ -2,11 +2,13 @@ import * as React from 'react';
 
 import './Biography.css';
 
+import fader from '../HOC/Fader'
+
 class Biography extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { visible: false }
+    this.state = { visible: this.props.visible }
 
     this.timeOut = null;
   }
@@ -16,8 +18,6 @@ class Biography extends React.Component {
   }
 
   render() {
-    this.timeOut = setTimeout(() => this.setState({ visible: true }));
-
     let classOfContainer = '';
 
     if (this.state.visible) {
@@ -155,4 +155,4 @@ class Biography extends React.Component {
   }
 }
 
-export default Biography;
+export default fader(Biography);

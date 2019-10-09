@@ -13,9 +13,12 @@ class ControlFooter extends React.Component {
 		this.state = { visible: false }
 	}
 
+	componentDidMount = () => {
+		setTimeout(() => this.setState({ visible: true }));
+	}
+
 	render() {
 		let visibleFooter = this.state.visible ? 'App-footerVisible' : 'dummyClass';
-		setTimeout(() => this.setState({ visible: true }));
 
 		return (
 			<nav id='App-controlFooter' className={this.props.isMobile ? visibleFooter + ' mobileControlFooter' : visibleFooter}>

@@ -2,18 +2,22 @@ import * as React from 'react';
 
 //TODO: create new css file for list
 import './Main.css';
-import { setTimeout } from 'core-js';
+
+import fader from '../HOC/Fader';
 
 class Skills extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { visible: false }
+    this.state = { visible: this.props.visible }
+  }
+
+  componentWillUnmount = () => {
+    console.log('componenetWillUnmount Skills.js')
+    clearTimeout(this.timeOut);
   }
 
   render() {
-    setTimeout(() => this.setState({ visible: true }));
-
     let mainClass = '';
 
     if (this.state.visible) {
@@ -78,4 +82,4 @@ class Skills extends React.Component {
   }
 }
 
-export default Skills;
+export default fader(Skills);

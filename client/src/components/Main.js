@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+//HOC, hope this works
+import fader from '../HOC/Fader'
+
 import Biography from './Biography.js';
 import EntryPage from './EntryPage.js';
 import SideBar from './Sidebar.js';
@@ -12,7 +15,7 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      visible: false,
+      visible: this.props.visible,
       route: 'main' //main, biography, skills 
     }
 
@@ -21,7 +24,9 @@ class Main extends React.Component {
     this.timeOut = null;
   }
 
-  componentWillUnmount = () => { clearTimeout(this.timeOut) }
+  componentWillUnmount = () => {
+    clearTimeout(this.timeOut);
+  }
 
   setVisiblePage = route => {
     if (this.state.route !== route) {
@@ -38,8 +43,6 @@ class Main extends React.Component {
       classMain += ' mobile';
     };
 
-    this.timeOut = setTimeout(() => this.setState({ visible: true }));
-
     return (
       <div
         // id='App-mainPage'
@@ -53,18 +56,22 @@ class Main extends React.Component {
         {/* self invoking function, switch cases handle routing */}
         {(() => {
           switch (this.state.route) {
+
             case 'main':
               return <EntryPage
                 isMobile={this.props.isMobile}
               />
+
             case 'skills':
               return <Skills
                 isMobile={this.props.isMobile}
               />
+
             case 'biography':
               return <Biography
                 isMobile={this.props.isMobile}
               />
+
             default: return (<div>Page not found :(</div>)
           }
         })()
@@ -75,6 +82,6 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default fader(Main);
 
 

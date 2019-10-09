@@ -22,6 +22,10 @@ class ProgressIndicator extends React.Component {
     this.props.finishZipping();
   };
 
+  componentDidMount = () => {
+    this.setState({ visible: true });
+  }
+
   clickFunction = async item => {
     if (this.props.finishedItems.length > 0) {
       let file = item.split('/').pop() + '.zip';
@@ -53,8 +57,6 @@ class ProgressIndicator extends React.Component {
       'zipping your folder...'
       : this.props.finishedItems[this.props.finishedItems.length - 1].split('/').pop() + '.zip';
 
-    setTimeout(() => this.setState({ visible: true }))
-
     return (
       <div id='App-progressIndicator'
         className={myClass}
@@ -64,6 +66,7 @@ class ProgressIndicator extends React.Component {
         >
           {message}
         </span>
+
         {this.props.finishedItems.length === 0 ?
 
           <img

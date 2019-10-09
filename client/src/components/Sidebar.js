@@ -13,10 +13,12 @@ class SideBar extends React.Component {
 		this.props.setVisiblePage(route);
 	}
 
+	componentDidMount = () => {
+		this.setState({ visible: true });
+	}
+
 	render() {
 		let faderClass = this.state.visible ? 'visible' : 'bullshitClass';
-		setTimeout(() => this.setState({ visible: true }));
-
 
 		return (
 			!this.props.isMobile ?

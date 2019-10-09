@@ -9,9 +9,12 @@ class WaitingScreen extends React.Component {
     this.state = { visible: false };
   }
 
+  componentDidMount = () => {
+    this.setState({ visible: true });
+  }
+
   render() {
     let handleVisible = this.state.visible ? 'visible' : 'dummyClass';
-    setTimeout(() => this.setState({ visible: true }))
 
     return (
       <div id='App-folderList'>

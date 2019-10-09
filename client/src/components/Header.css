@@ -12,7 +12,7 @@
 	user-select: none;
 	left:50%;
 	transform: translateX(-50%);
-	transition: 1000ms;
+	transition: 1000ms ease-in-out;
 }
 
 #App-header.mobileHeader{
