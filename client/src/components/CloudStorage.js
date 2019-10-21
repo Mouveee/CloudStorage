@@ -274,8 +274,6 @@ class CloudStorage extends React.Component {
     folder ? (targetFolder += folder.slice(2)) : console.log(`sending ${targetFolder}`);
     this.setState({ updating: true });
 
-    console.log('requested folder folder sliced: ' + folder.slice(2))
-
     let response = await this.callBackendAPI(targetFolder, '/external');
 
     let parsedResponse = response.json();
@@ -307,7 +305,6 @@ class CloudStorage extends React.Component {
   };
 
   setFileBeingDragged = file => {
-    console.log(`setting dragged file name to ${JSON.stringify(file)}`);
     this.setState({ fileBeingDragged: file });
   };
 

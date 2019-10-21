@@ -37,18 +37,6 @@ class App extends Component {
 			window.navigator.userAgent
 		);
 
-		// console.log(md.mobile() ? 'running on mobile ' + md.mobile() : 'no mobile');          // 'Sony'
-		// console.log(md.phone() ? 'phone type: ' + md.phone() : 'this is not a telephone');           // 'Sony'
-		// console.log(md.tablet());          // null
-		// console.log(md.userAgent());       // 'Safari'
-		// console.log(md.os() ? 'os: ' + md.os() : `couldn't determine os...`);              // 'AndroidOS'
-		// console.log(md.is('iPhone'));      // false
-		// console.log(md.is('bot'));         // false
-		// console.log(md.version('Webkit'));         // 534.3
-		// console.log(md.versionStr('Build'));       // '4.1.A.0.562'
-		// console.log(md.match('playstation|xbox')); // false
-
-
 		return (
 			<div className='App' >
 				<header>
@@ -83,3 +71,16 @@ class App extends Component {
 }
 
 export default App;
+
+
+		// use if needed
+		// console.log(md.mobile() ? 'running on mobile ' + md.mobile() : 'no mobile');          // 'Sony'
+		// console.log(md.phone() ? 'phone type: ' + md.phone() : 'this is not a telephone');           // 'Sony'
+		// console.log(md.tablet());          // null
+		// console.log(md.userAgent());       // 'Safari'
+		// console.log(md.os() ? 'os: ' + md.os() : `couldn't determine os...`);              // 'AndroidOS'
+		// console.log(md.is('iPhone'));      // false
+		// console.log(md.is('bot'));         // false
+		// console.log(md.version('Webkit'));         // 534.3
+		// console.log(md.versionStr('Build'));       // '4.1.A.0.562'
+		// console.log(md.match('playstation|xbox')); // false

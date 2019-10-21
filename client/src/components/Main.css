@@ -27,6 +27,7 @@ a { text-decoration: none;}
   top:112px;
 
   left: 50%;
+  width: 80vw;
   /* transform: translateX(-50%); */
 
   font-size: calc(12px + 0.5vmin);

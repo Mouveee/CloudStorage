@@ -114,43 +114,6 @@ app.post("/download", async function (req, res) {
 			res.send(JSON.stringify({ message: 'missing file ' + file }));
 		}
 	});
-
-	//OLD METHOD, KEEP FOR NOW~~~~~~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	// let file = new Promise((resolve, reject) => {
-	// 	fs.readFile(
-	// 		`${req.body.folder}${req.body.file}`,
-	// 		(err, content) => {
-	// 			if (err) {
-	// 				reject(
-	// 					`error finding ${req.body.folder}${req.body.file} :( `
-	// 				);
-	// 			} else {
-	// 				resolve(content);
-	// 			}
-	// 		}
-	// 	);
-	// })
-	// 	.then(async content => {
-	// 		content = { content: content.slice(2) };
-
-	// 		res.setHeader("File", req.body.file);
-	// 		await res.download(
-	// 			path.normalize(
-	// 				`${__dirname}/${req.body.folder}/${req.body.file}`
-	// 			),
-	// 			req.body.file,
-	// 			e => {
-	// 				if (e) {
-	// 					console.log(`error sending file: ${e}`);
-	// 				}
-	// 			}
-	// 		);
-	// 	})
-	// 	.catch(e => {
-	// 		console.log(`promise itemHandler catched: ${e}`);
-	// 		res.statusCode = 404;
-	// 		res.send(JSON.toString({ error: "file not found" }));
-	// 	});
 });
 
 app.post('/downloadFolder', async (req, res) => {

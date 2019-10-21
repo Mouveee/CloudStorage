@@ -6,6 +6,8 @@
   padding-left: 1em;
   padding-right: 1em;
   text-align: center;
+  align-items: center;
+  clear: both;
 }
 
 .App-bioTitle{
@@ -15,6 +17,8 @@
   text-align: left;
 
   position: relative;
+
+  float: left;
 }
 
 .App-bioContent{

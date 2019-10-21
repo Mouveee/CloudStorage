@@ -52,7 +52,7 @@ class Biography extends React.Component {
             <span className='App-bioContent'>Abschluss Microsoft Zertifikat MS-70-480</span>
             <br></br>
             <span className='App-bioContent'>
-              Microsoft Examen zum Thema Web Development (Javascript, CSS, HTML)
+              Microsoft Exam Web Development (Javascript, CSS, HTML)
             </span>
           </div>
 

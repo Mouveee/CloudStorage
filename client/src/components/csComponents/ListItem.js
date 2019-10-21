@@ -158,6 +158,8 @@ class ListItem extends React.Component {
 				//check if multiple files are selected so they are sent as an array to the 'move' function in app.js
 				if (Object.keys(this.props.selectedItems).length === 0) {
 					content.itemToMove = this.props.fileBeingDragged
+				} else {
+					content.itemToMove = this.props.selectedItems;
 				}
 
 				content.targetFolder = './external/' + this.props.currentFolder.slice(2) + this.props.item.name;

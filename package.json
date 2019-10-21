@@ -15,20 +15,20 @@
 		"archiver": "^3.1.1",
 		"body-parser": "^1.19.0",
 		"cors": "^2.8.5",
-		"dotenv": "^8.1.0",
+		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"express-fileupload": "^1.1.5",
 		"file-saver": "^2.0.2",
 		"formidable": "^1.2.1",
-		"node": "^12.11.0",
+		"node": "^12.12.0",
 		"payload-validator": "^1.0.4",
-		"react-app-polyfill": "^1.0.3",
+		"react-app-polyfill": "^1.0.4",
 		"rimraf": "^2.7.1",
 		"save-file": "^2.3.1"
 	},
 	"devDependencies": {
 		"concurrently": "^4.1.2",
-		"nodemon": "^1.19.3",
+		"nodemon": "^1.19.4",
 		"prompt": "^1.0.0"
 	}
 }

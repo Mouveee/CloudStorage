@@ -35,14 +35,20 @@ class Header extends Component {
 			<header id='App-header' className={this.props.isMobile ? classVisibility + ' mobileHeader' : classVisibility}>
 				<img src={octopus} id='App-avatar' className={classAvatar} alt=':(' />
 
-				<h1 className={classCaption += this.props.isMobile ? ' mobileHeader' : ''}>
-					MARCO HUWIG
-				</h1>
-				<h2 className={classSubHeader += this.props.isMobile ? ' mobileHeader' : ''} >
-					Web Developer
-				</h2>
+				<div id='App-headerDiv'>
 
-				<nav className={navBarClass}>
+					<h1 className={classCaption += this.props.isMobile ? ' mobileHeader' : ''}>
+						MARCO HUWIG
+					</h1>
+
+					<br></br>
+
+					<h2 className={classSubHeader += this.props.isMobile ? ' mobileHeader' : ''} >
+						Web Developer
+					</h2>
+				</div>
+
+				<div className={navBarClass}>
 					<span
 						className='App-navItem'
 						onClick={() => this.props.changeRoute('main')}
@@ -63,7 +69,7 @@ class Header extends Component {
 					>
 						About
         </span>
-				</nav >
+				</div>
 
 			</header>
 		);

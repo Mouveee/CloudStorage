@@ -1,0 +1,11 @@
+#App-wrapper {
+  transition: 2000ms ease-in-out;
+}
+
+#App-wrapper.invisible {
+  opacity: 1;
+}
+
+#App-wrapper.visible {
+  opacity: 0;
+}

@@ -9,16 +9,12 @@ const fader = (WrappedComponent) => {
     }
 
     componentDidMount = () => {
-      console.log('mounted fader')
-
       this.setState({ visible: true }, () => console.log('done, ' + this.state.visible))
-
-      console.log(this.state.visible)
     }
 
     render() {
-      const test = this.state;
-      return <WrappedComponent {...this.props} visible={test} />
+      const faderVisibility = this.state.visible ? 'visible' : 'invisible';
+      return <WrappedComponent {...this.props} visible={this.state.visible} className={faderVisibility} id='App-wrapper' />
     }
   }
 }

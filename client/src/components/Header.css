@@ -2,86 +2,88 @@
 	/* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
 	background-color: black;
 	color: white;
+	display: inline-block;
 	font-size: calc(32px + 1vmin);
 	height: calc(213px + 1vmin);
-	width: 100vw;
-	text-align: left;
+	/* height: auto;  */
+	width: 100%;
+	text-align: center;
+	/* align-items: center; */
+	vertical-align: middle;
 	opacity: 0;
-	position: relative;
-	top: 0px;
+	position: fixed;
+	top: 0;
 	user-select: none;
 	left:50%;
 	transform: translateX(-50%);
 	transition: 1000ms ease-in-out;
+	clear: both;
 }
-
-#App-header.mobileHeader{
-	font-size: calc(80px + 0.5vmin);
-	height: calc(58px + 10vmin);
-}
-
-#App-avatar {
-	left: 3%;
-	position: fixed;
-	border-radius: 100%;
-	height: calc(136px + 0.5vmin);
-	width: calc(136px + 0.5vmin);
-	padding: 1vmin;
-	object-fit: cover;
-	top: 6%;
-	vertical-align: middle;
-}
-
-#App-avatar.mobileHeader{
-	height: calc(50px + 0.5vmin);
-	width: calc(50px + 0.5vmin);
-	left: 6%;
-	top: 12%;
-}
-
 
 #App-header.visible {
 	opacity: 1;
 }
 
+#App-header.mobileHeader{
+	font-size: calc(80px + 0.5vmin);
+	height: 15vh;
+}
+
+#App-avatar {
+	display: inline-block;
+	border-radius: 100%;
+	width: calc(136px + 0.5vmin);
+	height: calc(136px + 0.5vmin);
+	/* left: 10em;
+	top: 10em;
+	padding: 1vmin; */
+	object-fit: cover;
+}
+
+#App-avatar.mobileHeader{
+	height: calc(50px + 0.5vmin);
+	width: calc(50px + 0.5vmin);
+	top: -1em;
+	left: 1em;
+}
+
+#App-headerDiv { 
+	position:static;
+	left: 0;
+
+	display: inline-block;
+	text-align: left;
+	height:inherit;
+}
+
 .App-caption{
 	font-family: fancyFont;
-	position: absolute;
-	left: 33%;
 	font-size: calc(100px + 1vmin);
-	transform: translateX(-40%);
-	top: 0;
 	margin: auto;
 	display: inline-block;
 }
 
 .App-caption.mobileHeader{
 	font-size: calc(28px + 0.1vmin);
-	left: 47%;
-	top: 8%;
 	display: inline-block;
 }
 
 .App-subHeader{
 	display: inline-block;
 	font-family: fancyFont;
-	position: absolute;
 	font-size: calc(33px + 1vmin);
 	line-break: strict;
-	top: 32%;
-	left: 25%;
-	transform: translateX(-40%);
+	margin-top: -28vmin;
+	text-align: left;
 }
 
 .App-subHeader.mobileHeader{
 	font-size: calc(10px + 1vmin);
-	top: 38%;
-	left: 36%;
-	transform: translateX(-30%);
 }
 
 /* all about Navigation Bar */
 .App-navBar {
+	display: inline-block;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
 		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
 		sans-serif;
@@ -89,12 +91,14 @@
 	font-size: calc(18px + 1vmin);
 	font-weight: normal;
 	text-align: center;
+	align-items: center;
 	height: calc(28px + 2vmin);
 	width: 100%;
 	color: gray;
 	opacity: 0;
 	transition: 400ms;
-	top: 88%;
+	left:0;
+	top: 90%;
 	background-color:white;
 	padding-top: 1vmin;
 }
@@ -104,8 +108,9 @@
 }
 
 .App-navBar.mobileHeader {
+	height: calc(8px + 1vmin);
 	font-size: calc(12px + 1vmin);
-	top: 100px;
+	/* top: 100px; */
 }
 
 
