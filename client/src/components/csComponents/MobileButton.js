@@ -13,9 +13,12 @@ class MobileButton extends React.Component {
 
   render() {
     return (
-      <button onClick={this.toggleVisible}>
-        X
-      </button>);
+      <td>
+        <button onClick={this.toggleVisible}>
+          X
+        </button>
+      </td>
+    )
   }
 }
 
