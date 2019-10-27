@@ -5,19 +5,13 @@ import "./TableHead.css";
 class TableHead extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { visible: false };
   }
 
-  componentDidMount = () => {
-    setTimeout(() => this.setState({ visible: true }))
-  }
+
 
   render() {
-    const visibility = this.state.visible ? 'visible' : 'chica';
-
     return (
-      <thead id='App-tableHead' className={this.props.isMobile ? visibility + ' mobileTableHead' : visibility}>
+      <thead id='App-tableHead' className={this.props.isMobile ? 'mobileTableHead' : ''}>
         <tr >
           <th />
           <th />

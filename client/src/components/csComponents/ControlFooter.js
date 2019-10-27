@@ -7,21 +7,9 @@ import trashIcon from "../../img/trashcan.svg";
 import uploadIcon from "../../img/upload.svg";
 
 class ControlFooter extends React.Component {
-	constructor(props) {
-		super(props);
-
-		this.state = { visible: false }
-	}
-
-	componentDidMount = () => {
-		setTimeout(() => this.setState({ visible: true }));
-	}
-
 	render() {
-		let visibleFooter = this.state.visible ? 'App-footerVisible' : 'dummyClass';
-
 		return (
-			<nav id='App-controlFooter' className={this.props.isMobile ? visibleFooter + ' mobileControlFooter' : visibleFooter}>
+			<nav id='App-controlFooter' className={this.props.isMobile ? 'mobileControlFooter' : ''}>
 				{Object.keys(this.props.selectedItems).length > 0 ? (
 					<img src={downloadIcon} alt=':(' className='App-controlElement' />
 				)

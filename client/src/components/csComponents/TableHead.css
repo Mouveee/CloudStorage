@@ -1,5 +1,5 @@
 #App-tableHead { 
-  opacity: 0;
+  opacity: 1;
   transition: 500ms;
 }
 
@@ -11,9 +11,7 @@
   font-size: 12px;
 }
 
-#App-tableHead.visible{
-  opacity: 1;
-}
+
 
 
 

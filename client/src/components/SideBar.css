@@ -9,6 +9,7 @@
 	user-select: none;
 	opacity: 0;
 	transition: 1000ms;
+	border-right: solid 1px lightgray;
 }
 
 #App-sideBar.mobileSideBar{
@@ -24,6 +25,7 @@
 	border-radius: 30px;
 	position: fixed;
 	padding: 0.2em;
+	border-right: none;
 }
 
 #App-sideBar.visible {

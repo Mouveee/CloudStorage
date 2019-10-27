@@ -2,36 +2,43 @@ a { text-decoration: none;}
 
 #App-mainPage{
   font-size: calc(16px + 0.5vh);
-  transition: 1200ms;
-  opacity: 0;
+  transition: 600ms;
   margin: auto;
-	width: 80vw;
-	height: 75vh;
-  top: 222px;
+	width: 65vw;
+  /* height: 75vh; */
+  height:auto;
   left: 10em;
   right: 4em;
   user-select: none;
-  position: fixed;
-  padding: 1em;
   z-index: -999;
   list-style-type: none;
   list-style: none;
-  overflow-y:scroll;
+  overflow-y:none;
+  margin-top: 200px;
 }
 
-#App-mainPage.App-mainVisibile {
+#App-subPageContainer{
+  transition: 600ms;
+}
+
+#App-subPageContainer.visible {
   opacity: 1;
 }
 
+#App-subPageContainer.invisible{
+  opacity:0;
+}
+
 #App-mainPage.mobile{
-  top:112px;
+  margin: auto;
+  margin-top:16vh;
 
   left: 50%;
-  width: 80vw;
+  width: 90vw;
   /* transform: translateX(-50%); */
 
   font-size: calc(12px + 0.5vmin);
-  left: 1em;
+  left: 0.5em;
 
   -ms-overflow-style: none; 
   /* // IE 10+ */

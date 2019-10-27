@@ -6,8 +6,8 @@
 	"dependencies": {
 		"filepond": "^4.7.2",
 		"mobile-detect": "^1.4.4",
-		"react": "^16.10.2",
-		"react-dom": "^16.10.2",
+		"react": "^16.11.0",
+		"react-dom": "^16.11.0",
 		"react-filepond": "^7.0.1",
 		"react-player": "^1.13.0",
 		"react-pose": "^4.0.9",

@@ -8,24 +8,13 @@ import fader from '../HOC/Fader';
 class Skills extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { visible: this.props.visible }
-  }
-
-  componentWillUnmount = () => {
-    console.log('componenetWillUnmount Skills.js')
-    clearTimeout(this.timeOut);
   }
 
   render() {
     let mainClass = '';
 
-    if (this.state.visible) {
-      mainClass += 'App-mainVisibile';
-    }
-
     if (this.props.isMobile) {
-      mainClass += ' mobile';
+      mainClass += 'mobile';
     }
 
     return (

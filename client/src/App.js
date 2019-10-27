@@ -10,11 +10,14 @@ import About from './components/About.js';
 import CloudStorage from './components/CloudStorage.js'
 import Header from './components/Header.js';
 import Main from './components/Main.js';
+import NavBar from './components/NavBar.js';
 import NotFound from './components/NotFound.js';
 
 import "./App.css";
 
 const MainTable = posed.table();
+
+document.title = 'Marco Huwig - Web Developer';
 
 class App extends Component {
 	constructor(props) {
@@ -22,48 +25,66 @@ class App extends Component {
 
 		this.state = {
 			route: 'main', //main, cloudStorage or about,
-			userRole: 'admin' //admin, user, guest 
+			userRole: 'admin', //admin, user, guest 
+			visible: false
 		};
 
 		this.changeRoute.bind(this);
 	}
 
-	changeRoute = route => this.setState({ route: route });
+	componentDidMount = setTimeout(() => this.setState({ visible: true }), 10);
+
+	changeRoute = async route => {
+		this.setState({ visible: false })
+		setTimeout(() => this.setState({ route: route }), 500);
+		setTimeout(() => this.setState({ visible: true }), 550);
+
+	}
 
 	render() {
 		// window.chrome ? console.log('Running on chrome...') : console.log('');
-
 		const md = new MobileDetect(
 			window.navigator.userAgent
 		);
 
-		return (
-			<div className='App' >
-				<header>
-					<Header
-						isMobile={md.phone() ? true : false}
-						changeRoute={this.changeRoute}
-					/>
-				</header>
+		const classOfMainContainer = this.state.visible ? 'visible' : 'invisible';
 
-				{(() => {
-					switch (this.state.route) {
-						case 'main': return (
-							<Main
-								isMobile={md.phone() ? true : false}
-							/>)
-						case 'cloudStorage': return (
-							<CloudStorage
-								isMobile={md.phone() ? true : false}
-							/>);
-						case 'about': return (
-							<About
-								isMobile={md.phone() ? true : false}
-							/>
-						)
-						default: return (<NotFound />)
-					}
-				})()}
+		return (
+
+			<div className={'App-container'}>
+				<Header
+					isMobile={md.phone() ? true : false}
+					changeRoute={this.changeRoute}
+				/>
+
+				<NavBar
+					isMobile={md.phone() ? true : false}
+					changeRoute={this.changeRoute}
+				/>
+
+				{/* this will be slowly faded in when changing this.state.visible */}
+				<div id='App-mainContainer' className={classOfMainContainer}>
+
+
+					{(() => {
+						switch (this.state.route) {
+							case 'main': return (
+								<Main
+									isMobile={md.phone() ? true : false}
+								/>)
+							case 'cloudStorage': return (
+								<CloudStorage
+									isMobile={md.phone() ? true : false}
+								/>);
+							case 'about': return (
+								<About
+									isMobile={md.phone() ? true : false}
+								/>
+							)
+							default: return (<NotFound />)
+						}
+					})()}
+				</div>
 
 			</div >
 		);

@@ -3,7 +3,7 @@
 	border-top: 1px solid lightgray;
 	margin: auto;
 	width: 86vw;
-	height: calc(350px + 5vmin);
+	height: 70vh;
 	position: fixed;
 	top: 250px;
 	left: 15%;
@@ -20,8 +20,8 @@
 	left: 0;
 	right: 1em;
 	width: 95%;
-	top: 8em;
-	font-size: 5vw;
+	top: 7em;
+	font-size: 4vw;
 	overflow: hidden;
 	left: 50%;
 	transform: translateX(-50%);

@@ -3,20 +3,8 @@ import * as React from 'react';
 import './Main.css';
 
 class About extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { visible: false }
-  }
-
-  componentDidMount = () => {
-    setTimeout(() => {
-      this.setState({ visible: true });
-    });
-  }
-
   render() {
-    let classMain = this.state.visible ? 'App-mainVisibile' : '';
+    let classMain = 'App-mainVisible';
 
     if (this.props.isMobile) {
       classMain += ' mobile';
@@ -24,7 +12,6 @@ class About extends React.Component {
 
     return (
       <section id='App-mainPage' className={classMain}>
-        <h1></h1>
 
         <div>Marco Huwig</div>
         <div>Gärtnerstraße 31</div>

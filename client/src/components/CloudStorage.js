@@ -207,6 +207,8 @@ class CloudStorage extends React.Component {
     this.requestFolder(this.state.currentFolder + e.target.textContent);
   };
 
+
+  //TODO: length of keys should be 0 if no items are checked
   itemSelect = async (e, name, type) => {
     const item = {}
 
@@ -339,8 +341,6 @@ class CloudStorage extends React.Component {
   };
 
   componentDidMount() {
-    document.title = 'Octodrive';
-
     const inputFolder = document.getElementById("App-folderInput");
     this.requestFolder(this.state.currentFolder);
 

@@ -10,17 +10,12 @@
 	left: 20%;
 	user-select: none;
 	border-radius: 90px;
-	opacity: 0;
 	transition: 1400ms;
 }
 
 #App-controlFooter.mobileControlFooter{
 	width: 90%;
 	left: 5%;
-}
-
-#App-controlFooter.App-footerVisible{
-	opacity: 1;
 }
 
 .App-controlElement {

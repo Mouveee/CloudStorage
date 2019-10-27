@@ -15,7 +15,7 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
-      visible: this.props.visible,
+      visible: false,
       route: 'main' //main, biography, skills 
     }
 
@@ -24,28 +24,32 @@ class Main extends React.Component {
     this.timeOut = null;
   }
 
-  componentWillUnmount = () => {
-    clearTimeout(this.timeOut);
+  componentDidMount = () => {
+    setTimeout(() => this.setState({ visible: true }), 10)
   }
 
   setVisiblePage = route => {
     if (this.state.route !== route) {
-      this.setState({ route: route });
+      this.setState({ visible: false });
+      setTimeout(() => this.setState({ route: route }), 600);
+      setTimeout(() => this.setState({ visible: true }), 650);
     }
   }
 
   render() {
     let classMain = '';
+    let classSub = '';
 
-    if (this.state.visible) { classMain += 'App-mainVisibile' };
+    if (this.state.visible) { classSub = ' visible' } else { classSub = 'invisible' };
 
     if (this.props.isMobile) {
       classMain += ' mobile';
     };
 
     return (
+
       <div
-        // id='App-mainPage'
+        id='App-mainPage'
         className={classMain}
       >
         <SideBar
@@ -54,29 +58,30 @@ class Main extends React.Component {
         />
 
         {/* self invoking function, switch cases handle routing */}
-        {(() => {
-          switch (this.state.route) {
+        <div id='App-subPageContainer' className={classSub}>
+          {(() => {
+            switch (this.state.route) {
 
-            case 'main':
-              return <EntryPage
-                isMobile={this.props.isMobile}
-              />
+              case 'main':
+                return <EntryPage
+                  isMobile={this.props.isMobile}
+                />
 
-            case 'skills':
-              return <Skills
-                isMobile={this.props.isMobile}
-              />
+              case 'skills':
+                return <Skills
+                  isMobile={this.props.isMobile}
+                />
 
-            case 'biography':
-              return <Biography
-                isMobile={this.props.isMobile}
-              />
+              case 'biography':
+                return <Biography
+                  isMobile={this.props.isMobile}
+                />
 
-            default: return (<div>Page not found :(</div>)
+              default: return (<div>Page not found :(</div>)
+            }
+          })()
           }
-        })()
-        }
-
+        </div>
       </div>
     );
   }

@@ -6,3 +6,23 @@
 button:hover {
 	cursor: pointer;
 }
+
+.App-container {
+	text-align:center;
+	transition: 400ms;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+}
+
+#App-mainContainer{
+	transition: 300ms; 
+}
+
+#App-mainContainer.visible{
+	opacity:1;
+}
+
+#App-mainContainer.invisible {
+	opacity:0;
+}
+

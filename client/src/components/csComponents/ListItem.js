@@ -99,17 +99,8 @@ class ListItem extends React.Component {
 		super(props);
 
 		this.state = {
-			visible: false, //being toggled with componentDidMount
 			checked: false //toggle by clicking on checkbox in first atble item
 		};
-	}
-
-	componentDidMount = () => {
-		this.setState({ visible: true });
-	}
-
-	componentWillUnmount() {
-		this.setState({ visible: false });
 	}
 
 	onDragOver = e => {
@@ -181,7 +172,7 @@ class ListItem extends React.Component {
 
 	render() {
 		let i = this.props.index * 1000;
-		let classVisible = this.state.visible ? 'App-listBody visible' : 'dididi';
+		let classVisible = 'App-listBody';
 		let classItemInfo = 'App-itemInfo';
 
 		if (this.props.isMobile) {

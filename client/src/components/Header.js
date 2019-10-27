@@ -18,59 +18,28 @@ class Header extends Component {
 	render() {
 		let classVisibility = this.state.visible ? 'visible' : '';
 
-
-
-		let navBarClass = 'App-navBar';
-
-		if (this.state.visible) {
-			navBarClass += ' App-navBarVisible';
-			navBarClass += this.props.isMobile ? ' mobileHeader' : '';
-		}
-
 		let classAvatar = this.props.isMobile ? 'mobileHeader' : '';
 		let classCaption = 'App-caption';
 		let classSubHeader = 'App-subHeader';
 
 		return (
 			<header id='App-header' className={this.props.isMobile ? classVisibility + ' mobileHeader' : classVisibility}>
-				<img src={octopus} id='App-avatar' className={classAvatar} alt=':(' />
+				<img
+					src={octopus}
+					id='App-avatar'
+					className={classAvatar} alt=':('
+					onClick={() => this.props.changeRoute('main')}
+				/>
 
-				<div id='App-headerDiv'>
-
+				<div id="App-headerDiv">
 					<h1 className={classCaption += this.props.isMobile ? ' mobileHeader' : ''}>
 						MARCO HUWIG
 					</h1>
-
-					<br></br>
 
 					<h2 className={classSubHeader += this.props.isMobile ? ' mobileHeader' : ''} >
 						Web Developer
 					</h2>
 				</div>
-
-				<div className={navBarClass}>
-					<span
-						className='App-navItem'
-						onClick={() => this.props.changeRoute('main')}
-					>
-						Main
-        	</span>
-
-					<span
-						className='App-navItem'
-						onClick={() => this.props.changeRoute('cloudStorage')}
-					>
-						Files
-        	</span>
-
-					<span
-						className='App-navItem'
-						onClick={() => this.props.changeRoute('about')}
-					>
-						About
-        </span>
-				</div>
-
 			</header>
 		);
 	}

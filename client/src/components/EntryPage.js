@@ -28,18 +28,19 @@ class EntryPage extends React.Component {
         id='App-mainPage'
         className={mainClass}
       >
-        <h1 className={classHead} id='App-mainHeader'>
+        <div className={classHead} id='App-mainHeader'>
 
-        </h1>
+        </div>
 
         <section className='App-mainText'>
-          Hallo,
+          Hi,
           <br></br>
           <br></br>
-          mein Name ist Marco Huwig und ich bin begeisterter Junior Devoper im Bereich Web Development.
-          Nach einem längeren Ausflug in die Welt der Gastronomie habe ich beschlossen, die von mir im Studium erworbenen
-          Fähigkeiten weiter auszubauen und eine berufsqualifizierende Maßnahme bei der Taylorix e.V. zu starten.
-          Diese habe ich dieses Jahr erfolgreich beendet und mich dabei auf den Bereich Web Development spezialisiert.
+          my name is Marco Huwig. I am a Full Stack Web Developer with a lot of skills. I see my motivation in programming
+          as a one of kind problem solver. If you don't like me, fuck off. If you like me, fuck off anyway.
+          <br></br>
+          I hate the police and taxmen. I love drugs and vinyl.<br></br>
+          Call me, I won't respond anyway.<br></br>
         </section>
       </ section>
     )

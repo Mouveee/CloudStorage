@@ -1,12 +1,8 @@
 tbody{
 	transition: 600ms;
-	opacity: 0;
+	opacity: 1;
 	display: block;
 	width: 100%;
-}
-
-tBody.visible{
-	opacity: 1;
 }
 
 .App-listBoxContainer{
@@ -15,7 +11,7 @@ tBody.visible{
   /* padding-left: 35px;
   margin-bottom: 12px; */
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1wpx;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -50,7 +46,7 @@ tBody.visible{
 }
 
 .App-itemInfo {
-	font-size: 12px;
+	font-size: 10px;
 	color: lightgray;
 	overflow: hidden;
 	line-break: strict;
