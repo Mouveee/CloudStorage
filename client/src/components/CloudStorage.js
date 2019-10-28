@@ -171,7 +171,6 @@ class CloudStorage extends React.Component {
     })
       .then(response => {
         fileName = response.headers.get("File");
-        console.log(JSON.stringify(response.headers))
         return response.blob();
       })
       .then(blob => {

@@ -1,0 +1,18 @@
+.App-skillList{
+  text-align:left;
+}
+
+.App-skillList li{
+  list-style-type: none;
+}
+
+.App-listPoint{
+  background-color: ghostwhite;
+  font-weight:  bold;
+  margin-bottom: 1em;
+}
+
+.App-subList{
+  background-color: white;
+  font-weight:normal;
+}

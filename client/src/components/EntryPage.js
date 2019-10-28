@@ -36,7 +36,7 @@ class EntryPage extends React.Component {
           Hi,
           <br></br>
           <br></br>
-          my name is Marco Huwig. I am a Full Stack Web Developer with a lot of skills. I see my motivation in programming
+          my name is Marco&nbsp;Huwig. I am a Full Stack Web Developer with a lot of skills. I see my motivation in programming
           as a one of kind problem solver. If you don't like me, fuck off. If you like me, fuck off anyway.
           <br></br>
           I hate the police and taxmen. I love drugs and vinyl.<br></br>

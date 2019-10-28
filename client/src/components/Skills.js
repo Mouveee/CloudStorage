@@ -2,6 +2,7 @@ import * as React from 'react';
 
 //TODO: create new css file for list
 import './Main.css';
+import './Skills.css';
 
 import fader from '../HOC/Fader';
 
@@ -11,26 +12,30 @@ class Skills extends React.Component {
   }
 
   render() {
-    let mainClass = '';
+    let mainClass = 'App-skillList';
 
     if (this.props.isMobile) {
       mainClass += 'mobile';
     }
 
     return (
-      <section id='App-mainPage' className={mainClass}>
-        <h1></h1>
-        <ul >
-          <li>
+      <section className={mainClass}>
+        <div></div>
+        <ul>
+          <li className='App-listPoint'>
             Javascript
-          <ul>
-              <li>React, ES6, Jquery</li>
-              <li>NodeJS, Express</li>
+          <ul className='App-subList'>
+              <li>
+                React, React Native, Jquery
+                </li>
+              <li>
+                NodeJS, Express
+                </li>
             </ul>
           </li>
-          <li>
-            CSS
-          <ul>
+          <li className='App-listPoint'>
+            CSS3
+          <ul className='App-subList'>
               <li>
                 Bootstrap
             </li>
@@ -39,30 +44,30 @@ class Skills extends React.Component {
             </li>
             </ul>
           </li>
-          <li>
-            HTML
+          <li App-listPoint>
+            HTML5
         </li>
-          <li>
+          <li className='App-listPoint'>
             MS Cloud Services
-          <ul>
+          <ul className='App-subList'>
               <li>
-                MS Azure
+                Azure
             </li>
               <li>
-                MS SharePoint
+                SharePoint
             </li>
               <li>
-                MS PowerApps (Canvas)
+                PowerApps (Canvas)
             </li>
               <li>
-                MS Flow
+                Flow
             </li>
             </ul>
           </li>
-          <li>
+          <li className='App-listPoint'>
             C++
         </li>
-          <li>
+          <li className='App-listPoint'>
             C#
         </li>
         </ul>

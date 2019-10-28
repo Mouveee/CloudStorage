@@ -2,7 +2,7 @@ a { text-decoration: none;}
 
 #App-mainPage{
   font-size: calc(16px + 0.5vh);
-  transition: 600ms;
+  transition: 600ms ease-in-out;
   margin: auto;
 	width: 65vw;
   /* height: 75vh; */
@@ -14,7 +14,7 @@ a { text-decoration: none;}
   list-style-type: none;
   list-style: none;
   overflow-y:none;
-  margin-top: 200px;
+  margin-top: 3em;
 }
 
 #App-subPageContainer{
