@@ -29,7 +29,7 @@ class NavBar extends React.Component {
           className='App-navItem'
           onClick={() => this.props.changeRoute('main')}
         >
-          Main
+          Start
       </span>
 
         <span
@@ -43,7 +43,7 @@ class NavBar extends React.Component {
           className='App-navItem'
           onClick={() => this.props.changeRoute('about')}
         >
-          About
+          Kontakt
     </span>
       </div>
     )

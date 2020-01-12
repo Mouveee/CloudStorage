@@ -7,9 +7,6 @@ import './Skills.css';
 import fader from '../HOC/Fader';
 
 class Skills extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let mainClass = 'App-skillList';
@@ -44,7 +41,7 @@ class Skills extends React.Component {
             </li>
             </ul>
           </li>
-          <li App-listPoint>
+          <li className='App-listPoint'>
             HTML5
         </li>
           <li className='App-listPoint'>
@@ -61,6 +58,9 @@ class Skills extends React.Component {
             </li>
               <li>
                 Flow
+            </li>
+              <li>
+                Common Data Services
             </li>
             </ul>
           </li>

@@ -38,7 +38,6 @@ class App extends Component {
 		this.setState({ visible: false })
 		setTimeout(() => this.setState({ route: route }), 500);
 		setTimeout(() => this.setState({ visible: true }), 550);
-
 	}
 
 	render() {

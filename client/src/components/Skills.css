@@ -4,15 +4,19 @@
 
 .App-skillList li{
   list-style-type: none;
+  list-style: none;
 }
 
 .App-listPoint{
   background-color: ghostwhite;
   font-weight:  bold;
   margin-bottom: 1em;
+  padding: 12px;
 }
 
 .App-subList{
   background-color: white;
   font-weight:normal;
+  margin:1em;
+  padding:0.3em;
 }

@@ -2,7 +2,7 @@
 	margin: auto;
 	margin-top: 2em;
 	width: 70vw;
-	height: 70vh;
+	height: 50vh;
 	position: static;
 	top: 250px;
 	left: 15%;
@@ -12,6 +12,8 @@
 	vertical-align: middle;
 	opacity: 1;
 	font-size: calc(16px + 0.5vh);
+	pointer-events: auto;
+	z-index: 999;
 }
 
 #App-folderList.folderListMobile{
@@ -68,7 +70,8 @@
 	position: fixed;
 	width: 100%;
 	bottom: 6em;
-	z-index: 999;
+	z-index: 999; 
+	pointer-events: auto;
 }
 
 .filepond--file {

@@ -1,10 +1,17 @@
+@font-face{
+	font-family: headFont;
+	src: url("../fonts/Gidole-Regular.otf");
+}
+
 #App-header {
-	/* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
-	background-color: black;
+	background-image: url('../img/head.jpg');
+	font-family: fancyFont;
+	font-weight: 100;
+	letter-spacing: 8px;
+	/* background-color: black; */
 	color: white;
 	font-size: calc(32px + 1vmin);
-	height: calc(213px + 1vmin);
-	height: calc(120px + 0.5vmin);; 
+	height: calc(160px + 0.5vmin);
 	width: 100%;
 	text-align: center;
 	justify-items: center;
@@ -14,8 +21,8 @@
 	position: static;
 	top: 0;
 	user-select: none;
-	margin:auto;	transition: 1000ms ease-in-out;
-	line-height: calc(50px + 0.5vmin);
+	margin:auto;	
+	transition: 400ms ease-in-out;
 	clear: both;
 }
 
@@ -24,62 +31,37 @@
 }
 
 #App-header.mobileHeader{
-	height: calc(40px + 0.5vmin);;
-}
-
-#App-avatar {
-	position: static;
-	display: inline-block;
-	border-radius: 100%;
-	width: calc(90px + 0.5vmin);
-	height: calc(90px + 0.5vmin);
-	vertical-align: center;
-	object-fit: cover;
-	margin-right: 2em;
-	margin-top: 0.3em;
-	transition: 400ms;
-}
-
-#App-avatar:hover{
-	cursor: pointer;
-	opacity: 0.8;
-}
-
-#App-avatar.mobileHeader{
-	margin-right: 1em;
-	height: calc(40px + 0.5vmin);
-	width: calc(40px + 0.5vmin);
-	/* top: -1em;
-	left: 1em; */
+	height: calc(68px + 0.5vmin);;
 }
 
 #App-headerDiv { 
 	display: inline-block;
-	text-align: right;
+	text-align: center;
 	top: 0;
-	width:70%;
-	vertical-align: center;
+	width:80%;
+	vertical-align: middle;
+	margin-top:0.5em;
+}
+
+#App-headerDiv.mobileHeader{
+	margin-top:0;
 }
 
 .App-caption{
-	/* display: inline; */
-
-	font-family: fancyFont;
-	font-size: calc(112 px + 1vmin);
+	font-size: calc(70px + 1vmin);
 	margin:0;
-	text-align:left;
-	margin-top: -8em;
+	text-align:center;
+	line-break: strict;
 }
 
 .App-caption.mobileHeader{
-	font-size: calc(28px + 0.1vmin);
+	font-size: calc(26px + 0.1vmin);
 }
 
 .App-subHeader{
-	font-family: fancyFont;
-	font-size: calc(36px + 1vmin);
+	font-size: calc(18px + 1vmin);
 	line-break: strict;
-	text-align: left;
+	text-align: center;
 	margin:0;
 }
 

@@ -7,10 +7,11 @@
 	background-color: black;
 	color: white;
 	border: solid white 1px;
-	left: 20%;
+	left: 50%;
 	user-select: none;
 	border-radius: 90px;
 	transition: 1400ms;
+	pointer-events: auto;
 }
 
 #App-controlFooter.mobileControlFooter{

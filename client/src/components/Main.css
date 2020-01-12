@@ -4,17 +4,13 @@ a { text-decoration: none;}
   font-size: calc(16px + 0.5vh);
   transition: 600ms ease-in-out;
   margin: auto;
-	width: 65vw;
+	width: 60vw;
   /* height: 75vh; */
   height:auto;
-  left: 10em;
-  right: 4em;
   user-select: none;
-  z-index: -999;
-  list-style-type: none;
-  list-style: none;
   overflow-y:none;
   margin-top: 3em;
+  position:relative;
 }
 
 #App-subPageContainer{
@@ -31,13 +27,14 @@ a { text-decoration: none;}
 
 #App-mainPage.mobile{
   margin: auto;
-  margin-top:16vh;
+  margin-top:1em;
+  position:static;
 
   left: 50%;
   width: 90vw;
   /* transform: translateX(-50%); */
 
-  font-size: calc(12px + 0.5vmin);
+  font-size: calc(13px + 0.5vmin);
   left: 0.5em;
 
   -ms-overflow-style: none; 
@@ -63,5 +60,5 @@ a { text-decoration: none;}
 }
 
 #App-mainHeader.App-headMobile{
-  font-size: 14px;
+  font-size: 12px;
 }

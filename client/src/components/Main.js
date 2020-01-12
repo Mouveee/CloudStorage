@@ -52,13 +52,13 @@ class Main extends React.Component {
         id='App-mainPage'
         className={classMain}
       >
+
+        {/* self invoking function, switch cases handle routing */}
         <SideBar
           isMobile={this.props.isMobile}
           setVisiblePage={this.setVisiblePage}
         />
-
-        {/* self invoking function, switch cases handle routing */}
-        <div id='App-subPageContainer' className={classSub}>
+        <section id='App-subPageContainer' className={classSub}>
           {(() => {
             switch (this.state.route) {
 
@@ -81,7 +81,7 @@ class Main extends React.Component {
             }
           })()
           }
-        </div>
+        </section>
       </div>
     );
   }

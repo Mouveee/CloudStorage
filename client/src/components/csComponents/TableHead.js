@@ -3,12 +3,6 @@ import React from 'react';
 import "./TableHead.css";
 
 class TableHead extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-
-
   render() {
     return (
       <thead id='App-tableHead' className={this.props.isMobile ? 'mobileTableHead' : ''}>

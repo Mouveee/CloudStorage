@@ -73,7 +73,7 @@ class Biography extends React.Component {
             <span className='App-bioContent'>Studium Kommunikationsinformatik</span>
             <br></br>
             <div className='App-bioContent'>
-              <strong>Hochschule für Technik und Wirtschaft(HTW), Saarbrücken</strong>
+              <strong>Hochschule für Technik und Wirtschaft Saarbrücken</strong>
               <br></br>
               ohne Abschluss
             </div>
@@ -90,16 +90,6 @@ class Biography extends React.Component {
               seit 2014 "Es Cafe Völklingen" aufgrund einer Urheberrechtsklage
             </span>
           </div>
-
-
-
-
-
-
-
-
-
-
 
           2004 – 2005
 

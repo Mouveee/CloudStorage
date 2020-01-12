@@ -1,34 +1,38 @@
 #App-sideBar {
 	display: inline-block;
 	font-size: calc(14px + 1vmin);
-	position: fixed;
-	left: 2%;
-	top: 50vh;
-	transform: translateY(-50%);
+	position: absolute;
+	left: -10em;
+	top: 10%;
 	width: 10%;
 	user-select: none;
 	opacity: 0;
 	transition: 1000ms;
 	border-right: solid 1px lightgray;
-	padding-right:10px;
+	padding-right:2em;
 	padding-top: 1em;
 	padding-bottom: 1em;
+	z-index:998;
+	pointer-events: auto;
 }
 
 #App-sideBar.mobileSideBar{
-	font-size: calc(12px + 1vmin);
+	font-size: calc(14px + 1vmin);
 	display: inline-block;
-	width: 95%;
-	height: 20px;
-	color: white;
-	background-color:black;
+	width: 80%;
+	height: calc(22px + 1vmin);;
+	color: gray;
+	background-color:white;
+	left:50%;
+	transform: translateX(-50%);
 	text-align: center;
-	top: auto;
-	bottom: 0.1vh;
+	top: 96%;
+	bottom: 0%;
 	border-radius: 30;
-	position: fixed;
 	padding: 0.2em;
 	border-right: none;
+	vertical-align:center;
+	position: fixed;
 }
 
 #App-sideBar.visible {
@@ -36,7 +40,7 @@
 }
 
 .App-sideBarItem {
-	display: block;
+	display: inline-block;
 	transition: 300ms;
 	padding:0.2em;
 	border-radius:200px;
@@ -44,8 +48,13 @@
 	margin-bottom: 0.1em;
 }
 
+.App-sideBarItem.mobile{
+	width: 20vw;
+}
+
 .App-sideBarItem:hover {
 	background-color: ghostwhite;
 	cursor: pointer;
 	opacity:0.9;
+	z-index: 999;
 }

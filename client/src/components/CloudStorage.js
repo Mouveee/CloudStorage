@@ -259,15 +259,17 @@ class CloudStorage extends React.Component {
 
     let newName = prompt('Enter the new name', item);
 
-    const content = {};
-    content.oldName = this.state.currentFolder + item;
-    content.newName = this.state.currentFolder + newName;
+    if (newName !== null) {
+      const content = {};
+      content.oldName = this.state.currentFolder + item;
+      content.newName = this.state.currentFolder + newName;
 
-    let answer = await this.callBackendAPI(content, '/rename');
+      let answer = await this.callBackendAPI(content, '/rename');
 
-    answer.status === 200 ?
-      this.actualize()
-      : console.log('something went wrong, server status: ' + answer.status);
+      answer.status === 200 ?
+        this.actualize()
+        : console.log('renaming went wrong, server status: ' + answer.status);
+    }
   }
 
   requestFolder = async folder => {

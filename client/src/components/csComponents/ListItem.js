@@ -14,14 +14,6 @@ import photoIcon from "../../img/photo.svg";
 import playIcon from '../../img/play.svg'
 
 import "./ListItem.css";
-import { timingSafeEqual } from "crypto";
-
-//TODO: make this useful
-const TableRow = posed.tr(
-	{
-		enter: { opacity: 1, delay: 300 },
-		exit: { opacity: 0 },
-	});
 
 function formatDate(dateString) {
 	const date = new Date(dateString);
@@ -120,8 +112,6 @@ class ListItem extends React.Component {
 
 	onDragStart = e => {
 		e.dataTransfer.setData('text/plain', 'assoass');
-
-		let key = this.props.item.name;
 
 		let fileBeingDragged = {
 			key: {

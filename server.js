@@ -191,7 +191,6 @@ app.post("/move", async (req, res) => {
 	res.send(JSON.stringify({ message: "moving succesful" }));
 });
 
-
 let uploadCalled = 0;
 app.post("/upload", (req, res) => {
 	const uploadedFile = req.files.file;
