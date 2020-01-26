@@ -16,7 +16,7 @@ class Main extends React.Component {
 
     this.state = {
       visible: false,
-      route: 'main' //main, biography, skills 
+      route: 'main', //main, biography, skills 
     }
 
     this.setVisiblePage.bind(this);

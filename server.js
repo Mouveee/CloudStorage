@@ -175,6 +175,14 @@ app.post("/external", (req, res) => {
 	}
 });
 
+app.post('/login', async (req, res) => {
+	console.log('logging ' + req.body.userName + 'yes')
+	objectToReturn = { response: 'fuck you' }
+
+	res.statusCode = 200;
+	res.send(JSON.stringify(objectToReturn))
+})
+
 app.post("/move", async (req, res) => {
 	const source = req.body.content.itemToMove;
 	const target = req.body.content.targetFolder;

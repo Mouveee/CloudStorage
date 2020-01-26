@@ -9,6 +9,7 @@ import posed from 'react-pose';
 import About from './components/About.js';
 import CloudStorage from './components/CloudStorage.js'
 import Header from './components/Header.js';
+import Login from './components/Login.js'
 import Main from './components/Main.js';
 import NavBar from './components/NavBar.js';
 import NotFound from './components/NotFound.js';
@@ -25,7 +26,7 @@ class App extends Component {
 
 		this.state = {
 			route: 'main', //main, cloudStorage or about,
-			userRole: 'admin', //admin, user, guest 
+			userRole: 'guest', //admin, user, guest 
 			visible: false
 		};
 
@@ -38,6 +39,11 @@ class App extends Component {
 		this.setState({ visible: false })
 		setTimeout(() => this.setState({ route: route }), 500);
 		setTimeout(() => this.setState({ visible: true }), 550);
+	}
+
+	changeUserRole = role => {
+		this.setState({ userRole: role })
+		console.log('role changed to: ' + this.state.userRole)
 	}
 
 	render() {
@@ -72,9 +78,14 @@ class App extends Component {
 									isMobile={md.phone() ? true : false}
 								/>)
 							case 'cloudStorage': return (
-								<CloudStorage
-									isMobile={md.phone() ? true : false}
-								/>);
+								this.state.userRole === 'admin' || this.state.userRole === 'user' ?
+									<CloudStorage
+										isMobile={md.phone() ? true : false}
+									/> :
+									<Login
+										changeUserRole={this.changeUserRole}
+										isMobile={md.phone() ? true : false}
+									/>);
 							case 'about': return (
 								<About
 									isMobile={md.phone() ? true : false}
