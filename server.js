@@ -1,15 +1,25 @@
 require("dotenv").config();
-const bodyParser = require("body-parser");
-const fs = require("fs");
-const path = require("path");
 const express = require("express");
 const app = express();
+const basicAuth = require("express-basic-auth");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const fs = require("fs");
+const path = require("path");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const https = require("https");
 const rimraf = require("rimraf");
 
 const archiver = require('archiver');
+
+const auth = basicAuth({
+	users: {
+		'huwig.marco@gmail.com': '123',
+		'mouvy@web.de': '456',
+		'bertholt': 'Sperling100$'
+	},
+});
 
 const corsOptions = {
 	origin: "*",
@@ -18,6 +28,7 @@ const corsOptions = {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser('82e4e438a0705fabf61f9854e3b575af'));
 app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, "external")));
 app.use(fileUpload());
@@ -78,8 +89,6 @@ app.post("/delete", (req, res) => {
 	let content = req.body.content;
 
 	for (key in content) {
-		console.log(`item: ${JSON.stringify(content[key])}`);
-
 		if (content[key].type === "file") {
 			fs.unlink(content[key].name, e => {
 				if (e) {
@@ -175,12 +184,21 @@ app.post("/external", (req, res) => {
 	}
 });
 
-app.post('/login', async (req, res) => {
-	console.log('logging ' + req.body.userName + 'yes')
-	objectToReturn = { response: 'fuck you' }
+app.post('/login', auth, async (req, res) => {
+	console.log('logging ' + req.body.userName + ' ' + req.body.password)
+	const options = {
+		httpOnly: true,
+		signed: true,
+	};
+
+	objectToReturn = { userRole: req.body.userName === 'huwig.marco@gmail.com' ? 'admin' : 'user' }
+
+	console.log(`logged in as ${objectToReturn.userRole}`)
 
 	res.statusCode = 200;
-	res.send(JSON.stringify(objectToReturn))
+	res
+		.cookie('name', 'admin', options)
+		.send(JSON.stringify(objectToReturn))
 })
 
 app.post("/move", async (req, res) => {

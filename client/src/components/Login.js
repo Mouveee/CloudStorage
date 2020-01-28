@@ -5,39 +5,75 @@ class Login extends React.Component {
     super(props)
 
     this.state = {
-      userName: 'test',
-      password: 'passtest'
+      userName: '',
+      password: ''
     }
   }
 
-  submitLoginData = async (name, password) => {
+  submitLoginData = async () => {
     const requestBody = this.state;
     const destination = 'http://localhost:5000/login';
 
-    const response = await fetch(destination, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, cors, *same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": `application/json`,
-        Accept: "*/*"
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrer: "no-referrer", // no-referrer, *client
-      body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
-    });
-    // this.props.changeUserRole('admin');
+    if (this.state.userName.length < 1 || this.state.password.length < 1) {
+      alert('i need more information');
+    } else {
+      const response = await fetch(destination, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+          "Content-Type": `application/json`,
+          Accept: "*/*",
+          "Authorization": `Basic ${btoa(`${this.state.userName}:${this.state.password}`)}`
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
+      })
+
+
+
+      if (response.status === 200) {
+        const parsedResponse = response.json();
+        parsedResponse.then(content => {
+          this.props.changeUserRole(content.userRole)
+        })
+      }
+    }
   }
 
   render() {
     return (
       <div>
-        <h1>LOGIN SCREEN</h1>
-        <input type="text" placeholder="Name"></input>
-        <input type="text" placeholder="Password"></input>
-        <button onClick={() => this.submitLoginData(this.state.name, this.state.password)}>SEND</button>
+        <h1>LOGIN</h1>
+
+        <input
+          type="text"
+          id='App-inputName'
+          placeholder="Name"
+          onChange={e => {
+            this.setState(
+              {
+                userName: e.target.value
+              }
+            )
+          }}>
+        </input>
+
+        <input
+          type="text"
+          id="App-inputPassword"
+          placeholder="Password"
+          onChange={e => {
+            this.setState({
+              password: e.target.value
+            })
+          }}>
+        </input>
+
+        <button onClick={() => this.submitLoginData()}>SEND</button>
       </div>
     );
   }
