@@ -17,6 +17,7 @@ class Login extends React.Component {
     if (this.state.userName.length < 1 || this.state.password.length < 1) {
       alert('i need more information');
     } else {
+      alert('at least im sending something :(')
       const response = await fetch(destination, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
