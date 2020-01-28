@@ -12,7 +12,7 @@ class Login extends React.Component {
 
   submitLoginData = async () => {
     const requestBody = this.state;
-    const destination = 'http://127.0.0.1:5000/login';
+    const destination = 'http://192.168.178.30:5000/login';
 
     if (this.state.userName.length < 1 || this.state.password.length < 1) {
       alert('i need more information');
