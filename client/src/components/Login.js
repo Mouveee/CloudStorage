@@ -33,14 +33,14 @@ class Login extends React.Component {
         body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
       })
 
-
-
       if (response.status === 200) {
         const parsedResponse = response.json();
         parsedResponse.then(content => {
           this.props.changeUserRole(content.userRole)
         })
-      }
+      } else if (response.status === 501) {
+        alert('wrong credentials');
+      } else alert('welcome to hell');
     }
   }
 
