@@ -237,8 +237,7 @@ class CloudStorage extends React.Component {
   };
 
   logout = async () => {
-    this.callBackendAPI({}, './clear-cookie');
-    this.props.changeUserRole('guest');
+    await this.callBackendAPI({}, './clear-cookie').then(() => { this.props.changeUserRole('guest'); });
   }
 
   navigateBack = async () => {
