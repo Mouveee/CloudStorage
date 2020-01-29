@@ -5,7 +5,7 @@
 	"main": "client.js",
 	"scripts": {
 		"test": "nodemon server.js",
-		"server": "nodemon server.js",
+		"server": "nodemon -L server.js",
 		"client": "cd client && npm start",
 		"start": "concurrently  --kill-others-on-fail \"set HTTPS=true && npm run server\" \"set HTTPS=true && npm run client\""
 	},

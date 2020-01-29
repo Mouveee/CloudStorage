@@ -3,7 +3,6 @@ import "react-app-polyfill/stable";
 import React, { Component } from "react";
 
 import MobileDetect from 'mobile-detect';
-import posed from 'react-pose';
 
 //custom components, hopefully well written
 import About from './components/About.js';
@@ -16,9 +15,7 @@ import NotFound from './components/NotFound.js';
 
 import "./App.css";
 
-const MainTable = posed.table();
-
-document.title = 'Marco Huwig - Web Developer';
+document.title = 'Marco Huwig Web Development';
 
 class App extends Component {
 	constructor(props) {
@@ -36,6 +33,9 @@ class App extends Component {
 	componentDidMount = setTimeout(() => this.setState({ visible: true }), 10);
 
 	changeRoute = async route => {
+		//to be sure no action is triggered unintentionally
+		// document.removeEventListener('keypress');
+
 		this.setState({ visible: false })
 		setTimeout(() => this.setState({ route: route }), 500);
 		setTimeout(() => this.setState({ visible: true }), 550);
@@ -55,7 +55,6 @@ class App extends Component {
 		const classOfMainContainer = this.state.visible ? 'visible' : 'invisible';
 
 		return (
-
 			<div className={'App-container'}>
 				<Header
 					isMobile={md.phone() ? true : false}
@@ -70,7 +69,6 @@ class App extends Component {
 				{/* this will be slowly faded in when changing this.state.visible */}
 				<div id='App-mainContainer' className={classOfMainContainer}>
 
-
 					{(() => {
 						switch (this.state.route) {
 							case 'main': return (
@@ -80,7 +78,9 @@ class App extends Component {
 							case 'cloudStorage': return (
 								this.state.userRole === 'admin' || this.state.userRole === 'user' ?
 									<CloudStorage
+										changeUserRole={this.changeUserRole}
 										isMobile={md.phone() ? true : false}
+										userRole={this.state.userRole}
 									/> :
 									<Login
 										changeUserRole={this.changeUserRole}

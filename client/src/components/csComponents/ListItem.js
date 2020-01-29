@@ -1,7 +1,6 @@
 import React from "react";
 
 import MobileButton from './MobileButton';
-import posed, { PoseGroup } from 'react-pose';
 
 import cameraIcon from "../../img/camera.svg";
 import trashcan from "../../img/trashcan.svg";
@@ -172,153 +171,151 @@ class ListItem extends React.Component {
 
 		return (
 			<tbody key={'body- ' + i++} className={classVisible}>
-				<PoseGroup>
-					<tr
-						key={"tr-" + this.props.type + "-" + i}
-						draggable="true"
-						onDragStart={e => this.onDragStart(e)}
-						onDragOver={e => this.onDragOver(e)}
-						onDragLeave={e => this.onDragLeave(e)}
-						onDrop={e => this.onDrop(e)}
-					>
-						<td key={'td- ' + i++} className='App-smallSpan'>
-							<label className="App-listBoxContainer">
-								<input
-									className="App-listCheckbox"
-									type='checkbox'
-									onChange={e => {
-										this.props.itemSelect(e, this.props.item.name, this.props.type);
-										this.setState({ checked: !this.state.checked })
-									}}
-									value={this.state.checked}
-								/>
-								<span className='App-listCustomCheckbox' />
-							</label>
-						</td>
+				<tr
+					key={"tr-" + this.props.type + "-" + i}
+					draggable="true"
+					onDragStart={e => this.onDragStart(e)}
+					onDragOver={e => this.onDragOver(e)}
+					onDragLeave={e => this.onDragLeave(e)}
+					onDrop={e => this.onDrop(e)}
+				>
+					<td key={'td- ' + i++} className='App-smallSpan'>
+						<label className="App-listBoxContainer">
+							<input
+								className="App-listCheckbox"
+								type='checkbox'
+								onChange={e => {
+									this.props.itemSelect(e, this.props.item.name, this.props.type);
+									this.setState({ checked: !this.state.checked })
+								}}
+								value={this.state.checked}
+							/>
+							<span className='App-listCustomCheckbox' />
+						</label>
+					</td>
 
+					<td className='App-smallSpan' key={'td- ' + i++}>
+						<img
+							src={
+								this.props.type === "folder"
+									? folderIcon
+									: getFileIcon(this.props.fileEnding)
+							}
+							className='App-listIconNonClickable'
+							alt=''
+						/>
+					</td>
+
+					<td
+						onClick={e => {
+							this.props.type === 'file' ?
+								this.props.handleClick(this.props.item.name, './external/' + this.props.currentFolder.slice(2))
+								: this.props.handleClick(e);
+						}}
+						className='App-listItem App-bigSpan'
+						key={this.props.item.name}
+					>
+						{this.props.item.name}
+					</td>
+
+					{!this.props.isMobile ?
 						<td className='App-smallSpan' key={'td- ' + i++}>
+							{/* mp4? ad a player icon */}
+							{this.props.fileEnding === 'mp4' ?
+								<img
+									key={'td- ' + i++}
+									src={playIcon}
+									className='App-listIcon'
+									data-item={this.props.item.name}
+									data-type={this.props.type}
+									onClick={() => alert('soon to be streamed')}
+									alt='KILL'
+								/>
+								: null}
+
 							<img
-								src={
-									this.props.type === "folder"
-										? folderIcon
-										: getFileIcon(this.props.fileEnding)
+								key={'td- ' + i++}
+								src={penIcon}
+								className='App-listIcon'
+								data-item={this.props.item.name}
+								data-type={this.props.type}
+								onClick={() => this.props.renameItem(this.props.item.name)}
+								alt='KILL'
+							/>
+
+							<img
+								key={'td- ' + i++}
+								src={downloadIcon}
+								className='App-listIcon'
+								data-item={this.props.item.name}
+								data-type={this.props.type}
+								onClick={
+									this.props.type === "file"
+										? () => {
+											this.props.handleClick(this.props.item.name, './external/' + this.props.currentFolder.slice(2));
+										}
+										: () => {
+											this.props.downloadFolder('./external/' + this.props.currentFolder.slice(2) + this.props.item.name);
+										}
 								}
-								className='App-listIconNonClickable'
-								alt=''
+								alt='KILL'
+							/>
+
+							<img
+								src={trashcan}
+								className='App-listIcon'
+								onClick={() => {
+									if (Object.keys(this.props.selectedItems).length > 0) {
+										this.props.deleteItem(this.props.selectedItems)
+									} else {
+										let item = {};
+										item.name = './external/' + this.props.currentFolder.slice(2) + this.props.item.name
+										item.type = this.props.type;
+
+										let container = {};
+										container[this.props.item.name] = item;
+
+										console.log(`composed: ${JSON.stringify(this.props.item)}`)
+
+										this.props.deleteItem(container);
+									}
+								}}
+								alt='KILL'
 							/>
 						</td>
+						: <MobileButton />
+					}
 
-						<td
-							onClick={e => {
-								this.props.type === 'file' ?
-									this.props.handleClick(this.props.item.name, './external/' + this.props.currentFolder.slice(2))
-									: this.props.handleClick(e);
-							}}
-							className='App-listItem App-bigSpan'
-							key={this.props.item.name}
-						>
-							{this.props.item.name}
+				</tr>
+				{this.props.type === "file" ? (
+					<tr key={"tr-" + this.props.type + "-" + this.props.index}
+						className={classItemInfo}
+					>
+						<td key={'td- ' + i++} />
+						<td key={'td- ' + i++} />
+						<td className={classItemInfo} key={'td- ' + i++}>
+							{Math.round((this.props.item.size / 1048576 * 100)) / 100 +
+								" mb" +
+								" " +
+								formatDate(this.props.item.modified)}
 						</td>
-
-						{!this.props.isMobile ?
-							<td className='App-smallSpan' key={'td- ' + i++}>
-								{/* mp4? ad a player icon */}
-								{this.props.fileEnding === 'mp4' ?
-									<img
-										key={'td- ' + i++}
-										src={playIcon}
-										className='App-listIcon'
-										data-item={this.props.item.name}
-										data-type={this.props.type}
-										onClick={() => alert('soon to be streamed')}
-										alt='KILL'
-									/>
-									: null}
-
-								<img
-									key={'td- ' + i++}
-									src={penIcon}
-									className='App-listIcon'
-									data-item={this.props.item.name}
-									data-type={this.props.type}
-									onClick={() => this.props.renameItem(this.props.item.name)}
-									alt='KILL'
-								/>
-
-								<img
-									key={'td- ' + i++}
-									src={downloadIcon}
-									className='App-listIcon'
-									data-item={this.props.item.name}
-									data-type={this.props.type}
-									onClick={
-										this.props.type === "file"
-											? () => {
-												this.props.handleClick(this.props.item.name, './external/' + this.props.currentFolder.slice(2));
-											}
-											: () => {
-												this.props.downloadFolder('./external/' + this.props.currentFolder.slice(2) + this.props.item.name);
-											}
-									}
-									alt='KILL'
-								/>
-
-								<img
-									src={trashcan}
-									className='App-listIcon'
-									onClick={() => {
-										if (Object.keys(this.props.selectedItems).length > 0) {
-											this.props.deleteItem(this.props.selectedItems)
-										} else {
-											let item = {};
-											item.name = './external/' + this.props.currentFolder.slice(2) + this.props.item.name
-											item.type = this.props.type;
-
-											let container = {};
-											container[this.props.item.name] = item;
-
-											console.log(`composed: ${JSON.stringify(this.props.item)}`)
-
-											this.props.deleteItem(container);
-										}
-									}}
-									alt='KILL'
-								/>
-							</td>
-							: <MobileButton />
-						}
-
+						<td key={'td- ' + i++} />
+						<td key={'td- ' + i++} />
+						<td key={'td- ' + i++} />
 					</tr>
-					{this.props.type === "file" ? (
-						<tr key={"tr-" + this.props.type + "-" + this.props.index}
-							className={classItemInfo}
-						>
+				) : (
+						<tr className={classItemInfo}
+							key={"tr-sub-" + this.props.type + "-" + this.props.index}>
 							<td key={'td- ' + i++} />
 							<td key={'td- ' + i++} />
-							<td className={classItemInfo} key={'td- ' + i++}>
-								{Math.round((this.props.item.size / 1048576 * 100)) / 100 +
-									" mb" +
-									" " +
-									formatDate(this.props.item.modified)}
+							<td className={classItemInfo}>
+								Folder {formatDate(this.props.item.modified)}
 							</td>
 							<td key={'td- ' + i++} />
 							<td key={'td- ' + i++} />
 							<td key={'td- ' + i++} />
 						</tr>
-					) : (
-							<tr className={classItemInfo}
-								key={"tr-sub-" + this.props.type + "-" + this.props.index}>
-								<td key={'td- ' + i++} />
-								<td key={'td- ' + i++} />
-								<td className={classItemInfo}>
-									Folder {formatDate(this.props.item.modified)}
-								</td>
-								<td key={'td- ' + i++} />
-								<td key={'td- ' + i++} />
-								<td key={'td- ' + i++} />
-							</tr>
-						)}
-				</PoseGroup>
+					)}
 			</tbody >
 		);
 	}

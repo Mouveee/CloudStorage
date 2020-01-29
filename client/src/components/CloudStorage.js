@@ -98,6 +98,8 @@ class CloudStorage extends React.Component {
     if (folder.length > 0) {
       let response = this.callBackendAPI(folder, "/createfolder");
 
+      response.status === 200 ? alert('succesfully renamed') : alert('permission stuff')
+
       this.requestFolder(this.state.currentFolder);
 
       inputFolder.value = "";
@@ -234,6 +236,11 @@ class CloudStorage extends React.Component {
     }
   };
 
+  logout = async () => {
+    this.callBackendAPI({}, './clear-cookie');
+    this.props.changeUserRole('guest');
+  }
+
   navigateBack = async () => {
     if (this.state.prevFolder.length > 0) {
       let prevFolder = [...this.state.prevFolder];
@@ -360,6 +367,8 @@ class CloudStorage extends React.Component {
   render() {
     return (
       <section id='App-container'>
+        <button onClick={this.logout}>LOG OUT</button>
+
         {this.state.inProgress.length > 0 || this.state.finishedItems.length > 0 ?
           <ProgressIndicator
             deleteItem={this.deleteItem}

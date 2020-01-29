@@ -13,12 +13,14 @@ const rimraf = require("rimraf");
 
 const archiver = require('archiver');
 
+const registeredUsers = {
+	'huwig.marco@gmail.com': '123',
+	'mouvy@web.de': '456',
+	'bertholt': 'Sperling100$'
+};
+
 const auth = basicAuth({
-	users: {
-		'huwig.marco@gmail.com': '123',
-		'mouvy@web.de': '456',
-		'bertholt': 'Sperling100$'
-	},
+	users: registeredUsers
 });
 
 const corsOptions = {
@@ -193,11 +195,11 @@ app.post('/login', auth, async (req, res) => {
 
 	objectToReturn = { userRole: req.body.userName === 'huwig.marco@gmail.com' ? 'admin' : 'user' }
 
-	console.log(`logged in as ${objectToReturn.userRole}`)
+	console.log(`logged in as ${objectToReturn.userRole}`);
 
 	res.statusCode = 200;
 	res
-		.cookie('name', 'admin', options)
+		.cookie('name', req.body.userName, options)
 		.send(JSON.stringify(objectToReturn))
 })
 
@@ -217,6 +219,37 @@ app.post("/move", async (req, res) => {
 	res.send(JSON.stringify({ message: "moving succesful" }));
 });
 
+app.post('/rename', (req, res) => {
+	console.log(`renaming ${req.body.content.oldName} to ${req.body.content.newName}`);
+
+	let source = './external/' + req.body.content.oldName;
+	let target = './external/' + req.body.content.newName
+
+	fs.renameSync(source, target);
+
+	res.statusCode = 200;
+	res.send(JSON.stringify({ message: 'naming successfully' }));
+})
+
+app.post('/clear-cookie', (req, res) => {
+	console.log('clearing cookie of ' + req.signedCookies.name)
+	res.clearCookie(req.signedCookies.name).end();
+});
+
+app.post('/read-cookie', (req, res) => {
+	if (req.signedCookies.name === 'huwig.marco@gmail.com') {
+		console.log('hello master')
+		res.send({ userRole: 'admin' });
+	} else if (this.registeredUsers.hasOwnProperty(req.signedCookies.name)) {
+		console.log(`valid cookie of user ${req.signedCookies.name}`)
+		res.send({ userRole: 'user' });
+	} else {
+		res.send({ userRole: 'guest' });
+	}
+});
+
+console.log(JSON.stringify(typeof basicAuth))
+
 let uploadCalled = 0;
 app.post("/upload", (req, res) => {
 	const uploadedFile = req.files.file;
@@ -231,18 +264,6 @@ app.post("/upload", (req, res) => {
 	res.statusCode = 200;
 	res.send("1234");
 });
-
-app.post('/rename', (req, res) => {
-	console.log(`renaming ${req.body.content.oldName} to ${req.body.content.newName}`);
-
-	let source = './external/' + req.body.content.oldName;
-	let target = './external/' + req.body.content.newName
-
-	fs.renameSync(source, target);
-
-	res.statusCode = 200;
-	res.send(JSON.stringify({ message: 'naming successfully' }));
-})
 
 const server = app.listen(5000, "127.0.0.1", function () {
 	const host = server.address().address;

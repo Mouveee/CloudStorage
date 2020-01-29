@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./Header.css";
 
-import octopus from "../img/myself.jpg";
+// import octopus from "../img/myself.jpg";
 
 class Header extends Component {
 	constructor(props) {
