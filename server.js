@@ -233,14 +233,14 @@ app.post('/rename', (req, res) => {
 
 app.post('/clear-cookie', (req, res) => {
 	console.log('clearing cookie of ' + req.signedCookies.name)
-	res.clearCookie(req.signedCookies.name).end();
+	res.clearCookie('name').end();
 });
 
 app.post('/read-cookie', (req, res) => {
 	if (req.signedCookies.name === 'huwig.marco@gmail.com') {
 		console.log('hello master')
 		res.send({ userRole: 'admin' });
-	} else if (this.registeredUsers.hasOwnProperty(req.signedCookies.name)) {
+	} else if (registeredUsers.hasOwnProperty(req.signedCookies.name)) {
 		console.log(`valid cookie of user ${req.signedCookies.name}`)
 		res.send({ userRole: 'user' });
 	} else {
