@@ -36,7 +36,7 @@ class NavBar extends React.Component {
           className='App-navItem'
           onClick={() => this.props.changeRoute('cloudStorage')}
         >
-          Files
+          Downloads
       </span>
 
         <span

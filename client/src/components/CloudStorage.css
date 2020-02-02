@@ -16,7 +16,7 @@
 	z-index: 999;
 }
 
-#App-folderList.folderListMobile{
+#App-folderList.folderListMobile {
 	left: 0;
 	right: 1em;
 	width: 95%;
@@ -41,27 +41,43 @@
 	padding-right: 1em;
 }
 
-#App-setViewMenu{
-  position: fixed;
-  top:4.5em;
-  right:2em;
-  color:white;
-  background-color: black;
-  border-radius:30px;
-  padding:3px;
-  z-index: 999;
+#App-logoutButton {
+	color: gray;
+	font-size: calc(16px + 1vmin);
+	margin: auto;
+	padding: 0.5em;
+	transition: 400ms;
+	user-select: none;
+	width: 15vw;
 }
 
-.App-setViewItem{
+#App-logoutButton:hover {
+	background-color: black;
+	color: lightgray;
+	cursor: pointer;
+}
+
+#App-setViewMenu {
+	position: fixed;
+	top: 4.5em;
+	right: 2em;
+	color: white;
+	background-color: black;
+	border-radius: 30px;
+	padding: 3px;
+	z-index: 999;
+}
+
+.App-setViewItem {
 	font-size: 14px;
-  margin: 4px;
-  transition:300ms;
-  user-select: none;
+	margin: 4px;
+	transition: 300ms;
+	user-select: none;
 }
 
-.App-setViewItem:hover{
-  cursor: pointer;
-  color:#DA87B6;
+.App-setViewItem:hover {
+	cursor: pointer;
+	color: #DA87B6;
 }
 
 .App-filePond {
@@ -70,7 +86,7 @@
 	position: fixed;
 	width: 100%;
 	bottom: 6em;
-	z-index: 999; 
+	z-index: 999;
 	pointer-events: auto;
 }
 

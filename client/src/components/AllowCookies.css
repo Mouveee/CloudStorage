@@ -1,0 +1,21 @@
+#App-allowCookieDialogue {
+  background-color: white;
+  padding: 1em;
+  font-size: calc(16px + 0.5vh);
+  position: fixed;
+  right: 50%;
+  bottom: 50%;
+  border: 1px solid black;
+  border-radius: 15px;
+  width: 25vw;
+  z-index: 999;
+}
+
+.App-btnCookie {
+  transition: 400ms;
+}
+
+.App-btnCookie:hover {
+  color: lightgray;
+  cursor: pointer;
+}

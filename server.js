@@ -13,11 +13,7 @@ const rimraf = require("rimraf");
 
 const archiver = require('archiver');
 
-const registeredUsers = {
-	'huwig.marco@gmail.com': '123',
-	'mouvy@web.de': '456',
-	'bertholt': 'Sperling100$'
-};
+const registeredUsers = JSON.parse(process.env.USERS).users;
 
 const auth = basicAuth({
 	users: registeredUsers
@@ -34,6 +30,15 @@ app.use(cookieParser('82e4e438a0705fabf61f9854e3b575af'));
 app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, "external")));
 app.use(fileUpload());
+
+
+function cookieIsValid(req) {
+	const cookieIsValid = registeredUsers.hasOwnProperty(req.signedCookies.name) ?
+		true : false;
+
+	return cookieIsValid;
+}
+
 
 function getFolderContent(folder) {
 	let objectToSend = {};
@@ -66,96 +71,123 @@ function getFolderContent(folder) {
 	return objectToSend;
 }
 
+
 app.post("/createfolder", (req, res) => {
-	let objectToSend = {};
+	if (!cookieIsValid(req)) {
+		console.log('creating not permitted')
+		res.statusCode = 403;
+		res.send('{}')
+	} else {
 
-	console.log(
-		`${process.env.DOTS}\nsomebody wants me to create folder ./external/${req.body.content}`
-	);
-	if (req.body.content && !fs.existsSync(`./external/${req.body.content}`)) {
-		console.log(`no naming conflict, creating folder: ${req.body.content}`);
+		let objectToSend = {};
 
-		fs.mkdirSync(`./external/${req.body.content}`);
-		objectToSend = getFolderContent(`./external/` + req.body.content);
-		res.statusCode = 200;
-		res.send(JSON.stringify(objectToSend));
-	} else if (fs.existsSync(`./external/${req.body.content}`)) {
-		console.log(`naming conflict, folder ${req.body.content}`);
+		console.log(
+			`${process.env.DOTS}\nsomebody wants me to create folder ./external/${req.body.content}`
+		);
+		if (req.body.content && !fs.existsSync(`./external/${req.body.content}`)) {
+			console.log(`no naming conflict, creating folder: ${req.body.content}`);
 
-		res.statusCode = 409;
-		res.send(JSON.stringify({ message: "folder already exists" }));
+			fs.mkdirSync(`./external/${req.body.content}`);
+			objectToSend = getFolderContent(`./external/` + req.body.content);
+			res.statusCode = 200;
+			res.send(JSON.stringify(objectToSend));
+		} else if (fs.existsSync(`./external/${req.body.content}`)) {
+			console.log(`naming conflict, folder ${req.body.content}`);
+
+			res.statusCode = 409;
+			res.send(JSON.stringify({ message: "folder already exists" }));
+		}
 	}
 });
+
 
 app.post("/delete", (req, res) => {
-	let content = req.body.content;
+	if (!cookieIsValid(req)) {
+		res.statusCode = 403;
+		res.send('{}')
+	} else {
+		let content = req.body.content;
 
-	for (key in content) {
-		if (content[key].type === "file") {
-			fs.unlink(content[key].name, e => {
-				if (e) {
-					let error = {};
-					error.message = e.message;
-				} else {
-					console.log(`deleted ${content[key].name}`);
-				}
-			});
-		} else {
-			rimraf.sync(content[key].name);
-			console.log("deletion SHOULD be done... \\_%_/");
+		for (key in content) {
+			if (content[key].type === "file") {
+				fs.unlink(content[key].name, e => {
+					if (e) {
+						let error = {};
+						error.message = e.message;
+					} else {
+						console.log(`deleted ${content[key].name}`);
+					}
+				});
+			} else {
+				rimraf.sync(content[key].name);
+				console.log("deletion SHOULD be done... \\_%_/");
+			}
 		}
-	}
 
-	res.statusCode = 200;
-	res.send(JSON.stringify({ message: "your server did it, take more care of him" }));
+		res.statusCode = 200;
+		res.send(JSON.stringify({ message: "your server did it, take more care of him" }));
+	}
 })
 
+
 app.post("/download", async function (req, res) {
-	console.log(`${process.env.DOTS}\nsomebody requested: ${req.body.file}`);
-	const file = `${req.body.folder}${req.body.file}`;
+	if (!cookieIsValid(req)) {
+		res.statusCode = 403;
+		res.send('{}')
+	} else {
 
-	res.setHeader("File", req.body.file);
+		console.log(`${process.env.DOTS}\nsomebody requested: ${req.body.file}`);
+		const file = `${req.body.folder}${req.body.file}`;
 
-	res.statusCode = 200;
-	res.download(file, req.body.file, err => {
-		if (err) {
-			console.log('file seems to be missing');
+		res.setHeader("File", req.body.file);
 
-			res.statusCode = 404;
-			res.send(JSON.stringify({ message: 'missing file ' + file }));
-		}
-	});
+		res.statusCode = 200;
+		res.download(file, req.body.file, err => {
+			if (err) {
+				console.log('file seems to be missing');
+
+				res.statusCode = 404;
+				res.send(JSON.stringify({ message: 'missing file ' + file }));
+			}
+		});
+	}
 });
 
+
 app.post('/downloadFolder', async (req, res) => {
-	let splitted = req.body.content.folder.split('/');
-	const fileName = splitted.pop();
-
-	console.log('check if ' + `./internal/${req.body.content.folder + '.zip'}` + ' already exists...')
-
-	if (fs.existsSync(`./internal/${fileName + '.zip'}`)) {
-		console.log('this folder has already been zipped');
-
-		res.status = 409;
-		res.send(JSON.stringify({ message: 'folder has alredy been zipped, please delete first' }));
+	if (!cookieIsValid(req)) {
+		res.statusCode = 403;
+		res.send('{}')
 	} else {
-		console.log('it doesn`t')
-		let archive = archiver.create('zip', {});
-		let output = fs.createWriteStream(`./internal/${fileName + '.zip'}`);
-		archive.pipe(output);
+		let splitted = req.body.content.folder.split('/');
+		const fileName = splitted.pop();
 
-		archive
-			.directory(req.body.content.folder, false);
+		console.log('check if ' + `./internal/${req.body.content.folder + '.zip'}` + ' already exists...')
+
+		if (fs.existsSync(`./internal/${fileName + '.zip'}`)) {
+			console.log('this folder has already been zipped');
+
+			res.status = 409;
+			res.send(JSON.stringify({ message: 'folder has alredy been zipped, please delete first' }));
+		} else {
+			console.log('it doesn`t')
+			let archive = archiver.create('zip', {});
+			let output = fs.createWriteStream(`./internal/${fileName + '.zip'}`);
+			archive.pipe(output);
+
+			archive
+				.directory(req.body.content.folder, false);
 
 
-		output.on('finish', function () {
-			console.log('zipping should have worked')
+			output.on('finish', function () {
+				console.log('zipping should have worked')
 
-			res.statusCode = 200;
-			res.send(JSON.stringify({ message: 'you lucky motherfucker' }))
-		});
+				res.statusCode = 200;
+				res.send(JSON.stringify({ message: 'you lucky motherfucker' }))
+			});
 
-		archive.finalize();
+			archive.finalize();
+		}
 	}
 })
 
@@ -163,6 +195,13 @@ app.post('/downloadFolder', async (req, res) => {
 app.post("/external", (req, res) => {
 	let objectToSend = {};
 	let dir = req.body.content || "./external/";
+
+	if (!cookieIsValid(req)) {
+		console.log('cookie auth at external failed')
+		objectToSend = getFolderContent(dir)
+		res.statusCode = 200;
+		res.send(JSON.stringify(objectToSend))
+	}
 
 	let noError = true;
 
@@ -183,11 +222,15 @@ app.post("/external", (req, res) => {
 	if (noError) {
 		res.statusCode = 200;
 		res.send(JSON.stringify(objectToSend));
+	} else {
+		res.statusCode = 500;
+		res.send(`{"error":"internal server error"}`)
 	}
 });
 
+
 app.post('/login', auth, async (req, res) => {
-	console.log('logging ' + req.body.userName + ' ' + req.body.password)
+	console.log('logging ' + req.body.userName + ' ' + req.body.password + '\ncookies enabled: ' + req.body.cookiesAllowed)
 	const options = {
 		httpOnly: true,
 		signed: true,
@@ -198,43 +241,60 @@ app.post('/login', auth, async (req, res) => {
 	console.log(`logged in as ${objectToReturn.userRole}`);
 
 	res.statusCode = 200;
-	res
-		.cookie('name', req.body.userName, options)
-		.send(JSON.stringify(objectToReturn))
+
+	if (req.body.cookiesAllowed) {
+		res
+			.cookie('name', req.body.userName, options)
+			.send(JSON.stringify(objectToReturn))
+	} else res.send(JSON.stringify(objectToReturn))
 })
 
+
 app.post("/move", async (req, res) => {
-	const source = req.body.content.itemToMove;
-	const target = req.body.content.targetFolder;
+	if (!cookieIsValid(req)) {
+		res.statusCode = 403;
+		res.send('{}')
+	} else {
+		const source = req.body.content.itemToMove;
+		const target = req.body.content.targetFolder;
 
-	let i = 0;
-	for (let index in source) {
-		let splittedItemName = source[index].name.split('/');
-		let itemName = splittedItemName.pop();
+		let i = 0;
+		for (let index in source) {
+			let splittedItemName = source[index].name.split('/');
+			let itemName = splittedItemName.pop();
 
-		fs.renameSync(source[index].name, target + '/' + itemName);
+			fs.renameSync(source[index].name, target + '/' + itemName);
+		}
+
+		res.statusCode = 200;
+		res.send(JSON.stringify({ message: "moving succesful" }));
 	}
-
-	res.statusCode = 200;
-	res.send(JSON.stringify({ message: "moving succesful" }));
 });
 
+
 app.post('/rename', (req, res) => {
-	console.log(`renaming ${req.body.content.oldName} to ${req.body.content.newName}`);
+	if (!cookieIsValid(req)) {
+		console.log('unauthorized renaming attempt')
+		res.statusCode = 403;
+		res.send('{}')
+	} else {
+		console.log(`renaming ${req.body.content.oldName} to ${req.body.content.newName}`);
 
-	let source = './external/' + req.body.content.oldName;
-	let target = './external/' + req.body.content.newName
+		let source = './external/' + req.body.content.oldName;
+		let target = './external/' + req.body.content.newName
 
-	fs.renameSync(source, target);
+		fs.renameSync(source, target);
 
-	res.statusCode = 200;
-	res.send(JSON.stringify({ message: 'naming successfully' }));
+		res.statusCode = 200;
+		res.send(JSON.stringify({ message: 'naming successfully' }));
+	}
 })
 
 app.post('/clear-cookie', (req, res) => {
 	console.log('clearing cookie of ' + req.signedCookies.name)
 	res.clearCookie('name').end();
 });
+
 
 app.post('/read-cookie', (req, res) => {
 	if (req.signedCookies.name === 'huwig.marco@gmail.com') {
@@ -244,11 +304,11 @@ app.post('/read-cookie', (req, res) => {
 		console.log(`valid cookie of user ${req.signedCookies.name}`)
 		res.send({ userRole: 'user' });
 	} else {
+		res.statusCode = 403;
 		res.send({ userRole: 'guest' });
 	}
 });
 
-console.log(JSON.stringify(typeof basicAuth))
 
 let uploadCalled = 0;
 app.post("/upload", (req, res) => {

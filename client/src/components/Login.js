@@ -5,43 +5,27 @@ class Login extends React.Component {
     super(props)
 
     this.state = {
+      cookiesAllowed: this.props.allowCookies,
       userName: '',
       password: ''
     }
   }
 
-  callBackend = async (destination, requestBody) => {
-    const response = await fetch(destination, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, cors, *same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
-      headers: {
-        "Content-Type": `application/json`,
-        Accept: "*/*",
-        "Authorization": `Basic ${btoa(`${this.state.userName}:${this.state.password}`)}`
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrer: "no-referrer", // no-referrer, *client
-      body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
-    }).then(response => { return response });
-
-    return response
-  }
 
   submitLoginData = async () => {
-    const requestBody = this.state;
+    let requestBody = {};
+    requestBody = Object.assign(requestBody, this.state);
 
     if (this.state.userName.length < 1 || this.state.password.length < 1) {
       alert('i need more information');
     } else {
-      const response = await this.callBackend('./login', requestBody)
+      const response = await this.props.callBackend('./login', requestBody)
 
       if (response.status === 200) {
         const parsedResponse = response.json();
         parsedResponse.then(content => {
-          this.props.changeUserRole(content.userRole)
+          this.props.changeUserRole(content.userRole);
+          document.removeEventListener('keyup', this.addKeyUpEvent)
         })
       } else if (response.status === 401) {
         alert('wrong credentials');
@@ -53,28 +37,16 @@ class Login extends React.Component {
     if (e.keyCode === 13) {
       e.preventDefault();
       this.submitLoginData();
+      document.onkeypress = null;
     }
   }
-
-  readCookie = async () => {
-    console.log('soon to be readinig the cookies')
-    const response = await this.callBackend('/read-cookie', {})
-    if (response.status === 200) {
-      const parsedResponse = response.json();
-
-      parsedResponse.then(content => {
-        this.props.changeUserRole(content.userRole);
-      })
-
-    } else if (response.staus === 401) {
-      console.log('auth failed');
-    }
-  }
-
 
   componentDidMount() {
-    this.readCookie();
-    document.addEventListener('keyup', e => this.addKeyUpEvent(e))
+    document.onkeypress = e => this.addKeyUpEvent(e)
+  }
+
+  UNSAFE_componentWillMount() {
+    console.log('unmounting')
   }
 
 
@@ -84,6 +56,7 @@ class Login extends React.Component {
         <h1>LOGIN</h1>
 
         <input
+          autoComplete="true"
           type="text"
           id='App-inputName'
           placeholder="Name"
@@ -97,7 +70,7 @@ class Login extends React.Component {
         </input>
 
         <input
-          type="text"
+          type="password"
           id="App-inputPassword"
           placeholder="Password"
           onChange={e => {

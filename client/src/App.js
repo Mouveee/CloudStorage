@@ -6,6 +6,7 @@ import MobileDetect from 'mobile-detect';
 
 //custom components, hopefully well written
 import About from './components/About.js';
+import AllowCookies from './components/AllowCookies.js'
 import CloudStorage from './components/CloudStorage.js'
 import Header from './components/Header.js';
 import Login from './components/Login.js'
@@ -22,15 +23,65 @@ class App extends Component {
 		super(props);
 
 		this.state = {
+			allowCookies: false,
+			askedForCookies: true,
 			route: 'main', //main, cloudStorage or about,
 			userRole: 'guest', //admin, user, guest 
 			visible: false
 		};
 
 		this.changeRoute.bind(this);
+		this.setCookieAllowance.bind(this);
 	}
 
-	componentDidMount = setTimeout(() => this.setState({ visible: true }), 10);
+	componentDidMount = () => {
+		setTimeout(() => this.setState({ visible: true }), 10);
+		this.readCookie();
+	}
+
+	callBackend = async (destination, requestBody) => {
+		const response = await fetch(destination, {
+			method: "POST", // *GET, POST, PUT, DELETE, etc.
+			mode: "cors", // no-cors, cors, *same-origin
+			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+			credentials: "same-origin", // include, *same-origin, omit
+			headers: {
+				"Content-Type": `application/json`,
+				Accept: "*/*",
+				"Authorization": `Basic ${btoa(`${requestBody.userName}:${requestBody.password}`)}`
+				// 'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			redirect: "follow", // manual, *follow, error
+			referrer: "no-referrer", // no-referrer, *client
+			body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
+		}).then(response => { return response });
+
+		return response
+	}
+
+	readCookie = async () => {
+		const response = await this.callBackend('/read-cookie', {})
+		if (response.status === 200) {
+			console.log('auth succesful');
+			const parsedResponse = response.json();
+
+			parsedResponse.then(content => {
+				this.changeUserRole(content.userRole);
+			})
+
+		} else {
+			console.log('auth failed');
+			this.setState({ allowCookies: false, askedForCookies: false })
+		}
+	}
+
+	setCookieAllowance = (allowed) => {
+		this.setState({
+			allowCookies: allowed,
+			askedForCookies: true
+		});
+	}
+
 
 	changeRoute = async route => {
 		//to be sure no action is triggered unintentionally
@@ -83,8 +134,11 @@ class App extends Component {
 										userRole={this.state.userRole}
 									/> :
 									<Login
+										callBackend={this.callBackend}
 										changeUserRole={this.changeUserRole}
+										allowCookies={this.state.allowCookies}
 										isMobile={md.phone() ? true : false}
+										userRole={this.state.userRole}
 									/>);
 							case 'about': return (
 								<About
@@ -94,8 +148,19 @@ class App extends Component {
 							default: return (<NotFound />)
 						}
 					})()}
-				</div>
 
+
+					{(() => {
+						if (!this.state.askedForCookies && this.state.userRole === 'guest') {
+							console.log(`user hasn't been asked for Cookies`);
+							return (
+								<AllowCookies
+									setCookieAllowance={this.setCookieAllowance}
+								/>
+							);
+						}
+					})()}
+				</div>
 			</div >
 		);
 	}

@@ -56,6 +56,21 @@ class CloudStorage extends React.Component {
     this.requestFolder(this.state.currentFolder);
   };
 
+  armInputFolder = () => {
+    const inputFolder = document.getElementById("App-folderInput");
+
+    //create a folder by pressing return, remove event listener when unfocused
+    inputFolder.onfocus = () =>
+      (document.onkeypress = e => {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          this.createFolder(inputFolder);
+        }
+      });
+
+    inputFolder.onblur = () => (document.onkeypress = null);
+  }
+
   callBackendAPI = async (content, destination) => {
     let requestBody = {};
     requestBody.content = content;
@@ -77,6 +92,10 @@ class CloudStorage extends React.Component {
       body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
     });
 
+    if (response.staus === 403) {
+      this.props.changeUserRole('guest');
+    }
+
     return response;
   };
 
@@ -96,7 +115,7 @@ class CloudStorage extends React.Component {
     const folder = this.state.currentFolder + inputFolder.value;
 
     if (folder.length > 0) {
-      let response = this.callBackendAPI(folder, "/createfolder");
+      let response = await this.callBackendAPI(folder, "/createfolder");
 
       response.status === 200 ? alert('succesfully renamed') : alert('permission stuff')
 
@@ -202,7 +221,7 @@ class CloudStorage extends React.Component {
     this.setState({
       currentFolder: this.state.currentFolder + e.target.textContent + "/",
       prevFolder: prev,
-      selectedItems: {}
+      selectedItems: {},
     });
 
     this.requestFolder(this.state.currentFolder + e.target.textContent);
@@ -348,25 +367,14 @@ class CloudStorage extends React.Component {
   };
 
   componentDidMount() {
-    const inputFolder = document.getElementById("App-folderInput");
     this.requestFolder(this.state.currentFolder);
-
-    //create a folder by pressing return, remove event listener when unfocused
-    inputFolder.onfocus = () =>
-      (document.onkeypress = e => {
-        if (e.keyCode === 13) {
-          e.preventDefault();
-          this.createFolder(inputFolder);
-        }
-      });
-
-    inputFolder.onblur = () => (document.onkeypress = null);
+    if (this.props.userRole === 'admin') this.armInputFolder();
   }
 
   render() {
     return (
       <section id='App-container'>
-        <button onClick={this.logout}>LOG OUT</button>
+        <div onClick={this.logout} id="App-logoutButton">Abmelden</div>
 
         {this.state.inProgress.length > 0 || this.state.finishedItems.length > 0 ?
           <ProgressIndicator
@@ -457,6 +465,7 @@ class CloudStorage extends React.Component {
                         selectedItems={this.state.selectedItems}
                         setFileBeingDragged={this.setFileBeingDragged}
                         type='folder'
+                        userRole={this.props.userRole}
                       />
                     );
                   })}
@@ -483,6 +492,7 @@ class CloudStorage extends React.Component {
                         selectedItems={this.state.selectedItems}
                         setFileBeingDragged={this.setFileBeingDragged}
                         type='file'
+                        userRole={this.props.userRole}
                       />
                     );
                   })}
@@ -525,13 +535,16 @@ class CloudStorage extends React.Component {
           }
         })()}
 
-        <ControlFooter
-          deleteItem={this.deleteItem}
-          isMobile={this.props.isMobile ? true : false}
-          selectedItems={this.state.selectedItems}
-          updating={this.state.updating}
-          uploadFile={this.uploadFile}
-        />
+        {this.props.userRole === 'admin' ?
+          <ControlFooter
+            deleteItem={this.deleteItem}
+            isMobile={this.props.isMobile ? true : false}
+            selectedItems={this.state.selectedItems}
+            updating={this.state.updating}
+            uploadFile={this.uploadFile}
+          />
+          : <p></p>
+        }
 
         {this.state.uploadMenuVisible ? (
           <FilePond
