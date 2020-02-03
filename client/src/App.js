@@ -13,6 +13,7 @@ import Login from './components/Login.js'
 import Main from './components/Main.js';
 import NavBar from './components/NavBar.js';
 import NotFound from './components/NotFound.js';
+import UserInfo from './components/UserInfo.js';
 
 import "./App.css";
 
@@ -25,6 +26,7 @@ class App extends Component {
 		this.state = {
 			allowCookies: false,
 			askedForCookies: true,
+			loggedInUser: '',
 			route: 'main', //main, cloudStorage or about,
 			userRole: 'guest', //admin, user, guest 
 			visible: false
@@ -59,6 +61,20 @@ class App extends Component {
 		return response
 	}
 
+	changeRoute = async route => {
+		//to be sure no action is triggered unintentionally
+		// document.removeEventListener('keypress');
+
+		this.setState({ visible: false })
+		setTimeout(() => this.setState({ route: route }), 500);
+		setTimeout(() => this.setState({ visible: true }), 550);
+	}
+
+	changeUserRole = role => {
+		this.setState({ userRole: role })
+		console.log('role changed to: ' + this.state.userRole)
+	}
+
 	readCookie = async () => {
 		const response = await this.callBackend('/read-cookie', {})
 		if (response.status === 200) {
@@ -82,21 +98,6 @@ class App extends Component {
 		});
 	}
 
-
-	changeRoute = async route => {
-		//to be sure no action is triggered unintentionally
-		// document.removeEventListener('keypress');
-
-		this.setState({ visible: false })
-		setTimeout(() => this.setState({ route: route }), 500);
-		setTimeout(() => this.setState({ visible: true }), 550);
-	}
-
-	changeUserRole = role => {
-		this.setState({ userRole: role })
-		console.log('role changed to: ' + this.state.userRole)
-	}
-
 	render() {
 		// window.chrome ? console.log('Running on chrome...') : console.log('');
 		const md = new MobileDetect(
@@ -116,6 +117,8 @@ class App extends Component {
 					isMobile={md.phone() ? true : false}
 					changeRoute={this.changeRoute}
 				/>
+
+				{this.state.userRole !== 'guest' ? <UserInfo /> : <p></p>}
 
 				{/* this will be slowly faded in when changing this.state.visible */}
 				<div id='App-mainContainer' className={classOfMainContainer}>

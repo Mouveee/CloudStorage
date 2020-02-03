@@ -1,16 +1,18 @@
 h1 {
-  font-size: calc(20px + 1vmin);
+  margin-top: -0.3em;
+  font-size: calc(32px + 1vmin);
 }
 
 #App-avatar {
   position: static;
   display: inline;
   border-radius: 100%;
-  width: calc(90px + 0.5vmin);
-  height: calc(90px + 0.5vmin);
+  width: calc(86px + 0.5vmin);
+  height: calc(86px + 0.5vmin);
   object-fit: cover;
   margin-left: 0.2em;
-  margin-right: 1em;
+  margin-right: 0.6em;
+  margin-top: -0.2em;
   transition: 400ms;
   float: left;
   text-align: justify;
@@ -28,6 +30,12 @@ h1 {
   margin-bottom: 1px;
   height: calc(60px + 0.5vmin);
   width: calc(60px + 0.5vmin);
+}
+
+#App-subHeaderEntrypage {
+  color: gray;
+  font-size: calc(26px + 1vmin);
+  margin-top: -0.1em;
 }
 
 .App-mobileHead {

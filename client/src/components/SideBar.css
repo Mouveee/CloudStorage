@@ -1,29 +1,30 @@
 #App-sideBar {
 	display: inline-block;
 	font-size: calc(14px + 1vmin);
-	position: absolute;
-	left: -10em;
-	top: 10%;
+	position: fixed;
+	left: 3.5vw;
+	top: 38vh;
 	width: 10%;
 	user-select: none;
 	opacity: 0;
 	transition: 1000ms;
 	border-right: solid 1px lightgray;
-	padding-right:2em;
+	padding-right: 1.5em;
 	padding-top: 1em;
 	padding-bottom: 1em;
-	z-index:998;
+	z-index: 998;
 	pointer-events: auto;
 }
 
-#App-sideBar.mobileSideBar{
+#App-sideBar.mobileSideBar {
 	font-size: calc(14px + 1vmin);
 	display: inline-block;
 	width: 80%;
-	height: calc(22px + 1vmin);;
+	height: calc(22px + 1vmin);
+	;
 	color: gray;
-	background-color:white;
-	left:50%;
+	background-color: white;
+	left: 50%;
 	transform: translateX(-50%);
 	text-align: center;
 	top: 96%;
@@ -31,7 +32,7 @@
 	border-radius: 30;
 	padding: 0.2em;
 	border-right: none;
-	vertical-align:center;
+	vertical-align: center;
 	position: fixed;
 }
 
@@ -42,19 +43,19 @@
 .App-sideBarItem {
 	display: inline-block;
 	transition: 300ms;
-	padding:0.2em;
-	border-radius:200px;
+	padding: 0.2em;
+	border-radius: 200px;
 	border: 1px solid ghostwhite;
 	margin-bottom: 0.1em;
 }
 
-.App-sideBarItem.mobile{
+.App-sideBarItem.mobile {
 	width: 20vw;
 }
 
 .App-sideBarItem:hover {
 	background-color: ghostwhite;
 	cursor: pointer;
-	opacity:0.9;
+	opacity: 0.9;
 	z-index: 999;
 }

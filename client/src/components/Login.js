@@ -7,12 +7,29 @@ class Login extends React.Component {
     super(props)
 
     this.state = {
+      submitButtonVisible: false,
       cookiesAllowed: this.props.allowCookies,
       userName: '',
       password: ''
     }
   }
 
+  toggleSubmitButton = () => {
+    const button = document.getElementById('App-loginButton')
+
+    button.style.display = !this.state.submitButtonVisible ? 'block' : 'none';
+
+    setTimeout(() => {
+      if (this.state.submitButtonVisible) {
+        button.classList.replace('hidden', 'visible');
+      } else {
+        button.classList.replace('visible', 'hidden');
+      }
+    }, 20)
+
+    this.setState({ submitButtonVisible: !this.state.submitButtonVisible })
+    console.log(button.classList)
+  }
 
   submitLoginData = async () => {
     let requestBody = {};
@@ -47,15 +64,11 @@ class Login extends React.Component {
     document.onkeypress = e => this.addKeyUpEvent(e)
   }
 
-  UNSAFE_componentWillMount() {
-    console.log('unmounting')
-  }
-
 
   render() {
     return (
-      <div>
-        <h1>LOGIN</h1>
+      <div id='App-loginScreen'>
+        <h1 id='App-loginHead'>ANMELDUNG</h1>
 
         <input
           autoComplete="true"
@@ -64,11 +77,15 @@ class Login extends React.Component {
           id='App-inputName'
           placeholder="Name"
           onChange={e => {
-            this.setState(
-              {
-                userName: e.target.value
-              }
+            this.setState({
+              userName: e.target.value
+            }
             )
+            if ((this.state.userName.length > 0 && this.state.password.length > 0) && !this.state.submitButtonVisible) {
+              this.toggleSubmitButton()
+            } else if ((this.state.userName.length === 0 || this.state.password.length === 0) && this.state.submitButtonVisible) {
+              this.toggleSubmitButton()
+            }
           }}>
         </input>
 
@@ -81,10 +98,15 @@ class Login extends React.Component {
             this.setState({
               password: e.target.value
             })
+            if ((this.state.userName.length > 0 && this.state.password.length > 0) && !this.state.submitButtonVisible) {
+              this.toggleSubmitButton()
+            } else if ((this.state.userName.length === 0 || this.state.password.length === 0) && this.state.submitButtonVisible) {
+              this.toggleSubmitButton()
+            }
           }}>
         </input>
 
-        <div id='App-loginButton' onClick={() => this.submitLoginData()}>SEND</div>
+        <div id='App-loginButton' className='hidden' onClick={() => this.submitLoginData()}>LOGIN</div>
       </div>
     );
   }

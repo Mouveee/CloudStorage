@@ -1,7 +1,17 @@
 #App-loginButton {
   font-size: calc(16px + 1vmin);
-  transition: 400ms;
+  transition: 800ms;
   margin: 1em;
+  display: none;
+  opacity: 0;
+}
+
+#App-loginButton.visible {
+  opacity: 1;
+}
+
+#App-loginScreen {
+  margin-top: 7vh;
 }
 
 #App-loginButton:hover {
