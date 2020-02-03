@@ -47,9 +47,9 @@ class EntryPage extends React.Component {
               onClick={() => this.props.changeRoute('main')}
             />
 
-            Mein Name ist Marco&nbsp;Huwig.<br></br> Ich bin ein in Saarbrücken lebender Full Stack Web Developer.
+            Mein Name ist Marco&nbsp;Huwig.<div><small>Full Stack Web Developer.</small></div>
           </h1>
-          {/* <br></br> */}
+          <br></br>
           <div>
             Als Web Developer liegen meine Kernkompetenzen im Umgang mit Technologien wie <i>HTML, Javascript und CSS</i>.
             Eine detailliertere Auflistung meiner Kenntnisse und Erfahrungen findest Du unter <i>Kenntnisse</i>.

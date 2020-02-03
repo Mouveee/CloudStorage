@@ -4,6 +4,7 @@
 }
 
 /* all about Navigation Bar */
+
 .App-navBar {
 	display: inline-block;
 	font-family: fancyFont;
@@ -12,16 +13,16 @@
 	height: auto;
 	color: gray;
 	opacity: 0;
-	padding-top:0.2em;
-	padding-bottom:0.2em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
 	transition: 1600ms;
-	background-color:white;
-  border-bottom: solid 1px lightgray;
+	background-color: white;
+	border-bottom: solid 1px lightgray;
 	justify-content: center;
 	pointer-events: all;
 }
 
-.App-navBar.App-navBarVisible{
+.App-navBar.App-navBarVisible {
 	opacity: 1;
 }
 
@@ -32,10 +33,9 @@
 	display: inline-block;
 }
 
-
 .App-navItem {
 	vertical-align: middle;
-	margin:1em;
+	margin: 1em;
 	display: inline;
 	user-select: none;
 	transition: 300ms;

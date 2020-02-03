@@ -201,30 +201,31 @@ app.post("/external", (req, res) => {
 		objectToSend = getFolderContent(dir)
 		res.statusCode = 200;
 		res.send(JSON.stringify(objectToSend))
-	}
-
-	let noError = true;
-
-	console.log(process.env.DOTS);
-	console.log(`received POST request (get folder) with params: ${req.body.content}`);
-
-	try {
-		objectToSend = getFolderContent(dir);
-	}
-	catch (e) {
-		console.log(`e.message: ${e.message}`);
-		noError = !noError;
-
-		res.statusCode = 404;
-		res.send(JSON.stringify({ message: 'folder not found' }))
-	}
-
-	if (noError) {
-		res.statusCode = 200;
-		res.send(JSON.stringify(objectToSend));
 	} else {
-		res.statusCode = 500;
-		res.send(`{"error":"internal server error"}`)
+
+		let noError = true;
+
+		console.log(process.env.DOTS);
+		console.log(`received POST request (get folder) with params: ${req.body.content}`);
+
+		try {
+			objectToSend = getFolderContent(dir);
+		}
+		catch (e) {
+			console.log(`e.message: ${e.message}`);
+			noError = !noError;
+
+			res.statusCode = 404;
+			res.send(JSON.stringify({ message: 'folder not found' }))
+		}
+
+		if (noError) {
+			res.statusCode = 200;
+			res.send(JSON.stringify(objectToSend));
+		} else {
+			res.statusCode = 500;
+			res.send(`{"error":"internal server error"}`)
+		}
 	}
 });
 

@@ -1,0 +1,17 @@
+#App-loginButton {
+  font-size: calc(16px + 1vmin);
+  transition: 400ms;
+  margin: 1em;
+}
+
+#App-loginButton:hover {
+  cursor: pointer;
+  color: pink;
+}
+
+.App-loginInput {
+  padding: 8px;
+  border-radius: 90px;
+  display: inline;
+  margin: 1em;
+}

@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import "./Login.css";
+
 class Login extends React.Component {
   constructor(props) {
     super(props)
@@ -57,6 +59,7 @@ class Login extends React.Component {
 
         <input
           autoComplete="true"
+          className="App-loginInput"
           type="text"
           id='App-inputName'
           placeholder="Name"
@@ -70,6 +73,7 @@ class Login extends React.Component {
         </input>
 
         <input
+          className="App-loginInput"
           type="password"
           id="App-inputPassword"
           placeholder="Password"
@@ -80,7 +84,7 @@ class Login extends React.Component {
           }}>
         </input>
 
-        <button onClick={() => this.submitLoginData()}>SEND</button>
+        <div id='App-loginButton' onClick={() => this.submitLoginData()}>SEND</div>
       </div>
     );
   }

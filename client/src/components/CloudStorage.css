@@ -52,8 +52,7 @@
 }
 
 #App-logoutButton:hover {
-	background-color: black;
-	color: lightgray;
+	color: pink;
 	cursor: pointer;
 }
 

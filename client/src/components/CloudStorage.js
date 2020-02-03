@@ -521,11 +521,11 @@ class CloudStorage extends React.Component {
                     <td>this folder is empty...</td>
                     <td>
                       <a
-                        href='http://www.assoass.com'
+                        href='http://www.google.de'
                         target='_blank'
                         rel='noopener noreferrer'
                       >
-                        WATCH PORN INSTEAD!
+                        GOOGLE WHAT YOU ARE LOOKING FOR!
                 </a>
                     </td>
                   </tr>
@@ -569,7 +569,7 @@ class CloudStorage extends React.Component {
             }
             }
           />
-        ) : null}-
+        ) : null}
       </section>)
   }
 }

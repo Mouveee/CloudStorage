@@ -271,7 +271,7 @@ class ListItem extends React.Component {
 									alt='KILL'
 								/>
 							</td> : <MobileButton />
-						: <p>{this.props.userRole}</p>
+						: <td><p></p></td>
 					}
 
 				</tr>
