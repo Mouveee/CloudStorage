@@ -40,13 +40,14 @@ class Login extends React.Component {
     if (this.state.userName.length < 1 || this.state.password.length < 1) {
       alert('i need more information');
     } else {
-      const response = await this.props.callBackend('http://127.0.0.1:5000/login', requestBody)
+      const response = await this.props.callBackend('http://localhost:5000/login', requestBody)
 
       if (response.status === 200) {
         const parsedResponse = response.json();
         parsedResponse.then(content => {
           this.props.changeUserRole(content.userRole);
-          document.removeEventListener('keyup', this.addKeyUpEvent)
+          document.removeEventListener('keyup', this.addKeyUpEvent);
+          console.log(`document.cookies: ${document.cookies}`)
         })
       } else if (response.status === 401) {
         alert('wrong credentials');

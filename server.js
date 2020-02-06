@@ -34,6 +34,8 @@ app.use(fileUpload());
 
 
 function cookieIsValid(req) {
+	console.log(`checking cookie of: ${req.signedCookies.name}`)
+
 	const cookieIsValid = registeredUsers.hasOwnProperty(req.signedCookies.name) ?
 		true : false;
 
@@ -198,6 +200,8 @@ app.post("/external", (req, res) => {
 	let objectToSend = {};
 	let dir = req.body.content || "./external/";
 
+	console.log(req.signedCookies.name ? `there are signed cookies` : req.signedCookies.name ? ` with a name property` : `without a name`)
+
 	if (!cookieIsValid(req)) {
 		console.log('cookie auth at external failed')
 		objectToSend = getFolderContent(dir)
@@ -300,6 +304,8 @@ app.post('/clear-cookie', (req, res) => {
 
 
 app.post('/read-cookie', (req, res) => {
+	console.log(req.signedCookies.name ? `there are signed cookies` : req.signedCookies.name ? ` with a name property` : `without a name`)
+
 	if (req.signedCookies.name === 'huwig.marco@gmail.com') {
 		console.log('hello master')
 		res.send({ userName: req.signedCookies.name, userRole: 'admin' });
@@ -307,7 +313,7 @@ app.post('/read-cookie', (req, res) => {
 		console.log(`valid cookie of user ${req.signedCookies.name}`)
 		res.send({ userName: req.signedCookies.name, userRole: 'user' });
 	} else {
-		res.statusCode = 403;
+		res.statusCode = 404;
 		res.send({ userName: req.signedCookies.name, userRole: 'guest' });
 	}
 });
@@ -328,7 +334,7 @@ app.post("/upload", (req, res) => {
 	res.send("1234");
 });
 
-const server = app.listen(5000, "127.0.0.1", function () {
+const server = app.listen(5000, "0.0.0.0", function () {
 	const host = server.address().address;
 	const port = server.address().port;
 
