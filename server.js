@@ -13,6 +13,7 @@ const rimraf = require("rimraf");
 
 const archiver = require('archiver');
 
+
 const registeredUsers = JSON.parse(process.env.USERS).users;
 
 const auth = basicAuth({
@@ -20,8 +21,9 @@ const auth = basicAuth({
 });
 
 const corsOptions = {
-	origin: "*",
-	optionsSuccessStatus: 200
+	origin: "http://localhost:3000",
+	optionsSuccessStatus: 200,
+	credentials: true
 };
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -200,8 +202,8 @@ app.post("/external", (req, res) => {
 	if (!cookieIsValid(req)) {
 		console.log('cookie auth at external failed')
 		objectToSend = getFolderContent(dir)
-		res.statusCode = 200;
-		res.send(JSON.stringify(objectToSend))
+		res.statusCode = 403
+		res.send(JSON.stringify({}))
 	} else {
 
 		let noError = true;
