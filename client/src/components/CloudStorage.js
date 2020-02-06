@@ -78,8 +78,7 @@ class CloudStorage extends React.Component {
 
     console.log(`cs sending to ${destination}`)
 
-    if (!destination) destination = "http://127.0.0.1:5000/external"
-    else destination = destination.replace('.', 'http://127.0.0.1:5000')
+    if (!destination) destination = "./external"
 
     const response = await fetch(destination, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
