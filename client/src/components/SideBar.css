@@ -3,7 +3,7 @@
 	font-size: calc(14px + 1vmin);
 	position: fixed;
 	left: 3.5vw;
-	top: 38vh;
+	top: 38%;
 	width: 10%;
 	user-select: none;
 	opacity: 0;
@@ -44,8 +44,6 @@
 	display: inline-block;
 	transition: 300ms;
 	padding: 0.2em;
-	border-radius: 200px;
-	border: 1px solid ghostwhite;
 	margin-bottom: 0.1em;
 }
 
@@ -54,7 +52,7 @@
 }
 
 .App-sideBarItem:hover {
-	background-color: ghostwhite;
+	color: pink;
 	cursor: pointer;
 	opacity: 0.9;
 	z-index: 999;

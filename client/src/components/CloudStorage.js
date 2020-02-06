@@ -47,6 +47,7 @@ class CloudStorage extends React.Component {
       statusOverlayMessage: 'Please Wait...',
       updating: false,
       uploadMenuVisible: false,
+      url: '127.0.0.1',
       view: 'list' //TODO: add grid and set as default for mobile
       //TODO factorize the whole table
     };
@@ -75,7 +76,10 @@ class CloudStorage extends React.Component {
     let requestBody = {};
     requestBody.content = content;
 
-    if (!destination) destination = "./external";
+    console.log(`cs sending to ${destination}`)
+
+    if (!destination) destination = "http://127.0.0.1:5000/external"
+    else destination = destination.replace('.', 'http://127.0.0.1:5000')
 
     const response = await fetch(destination, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -117,7 +121,7 @@ class CloudStorage extends React.Component {
     if (folder.length > 0) {
       let response = await this.callBackendAPI(folder, "/createfolder");
 
-      response.status === 200 ? alert('succesfully renamed') : alert('permission stuff')
+      response.status === 200 ? alert('succesfully renamed') : alert('error, server response status: ' + response.status)
 
       this.requestFolder(this.state.currentFolder);
 
@@ -170,7 +174,7 @@ class CloudStorage extends React.Component {
     let fileName = "unknown.dat";
 
     new Promise(async (resolve, reject) => {
-      let answer = await fetch("/download", {
+      let answer = await fetch("http://127.0.0.1:5000/download", {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -188,7 +192,12 @@ class CloudStorage extends React.Component {
         }) // body data type must match "Content-Type" header
       });
 
-      resolve(answer)
+      if (answer.status !== 200) {
+        alert(`server answered with ${answer.status}`)
+        reject(answer);
+      } else {
+        resolve(answer)
+      }
     })
       .then(response => {
         fileName = response.headers.get("File");

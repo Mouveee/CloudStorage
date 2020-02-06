@@ -47,7 +47,11 @@ class EntryPage extends React.Component {
               onClick={() => this.props.changeRoute('main')}
             />
 
-            MARCO&nbsp;HUWIG.<div id='App-subHeaderEntrypage'><small>Full Stack Web Developer.</small></div>
+            MARCO&nbsp;HUWIG
+
+            <div id='App-subHeaderEntrypage'>
+              <small>Full Stack Web Developer</small>
+            </div>
           </h1>
           {/* <br></br> */}
           <div>

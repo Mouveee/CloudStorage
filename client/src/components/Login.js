@@ -35,10 +35,12 @@ class Login extends React.Component {
     let requestBody = {};
     requestBody = Object.assign(requestBody, this.state);
 
+    console.log('body of request: \n' + JSON.stringify(requestBody))
+
     if (this.state.userName.length < 1 || this.state.password.length < 1) {
       alert('i need more information');
     } else {
-      const response = await this.props.callBackend('./login', requestBody)
+      const response = await this.props.callBackend('http://127.0.0.1:5000/login', requestBody)
 
       if (response.status === 200) {
         const parsedResponse = response.json();
@@ -72,8 +74,8 @@ class Login extends React.Component {
 
         <input
           autoComplete="true"
-          className="App-loginInput"
-          type="text"
+          className="App-loginInput question"
+          type="email"
           id='App-inputName'
           placeholder="Name"
           onChange={e => {
@@ -90,7 +92,7 @@ class Login extends React.Component {
         </input>
 
         <input
-          className="App-loginInput"
+          className="App-loginInput question"
           type="password"
           id="App-inputPassword"
           placeholder="Password"

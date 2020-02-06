@@ -132,6 +132,7 @@ app.post("/delete", (req, res) => {
 
 app.post("/download", async function (req, res) {
 	if (!cookieIsValid(req)) {
+		console.log('unauthorized download attempt');
 		res.statusCode = 403;
 		res.send('{}')
 	} else {
@@ -237,7 +238,7 @@ app.post('/login', auth, async (req, res) => {
 		signed: true,
 	};
 
-	objectToReturn = { userRole: req.body.userName === 'huwig.marco@gmail.com' ? 'admin' : 'user' }
+	objectToReturn = { userName: req.body.userName, userRole: req.body.userName === 'huwig.marco@gmail.com' ? 'admin' : 'user' }
 
 	console.log(`logged in as ${objectToReturn.userRole}`);
 
@@ -300,13 +301,13 @@ app.post('/clear-cookie', (req, res) => {
 app.post('/read-cookie', (req, res) => {
 	if (req.signedCookies.name === 'huwig.marco@gmail.com') {
 		console.log('hello master')
-		res.send({ userRole: 'admin' });
+		res.send({ userName: req.signedCookies.name, userRole: 'admin' });
 	} else if (registeredUsers.hasOwnProperty(req.signedCookies.name)) {
 		console.log(`valid cookie of user ${req.signedCookies.name}`)
-		res.send({ userRole: 'user' });
+		res.send({ userName: req.signedCookies.name, userRole: 'user' });
 	} else {
 		res.statusCode = 403;
-		res.send({ userRole: 'guest' });
+		res.send({ userName: req.signedCookies.name, userRole: 'guest' });
 	}
 });
 

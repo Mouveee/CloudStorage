@@ -10,7 +10,6 @@ import fileIcon from "../../img/file.svg";
 import headphones from "../../img/headphones.svg";
 import penIcon from "../../img/pen.svg"
 import photoIcon from "../../img/photo.svg";
-import playIcon from '../../img/play.svg'
 
 import "./ListItem.css";
 
