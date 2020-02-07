@@ -173,7 +173,7 @@ class CloudStorage extends React.Component {
     let fileName = "unknown.dat";
 
     new Promise(async (resolve, reject) => {
-      let answer = await fetch("http://127.0.0.1:5000/download", {
+      let answer = await fetch("/download", {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached

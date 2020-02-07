@@ -76,7 +76,7 @@ class App extends Component {
 	}
 
 	readCookie = async () => {
-		const response = await this.callBackend('http://localhost:5000/read-cookie', {})
+		const response = await this.callBackend('./read-cookie', {})
 		if (response.status === 200) {
 			console.log('auth succesful');
 			const parsedResponse = response.json();

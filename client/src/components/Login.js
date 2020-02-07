@@ -40,14 +40,13 @@ class Login extends React.Component {
     if (this.state.userName.length < 1 || this.state.password.length < 1) {
       alert('i need more information');
     } else {
-      const response = await this.props.callBackend('http://localhost:5000/login', requestBody)
+      const response = await this.props.callBackend('./login', requestBody)
 
       if (response.status === 200) {
         const parsedResponse = response.json();
         parsedResponse.then(content => {
           this.props.changeUserRole(content.userRole);
-          document.removeEventListener('keyup', this.addKeyUpEvent);
-          console.log(`document.cookies: ${document.cookies}`)
+          document.onkeypress = null;
         })
       } else if (response.status === 401) {
         alert('wrong credentials');
@@ -59,7 +58,6 @@ class Login extends React.Component {
     if (e.keyCode === 13) {
       e.preventDefault();
       this.submitLoginData();
-      document.onkeypress = null;
     }
   }
 
