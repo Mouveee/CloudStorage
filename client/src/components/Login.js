@@ -40,7 +40,7 @@ class Login extends React.Component {
     if (this.state.userName.length < 1 || this.state.password.length < 1) {
       alert('i need more information');
     } else {
-      const response = await this.props.callBackend('./login', requestBody)
+      const response = await this.props.callBackend(`${process.env.REACT_APP_BACKEND_URL}/login`, requestBody)
 
       if (response.status === 200) {
         const parsedResponse = response.json();

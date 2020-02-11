@@ -21,6 +21,7 @@ const auth = basicAuth({
 });
 
 const corsOptions = {
+	origin: true,
 	optionsSuccessStatus: 200,
 	credentials: true
 };

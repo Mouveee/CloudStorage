@@ -76,7 +76,7 @@ class App extends Component {
 	}
 
 	readCookie = async () => {
-		const response = await this.callBackend('./read-cookie', {})
+		const response = await this.callBackend(`${process.env.REACT_APP_BACKEND_URL}/read-cookie`, {})
 		if (response.status === 200) {
 			console.log('auth succesful');
 			const parsedResponse = response.json();

@@ -23,13 +23,6 @@ class Header extends Component {
 
 		return (
 			<header id='App-header' className={this.props.isMobile ? classVisibility + ' mobileHeader' : classVisibility}>
-				{/* <img
-					src={octopus}
-					id='App-avatar'
-					className={classAvatar} alt=':('
-					onClick={() => this.props.changeRoute('main')}
-				/> */}
-
 				<div id="App-headerDiv" className={this.props.isMobile ? 'mobileHeader' : ''}>
 					<h1 className={classCaption += this.props.isMobile ? ' mobileHeader' : ''}>
 						MARCO HUWIG

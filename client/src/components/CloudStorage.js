@@ -76,15 +76,13 @@ class CloudStorage extends React.Component {
     let requestBody = {};
     requestBody.content = content;
 
-    console.log(`cs sending to ${destination}`)
-
-    if (!destination) destination = "./external"
+    if (!destination) destination = `${process.env.REACT_APP_BACKEND_URL}/external`
 
     const response = await fetch(destination, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       mode: "cors", // no-cors, cors, *same-origin
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, *same-origin, omit
+      credentials: "include", // include, *same-origin, omit
       headers: {
         "Content-Type": `application/json`,
         Accept: "*/*"
@@ -118,9 +116,13 @@ class CloudStorage extends React.Component {
     const folder = this.state.currentFolder + inputFolder.value;
 
     if (folder.length > 0) {
-      let response = await this.callBackendAPI(folder, "/createfolder");
+      let response = await this.callBackendAPI(folder, `${process.env.REACT_APP_BACKEND_URL}/createfolder`);
 
-      response.status === 200 ? alert('succesfully renamed') : alert('error, server response status: ' + response.status)
+      response.status === 200
+        ? alert('succesfully renamed')
+        : response.status === 403
+          ? alert('cookie validation failed')
+          : alert(`response status: ${response.status}`)
 
       this.requestFolder(this.state.currentFolder);
 
@@ -136,7 +138,7 @@ class CloudStorage extends React.Component {
 
     if (confirmed) {
       this.setState({ updating: true, selectedItems: {} });
-      await this.callBackendAPI(items, "/delete");
+      await this.callBackendAPI(items, `${process.env.REACT_APP_BACKEND_URL}/delete`);
       this.actualize();
       this.setState({ updating: false, selectedItems: {} });
     }
@@ -154,7 +156,7 @@ class CloudStorage extends React.Component {
 
     this.setState({ inProgress: [...this.state.inProgress, folder] })
 
-    let res = await this.callBackendAPI(content, '/downloadFolder');
+    let res = await this.callBackendAPI(content, `${process.env.REACT_APP_BACKEND_URL}/downloadFolder`);
     console.log(`response.status : ${res.status}`);
 
     res.json().then(response => {
@@ -264,7 +266,7 @@ class CloudStorage extends React.Component {
   };
 
   logout = async () => {
-    await this.callBackendAPI({}, './clear-cookie').then(() => { this.props.changeUserRole('guest'); });
+    await this.callBackendAPI({}, `${process.env.REACT_APP_BACKEND_URL}/clear-cookie`).then(() => { this.props.changeUserRole('guest'); });
   }
 
   navigateBack = async () => {
@@ -297,7 +299,7 @@ class CloudStorage extends React.Component {
       content.oldName = this.state.currentFolder + item;
       content.newName = this.state.currentFolder + newName;
 
-      let answer = await this.callBackendAPI(content, '/rename');
+      let answer = await this.callBackendAPI(content, `${process.env.REACT_APP_BACKEND_URL}/rename`);
 
       answer.status === 200 ?
         this.actualize()
@@ -310,7 +312,7 @@ class CloudStorage extends React.Component {
     folder ? (targetFolder += folder.slice(2)) : console.log(`sending ${targetFolder}`);
     this.setState({ updating: true });
 
-    let response = await this.callBackendAPI(targetFolder, '/external');
+    let response = await this.callBackendAPI(targetFolder, `${process.env.REACT_APP_BACKEND_URL}/external`);
 
     let parsedResponse = response.json();
 
