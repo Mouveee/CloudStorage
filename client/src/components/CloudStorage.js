@@ -122,7 +122,7 @@ class CloudStorage extends React.Component {
         ? alert('succesfully renamed')
         : response.status === 403
           ? alert('cookie validation failed')
-          : alert(`response status: ${response.status}`)
+          : alert(`Error, server responded with status: ${response.status}`)
 
       this.requestFolder(this.state.currentFolder);
 

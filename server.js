@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const basicAuth = require("express-basic-auth");
+const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const fs = require("fs");
@@ -9,8 +10,8 @@ const path = require("path");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const https = require("https");
+const node_openssl = require('node-openssl-cert');
 const rimraf = require("rimraf");
-
 const archiver = require('archiver');
 
 
@@ -25,6 +26,11 @@ const corsOptions = {
 	optionsSuccessStatus: 200,
 	credentials: true
 };
+
+const httpsOptions = {
+	key: fs.readFileSync('./security/cert.key'),
+	cert: fs.readFileSync('./security/cert.pem')
+}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -89,11 +95,12 @@ app.post("/createfolder", (req, res) => {
 			`${process.env.DOTS}\nsomebody wants me to create folder ./external/${req.body.content}`
 		);
 		if (req.body.content && !fs.existsSync(`./external/${req.body.content}`)) {
-			console.log(`no naming conflict, creating folder: ${req.body.content}`);
+			console.log(`creating folder: ${req.body.content}`);
 
 			fs.mkdirSync(`./external/${req.body.content}`);
 			objectToSend = getFolderContent(`./external/` + req.body.content);
-			res.statusCode = 200;
+
+			res.statusCode = 201;
 			res.send(JSON.stringify(objectToSend));
 		} else if (fs.existsSync(`./external/${req.body.content}`)) {
 			console.log(`naming conflict, folder ${req.body.content}`);
@@ -335,12 +342,17 @@ app.post("/upload", (req, res) => {
 	res.send("1234");
 });
 
-const server = app.listen(5000, "0.0.0.0", function () {
+const server = https.createServer(httpsOptions, app).listen(5000, "0.0.0.0", function () {
 	const host = server.address().address;
 	const port = server.address().port;
+
+	bcrypt.hash('123', 10, function (err, hash) {
+		// Store hash in database
+		console.log(`hashed to: ${hash}`);
+	});
 
 	fs.existsSync('./external') ? null : fs.mkdirSync('./external');
 	fs.existsSync('./internal') ? null : fs.mkdirSync('./internal');
 
-	console.log(`Example app listening at http://${host}:${port}`);
+	console.log(`Example app listening at https://${host}:${port}`);
 });
