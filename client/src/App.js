@@ -37,6 +37,7 @@ class App extends Component {
 	}
 
 	componentDidMount = () => {
+		console.log(`backend at: ${process.env.REACT_APP_BACKEND_URL}`)
 		setTimeout(() => this.setState({ visible: true }), 10);
 		this.readCookie();
 	}
