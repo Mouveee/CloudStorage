@@ -31,29 +31,6 @@ class Login extends React.Component {
     console.log(button.classList)
   }
 
-  submitLoginData = async () => {
-    let requestBody = {};
-    requestBody = Object.assign(requestBody, this.state);
-
-    console.log('body of request: \n' + JSON.stringify(requestBody))
-
-    if (this.state.userName.length < 1 || this.state.password.length < 1) {
-      alert('i need more information');
-    } else {
-      const response = await this.props.callBackend(`${process.env.REACT_APP_BACKEND_URL}/login`, requestBody)
-
-      if (response.status === 200) {
-        const parsedResponse = response.json();
-        parsedResponse.then(content => {
-          this.props.changeUserRole(content.userRole);
-          document.onkeypress = null;
-        })
-      } else if (response.status === 401) {
-        alert('wrong credentials');
-      } else alert('welcome to hell');
-    }
-  }
-
   addKeyUpEvent = function addEvent(e) {
     if (e.keyCode === 13) {
       e.preventDefault();

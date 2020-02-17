@@ -301,7 +301,7 @@ class CloudStorage extends React.Component {
 
       let answer = await this.callBackendAPI(content, `${process.env.REACT_APP_BACKEND_URL}/rename`);
 
-      answer.status === 200 ?
+      answer.status === 201 ?
         this.actualize()
         : console.log('renaming went wrong, server status: ' + answer.status);
     }

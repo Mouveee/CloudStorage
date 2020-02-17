@@ -1,6 +1,7 @@
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
+import createAuth0Client from '@auth0/auth0-spa-js';
 
 import MobileDetect from 'mobile-detect';
 
@@ -24,6 +25,12 @@ class App extends Component {
 		super(props);
 
 		this.state = {
+			auth0Client: null,
+			auth0Config: {
+				domain: process.env.REACT_APP_AUTH0_DOMAIN,
+				client_id: process.env.REACT_APP_AUTH0_CLIENT_ID,
+				redirect_uri: window.location.origin
+			},
 			allowCookies: false,
 			askedForCookies: true,
 			loggedInUser: '',
@@ -38,8 +45,10 @@ class App extends Component {
 
 	componentDidMount = () => {
 		console.log(`backend at: ${process.env.REACT_APP_BACKEND_URL}`)
+
+		this.initializeAuth0();
+
 		setTimeout(() => this.setState({ visible: true }), 10);
-		this.readCookie();
 	}
 
 	callBackend = async (destination, requestBody) => {
@@ -76,21 +85,14 @@ class App extends Component {
 		console.log('role changed to: ' + this.state.userRole)
 	}
 
-	readCookie = async () => {
-		const response = await this.callBackend(`${process.env.REACT_APP_BACKEND_URL}/read-cookie`, {})
-		if (response.status === 200) {
-			console.log('auth succesful');
-			const parsedResponse = response.json();
+	initializeAuth0 = async () => {
+		const auth0Client = await createAuth0Client(this.state.auth0Config);
+		const isAuthenticated = await auth0Client.isAuthenticated();
 
-			parsedResponse.then(content => {
-				this.changeUserRole(content.userRole);
-			})
+		console.log('auth check result: ' + isAuthenticated)
 
-		} else {
-			console.log('auth failed');
-			this.setState({ allowCookies: false, askedForCookies: false })
-		}
-	}
+		this.setState({ auth0Client, isAuthenticated });
+	};
 
 	setCookieAllowance = (allowed) => {
 		this.setState({
