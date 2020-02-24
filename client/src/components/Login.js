@@ -14,6 +14,10 @@ class Login extends React.Component {
     }
   }
 
+  submitLoginData = () => {
+    alert('couldnt reach backend')
+  }
+
   toggleSubmitButton = () => {
     const button = document.getElementById('App-loginButton')
 
@@ -38,7 +42,7 @@ class Login extends React.Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     document.onkeypress = e => this.addKeyUpEvent(e)
   }
 

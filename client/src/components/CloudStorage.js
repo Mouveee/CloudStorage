@@ -57,7 +57,7 @@ class CloudStorage extends React.Component {
     this.requestFolder(this.state.currentFolder);
   };
 
-  armInputFolder = () => {
+  armFolderInput = () => {
     const inputFolder = document.getElementById("App-folderInput");
 
     //create a folder by pressing return, remove event listener when unfocused
@@ -377,8 +377,10 @@ class CloudStorage extends React.Component {
   };
 
   componentDidMount() {
+    console.log(`it has mounted :(`)
+
     this.requestFolder(this.state.currentFolder);
-    if (this.props.userRole === 'admin') this.armInputFolder();
+    if (this.props.userRole === 'admin') this.armFolderInput();
   }
 
   render() {

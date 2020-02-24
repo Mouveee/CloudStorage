@@ -1,7 +1,6 @@
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
-import createAuth0Client from '@auth0/auth0-spa-js';
 
 import MobileDetect from 'mobile-detect';
 
@@ -25,16 +24,11 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			auth0Client: null,
-			auth0Config: {
-				domain: process.env.REACT_APP_AUTH0_DOMAIN,
-				client_id: process.env.REACT_APP_AUTH0_CLIENT_ID,
-				redirect_uri: window.location.origin
-			},
 			allowCookies: false,
-			askedForCookies: true,
+			askedForCookies: false,
 			loggedInUser: '',
 			route: 'main', //main, cloudStorage or about,
+			user: null,
 			userRole: 'guest', //admin, user, guest 
 			visible: false
 		};
@@ -44,11 +38,7 @@ class App extends Component {
 	}
 
 	componentDidMount = () => {
-		console.log(`backend at: ${process.env.REACT_APP_BACKEND_URL}`)
-
-		this.initializeAuth0();
-
-		setTimeout(() => this.setState({ visible: true }), 10);
+		setTimeout(() => this.setState({ visible: true }), 800);
 	}
 
 	callBackend = async (destination, requestBody) => {
@@ -60,7 +50,7 @@ class App extends Component {
 			headers: {
 				"Content-Type": `application/json`,
 				Accept: "*/*",
-				"Authorization": `Basic ${btoa(`${requestBody.userName}:${requestBody.password}`)}`
+				// "Authorization": `Basic ${btoa(`${requestBody.userName}:${requestBody.password}`)}`
 				// 'Content-Type': 'application/x-www-form-urlencoded',
 			},
 			redirect: "follow", // manual, *follow, error
@@ -85,14 +75,6 @@ class App extends Component {
 		console.log('role changed to: ' + this.state.userRole)
 	}
 
-	initializeAuth0 = async () => {
-		const auth0Client = await createAuth0Client(this.state.auth0Config);
-		const isAuthenticated = await auth0Client.isAuthenticated();
-
-		console.log('auth check result: ' + isAuthenticated)
-
-		this.setState({ auth0Client, isAuthenticated });
-	};
 
 	setCookieAllowance = (allowed) => {
 		this.setState({
@@ -138,14 +120,17 @@ class App extends Component {
 										changeUserRole={this.changeUserRole}
 										isMobile={md.phone() ? true : false}
 										userRole={this.state.userRole}
-									/> :
+									/>
+									:
 									<Login
 										callBackend={this.callBackend}
 										changeUserRole={this.changeUserRole}
 										allowCookies={this.state.allowCookies}
 										isMobile={md.phone() ? true : false}
+										user={this.state.user}
 										userRole={this.state.userRole}
-									/>);
+									/>
+							);
 							case 'about': return (
 								<About
 									isMobile={md.phone() ? true : false}
@@ -158,7 +143,6 @@ class App extends Component {
 
 					{(() => {
 						if (!this.state.askedForCookies && this.state.userRole === 'guest') {
-							console.log(`user hasn't been asked for Cookies`);
 							return (
 								<AllowCookies
 									setCookieAllowance={this.setCookieAllowance}

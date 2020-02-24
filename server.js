@@ -5,9 +5,6 @@ const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const fs = require("fs");
-const jwt = require('express-jwt');
-const jwtAuthz = require('express-jwt-authz');
-const jwksRsa = require('jwks-rsa');
 const path = require("path");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
@@ -18,24 +15,17 @@ const archiver = require('archiver');
 
 const registeredUsers = JSON.parse(process.env.USERS).users;
 
+const httpsOptions = {
+	key: fs.readFileSync("./security/_.huwig-webdev.de_private_key.key"),
+	cert: fs.readFileSync("./security/huwig-webdev.de_ssl_certificate.cer"),
+	// ca: [
 
-const authConfig = {
-	domain: "huwig.eu.auth0.com",
-	audience: "https://cslogin.com/api"
+	// 	fs.readFileSync('path/to/CA_root.crt'),
+
+	// 	fs.readFileSync('path/to/ca_bundle_certificate.crt')
+
+	// ]
 };
-
-const checkJwt = jwt({
-	secret: jwksRsa.expressJwtSecret({
-		cache: true,
-		rateLimit: true,
-		jwksRequestsPerMinute: 5,
-		jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`
-	}),
-
-	audience: authConfig.audience,
-	issuer: `https://${authConfig.domain}/`,
-	algorithm: ["RS256"]
-});
 
 const corsOptions = {
 	origin: true,
@@ -143,7 +133,7 @@ app.post("/delete", (req, res) => {
 })
 
 
-app.post("/download", checkJwt, async function (req, res) {
+app.post("/download", async function (req, res) {
 	console.log(`${process.env.DOTS}\nsomebody requested: ${req.body.file}`);
 	const file = `${req.body.folder}${req.body.file}`;
 
@@ -199,8 +189,6 @@ app.post("/external", (req, res) => {
 	let objectToSend = {};
 	let dir = req.body.content || "./external/";
 
-
-
 	let noError = true;
 
 	console.log(process.env.DOTS);
@@ -226,7 +214,7 @@ app.post("/external", (req, res) => {
 	}
 });
 
-app.post("/login", checkJwt, (req, res) => {
+app.post("/login", (req, res) => {
 	console.log('called login');
 	res.status = 200;
 	res.send({
@@ -280,7 +268,7 @@ app.post("/upload", (req, res) => {
 	res.send("1234");
 });
 
-const server = app.listen(5000, "0.0.0.0", function () {
+const server = https.createServer(httpsOptions, app).listen(5000, "0.0.0.0", function () {
 	const host = server.address().address;
 	const port = server.address().port;
 

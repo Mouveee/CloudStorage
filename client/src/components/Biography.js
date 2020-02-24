@@ -91,6 +91,18 @@ class Biography extends React.Component {
             </span>
           </div>
 
+          <div className='App-bioEntry'>
+            <span className='App-bioTitle'>2011-2013</span>
+            <span className='App-bioContent'>
+              Servicekraft Cafe Umwalzer(Weltkulturerbe Völklinger Hütte)
+              </span>
+            <br></br>
+            <span className='App-bioContent'>
+              <br></br>
+
+            </span>
+          </div>
+
           2004 – 2005
 
           Zivildienst

@@ -55,15 +55,17 @@ class EntryPage extends React.Component {
           </h1>
           {/* <br></br> */}
           <div>
-            Als Web Developer liegen meine Kernkompetenzen im Umgang mit Technologien wie <i>HTML, Javascript und CSS</i>.
+            Als Web Developer liegen meine Kernkompetenzen im Umgang mit Technologien wie <i>HTML, Javascript und CSS</i>
+            sowie verwandten Tools, Libraries und Frameworks. Diese Seite wurde zum Beispiel
+            mit <i>React</i> programmiert.
             Eine detailliertere Auflistung meiner Kenntnisse und Erfahrungen findest Du unter <i>Kenntnisse</i>.
             <br></br>
             Als Web Developer besteht ein Großteil meiner Aufgaben in der Konzeptionierung und Gestaltung von Websites
             und deren praktischer Umsetzung in Codeform im Frontend, sowie mit der Entwicklung von REST-APIs im Backend.
-            Ich sehe mich abei als klassischen Problemlöser: Der Kunde hat ein Problem, meine Aufgabe ist es dieses zu analysieren,
+            Ich sehe mich dabei als klassischen Problemlöser: Der Kunde hat ein Problem, meine Aufgabe ist es dieses zu analysieren,
             seinen Ursprung zu finden und es schließlich zu lösen.
             <br></br>
-            Neben der Webentwicklung beschäftige ich mich intensiv mit digital erstellter Musik und Sounddesign und bin
+            Neben der Webentwicklung beschäftige ich mich intensiv mit digital erstellter Musik und Sounddesign mit <i>Ableton Live</i> und bin
             begeisterter Leser von Romanen.
             <br></br>
             Derzeit bin ich auf der Suche nach einer neuen beruflichen Herausfordeung. Ich freue mich über jede Anfrage
