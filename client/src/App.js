@@ -113,6 +113,7 @@ class App extends Component {
 							case 'main': return (
 								<Main
 									isMobile={md.phone() ? true : false}
+									changeRoute={this.changeRoute}
 								/>)
 							case 'cloudStorage': return (
 								this.state.userRole === 'admin' || this.state.userRole === 'user' ?

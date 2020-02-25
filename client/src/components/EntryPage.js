@@ -44,24 +44,25 @@ class EntryPage extends React.Component {
               src={avatar}
               id='App-avatar'
               className={classAvatar} alt=':('
-              onClick={() => this.props.changeRoute('main')}
             />
 
             MARCO&nbsp;HUWIG
 
             <div id='App-subHeaderEntrypage'>
-              <small>Full Stack Web Developer</small>
+              <small>Web Developer</small>
             </div>
           </h1>
           {/* <br></br> */}
           <div>
-            Als Web Developer liegen meine Kernkompetenzen im Umgang mit Technologien wie <i>HTML, Javascript und CSS</i>
+            Als Web Developer liegen meine Kernkompetenzen im Umgang mit Technologien wie <i>HTML, Javascript und CSS</i>{' '}
             sowie verwandten Tools, Libraries und Frameworks. Diese Seite wurde zum Beispiel
             mit <i>React</i> programmiert.
-            Eine detailliertere Auflistung meiner Kenntnisse und Erfahrungen findest Du unter <i>Kenntnisse</i>.
+            Eine detailliertere Auflistung meiner Kenntnisse und Erfahrungen findest Du unter
+            {' '}<i className='App-clickable' onClick={() => this.props.setVisiblePage('skills')}>Kenntnisse</i>.
             <br></br>
             Als Web Developer besteht ein Großteil meiner Aufgaben in der Konzeptionierung und Gestaltung von Websites
-            und deren praktischer Umsetzung in Codeform im Frontend, sowie mit der Entwicklung von REST-APIs im Backend.
+            und deren praktischer Umsetzung in Codeform im Frontend, sowie in der Entwicklung von REST-APIs und
+            Datenverarbeitung im Backend.
             Ich sehe mich dabei als klassischen Problemlöser: Der Kunde hat ein Problem, meine Aufgabe ist es dieses zu analysieren,
             seinen Ursprung zu finden und es schließlich zu lösen.
             <br></br>
@@ -69,8 +70,8 @@ class EntryPage extends React.Component {
             begeisterter Leser von Romanen.
             <br></br>
             Derzeit bin ich auf der Suche nach einer neuen beruflichen Herausfordeung. Ich freue mich über jede Anfrage
-            diesbezüglich, Du erreichst mich unter meiner <a type="email" href="huwig.marco@gmail.com">EMail Adresse </a>
-            oder in den Kontaktdaten.
+            diesbezüglich, Du erreichst mich unter meiner <i><a type="email" className="App-clickable" href="huwig.marco@gmail.com">EMail Adresse </a></i>
+            oder in den <i className="App-clickable" onClick={() => this.props.changeRoute('about')}>Kontaktdaten</i>.
           </div>
         </section>
       </ section >

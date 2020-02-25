@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./Header.css";
 
-import icon from "../img/headIcon.jpg";
+import icon from "../img/headIconTP.png";
 
 class Header extends Component {
 	constructor(props) {
@@ -23,6 +23,7 @@ class Header extends Component {
 
 		return (
 			<header id='App-header' className={this.props.isMobile ? classVisibility + ' mobileHeader' : classVisibility}>
+				<img src={icon} alt='nope' id="App-headerIcon"></img>
 				<div id="App-headerDiv" className={this.props.isMobile ? 'mobileHeader' : ''}>
 					<h1 className={classCaption += this.props.isMobile ? ' mobileHeader' : ''}>
 						MARCO HUWIG

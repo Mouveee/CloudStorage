@@ -1,6 +1,6 @@
 h1 {
   margin-top: -0.3em;
-  font-size: calc(32px + 1vmin);
+  font-size: calc(34px + 1vmin);
 }
 
 #App-avatar {
@@ -18,26 +18,9 @@ h1 {
   text-align: justify;
 }
 
-#App-avatar:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-#App-avatar.mobileHeader {
-  margin-left: 5px;
-  margin-top: 0;
-  margin-right: 8px;
-  margin-bottom: 1px;
-  height: calc(60px + 0.5vmin);
-  width: calc(60px + 0.5vmin);
-}
-
 #App-subHeaderEntrypage {
   color: gray;
-  font-size: calc(24px + 1vmin);
+  font-size: calc(22px + 1vmin);
   margin-top: -0.1em;
 }
 
-.App-mobileHead {
-  font-size: calc(16px + 0.5vmin);
-}

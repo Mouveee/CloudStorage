@@ -22,6 +22,7 @@
 	margin: auto;
 	transition: 400ms ease-in-out;
 	clear: both;
+	z-index:-999;
 }
 
 #App-header.visible {
@@ -40,11 +41,14 @@
 
 #App-headerIcon {
 	position: absolute;
-	height: calc(30px + 0.5vmin);
-	width: calc(300px + 0.5vmin);
-	left: 3vw;
-	top: 1.5vh;
-	z-index: 1;
+	height: calc(100px + 1vmin);
+	width: 90vw;
+	left: -50px;;
+	top: 3vh;
+	z-index: 0;
+	opacity:0.23;
+	filter: hue-rotate(100deg);
+	filter: saturate(80%);
 }
 
 .App-caption {
@@ -57,7 +61,8 @@
 }
 
 .App-subHeader {
-	font-size: calc(18px + 1vmin);
+	z-index:999;
+	font-size: calc(16px + 1vmin);
 	line-break: strict;
 	text-align: center;
 	margin: 0;

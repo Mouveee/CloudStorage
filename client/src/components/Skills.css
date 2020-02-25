@@ -8,15 +8,61 @@
 }
 
 .App-listPoint{
-  background-color: ghostwhite;
-  font-weight:  bold;
+  /* height: 25vh; */
+  font-size: calc(16px + 0.5vh);
+  width: 80%;
+  margin-right: 1em;
+  background-color: white;
+  font-weight: bold;
   margin-bottom: 1em;
-  padding: 12px;
+  padding: 16px;
+  border-radius: 15px;
+  text-shadow: white;
+  transition: 600ms ease-in-out;
+  opacity:0;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 1px 2px lightgrey;
+}
+
+.App-listPoint li:nth-child(odd){
+  /* background-color: ghostwhite; */
+  border-top:1px solid lightgray;
+  border-right: 1px solid lightgrey;
+}
+
+.App-listPoint li:nth-child(even){
+  border-bottom:1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+}
+
+.App-listPoint.opaque{
+  opacity: 1;
 }
 
 .App-subList{
-  background-color: white;
+  font-size: calc(14px + 0.5vh);
   font-weight:normal;
-  margin:1em;
-  padding:0.3em;
+  margin:0;
+  padding:0.4em;
 }
+
+.App-subList li{
+  /* text-align: center; */
+  width: 12vw;
+  height: 5vh;
+  padding: 12px;
+  margin: 6px;
+  float:left;
+  background-color:white;
+  border-radius: 12px;
+  color:black;
+}
+
+.App-listPoint:nth-child(odd){
+  margin-left:6em;
+}
+
+/* #App-microsoftEntry{
+  width: 100%;
+} */

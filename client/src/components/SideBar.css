@@ -1,5 +1,5 @@
 #App-sideBar {
-	display: inline-block;
+	/* display: inline-block; */
 	font-size: calc(14px + 1vmin);
 	position: absolute;
 	left: -14vw;

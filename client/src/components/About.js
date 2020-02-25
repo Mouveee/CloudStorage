@@ -18,9 +18,9 @@ class About extends React.Component {
         <div><br></br></div>
         <div>66117 Saarbrücken</div>
 
-        <div><small>2019</small></div>
+        <div><small>2020</small></div>
 
-        <a href='mailto:huwig.marco@gmail.com'>huwig.marco@gmail.com</a>
+        <a className="App-clickable" href='mailto:huwig.marco@gmail.com'>huwig.marco@gmail.com</a>
       </section>
     )
   }
