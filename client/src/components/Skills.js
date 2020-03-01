@@ -18,7 +18,7 @@ class Skills extends React.Component {
     for (let i = listEntries.length - 1; i >= 0; i--) {
       setTimeout(() => {
         listEntries[i].className += ' opaque'
-      }, 600 + i * 110)
+      }, 10 + i * 90)
     }
   }
 
@@ -37,8 +37,9 @@ class Skills extends React.Component {
             <h3>Javascript</h3>
             <ul className='App-subList'>
               <li>
-                React, React Native, Jquery
+                React, React Native
                 </li>
+              <li>Jquery</li>
               <li>
                 NodeJS, Express
                 </li>

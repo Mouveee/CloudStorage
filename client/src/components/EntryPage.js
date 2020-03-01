@@ -43,6 +43,7 @@ class EntryPage extends React.Component {
             <img
               src={avatar}
               id='App-avatar'
+              rel="preload"
               className={classAvatar} alt=':('
             />
 

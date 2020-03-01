@@ -23,6 +23,7 @@
   overflow: hidden;
   text-align: center;
   box-shadow: 1px 2px lightgrey;
+  list-style: none;
 }
 
 .App-listPoint li:nth-child(odd){
@@ -50,13 +51,14 @@
 .App-subList li{
   /* text-align: center; */
   width: 12vw;
-  height: 5vh;
+  height: 3vh;
   padding: 12px;
   margin: 6px;
   float:left;
   background-color:white;
   border-radius: 12px;
   color:black;
+  vertical-align: middle;
 }
 
 .App-listPoint:nth-child(odd){

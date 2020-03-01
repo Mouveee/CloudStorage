@@ -1,6 +1,7 @@
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React, { Component } from "react";
+import Fullscreen from "react-full-screen";
 
 import MobileDetect from 'mobile-detect';
 
@@ -26,6 +27,7 @@ class App extends Component {
 		this.state = {
 			allowCookies: false,
 			askedForCookies: false,
+			fullScreen: false,
 			loggedInUser: '',
 			route: 'main', //main, cloudStorage or about,
 			user: null,
@@ -81,6 +83,14 @@ class App extends Component {
 			allowCookies: allowed,
 			askedForCookies: true
 		});
+
+		document.cookie = `cookiesAllowed=${allowed}`
+		console.log(`cookie: ${document.cookie} of type ${typeof document.cookie}`)
+	}
+
+	setFullScreen = () => {
+		this.setState({ fullScreen: true });
+		alert('fired')
 	}
 
 	render() {
@@ -92,66 +102,75 @@ class App extends Component {
 		const classOfMainContainer = this.state.visible ? 'visible' : 'invisible';
 
 		return (
+
 			<div className={'App-container'}>
-				<Header
-					isMobile={md.phone() ? true : false}
-					changeRoute={this.changeRoute}
-				/>
+				<button onClick={this.setFullScreen} className="App-btnFull">FULL</button>
+				<Fullscreen
+					enabled={this.state.fullScreen}
+				>
+					<Header
+						isMobile={md.phone() ? true : false}
+						changeRoute={this.changeRoute}
+					/>
 
-				<NavBar
-					isMobile={md.phone() ? true : false}
-					changeRoute={this.changeRoute}
-				/>
+					<NavBar
+						isMobile={md.phone() ? true : false}
+						changeRoute={this.changeRoute}
+					/>
 
-				{this.state.userRole !== 'guest' ? <UserInfo /> : <p></p>}
+					{this.state.userRole !== 'guest' ? <UserInfo /> : <p></p>}
 
-				{/* this will be slowly faded in when changing this.state.visible */}
-				<div id='App-mainContainer' className={classOfMainContainer}>
+					{/* this will be slowly faded in when changing this.state.visible */}
+					<div id='App-mainContainer' className={classOfMainContainer}>
 
-					{(() => {
-						switch (this.state.route) {
-							case 'main': return (
-								<Main
-									isMobile={md.phone() ? true : false}
-									changeRoute={this.changeRoute}
-								/>)
-							case 'cloudStorage': return (
-								this.state.userRole === 'admin' || this.state.userRole === 'user' ?
-									<CloudStorage
-										changeUserRole={this.changeUserRole}
+						{(() => {
+							switch (this.state.route) {
+								case 'main': return (
+									<Main
 										isMobile={md.phone() ? true : false}
-										userRole={this.state.userRole}
-									/>
-									:
-									<Login
-										callBackend={this.callBackend}
-										changeUserRole={this.changeUserRole}
-										allowCookies={this.state.allowCookies}
+										changeRoute={this.changeRoute}
+									/>)
+								case 'cloudStorage': return (
+									this.state.userRole === 'admin' || this.state.userRole === 'user' ?
+										<CloudStorage
+											changeUserRole={this.changeUserRole}
+											isMobile={md.phone() ? true : false}
+											userRole={this.state.userRole}
+										/>
+										:
+										<Login
+											callBackend={this.callBackend}
+											changeUserRole={this.changeUserRole}
+											allowCookies={this.state.allowCookies}
+											isMobile={md.phone() ? true : false}
+											user={this.state.user}
+											userRole={this.state.userRole}
+										/>
+								);
+								case 'about': return (
+									<About
 										isMobile={md.phone() ? true : false}
-										user={this.state.user}
-										userRole={this.state.userRole}
 									/>
-							);
-							case 'about': return (
-								<About
-									isMobile={md.phone() ? true : false}
-								/>
-							)
-							default: return (<NotFound />)
-						}
-					})()}
+								)
+								default: return (<NotFound />)
+							}
+						})()}
 
 
-					{(() => {
-						if (!this.state.askedForCookies && this.state.userRole === 'guest') {
-							return (
-								<AllowCookies
-									setCookieAllowance={this.setCookieAllowance}
-								/>
-							);
-						}
-					})()}
-				</div>
+						{(() => {
+							if (!this.state.askedForCookies
+								&& this.state.userRole === 'guest'
+								&& !document.cookie.substring('cookiesAllowed=true')
+							) {
+								return (
+									<AllowCookies
+										setCookieAllowance={this.setCookieAllowance}
+									/>
+								);
+							}
+						})()}
+					</div>
+				</Fullscreen >
 			</div >
 		);
 	}
