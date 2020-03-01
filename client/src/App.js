@@ -81,7 +81,7 @@ class App extends Component {
 	setCookieAllowance = (allowed) => {
 		this.setState({
 			allowCookies: allowed,
-			askedForCookies: true
+			askedForCookiesAndFullScreen: true
 		});
 
 		document.cookie = `cookiesAllowed=${allowed}`

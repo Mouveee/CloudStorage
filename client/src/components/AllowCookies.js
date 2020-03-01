@@ -6,6 +6,7 @@ class AllowCookies extends React.Component {
     super(props);
 
     this.state = {
+      cookiesAllowed: false,
       question: this.props.cookiesAllowed ? 1 : 0,
       visible: true
     }
@@ -15,7 +16,6 @@ class AllowCookies extends React.Component {
     if (this.state.question === 1) {
       document.getElementById('App-infoText').innerHTML = 'Seite im Vollbild darstellen?';
     }
-    alert(this.state.question === 1 ? 'allowed' : 'not allowed')
   }
 
   fadeOut = () => {
@@ -24,12 +24,12 @@ class AllowCookies extends React.Component {
 
   handleClick(decision) {
     if (this.state.question === 0) {
-      this.props.setCookieAllowance(decision)
       document.getElementById('App-infoText').innerHTML = 'Seite im Vollbild darstellen?';
       this.setState({ question: this.state.question + 1 })
     } else {
       this.fadeOut();
       if (decision) this.props.setFullScreen();
+      this.props.setCookieAllowance(decision);
     }
   }
 

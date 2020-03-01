@@ -52,7 +52,7 @@ h3{
 #App-mainContainer {
 	background-color: white;
 	transition: 300ms;
-	pointer-events: all;
+	pointer-events: none;
 }
 
 #App-mainContainer.visible {
