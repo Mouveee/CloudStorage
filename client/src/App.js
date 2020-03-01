@@ -26,7 +26,7 @@ class App extends Component {
 
 		this.state = {
 			allowCookies: false,
-			askedForCookies: false,
+			askedForCookiesAndFullScreen: false,
 			fullScreen: false,
 			loggedInUser: '',
 			route: 'main', //main, cloudStorage or about,
@@ -101,6 +101,19 @@ class App extends Component {
 
 		return (
 			<div className={'App-container'}>
+				{(() => {
+					if (!this.state.askedForCookiesAndFullScreen
+						&& this.state.userRole === 'guest'
+					) {
+						return (
+							<AllowCookies
+								cookiesAllowed={document.cookie.search('cookiesAllowed=true') !== -1}
+								setCookieAllowance={this.setCookieAllowance}
+								setFullScreen={this.setFullScreen}
+							/>
+						);
+					}
+				})()}
 				<Fullscreen
 					enabled={this.state.fullScreen}
 				>
@@ -153,19 +166,7 @@ class App extends Component {
 						})()}
 
 
-						{(() => {
-							if (!this.state.askedForCookies
-								&& this.state.userRole === 'guest'
-							) {
-								return (
-									<AllowCookies
-										cookiesAllowed={document.cookie.search('cookiesAllowed=true') !== -1}
-										setCookieAllowance={this.setCookieAllowance}
-										setFullScreen={this.setFullScreen}
-									/>
-								);
-							}
-						})()}
+
 					</div>
 				</Fullscreen >
 			</div >

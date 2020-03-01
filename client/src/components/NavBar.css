@@ -19,7 +19,7 @@
 	background-color: white;
 	border-bottom: solid 1px lightgray;
 	justify-content: center;
-	pointer-events: all;
+	/* pointer-events: all; */
 }
 
 .App-navBar.App-navBarVisible {
