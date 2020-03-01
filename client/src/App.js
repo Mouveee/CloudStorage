@@ -85,12 +85,10 @@ class App extends Component {
 		});
 
 		document.cookie = `cookiesAllowed=${allowed}`
-		console.log(`cookie: ${document.cookie} of type ${typeof document.cookie}`)
 	}
 
 	setFullScreen = () => {
 		this.setState({ fullScreen: true });
-		alert('fired')
 	}
 
 	render() {
@@ -102,9 +100,7 @@ class App extends Component {
 		const classOfMainContainer = this.state.visible ? 'visible' : 'invisible';
 
 		return (
-
 			<div className={'App-container'}>
-				<button onClick={this.setFullScreen} className="App-btnFull">FULL</button>
 				<Fullscreen
 					enabled={this.state.fullScreen}
 				>
@@ -160,11 +156,12 @@ class App extends Component {
 						{(() => {
 							if (!this.state.askedForCookies
 								&& this.state.userRole === 'guest'
-								&& !document.cookie.substring('cookiesAllowed=true')
 							) {
 								return (
 									<AllowCookies
+										cookiesAllowed={document.cookie.search('cookiesAllowed=true') !== -1}
 										setCookieAllowance={this.setCookieAllowance}
+										setFullScreen={this.setFullScreen}
 									/>
 								);
 							}
