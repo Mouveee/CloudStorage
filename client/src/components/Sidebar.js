@@ -45,7 +45,7 @@ class SideBar extends React.Component {
 						className='App-sideBarItem'
 						onClick={() => this.changeView('biography')}
 					>
-						Lebenslauf
+						Vita
 				</div>
 				</nav>
 				:
