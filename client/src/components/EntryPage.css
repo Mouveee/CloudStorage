@@ -18,6 +18,10 @@ h1 {
   text-align: justify;
 }
 
+#App-introductionText{
+  padding-left: 4em;
+}
+
 #App-subHeaderEntrypage {
   color: gray;
   font-size: calc(22px + 1vmin);

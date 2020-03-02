@@ -54,7 +54,7 @@ class EntryPage extends React.Component {
             </div>
           </h1>
           {/* <br></br> */}
-          <div>
+          <div id='App-introductionText'>
             Als Web Developer liegen meine Kernkompetenzen im Umgang mit Technologien wie <i>HTML, Javascript und CSS</i>{' '}
             sowie verwandten Tools, Libraries und Frameworks. Diese Seite wurde zum Beispiel
             mit <i>React</i> programmiert.
