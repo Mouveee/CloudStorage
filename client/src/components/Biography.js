@@ -1,39 +1,20 @@
 import * as React from 'react';
 
-import './Biography.css';
-
-import fader from '../HOC/Fader'
-
 class Biography extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { visible: this.props.visible }
-
-    this.timeOut = null;
-  }
-
-  componentWillUnmount = () => {
-    clearTimeout(this.timeOut);
-  }
-
-  render() {
-    let classOfContainer = '';
-
-    if (this.state.visible) {
-      classOfContainer += 'App-mainVisibile';
-    }
-
-    if (this.props.isMobile) {
-      classOfContainer += ' mobile'
-    }
-
-    return (
-      <div id='App-mainPage' className={classOfContainer}>
-
-      </div>
-    )
-  }
+    render(){
+        return(
+            <div>
+                Vor und während meiner Beschäftigung mit Web Development habe ich viel in der Gastronomie gearbeitet und 
+                habe mir dabei einen offenen Umgang mit Menschen angeeignet. Ich habe gern Kundenkontakt und arbeite auch 
+                an der Schnittstelle zwischen Beratung und Entwicklung. 
+                <br></br>
+                Privat beschäftige ich mich außerdem viel mit Musik und Literatur, sowohl mit Fachliteratur als auch mit Romanen.
+                <br></br>
+            </div>
+    )}
 }
 
-export default fader(Biography);
+export default Biography;
+
+
+
