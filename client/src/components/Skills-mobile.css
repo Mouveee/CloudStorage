@@ -1,12 +1,9 @@
 h3 {
   text-align: left;
   text-transform: uppercase;
-  border-left: 1px solid lightgray;
-  border-top: 1px solid lightgray;
-  border-radius: 8px;
   margin-left: -24px;
   margin-top: 0;
-  padding-top: 2px;
+  /* padding-top: 2px; */
   padding-left: 24px;
   padding-top: 12px;
   width: 12vw;
@@ -14,7 +11,14 @@ h3 {
 
 .App-skillList {
   text-align: left;
+  list-style: none;
 }
+
+.App-subList {
+  list-style: none;
+}
+
+/*
 
 .App-skillList li {
   list-style-type: none;
@@ -22,14 +26,13 @@ h3 {
 }
 
 .App-listPoint {
-  /* height: 25vh; */
   font-size: calc(16px + 0.5vh);
   width: 80%;
   margin-right: 1em;
   background-color: white;
   font-weight: bold;
   margin-bottom: 1em;
-  padding: 16px;
+  padding: 14px;
   border-radius: 15px;
   text-shadow: white;
   transition: 600ms ease-in-out;
@@ -38,18 +41,10 @@ h3 {
   text-align: center;
   box-shadow: 1px 2px lightgrey;
   list-style: none;
+  list-style-type: none;
 }
 
-.App-listPoint li:nth-child(odd) {
-  /* background-color: ghostwhite; */
-  border-top: 1px solid lightgray;
-  border-right: 1px solid lightgrey;
-}
 
-.App-listPoint li:nth-child(even) {
-  border-bottom: 1px solid lightgrey;
-  border-left: 1px solid lightgrey;
-}
 
 .App-listPoint.opaque {
   opacity: 1;
@@ -63,7 +58,6 @@ h3 {
 }
 
 .App-subList li {
-  /* text-align: center; */
   width: 12vw;
   height: 3vh;
   padding: 12px;
@@ -76,7 +70,7 @@ h3 {
 }
 
 .App-listPoint:nth-child(odd) {
-  margin-left: 6em;
+  margin-left: 2em;
 }
 
 /* #App-microsoftEntry{

@@ -2,13 +2,17 @@ import * as React from 'react';
 
 import avatar from '../img/myself.jpg';
 
-import './EntryPage.css';
-
 class EntryPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = { visible: false }
+
+    if (this.props.isMobile) {
+      import('./EntryPage-mobile.css').then();
+    } else {
+      import('./EntryPage.css').then();
+    }
   }
 
   componentDidMount = () => {
@@ -71,7 +75,7 @@ class EntryPage extends React.Component {
             begeisterter Leser von Romanen.
             <br></br>
             Derzeit bin ich auf der Suche nach einer neuen beruflichen Herausfordeung. Ich freue mich über jede Anfrage
-            diesbezüglich, Du erreichst mich unter meiner <i><a type="email" className="App-clickable" href="huwig.marco@gmail.com">EMail Adresse </a></i>
+            diesbezüglich, Du erreichst mich unter meiner <i><a type="email" className="App-clickable" href="mailto:huwig.marco@gmail.com">EMail Adresse </a></i>
             oder in den <i className="App-clickable" onClick={() => this.props.changeRoute('about')}>Kontaktdaten</i>.
           </div>
         </section>

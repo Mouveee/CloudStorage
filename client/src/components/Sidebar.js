@@ -72,7 +72,7 @@ class SideBar extends React.Component {
 						className='App-sideBarItem mobile'
 						onClick={() => this.changeView('biography')}
 					>
-						Lebenslauf
+						Vita
 				</span>
 				</nav>
 		)

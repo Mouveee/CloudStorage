@@ -2,11 +2,19 @@ import * as React from 'react';
 
 //TODO: create new css file for list
 import './Main.css';
-import './Skills.css';
 
 import fader from '../HOC/Fader';
 
 class Skills extends React.Component {
+  constructor(props) {
+    super(props);
+
+    if (this.props.isMobile) {
+      import('./Skills-mobile.css').then();
+    } else {
+      import('./Skills.css').then();
+    }
+  }
 
   componentDidMount = () => {
     this.fadeInListEntries();
@@ -32,7 +40,7 @@ class Skills extends React.Component {
     return (
       <section className={mainClass}>
         <div></div>
-        <ul>
+        <ul className='App-skillList'>
           <li className='App-listPoint'>
             <h3>Javascript</h3>
             <ul className='App-subList'>

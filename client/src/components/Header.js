@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 
-import "./Header.css";
-
 class Header extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = { visible: false }
+
+		if (this.props.isMobile) {
+			import('./Header-mobile.css').then();
+		} else {
+			import('./Header.css').then();
+		}
 	}
 
 	componentDidMount = () => {

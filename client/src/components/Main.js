@@ -8,7 +8,6 @@ import EntryPage from './EntryPage.js';
 import SideBar from './Sidebar.js';
 import Skills from './Skills.js';
 
-import './Main.css';
 
 class Main extends React.Component {
   constructor(props) {
@@ -18,6 +17,10 @@ class Main extends React.Component {
       visible: false,
       route: 'main', //main, biography, skills 
     }
+
+    if (this.props.isMobile)
+      import('./Main-mobile.css').then();
+    else import('./Main.css').then();
 
     this.setVisiblePage.bind(this);
 

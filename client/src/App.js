@@ -16,7 +16,13 @@ import NavBar from './components/NavBar.js';
 import NotFound from './components/NotFound.js';
 import UserInfo from './components/UserInfo.js';
 
-import "./App.css";
+const md = new MobileDetect(
+	window.navigator.userAgent
+);
+
+if (md.phone()) {
+	import('./App-mobile.css').then((css) => console.log('imported mobile'))
+} else import('./App.css').then((css) => console.log('desktop css'))
 
 document.title = 'Marco Huwig Web Development';
 
@@ -93,10 +99,6 @@ class App extends Component {
 
 	render() {
 		// window.chrome ? console.log('Running on chrome...') : console.log('');
-		const md = new MobileDetect(
-			window.navigator.userAgent
-		);
-
 		const classOfMainContainer = this.state.visible ? 'visible' : 'invisible';
 
 		return (

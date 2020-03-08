@@ -1,0 +1,68 @@
+@font-face {
+	font-family: headFont;
+	src: url("../fonts/Gidole-Regular.otf");
+}
+
+#App-header {
+	background-image: url('../img/head.jpg');
+	background-size: 120vw;
+	/* background-position-x: 100; */
+	background-position-y: 10%;
+	font-family: fancyFont;
+	font-weight: 100;
+	letter-spacing: 2px;
+	color: white;
+	width: 100%;
+	text-align: center;
+	vertical-align: middle;
+	opacity: 0;
+	top: 0;
+	user-select: none;
+	transition: 400ms ease-in-out;
+	clear: both;
+	z-index: -999;
+	height: calc(100px + 1vmin);
+	pointer-events: none;
+}
+
+#App-header.visible {
+	opacity: 1;
+}
+
+#App-headerDiv {
+	position: absolute;
+	left: 4vw;
+	display: inline-block;
+	text-align: center;
+	top: 0;
+	width: 80%;
+	vertical-align: middle;
+	margin-top: 0.2em;
+	height: calc(110px + 1vmin);
+}
+
+.App-caption {
+	font-size: calc(34px + 1vmin);
+	margin: 0;
+	margin-top: 0.3em;
+	text-align: left;
+	line-break: strict;
+	z-index: 999;
+}
+
+.App-subHeader {
+	/* display: inline-block; */
+	color: black;
+	position: fixed;
+	left: 1em;
+	top: 12px;
+	z-index: 999;
+	font-size: calc(18px + 1vmin);
+	line-break: strict;
+	text-align: left;
+	/* margin: 0;
+	padding: 0; */
+	margin-top: -4em;
+	/* margin-left: 0.2em; */
+	padding-top: 0;
+}
