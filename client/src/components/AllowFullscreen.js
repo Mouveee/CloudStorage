@@ -7,7 +7,14 @@ class AllowCookies extends React.Component {
 
     this.state = {
       cookiesAllowed: false,
+      question: this.props.cookiesAllowed ? 1 : 0,
       visible: true
+    }
+  }
+
+  componentDidMount = () => {
+    if (this.state.question === 1) {
+      document.getElementById('App-infoText').innerHTML = 'Seite im Vollbild darstellen?';
     }
   }
 
@@ -16,11 +23,15 @@ class AllowCookies extends React.Component {
   }
 
   handleClick(decision) {
-    this.fadeOut();
-    this.props.setCookieAllowance(decision);
+    if (this.state.question === 0) {
+      document.getElementById('App-infoText').innerHTML = 'Seite im Vollbild darstellen?';
+      this.setState({ question: this.state.question + 1 })
+    } else {
+      this.fadeOut();
+      if (decision) this.props.setFullScreen();
+      this.props.setCookieAllowance(decision);
+    }
   }
-
-
 
   render() {
     return (

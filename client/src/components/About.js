@@ -1,5 +1,7 @@
 import * as React from 'react';
+import SideBar from './SideBar.js';
 
+import './SideBar.css';
 import './Main.css';
 
 class About extends React.Component {
@@ -12,6 +14,11 @@ class About extends React.Component {
 
     return (
       <section id='App-mainPage' className={classMain}>
+        <SideBar
+          changeRoute={this.props.changeRoute}
+          isMainRoute={false}
+          setVisiblePage={this.props.setVisiblePage}
+        />
 
         <div>Marco Huwig</div>
         <div>Gärtnerstraße 31</div>

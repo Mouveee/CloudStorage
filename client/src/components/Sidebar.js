@@ -10,6 +10,11 @@ class SideBar extends React.Component {
 	}
 
 	changeView = route => {
+		if (!this.props.isMainRoute) {
+			console.log('calling from Main page')
+			this.props.changeRoute('main');
+		}
+		console.log(`sub page: ${route}`)
 		this.props.setVisiblePage(route);
 	}
 

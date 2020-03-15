@@ -20,6 +20,7 @@ const md = new MobileDetect(
 	window.navigator.userAgent
 );
 
+//conditional importing css for mobile or desktop
 if (md.phone()) {
 	import('./App-mobile.css').then((css) => console.log('imported mobile'))
 } else import('./App.css').then((css) => console.log('desktop css'))
@@ -31,18 +32,21 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			allowCookies: false,
-			askedForCookiesAndFullScreen: false,
+			allowCookies: document.cookie.search('cookiesAllowed=true') !== -1 ? false : true,
+			askedForCookie: this.allowCookies ? true : false,
+			askedForFullscreen: md.phone() ? false : true,
 			fullScreen: false,
 			loggedInUser: '',
 			route: 'main', //main, cloudStorage or about,
 			user: null,
 			userRole: 'guest', //admin, user, guest 
-			visible: false
+			visible: false,
+			visiblePage: 'main'
 		};
 
 		this.changeRoute.bind(this);
 		this.setCookieAllowance.bind(this);
+		this.setVisiblePage.bind(this);
 	}
 
 	componentDidMount = () => {
@@ -83,11 +87,10 @@ class App extends Component {
 		console.log('role changed to: ' + this.state.userRole)
 	}
 
-
 	setCookieAllowance = (allowed) => {
 		this.setState({
 			allowCookies: allowed,
-			askedForCookiesAndFullScreen: true
+			askedForCookies: true
 		});
 
 		document.cookie = `cookiesAllowed=${allowed}`
@@ -97,25 +100,36 @@ class App extends Component {
 		this.setState({ fullScreen: true });
 	}
 
+	setVisiblePage = route => {
+		if (this.state.route !== route) {
+			console.log(`setting sub page to: ${route}`)
+			this.setState({ visible: false });
+			setTimeout(() => { this.setState({ visiblePage: route }); console.log(`visible page set to: ${this.state.visiblePage}`) }, 600);
+			setTimeout(() => this.setState({ visible: true }), 650);
+
+		}
+	}
+
 	render() {
-		// window.chrome ? console.log('Running on chrome...') : console.log('');
 		const classOfMainContainer = this.state.visible ? 'visible' : 'invisible';
 
 		return (
 			<div className={'App-container'}>
 				{(() => {
-					if (!this.state.askedForCookiesAndFullScreen
+					if (!this.state.askedForCookies
 						&& this.state.userRole === 'guest'
 					) {
 						return (
 							<AllowCookies
-								cookiesAllowed={document.cookie.search('cookiesAllowed=true') !== -1}
+								cookiesAllowed={this.state.allowCookies}
+								isMobile={md.phone() ? true : false}
 								setCookieAllowance={this.setCookieAllowance}
 								setFullScreen={this.setFullScreen}
 							/>
 						);
 					}
 				})()}
+
 				<Fullscreen
 					enabled={this.state.fullScreen}
 				>
@@ -140,6 +154,8 @@ class App extends Component {
 									<Main
 										isMobile={md.phone() ? true : false}
 										changeRoute={this.changeRoute}
+										setVisiblePage={this.setVisiblePage}
+										visiblePage={this.state.visiblePage}
 									/>)
 								case 'cloudStorage': return (
 									this.state.userRole === 'admin' || this.state.userRole === 'user' ?
@@ -161,6 +177,8 @@ class App extends Component {
 								case 'about': return (
 									<About
 										isMobile={md.phone() ? true : false}
+										changeRoute={this.changeRoute}
+										setVisiblePage={this.setVisiblePage}
 									/>
 								)
 								default: return (<NotFound />)

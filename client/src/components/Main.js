@@ -1,11 +1,11 @@
 import * as React from 'react';
 
-//HOC, hope this works
+//HOC
 import fader from '../HOC/Fader'
 
 import Biography from './Biography.js';
 import EntryPage from './EntryPage.js';
-import SideBar from './Sidebar.js';
+import SideBar from './SideBar.js';
 import Skills from './Skills.js';
 
 
@@ -15,28 +15,18 @@ class Main extends React.Component {
 
     this.state = {
       visible: false,
-      route: 'main', //main, biography, skills 
+      route: this.props.visiblePage //main, biography, skills 
     }
 
     if (this.props.isMobile)
       import('./Main-mobile.css').then();
     else import('./Main.css').then();
 
-    this.setVisiblePage.bind(this);
-
     this.timeOut = null;
   }
 
   componentDidMount = () => {
     setTimeout(() => this.setState({ visible: true }), 10)
-  }
-
-  setVisiblePage = route => {
-    if (this.state.route !== route) {
-      this.setState({ visible: false });
-      setTimeout(() => this.setState({ route: route }), 600);
-      setTimeout(() => this.setState({ visible: true }), 650);
-    }
   }
 
   render() {
@@ -56,20 +46,22 @@ class Main extends React.Component {
         className={classMain}
       >
 
-        {/* self invoking function, switch cases handle routing */}
         <SideBar
+          isMainRoute={true}
           isMobile={this.props.isMobile}
-          setVisiblePage={this.setVisiblePage}
+          setVisiblePage={this.props.setVisiblePage}
+          visiblePage={this.state.visiblePage}
         />
+
         <section id='App-subPageContainer' className={classSub}>
+          {/* self invoking function, switch cases handle routing */}
           {(() => {
-            switch (this.state.route) {
+            switch (this.props.visiblePage) {
 
               case 'main':
                 return <EntryPage
                   changeRoute={this.props.changeRoute}
                   isMobile={this.props.isMobile}
-                  setVisiblePage={this.setVisiblePage}
                 />
 
               case 'skills':
