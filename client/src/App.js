@@ -37,7 +37,6 @@ class App extends Component {
 			askedForFullscreen: md.phone() ? false : true,
 			fullScreen: false,
 			loggedInUser: '',
-			route: 'main', //main, cloudStorage or about,
 			user: null,
 			userRole: 'guest', //admin, user, guest 
 			visible: false,
@@ -101,7 +100,7 @@ class App extends Component {
 	}
 
 	setVisiblePage = route => {
-		if (this.state.route !== route) {
+		if (this.state.visiblePage !== route) {
 			console.log(`setting sub page to: ${route}`)
 			this.setState({ visible: false });
 			setTimeout(() => { this.setState({ visiblePage: route }); console.log(`visible page set to: ${this.state.visiblePage}`) }, 600);
