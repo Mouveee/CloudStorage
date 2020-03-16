@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import myVideo from "../vids/head.mp4";
+import myVideo from "../vids/head.webm";
 
 class Header extends Component {
 	constructor(props) {
@@ -29,7 +29,7 @@ class Header extends Component {
 		return (
 			<header id='App-header' className={this.props.isMobile ? classVisibility + ' mobileHeader' : classVisibility}>
 				<video autoPlay muted loop id="App-headerVideo">
-					<source src={myVideo} type="video/mp4"></source>
+					<source src={myVideo} type="video/webm"></source>
 					<p>Video nicht geladen :(</p>
 				</video>
 				<div id="App-headerDiv" className={this.props.isMobile ? 'mobileHeader' : ''}>

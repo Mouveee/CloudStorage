@@ -35,7 +35,7 @@ class SideBar extends React.Component {
 						Über mich
 				</div>
 
-					<div>...</div>
+					<div className='App-sideBarDots'>.</div>
 
 					<div
 						className='App-sideBarItem'
@@ -44,7 +44,7 @@ class SideBar extends React.Component {
 						Kenntnisse
 				</div>
 
-					<div>...</div>
+					<div className='App-sideBarDots'>.</div>
 
 					<div
 						className='App-sideBarItem'

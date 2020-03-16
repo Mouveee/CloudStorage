@@ -37,6 +37,7 @@ class App extends Component {
 			askedForFullscreen: md.phone() ? false : true,
 			fullScreen: false,
 			loggedInUser: '',
+			route: 'main',
 			user: null,
 			userRole: 'guest', //admin, user, guest 
 			visible: false,
