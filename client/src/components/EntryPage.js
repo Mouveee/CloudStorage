@@ -74,8 +74,7 @@ class EntryPage extends React.Component {
             Neben der Webentwicklung beschäftige ich mich intensiv mit digital erstellter Musik und Sounddesign mit <i>Ableton Live</i> und bin
             begeisterter Leser von Romanen.
             <br></br>
-            Derzeit bin ich auf der Suche nach einer neuen beruflichen Herausfordeung. Ich freue mich über jede Anfrage
-            diesbezüglich, Du erreichst mich unter meiner <i><a type="email" className="App-clickable" href="mailto:huwig.marco@gmail.com">EMail Adresse </a></i>
+            Du erreichst mich unter meiner <i><a type="email" className="App-clickable" href="mailto:huwig.marco@gmail.com">E-Mail Adresse </a></i>
             oder in den <i className="App-clickable" onClick={() => this.props.changeRoute('about')}>Kontaktdaten</i>.
           </div>
         </section>

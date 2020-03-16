@@ -40,11 +40,17 @@
 	opacity: 1;
 }
 
+.App-sideBarDots{
+	margin-top: -0.5em;
+	margin-bottom: 0.2em;
+}
+
 .App-sideBarItem {
 	display: inline-block;
 	transition: 300ms;
 	padding: 0.2em;
 	margin-bottom: 0.1em;
+	color: gray;
 }
 
 .App-sideBarItem.mobile {
@@ -52,7 +58,7 @@
 }
 
 .App-sideBarItem:hover {
-	color: pink;
+	color: blue;
 	cursor: pointer;
 	opacity: 0.9;
 	z-index: 999;

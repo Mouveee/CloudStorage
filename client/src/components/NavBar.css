@@ -42,6 +42,6 @@
 }
 
 .App-navItem:hover {
-	color: #DA87B6;
+	color: blue;
 	cursor: pointer;
 }
