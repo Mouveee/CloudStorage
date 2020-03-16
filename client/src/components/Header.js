@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import myVideo from "../vids/head.mp4";
+
 class Header extends Component {
 	constructor(props) {
 		super(props);
@@ -14,6 +16,7 @@ class Header extends Component {
 	}
 
 	componentDidMount = () => {
+		document.getElementById('App-headerVideo').defaultPlaybackRate = 4.0;
 		setTimeout(() => this.setState({ visible: true }))
 	}
 
@@ -25,6 +28,10 @@ class Header extends Component {
 
 		return (
 			<header id='App-header' className={this.props.isMobile ? classVisibility + ' mobileHeader' : classVisibility}>
+				<video autoPlay muted loop id="App-headerVideo">
+					<source src={myVideo} type="video/mp4"></source>
+					<p>Video nicht geladen :(</p>
+				</video>
 				<div id="App-headerDiv" className={this.props.isMobile ? 'mobileHeader' : ''}>
 					<h1 className={classCaption += this.props.isMobile ? ' mobileHeader' : ''}>
 						MARCO HUWIG
@@ -32,8 +39,6 @@ class Header extends Component {
 							{'\t             '}Web Development
 					</span>
 					</h1>
-
-
 				</div>
 			</header>
 		);

@@ -4,9 +4,6 @@
 }
 
 #App-header {
-	background-image: url('../img/head.jpg');
-	background-size: 100vw;
-	/* background-position-x: 100; */
 	background-position-y: 10%;
 	font-family: fancyFont;
 	font-weight: 100;
@@ -39,6 +36,18 @@
 	vertical-align: middle;
 	margin-top: 0.25em;
 	height: calc(128px + 1vmin);
+}
+
+#App-headerVideo{
+	position: absolute;
+	left: 0px;
+	width: 100%    !important;
+  	height: calc(90px + 1vmin)   !important;
+  	z-index:-1; /* Causes the video to sit behind your heading */
+    object-position:bottom; /* Causes video to be centred against the header */
+	object-fit:cover; /* Causes video to cover/stretch to the header */
+	transform: rotateY(180deg);
+	opacity:1;
 }
 
 /* #App-headerIcon {

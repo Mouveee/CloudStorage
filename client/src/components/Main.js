@@ -62,6 +62,7 @@ class Main extends React.Component {
                 return <EntryPage
                   changeRoute={this.props.changeRoute}
                   isMobile={this.props.isMobile}
+                  setVisiblePage={this.props.setVisiblePage}
                 />
 
               case 'skills':
