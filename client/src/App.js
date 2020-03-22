@@ -20,11 +20,6 @@ const md = new MobileDetect(
 	window.navigator.userAgent
 );
 
-//conditional importing css for mobile or desktop
-if (md.phone()) {
-	import('./App-mobile.css').then((css) => console.log('imported mobile'))
-} else import('./App.css').then((css) => console.log('desktop css'))
-
 document.title = 'Marco Huwig Web Development';
 
 class App extends Component {
@@ -50,7 +45,12 @@ class App extends Component {
 	}
 
 	componentDidMount = () => {
-		setTimeout(() => this.setState({ visible: true }), 800);
+		setTimeout(() => {
+			//conditional importing css for mobile or desktop
+			if (md.phone()) {
+				import('./App-mobile.css').then((css) => this.setState({ visible: true }))
+			} else import('./App.css').then((css) => this.setState({ visible: true }))
+		}, 800);
 	}
 
 	callBackend = async (destination, requestBody) => {
@@ -106,7 +106,6 @@ class App extends Component {
 			this.setState({ visible: false });
 			setTimeout(() => { this.setState({ visiblePage: route }); console.log(`visible page set to: ${this.state.visiblePage}`) }, 600);
 			setTimeout(() => this.setState({ visible: true }), 650);
-
 		}
 	}
 

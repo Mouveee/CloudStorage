@@ -9,11 +9,7 @@ class Skills extends React.Component {
   constructor(props) {
     super(props);
 
-    if (this.props.isMobile) {
-      import('./Skills-mobile.css').then();
-    } else {
-      import('./Skills.css').then();
-    }
+
   }
 
   componentDidMount = () => {
@@ -25,6 +21,12 @@ class Skills extends React.Component {
 
     for (let i = listEntries.length - 1; i >= 0; i--) {
       setTimeout(() => {
+        if (this.props.isMobile) {
+          import('./Skills-mobile.css').then();
+        } else {
+          import('./Skills.css').then();
+        }
+
         listEntries[i].className += ' opaque'
       }, 10 + i * 90)
     }

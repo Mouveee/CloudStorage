@@ -7,17 +7,19 @@ class Header extends Component {
 		super(props);
 
 		this.state = { visible: false }
-
-		if (this.props.isMobile) {
-			import('./Header-mobile.css').then();
-		} else {
-			import('./Header.css').then();
-		}
 	}
 
 	componentDidMount = () => {
 		document.getElementById('App-headerVideo').playbackRate = 0.7;
-		setTimeout(() => this.setState({ visible: true }))
+
+		setTimeout(() => {
+			this.setState({ visible: true })
+			if (this.props.isMobile) {
+				import('./Header-mobile.css').then(() => this.setState({ visible: true }));
+			} else {
+				import('./Header.css').then(() => this.setState({ visible: true }));
+			}
+		}, 0)
 	}
 
 	render() {
@@ -27,7 +29,7 @@ class Header extends Component {
 		let classSubHeader = 'App-subHeader';
 
 		return (
-			<header id='App-header' className={this.props.isMobile ? classVisibility + ' mobileHeader' : classVisibility}>
+			<header id='App-header' className={this.props.isMobile ? classVisibility + ' mobileHeader' : classVisibility} >
 				<video autoPlay muted loop id="App-headerVideo">
 					<source src={myVideo} type="video/webm"></source>
 					<p>Video nicht geladen :(</p>
