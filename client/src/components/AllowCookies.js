@@ -1,5 +1,6 @@
 import * as React from 'react';
-import './AllowCookies.css';
+
+
 
 class AllowCookies extends React.Component {
   constructor(props) {
@@ -8,6 +9,12 @@ class AllowCookies extends React.Component {
     this.state = {
       cookiesAllowed: false,
       visible: true
+    }
+
+    if (this.props.isMobile) {
+      import('./AllowCookies-mobile.css').then();
+    } else {
+      import('./AllowCookies.css').then();
     }
   }
 

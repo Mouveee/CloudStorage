@@ -1,0 +1,41 @@
+#App-cookieConfirmationContainer {
+  transition: 400ms;
+}
+
+#App-overlay {
+  top: 0;
+  left: 0;
+  background-color: gray;
+  opacity: 0.7;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 998;
+}
+
+#App-allowCookieDialogue {
+  background-color: white;
+  padding: 1em;
+  font-size: calc(16px + 0.5vh);
+  position: fixed;
+  left: 25%;
+  top: 40%;
+  border: 1px solid black;
+  border-radius: 15px;
+  opacity: 1;
+  width: 50vw;
+  z-index: 999;
+  /* margin-top: -100px;
+  margin-left: -280px; */
+}
+
+.App-btnCookie {
+  display: inline-block;
+  transition: 400ms;
+  margin: 1em;
+}
+
+.App-btnCookie:hover {
+  color: lightgray;
+  cursor: pointer;
+}

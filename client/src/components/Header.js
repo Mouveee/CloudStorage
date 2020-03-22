@@ -16,7 +16,7 @@ class Header extends Component {
 	}
 
 	componentDidMount = () => {
-		document.getElementById('App-headerVideo').defaultPlaybackRate = 4.0;
+		document.getElementById('App-headerVideo').playbackRate = 0.7;
 		setTimeout(() => this.setState({ visible: true }))
 	}
 

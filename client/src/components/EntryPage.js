@@ -2,17 +2,19 @@ import * as React from 'react';
 
 import avatar from '../img/myself.jpg';
 
+if (this.props.isMobile) {
+  import('./EntryPage-mobile.css').then();
+} else {
+  import('./EntryPage.css').then();
+}
+
 class EntryPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = { visible: false }
 
-    if (this.props.isMobile) {
-      import('./EntryPage-mobile.css').then();
-    } else {
-      import('./EntryPage.css').then();
-    }
+
   }
 
   componentDidMount = () => {
