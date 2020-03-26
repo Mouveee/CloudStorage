@@ -19,26 +19,29 @@
 	background-color: white;
 	border-bottom: solid 1px lightgray;
 	justify-content: center;
-	/* pointer-events: all; */
 }
 
-.App-navBar.App-navBarVisible {
+.App-navBar.visible {
 	opacity: 1;
 }
 
-.App-navBar.mobileHeader {
+.App-navBar.visible.App-mobile {
+	position: fixed;
+	top: 18vh;
 	height: calc(16px);
 	font-size: calc(14px + 1vmin);
-	padding-top: 0.5em;
-	display: inline-block;
 }
 
 .App-navItem {
 	vertical-align: middle;
-	margin: 1em;
+	margin:1em;
 	display: inline;
 	user-select: none;
 	transition: 300ms;
+}
+
+.App-navItem.App-mobile{
+	margin: 0.8em;
 }
 
 .App-navItem:hover {

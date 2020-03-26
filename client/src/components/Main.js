@@ -8,19 +8,17 @@ import EntryPage from './EntryPage.js';
 import SideBar from './SideBar.js';
 import Skills from './Skills.js';
 
+import './Main.css';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      mobileClass: this.props.isMobile ? ' App-mobile' : '',
       visible: false,
       route: this.props.visiblePage //main, biography, skills 
     }
-
-    if (this.props.isMobile)
-      import('./Main-mobile.css').then();
-    else import('./Main.css').then();
 
     this.timeOut = null;
   }
@@ -36,7 +34,7 @@ class Main extends React.Component {
     if (this.state.visible) { classSub = ' visible' } else { classSub = 'invisible' };
 
     if (this.props.isMobile) {
-      classMain += ' mobile';
+      classMain += this.state.mobileClass;
     };
 
     return (

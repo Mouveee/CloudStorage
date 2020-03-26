@@ -26,6 +26,13 @@
 	opacity: 1;
 }
 
+#App-header.visible.App-mobile{
+	position:fixed;
+	top:0;
+	left:0;
+	height: 18vh;
+}
+
 #App-headerDiv {
 	position: absolute;
 	left:8vw;
@@ -38,29 +45,27 @@
 	height: calc(128px + 1vmin);
 }
 
+#App-headerDiv.App-mobile{
+	margin-top: 4vh;
+	height:16%;
+}
+
 #App-headerVideo{
 	position: absolute;
 	left: 0px;
 	width: 100%    !important;
-  	height: calc(90px + 1vmin)   !important;
-  	z-index:-1; /* Causes the video to sit behind your heading */
-    object-position:bottom; /* Causes video to be centred against the header */
+  height: calc(90px + 1vmin)   !important;
+  z-index:-1; /* Causes the video to sit behind your heading */
+  object-position:bottom; /* Causes video to be centred against the header */
 	object-fit:cover; /* Causes video to cover/stretch to the header */
 	transform: rotateY(180deg);
 	opacity:1;
 }
 
-/* #App-headerIcon {
-	position: absolute;
-	height: calc(100px + 1vmin);
-	width: 90vw;
-	left: -50px;;
-	top: 3vh;
-	z-index: 0;
-	opacity:0.23;
-	filter: hue-rotate(100deg);
-	filter: saturate(80%);
-} */
+#App-headerVideo.App-mobile{
+	top:0;
+	height: 36 !important;
+}
 
 .App-caption {
 	font-size: calc(54px + 1vmin);
@@ -69,6 +74,11 @@
 	text-align: left;
 	line-break: strict;
 	z-index: 999;
+}
+
+.App-caption.App-mobile{
+	margin:0;
+	font-size: calc(36px + 1vmin);
 }
 
 .App-subHeader {
@@ -81,4 +91,10 @@
 	margin-left:0.5em;
 	margin-bottom: 1em;
 }
+
+.App-subHeader.App-mobile{
+	margin-top: 0;
+	display: block;
+	font-size: calc(16px + 1vmin);
+}	
 

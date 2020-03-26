@@ -2,18 +2,17 @@ import * as React from 'react';
 
 import avatar from '../img/myself.jpg';
 
+import './EntryPage.css';
+
 
 
 class EntryPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { visible: false }
-
-    if (this.props.isMobile) {
-      import('./EntryPage-mobile.css').then();
-    } else {
-      import('./EntryPage.css').then();
+    this.state = {
+      visible: false,
+      mobileClass: this.props.isMobile ? ' App-mobile' : ''
     }
   }
 
@@ -22,17 +21,12 @@ class EntryPage extends React.Component {
   }
 
   render() {
-    let classHead = this.props.isMobile ? 'App-headMobile' : 'App-head';
-    let classAvatar = this.props.isMobile ? 'mobileHeader' : '';
-
+    let classHead = 'App-head' + this.state.mobileClass;
+    let classAvatar = this.state.mobileClass;
 
     let mainClass = '';
     if (this.state.visible) {
-      mainClass += 'App-mainVisibile';
-    }
-
-    if (this.props.isMobile) {
-      mainClass += ' mobile';
+      mainClass += `App-mainVisibile${this.state.mobileClass}`;
     }
 
     return (
@@ -45,7 +39,7 @@ class EntryPage extends React.Component {
         </div>
 
         <section className='App-mainText'>
-          <h1 className={this.props.isMobile ? 'App-mobileHead' : ''}>
+          <h1 id='App-entryHead' className={this.state.mobileClass}>
             <img
               src={avatar}
               id='App-avatar'
@@ -60,7 +54,7 @@ class EntryPage extends React.Component {
             </div>
           </h1>
           {/* <br></br> */}
-          <div id='App-introductionText'>
+          <div id='App-introductionText' className={this.state.mobileClass}>
             Als Web Developer liegen meine Kernkompetenzen im Umgang mit Technologien wie <i>HTML, Javascript und CSS</i>{' '}
             sowie verwandten Tools, Libraries und Frameworks. Diese Seite wurde zum Beispiel
             mit <i>React</i> programmiert.

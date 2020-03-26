@@ -7,6 +7,7 @@ class NavBar extends React.Component {
     super(props);
 
     this.state = {
+      mobileClass: this.props.isMobile ? 'App-mobile' : '',
       visible: false
     }
   }
@@ -19,28 +20,28 @@ class NavBar extends React.Component {
     let navBarClass = 'App-navBar';
 
     if (this.state.visible) {
-      navBarClass += ' App-navBarVisible';
-      navBarClass += this.props.isMobile ? ' mobileHeader' : '';
+      navBarClass += ' visible';
+      navBarClass += ' ' + this.state.mobileClass;
     }
 
     return (
       <div className={navBarClass}>
         <span
-          className='App-navItem'
+          className={`App-navItem ${this.state.mobileClass}`}
           onClick={() => this.props.changeRoute('main')}
         >
           Start
       </span>
 
         <span
-          className='App-navItem'
+          className={`App-navItem ${this.state.mobileClass}`}
           onClick={() => this.props.changeRoute('cloudStorage')}
         >
           Downloads
       </span>
 
         <span
-          className='App-navItem'
+          className={`App-navItem ${this.state.mobileClass}`}
           onClick={() => this.props.changeRoute('about')}
         >
           Kontakt

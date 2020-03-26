@@ -25,7 +25,7 @@ a { text-decoration: none;}
   opacity:0;
 }
 
-#App-mainPage.mobile{
+#App-mainPage.App-mobile{
   margin: auto;
   margin-top:1em;
   position:static;
@@ -44,7 +44,7 @@ a { text-decoration: none;}
   /* // Firefox */
 }
 
-#App-mainPage.mobile::-webkit-scrollbar { 
+#App-mainPage.App-mobile::-webkit-scrollbar { 
   /* // Safari and Chrome */
   display: none;  
 }
@@ -59,6 +59,51 @@ a { text-decoration: none;}
   text-align: center;
 }
 
-#App-mainHeader.App-headMobile{
+#App-mainHeader.App-mobile{
   font-size: 12px;
+}
+
+a {
+  text-decoration: none;
+}
+
+#App-mainPage.App-mobile {
+  position: fixed;
+  top: 0;
+  font-size: calc(16px + 0.5vh);
+  transition: 600ms ease-in-out;
+  margin: auto;
+  width: 80vw;
+  /* height: 75vh; */
+  height: auto;
+  user-select: none;
+  overflow-y: none;
+  margin-top: 3em;
+  position: relative;
+  text-align: center;
+}
+
+#App-subPageContainer.App-mobile {
+  transition: 600ms;
+  text-align: center;
+}
+
+#App-subPageContainer.visible {
+  opacity: 1;
+}
+
+#App-subPageContainer.invisible {
+  opacity: 0;
+}
+
+.App-mainText.App-mobile {
+  font-size: 18px;
+  text-align: justify;
+  padding: 8px;
+}
+
+#App-mainHeader.App-mobile {
+  font-size: calc(22px + 1vmin);
+  transition: 2100ms;
+  text-align: center;
 }

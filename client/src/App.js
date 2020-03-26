@@ -3,6 +3,8 @@ import "react-app-polyfill/stable";
 import React, { Component } from "react";
 import Fullscreen from "react-full-screen";
 
+import './App.css'
+
 import MobileDetect from 'mobile-detect';
 
 //custom components, hopefully well written
@@ -19,6 +21,8 @@ import UserInfo from './components/UserInfo.js';
 const md = new MobileDetect(
 	window.navigator.userAgent
 );
+const isMobile = md.phone() ? true : false;
+const mobileClass = isMobile ? ' App-mobile' : '';
 
 document.title = 'Marco Huwig Web Development';
 
@@ -29,7 +33,7 @@ class App extends Component {
 		this.state = {
 			allowCookies: document.cookie.search('cookiesAllowed=true') !== -1 ? false : true,
 			askedForCookie: this.allowCookies ? true : false,
-			askedForFullscreen: md.phone() ? false : true,
+			askedForFullscreen: isMobile ? false : true,
 			fullScreen: false,
 			loggedInUser: '',
 			route: 'main',
@@ -46,10 +50,7 @@ class App extends Component {
 
 	componentDidMount = () => {
 		setTimeout(() => {
-			//conditional importing css for mobile or desktop
-			if (md.phone()) {
-				import('./App-mobile.css').then((css) => this.setState({ visible: true }))
-			} else import('./App.css').then((css) => this.setState({ visible: true }))
+			this.setState({ visible: true })
 		}, 800);
 	}
 
@@ -102,7 +103,6 @@ class App extends Component {
 
 	setVisiblePage = route => {
 		if (this.state.visiblePage !== route) {
-			console.log(`setting sub page to: ${route}`)
 			this.setState({ visible: false });
 			setTimeout(() => { this.setState({ visiblePage: route }); console.log(`visible page set to: ${this.state.visiblePage}`) }, 600);
 			setTimeout(() => this.setState({ visible: true }), 650);
@@ -113,7 +113,7 @@ class App extends Component {
 		const classOfMainContainer = this.state.visible ? 'visible' : 'invisible';
 
 		return (
-			<div className={'App-container'}>
+			<div className={`App-container ${mobileClass}`}>
 				{(() => {
 					if (!this.state.askedForCookies
 						&& this.state.userRole === 'guest'
@@ -145,13 +145,13 @@ class App extends Component {
 					{this.state.userRole !== 'guest' ? <UserInfo /> : <p></p>}
 
 					{/* this will be slowly faded in when changing this.state.visible */}
-					<div id='App-mainContainer' className={classOfMainContainer}>
+					<div id='App-mainContainer' className={classOfMainContainer + mobileClass}>
 
 						{(() => {
 							switch (this.state.route) {
 								case 'main': return (
 									<Main
-										isMobile={md.phone() ? true : false}
+										isMobile={isMobile}
 										changeRoute={this.changeRoute}
 										setVisiblePage={this.setVisiblePage}
 										visiblePage={this.state.visiblePage}
@@ -160,7 +160,7 @@ class App extends Component {
 									this.state.userRole === 'admin' || this.state.userRole === 'user' ?
 										<CloudStorage
 											changeUserRole={this.changeUserRole}
-											isMobile={md.phone() ? true : false}
+											isMobile={isMobile}
 											userRole={this.state.userRole}
 										/>
 										:
@@ -168,14 +168,14 @@ class App extends Component {
 											callBackend={this.callBackend}
 											changeUserRole={this.changeUserRole}
 											allowCookies={this.state.allowCookies}
-											isMobile={md.phone() ? true : false}
+											isMobile={isMobile}
 											user={this.state.user}
 											userRole={this.state.userRole}
 										/>
 								);
 								case 'about': return (
 									<About
-										isMobile={md.phone() ? true : false}
+										isMobile={isMobile}
 										changeRoute={this.changeRoute}
 										setVisiblePage={this.setVisiblePage}
 									/>
