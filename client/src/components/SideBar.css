@@ -17,22 +17,17 @@
 }
 
 #App-sideBar.mobileSideBar {
+	border-right: none;
 	font-size: calc(14px + 1vmin);
-	display: inline-block;
 	width: 80%;
 	height: calc(22px + 1vmin);
-	;
 	color: gray;
 	background-color: white;
 	left: 50%;
 	transform: translateX(-50%);
 	text-align: center;
-	top: 96%;
-	bottom: 0%;
-	border-radius: 30;
+	top: 95vh;
 	padding: 0.2em;
-	border-right: none;
-	vertical-align: center;
 	position: fixed;
 }
 

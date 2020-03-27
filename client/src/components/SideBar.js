@@ -27,7 +27,7 @@ class SideBar extends React.Component {
 
 		return (
 			!this.props.isMobile ?
-				<nav id='App-sideBar' className={faderClass}>
+				<div id='App-sideBar' className={faderClass}>
 					<div
 						className='App-sideBarItem'
 						onClick={() => this.changeView('main')}
@@ -52,9 +52,9 @@ class SideBar extends React.Component {
 					>
 						Vita
 				</div>
-				</nav>
+				</div>
 				:
-				<nav id='App-sideBar' className={faderClass += ' mobileSideBar'}>
+				<div id='App-sideBar' className={faderClass += ' mobileSideBar'}>
 					<span
 						className='App-sideBarItem mobile'
 						onClick={() => this.changeView('main')}
@@ -79,7 +79,7 @@ class SideBar extends React.Component {
 					>
 						Vita
 				</span>
-				</nav>
+				</div>
 		)
 	}
 }

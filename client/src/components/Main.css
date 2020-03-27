@@ -8,7 +8,6 @@ a { text-decoration: none;}
   height:auto;
   user-select: none;
   margin-top: 2em;
-  position:relative;
 }
 
 #App-subPageContainer{
@@ -58,7 +57,7 @@ a {
 }
 
 #App-subPageContainer.App-mobile {
-  height: 80vh;
+  height: 75vh;
   overflow-y:scroll;
   transition: 600ms;
   text-align: center;
