@@ -2,33 +2,40 @@
   border-top: 1px solid ghostwhite;
   border-right: 1px solid ghostwhite;
   border-radius: 60px;
-  /* margin-bottom:1em; */
-  height: 28vh;
+  margin-bottom:2em;
+  height: 15vh;
   width: 100%;
+  text-align: justify;
+  padding: 1em;
 }
 
 
 .App-bioContent{
-  text-align: right;
+  height: 15vh;
+  text-align: left;
   text-overflow: clip;
   /* float:right; */
   padding: 2em;
 }
 
-.App-bioEntry:nth-of-type(even) .App-bioContent{
-  /* float: left; */
-  text-align:left;
-}
-
 .App-bioPic{
-  display: inline;
+  /* display: inline; */
   object-fit: cover;
   float: left;
   border-radius: 100%;
   width: calc(100px + 0.5vmin);
   height: calc(100px + 0.5vmin);
-  padding:1em;
-  margin-top:1em;
+  padding:4px;
+  margin-right:24px;
+}
+
+.App-bioBorder{
+  width:65%;
+  height:1px;
+  background-color: lightgray;
+  margin: auto;
+  /* position: absolute; */
+  bottom: 0;
 }
 
 /* .App-bioEntry:nth-of-type(even) .App-bioPic{

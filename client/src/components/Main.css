@@ -5,11 +5,9 @@ a { text-decoration: none;}
   transition: 600ms ease-in-out;
   margin: auto;
 	width: 60vw;
-  /* height: 75vh; */
   height:auto;
   user-select: none;
-  overflow-y:none;
-  margin-top: 3em;
+  margin-top: 2em;
   position:relative;
 }
 
@@ -23,30 +21,6 @@ a { text-decoration: none;}
 
 #App-subPageContainer.invisible{
   opacity:0;
-}
-
-#App-mainPage.App-mobile{
-  margin: auto;
-  margin-top:1em;
-  position:static;
-
-  left: 50%;
-  width: 90vw;
-  /* transform: translateX(-50%); */
-
-  font-size: calc(13px + 0.5vmin);
-  left: 0.5em;
-
-  -ms-overflow-style: none; 
-  /* // IE 10+ */
-  
-  scrollbar-width: none;  
-  /* // Firefox */
-}
-
-#App-mainPage.App-mobile::-webkit-scrollbar { 
-  /* // Safari and Chrome */
-  display: none;  
 }
 
 .App-mainText{
@@ -73,17 +47,19 @@ a {
   font-size: calc(16px + 0.5vh);
   transition: 600ms ease-in-out;
   margin: auto;
-  width: 80vw;
-  /* height: 75vh; */
+  width: 90%;
+  height: 50vh;
   height: auto;
   user-select: none;
-  overflow-y: none;
-  margin-top: 3em;
+  left:0;
+  margin-top: 2em;
   position: relative;
   text-align: center;
 }
 
 #App-subPageContainer.App-mobile {
+  height: 80vh;
+  overflow-y:scroll;
   transition: 600ms;
   text-align: center;
 }

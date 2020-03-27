@@ -8,8 +8,13 @@ h3 {
   margin-top: 0;
   padding-top: 2px;
   padding-left: 24px;
-  padding-top: 12px;
   width: 12vw;
+}
+
+h3.App-mobile{
+  /* margin:0; */
+  margin-bottom: 4px;
+  border: none;
 }
 
 .App-skillList {
@@ -55,6 +60,15 @@ h3 {
   opacity: 1;
 }
 
+.App-listPoint.App-mobile{
+  background-color: ghostwhite;
+}
+
+.App-listPoint.App-mobile li{
+  padding: 8px;
+  border: none;
+}
+
 .App-subList {
   font-size: calc(14px + 0.5vh);
   font-weight: normal;
@@ -62,23 +76,32 @@ h3 {
   padding: 0.4em;
 }
 
+.App-subList.App-mobile{
+  padding-top:0.2em;
+}
+
 .App-subList li {
-  /* text-align: center; */
   width: 12vw;
   height: 3vh;
   padding: 12px;
   margin: 6px;
   float: left;
-  background-color: white;
   border-radius: 12px;
   color: black;
   vertical-align: middle;
+}
+
+.App-subList.App-mobile li{
+  border: none;
 }
 
 .App-listPoint:nth-child(odd) {
   margin-left: 6em;
 }
 
+.App-listPoint.App-mobile:nth-child(odd) {
+  margin-left: 0;
+}
 /* #App-microsoftEntry{
   width: 100%;
 } */

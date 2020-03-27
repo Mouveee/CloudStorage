@@ -1,7 +1,9 @@
 import * as React from 'react';
 
 //TODO: create new css file for list
-import './Main.css';
+// import './Main.css';
+
+import './Skills.css';
 
 import fader from '../HOC/Fader';
 
@@ -9,7 +11,9 @@ class Skills extends React.Component {
   constructor(props) {
     super(props);
 
-
+    this.state = {
+      mobileClass: this.props.isMobile ? ' App-mobile' : ''
+    }
   }
 
   componentDidMount = () => {
@@ -21,12 +25,6 @@ class Skills extends React.Component {
 
     for (let i = listEntries.length - 1; i >= 0; i--) {
       setTimeout(() => {
-        if (this.props.isMobile) {
-          import('./Skills-mobile.css').then();
-        } else {
-          import('./Skills.css').then();
-        }
-
         listEntries[i].className += ' opaque'
       }, 10 + i * 90)
     }
@@ -42,12 +40,12 @@ class Skills extends React.Component {
     return (
       <section className={mainClass}>
         <div></div>
-        <ul className='App-skillList'>
-          <li className='App-listPoint'>
-            <h3>Javascript</h3>
-            <ul className='App-subList'>
+        <ul className={'App-skillList' + this.state.mobileClass}>
+          <li className={'App-listPoint' + this.state.mobileClass} >
+            <h3 className={this.state.mobileClass}>Javascript</h3>
+            <ul className={'App-subList' + this.state.mobileClass}>
               <li>
-                React, React Native
+                React
                 </li>
               <li>Jquery</li>
               <li>
@@ -58,9 +56,9 @@ class Skills extends React.Component {
               </li>
             </ul>
           </li>
-          <li className='App-listPoint'>
-            <h3>CSS3</h3>
-            <ul className='App-subList'>
+          <li className={'App-listPoint' + this.state.mobileClass}>
+            <h3 className={this.state.mobileClass}>CSS3</h3>
+            <ul className={'App-subList' + this.state.mobileClass}>
               <li>
                 Bootstrap
             </li>
@@ -69,17 +67,17 @@ class Skills extends React.Component {
             </li>
             </ul>
           </li>
-          <li className='App-listPoint'>
-            <h3>HTML5</h3>
-            <ul className='App-subList' >
+          <li className={'App-listPoint' + this.state.mobileClass}>
+            <h3 className={this.state.mobileClass}>HTML5</h3>
+            <ul className={'App-subList' + this.state.mobileClass}>
               <li>
                 {'<div>Hello World</div>'}
               </li>
             </ul>
           </li>
-          <li className='App-listPoint' id="App-microsoftEntry">
-            <h3>MS Cloud Services</h3>
-            <ul className='App-subList' >
+          <li className={'App-listPoint' + this.state.mobileClass} id="App-microsoftEntry">
+            <h3 className={this.state.mobileClass}>MS Cloud Services</h3>
+            <ul className={'App-subList' + this.state.mobileClass}>
               <li>
                 Azure
             </li>
@@ -97,18 +95,18 @@ class Skills extends React.Component {
             </li>
             </ul>
           </li>
-          <li className='App-listPoint'>
-            <h3>Weitere Spracherfahrung</h3>
-            <ul className='App-subList'>
+          <li className={'App-listPoint' + this.state.mobileClass}>
+            <h3 className={this.state.mobileClass}>Weitere Spracherfahrung</h3>
+            <ul className={'App-subList' + this.state.mobileClass}>
               <li>Python</li>
               <li>C++</li>
               <li>C#</li>
               <li>Java</li>
             </ul>
           </li>
-          <li className='App-listPoint'>
-            <h3>Datenbanken</h3>
-            <ul className='App-subList'>
+          <li className={'App-listPoint' + this.state.mobileClass}>
+            <h3 className={this.state.mobileClass}>Datenbanken</h3>
+            <ul className={'App-subList' + this.state.mobileClass}>
               <li>
                 MySQL
             </li>

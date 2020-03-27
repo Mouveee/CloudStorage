@@ -40,8 +40,9 @@ button:hover {
 
 #App-mainContainer.App-mobile{
 	width: 100%;
+	text-align:center;
 	position: fixed;
-	top: 18vh;
+	top: 93px;
 }
 
 #App-mainContainer.visible {

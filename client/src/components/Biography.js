@@ -27,19 +27,20 @@ class Biography extends React.Component {
     return (
       <div id='App-mainPage' className={classOfContainer}>
         <div className="App-bioEntry">
-          <img src={books} className='App-bioPic' alt='missing pic'></img>
           <div className="App-bioContent">
-            Um mich von technischer Probelemlösung abzulenken und neue Impulse zu bekommen
-            lese ich gerne Romane, besonders Haruki Murakami hat es mir schwer angetan.
+            <img src={books} className='App-bioPic' alt='missing pic'></img>
+            Ich hatte schon immer großes Interesse an Literatur, in letzter Zeit hat es mir besonders Haruki Murakami
+            angetan.
           </div>
+          <div className='App-bioBorder'></div>
         </div>
 
         <div className="App-bioEntry">
-          <img src={guitar} className='App-bioPic' alt='missing pic'></img>
-
           <div className="App-bioContent">
-            Musik ist nicht alles, aber sehr vieles. Musik ist nicht alles, aber sehr vieles.Musik ist nicht alles, aber sehr vieles.Musik ist nicht alles, aber sehr vieles.Musik ist nicht alles, aber sehr vieles.Musik ist nicht alles, aber sehr vieles.Musik ist nicht alles, aber sehr vieles.Musik ist nicht alles, aber sehr vieles.Musik ist nicht alles, aber sehr vieles.Musik ist nicht alles, aber sehr vieles.
+            <img src={guitar} className='App-bioPic' alt='missing pic'></img>
+            Musik machen, Musik hören, Vinyl sammeln.
             </div>
+          <div className='App-bioBorder'></div>
         </div>
       </div>
     )

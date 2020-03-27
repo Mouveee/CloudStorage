@@ -31,7 +31,7 @@ class Main extends React.Component {
     let classMain = '';
     let classSub = '';
 
-    if (this.state.visible) { classSub = ' visible' } else { classSub = 'invisible' };
+    if (this.state.visible) { classSub = `${this.state.mobileClass} visible` } else { classSub = 'invisible' };
 
     if (this.props.isMobile) {
       classMain += this.state.mobileClass;

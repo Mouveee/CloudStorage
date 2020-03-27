@@ -49,7 +49,7 @@ class EntryPage extends React.Component {
 
             MARCO&nbsp;HUWIG
 
-            <div id='App-subHeaderEntrypage'>
+            <div id='App-subHeaderEntrypage' className={this.state.mobileClass}>
               <small>Web Developer</small>
             </div>
           </h1>

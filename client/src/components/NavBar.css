@@ -27,9 +27,12 @@
 
 .App-navBar.visible.App-mobile {
 	position: fixed;
-	top: 18vh;
+	top: 94px;
+	left:20%;
 	height: calc(16px);
 	font-size: calc(14px + 1vmin);
+	z-index: 1;
+	padding-bottom: 8px;
 }
 
 .App-navItem {
