@@ -2,6 +2,8 @@ import React from "react";
 
 import "./SideBar.css";
 
+import myVideo from "../vids/head.mp4";
+
 class SideBar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -55,6 +57,10 @@ class SideBar extends React.Component {
 				</div>
 				:
 				<div id='App-sideBar' className={faderClass += ' mobileSideBar'}>
+					<video autoPlay muted loop id="App-headerVideo" className={'App-footerVideo'}>
+						<source src={myVideo} type="video/mp4"></source>
+						<p>Video nicht geladen :(</p>
+					</video>
 					<span
 						className='App-sideBarItem mobile'
 						onClick={() => this.changeView('main')}

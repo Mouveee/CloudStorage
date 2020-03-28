@@ -17,6 +17,7 @@ class About extends React.Component {
         <SideBar
           changeRoute={this.props.changeRoute}
           isMainRoute={false}
+          isMobile={this.props.isMobile}
           setVisiblePage={this.props.setVisiblePage}
         />
 

@@ -10,7 +10,10 @@ class Biography extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { visible: this.props.visible }
+    this.state = {
+      visible: this.props.visible,
+      mobileClass: this.props.isMobile ? ' App-mobile' : ''
+    }
   }
 
   render() {
@@ -20,27 +23,23 @@ class Biography extends React.Component {
       classOfContainer += 'App-mainVisibile';
     }
 
-    if (this.props.isMobile) {
-      classOfContainer += ' mobile';
-    }
-
     return (
-      <div id='App-mainPage' className={classOfContainer}>
-        <div className="App-bioEntry">
-          <div className="App-bioContent">
-            <img src={books} className='App-bioPic' alt='missing pic'></img>
+      <div id='App-mainPage' className={classOfContainer + this.state.mobileClass}>
+        <div className={'App-bioEntry' + this.state.mobileClass}>
+          <div className={'App-bioContent' + this.state.mobileClass}>
+            <img src={books} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
             Ich hatte schon immer großes Interesse an Literatur, in letzter Zeit hat es mir besonders Haruki Murakami
             angetan.
           </div>
-          <div className='App-bioBorder'></div>
+          <div className={'App-bioBorder' + this.state.mobileClass}></div>
         </div>
 
-        <div className="App-bioEntry">
-          <div className="App-bioContent">
-            <img src={guitar} className='App-bioPic' alt='missing pic'></img>
+        <div className={'App-bioEntry' + this.state.mobileClass}>
+          <div className={'App-bioContent' + this.state.mobileClass}>
+            <img src={guitar} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
             Musik machen, Musik hören, Vinyl sammeln.
             </div>
-          <div className='App-bioBorder'></div>
+          <div className={'App-bioBorder' + this.state.mobileClass}></div>
         </div>
       </div>
     )

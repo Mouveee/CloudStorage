@@ -1,13 +1,17 @@
 a { text-decoration: none;}
 
 #App-mainPage{
-  font-size: calc(16px + 0.5vh);
-  transition: 600ms ease-in-out;
-  margin: auto;
-	width: 60vw;
-  height:auto;
-  user-select: none;
-  margin-top: 2em;
+  font-size: calc(16px + .5vh);
+    transition: .6s ease-in-out;
+    width: 60vw;
+    height: auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow-y: none;
+    margin: 3em auto auto;
+    position: relative;
 }
 
 #App-subPageContainer{
@@ -47,17 +51,16 @@ a {
   transition: 600ms ease-in-out;
   margin: auto;
   width: 90%;
-  height: 50vh;
   height: auto;
   user-select: none;
   left:0;
-  margin-top: 2em;
+  margin-top: 16px;
   position: relative;
   text-align: center;
 }
 
 #App-subPageContainer.App-mobile {
-  height: 75vh;
+  height: 78vh;
   overflow-y:scroll;
   transition: 600ms;
   text-align: center;

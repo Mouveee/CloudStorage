@@ -9,6 +9,12 @@
   padding: 1em;
 }
 
+.App-bioEntry.App-mobile{
+  padding: 4px;
+  margin-bottom:0.1em;
+  font-size: 14px;
+}
+
 
 .App-bioContent{
   height: 15vh;
@@ -16,6 +22,11 @@
   text-overflow: clip;
   /* float:right; */
   padding: 2em;
+}
+
+.App-bioContent.App-mobile{
+  padding: 8px;
+  height:8vh;
 }
 
 .App-bioPic{
@@ -29,15 +40,18 @@
   margin-right:24px;
 }
 
+.App-bioPic.App-mobile{
+  width: calc(36px + 0.5vmin);
+  height: calc(36px + 0.5vmin);
+  padding: 2px;
+  margin-right: 12px;
+}
+
 .App-bioBorder{
   width:65%;
   height:1px;
   background-color: lightgray;
   margin: auto;
-  /* position: absolute; */
   bottom: 0;
 }
 
-/* .App-bioEntry:nth-of-type(even) .App-bioPic{
-  float: right;
-} */
