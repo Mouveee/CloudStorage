@@ -4,7 +4,6 @@ import './Biography.css'
 
 import books from './../img/books.JPG';
 import guitar from './../img/guitar.JPG';
-import octopus from './../img/baby-octopus.jpg'
 
 class Biography extends React.Component {
   constructor(props) {
@@ -30,16 +29,17 @@ class Biography extends React.Component {
             <img src={books} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
             Ich hatte schon immer großes Interesse an Literatur, in letzter Zeit hat es mir besonders Haruki Murakami
             angetan.
+            <div className={'App-bioBorder' + this.state.mobileClass}></div>
           </div>
-          <div className={'App-bioBorder' + this.state.mobileClass}></div>
+
         </div>
 
         <div className={'App-bioEntry' + this.state.mobileClass}>
           <div className={'App-bioContent' + this.state.mobileClass}>
             <img src={guitar} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
             Musik machen, Musik hören, Vinyl sammeln.
-            </div>
-          <div className={'App-bioBorder' + this.state.mobileClass}></div>
+            <div className={'App-bioBorder' + this.state.mobileClass}></div>
+          </div>
         </div>
       </div>
     )

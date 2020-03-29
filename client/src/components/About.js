@@ -1,6 +1,7 @@
 import * as React from 'react';
 import SideBar from './SideBar.js';
 
+import './About.css';
 import './SideBar.css';
 import './Main.css';
 
@@ -21,14 +22,16 @@ class About extends React.Component {
           setVisiblePage={this.props.setVisiblePage}
         />
 
-        <div>Marco Huwig</div>
-        <div>Gärtnerstraße 31</div>
-        <div><br></br></div>
-        <div>66117 Saarbrücken</div>
+        <div className='App-about'>
+          <div>Marco Huwig</div>
+          <div>Gärtnerstraße 31</div>
+          <div><br></br></div>
+          <div>66117 Saarbrücken</div>
 
-        <div><small>2020</small></div>
+          <div><small>2020</small></div>
 
-        <a className="App-clickable" href='mailto:huwig.marco@gmail.com'>huwig.marco@gmail.com</a>
+          <a className="App-clickable" href='mailto:huwig.marco@gmail.com'>huwig.marco@gmail.com</a>
+        </div>
       </section>
     )
   }

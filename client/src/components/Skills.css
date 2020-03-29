@@ -11,14 +11,20 @@ h3 {
   width: 12vw;
 }
 
-h3.App-mobile{
+h3.App-mobile {
   /* margin:0; */
   margin-bottom: 4px;
   border: none;
 }
 
 .App-skillList {
+  /* left: 50%;
+  transform: translateX(-50%); */
+  width: 75%;
   text-align: left;
+  margin: auto;
+  padding-bottom: 2em;
+  padding-top: 1em;
 }
 
 .App-skillList li {
@@ -60,11 +66,11 @@ h3.App-mobile{
   opacity: 1;
 }
 
-.App-listPoint.App-mobile{
+.App-listPoint.App-mobile {
   background-color: ghostwhite;
 }
 
-.App-listPoint.App-mobile li{
+.App-listPoint.App-mobile li {
   padding: 8px;
   border: none;
 }
@@ -76,8 +82,8 @@ h3.App-mobile{
   padding: 0.4em;
 }
 
-.App-subList.App-mobile{
-  padding-top:0.2em;
+.App-subList.App-mobile {
+  padding-top: 0.2em;
 }
 
 .App-subList li {
@@ -91,7 +97,7 @@ h3.App-mobile{
   vertical-align: middle;
 }
 
-.App-subList.App-mobile li{
+.App-subList.App-mobile li {
   border: none;
 }
 
@@ -102,6 +108,7 @@ h3.App-mobile{
 .App-listPoint.App-mobile:nth-child(odd) {
   margin-left: 0;
 }
+
 /* #App-microsoftEntry{
   width: 100%;
 } */

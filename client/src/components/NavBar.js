@@ -28,16 +28,18 @@ class NavBar extends React.Component {
       <div className={navBarClass}>
         <span
           className={`App-navItem ${this.state.mobileClass}`}
-          onClick={() => this.props.changeRoute('main')}
+          onClick={() => {
+            this.props.changeRoute('main');
+          }}
         >
           Start
       </span>
 
         <span
           className={`App-navItem ${this.state.mobileClass}`}
-          onClick={() => this.props.changeRoute('cloudStorage')}
+          onClick={() => this.props.changeRoute('skills')}
         >
-          Downloads
+          Kenntnisse
       </span>
 
         <span

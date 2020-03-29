@@ -18,16 +18,30 @@
   text-align: justify;
 }
 
-#App-introductionText{
-  overflow-y: scroll;
+#App-avatar.App-mobile {
+  position: static;
+  /* display: inline; */
+  border-radius: 100%;
+  width: calc(62px + 0.5vmin);
+  height: calc(62px + 0.5vmin);
+  object-fit: cover;
+  margin-left: 0.2em;
+  margin-right: 0.6em;
+  margin-top: -0.2em;
+  transition: 400ms;
+  float: left;
+  text-align: justify;
+}
+
+#App-introductionText {
   text-align: left;
   padding-left: 4em;
 }
 
-#App-introductionText.App-mobile{
-  height:50%;
+#App-introductionText.App-mobile {
+  height: 50%;
   font-size: 16px;
-  padding-left:0;
+  padding-left: 0;
 }
 
 #App-subHeaderEntrypage {
@@ -38,21 +52,6 @@
 
 #App-entryHead.App-mobile {
   font-size: calc(24px + 1vmin);
-}
-
-#App-avatar.App-mobile {
-  position: static;
-  /* display: inline; */
-  border-radius: 100%;
-  width: calc(80px + 0.5vmin);
-  height: calc(80px + 0.5vmin);
-  object-fit: cover;
-  margin-left: 0.2em;
-  margin-right: 0.6em;
-  margin-top: -0.2em;
-  transition: 400ms;
-  float: left;
-  text-align: justify;
 }
 
 #App-subHeaderEntrypage.App-mobile {

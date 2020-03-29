@@ -38,11 +38,17 @@ button:hover {
 	transition: 300ms;
 }
 
-#App-mainContainer.App-mobile{
+#App-mainContainer.App-mobile {
+	z-index: -2;
+	margin-top: 22px;
+	height: 78vh;
+	overflow-y: scroll;
+	transition: 600ms;
+	text-align: center;
 	width: 100%;
-	text-align:center;
+	text-align: center;
 	position: fixed;
-	top: 93px;
+	top: 72px;
 }
 
 #App-mainContainer.visible {
@@ -51,4 +57,98 @@ button:hover {
 
 #App-mainContainer.invisible {
 	opacity: 0;
+}
+
+/* STUFF FROM MAIN.CSS */
+
+a {
+	text-decoration: none;
+}
+
+#App-mainPage {
+	font-size: calc(16px + .5vh);
+	transition: .6s ease-in-out;
+	width: 60vw;
+	height: auto;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	overflow-y: none;
+	margin: 3em auto auto;
+	position: relative;
+}
+
+#App-subPageContainer {
+	transition: 600ms;
+}
+
+#App-subPageContainer.visible {
+	opacity: 1;
+}
+
+#App-subPageContainer.invisible {
+	opacity: 0;
+}
+
+.App-mainText {
+	text-align: justify
+}
+
+#App-mainHeader {
+	font-size: calc(22px + 1vmin);
+	transition: 2100ms;
+	text-align: center;
+}
+
+#App-mainHeader.App-mobile {
+	font-size: 12px;
+}
+
+a {
+	text-decoration: none;
+}
+
+#App-mainPage.App-mobile {
+	position: fixed;
+	top: 0;
+	font-size: calc(16px + 0.5vh);
+	transition: 600ms ease-in-out;
+	margin: auto;
+	width: 90%;
+	height: auto;
+	user-select: none;
+	left: 0;
+	top: 14px;
+	position: relative;
+	text-align: center;
+	padding-bottom: 3em;
+	padding-top: 1em;
+}
+
+#App-subPageContainer.App-mobile {
+	height: 78vh;
+	overflow-y: scroll;
+	transition: 600ms;
+	text-align: center;
+}
+
+#App-subPageContainer.visible {
+	opacity: 1;
+}
+
+#App-subPageContainer.invisible {
+	opacity: 0;
+}
+
+.App-mainText.App-mobile {
+	font-size: 18px;
+	text-align: justify;
+	padding: 8px;
+}
+
+#App-mainHeader.App-mobile {
+	font-size: calc(22px + 1vmin);
+	transition: 2100ms;
+	text-align: center;
 }

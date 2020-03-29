@@ -18,15 +18,14 @@
   padding: 1em;
   font-size: calc(16px + 0.5vh);
   position: fixed;
-  left: 25%;
-  top: 40%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   border: 1px solid black;
   border-radius: 15px;
   opacity: 1;
   width: 50vw;
   z-index: 999;
-  /* margin-top: -100px;
-  margin-left: -280px; */
 }
 
 .App-btnCookie {

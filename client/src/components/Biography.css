@@ -1,57 +1,54 @@
-.App-bioEntry{
+.App-bioEntry {
   border-top: 1px solid ghostwhite;
   border-right: 1px solid ghostwhite;
   border-radius: 60px;
-  margin-bottom:2em;
+  margin-bottom: 2em;
   height: 15vh;
   width: 100%;
   text-align: justify;
   padding: 1em;
 }
 
-.App-bioEntry.App-mobile{
+.App-bioEntry.App-mobile {
   padding: 4px;
-  margin-bottom:0.1em;
+  margin-bottom: 0.1em;
   font-size: 14px;
 }
 
-
-.App-bioContent{
+.App-bioContent {
   height: 15vh;
   text-align: left;
   text-overflow: clip;
-  /* float:right; */
   padding: 2em;
 }
 
-.App-bioContent.App-mobile{
+.App-bioContent.App-mobile {
   padding: 8px;
-  height:8vh;
+  height: 100%;
 }
 
-.App-bioPic{
+.App-bioPic {
   /* display: inline; */
   object-fit: cover;
   float: left;
   border-radius: 100%;
   width: calc(100px + 0.5vmin);
   height: calc(100px + 0.5vmin);
-  padding:4px;
-  margin-right:24px;
+  padding: 4px;
+  margin-right: 24px;
 }
 
-.App-bioPic.App-mobile{
+.App-bioPic.App-mobile {
   width: calc(36px + 0.5vmin);
   height: calc(36px + 0.5vmin);
   padding: 2px;
   margin-right: 12px;
 }
 
-.App-bioBorder{
-  width:65%;
-  height:1px;
+.App-bioBorder {
+  width: 65%;
+  height: 1px;
   background-color: lightgray;
   margin: auto;
   bottom: 0;
 }
-

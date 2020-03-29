@@ -2,22 +2,14 @@ import React from "react";
 
 import "./SideBar.css";
 
-import myVideo from "../vids/head.mp4";
-
 class SideBar extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { visible: false }
-	}
-
-	changeView = route => {
-		if (!this.props.isMainRoute) {
-			console.log('calling from Main page')
-			this.props.changeRoute('main');
+		this.state = {
+			visible: false,
+			mobileClass: this.props.isMobile ? ' App-mobile' : ''
 		}
-		console.log(`sub page: ${route}`)
-		this.props.setVisiblePage(route);
 	}
 
 	componentDidMount = () => {
@@ -28,64 +20,14 @@ class SideBar extends React.Component {
 		let faderClass = 'visible';
 
 		return (
-			!this.props.isMobile ?
-				<div id='App-sideBar' className={faderClass}>
-					<div
-						className='App-sideBarItem'
-						onClick={() => this.changeView('main')}
-					>
-						Über mich
+			<div id='App-sideBar' className={faderClass + this.state.mobileClass}>
+				<div
+					className='App-sideBarItem mobile'
+					onClick={() => this.props.changeRoute('biography')}
+				>
+					Über mich
 				</div>
-
-					<div className='App-sideBarDots'>.</div>
-
-					<div
-						className='App-sideBarItem'
-						onClick={() => this.changeView('skills')}
-					>
-						Kenntnisse
-				</div>
-
-					<div className='App-sideBarDots'>.</div>
-
-					<div
-						className='App-sideBarItem'
-						onClick={() => this.changeView('biography')}
-					>
-						Vita
-				</div>
-				</div>
-				:
-				<div id='App-sideBar' className={faderClass += ' mobileSideBar'}>
-					<video autoPlay muted loop id="App-headerVideo" className={'App-footerVideo'}>
-						<source src={myVideo} type="video/mp4"></source>
-						<p>Video nicht geladen :(</p>
-					</video>
-					<span
-						className='App-sideBarItem mobile'
-						onClick={() => this.changeView('main')}
-					>
-						Über mich
-				</span>
-
-					<span> || </span>
-
-					<span
-						className='App-sideBarItem mobile'
-						onClick={() => this.changeView('skills')}
-					>
-						Kenntnisse
-				</span>
-
-					<span> || </span>
-
-					<span
-						className='App-sideBarItem mobile'
-						onClick={() => this.changeView('biography')}
-					>
-						Vita
-				</span>
-				</div>
+			</div>
 		)
 	}
 }

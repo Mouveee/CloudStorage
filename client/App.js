@@ -14,17 +14,17 @@ import Login from './components/Login.js'
 import Main from './components/Main.js';
 import NavBar from './components/NavBar.js';
 import NotFound from './components/NotFound.js';
+import Skills from './components/Skills.js';
 import UserInfo from './components/UserInfo.js';
+
+import './App.css';
 
 const md = new MobileDetect(
 	window.navigator.userAgent
 );
 
 //conditional importing css for mobile or desktop
-if (md.phone()) {
-	import('./App-mobile.css').then((css) => console.log('imported mobile'))
-} else import('./App.css').then((css) => console.log('desktop css'))
-
+const isMobile = md.phone() ? true : false;
 document.title = 'Marco Huwig Web Development';
 
 class App extends Component {
@@ -37,6 +37,7 @@ class App extends Component {
 			askedForFullscreen: md.phone() ? false : true,
 			fullScreen: false,
 			loggedInUser: '',
+			mobileClass: isMobile ? ' App-mobile' : '',
 			route: 'main',
 			user: null,
 			userRole: 'guest', //admin, user, guest 
@@ -105,11 +106,9 @@ class App extends Component {
 	//sets visible SUB page
 	setVisiblePage = route => {
 		if (this.state.visiblePage !== route) {
-			console.log(`setting sub page to: ${route}`)
 			this.setState({ visible: false });
 			setTimeout(() => { this.setState({ visiblePage: route }); console.log(`visible page set to: ${this.state.visiblePage}`) }, 600);
 			setTimeout(() => this.setState({ visible: true }), 650);
-
 		}
 	}
 
@@ -137,13 +136,14 @@ class App extends Component {
 					enabled={this.state.fullScreen}
 				>
 					<Header
-						isMobile={md.phone() ? true : false}
+						isMobile={isMobile}
 						changeRoute={this.changeRoute}
 					/>
 
 					<NavBar
-						isMobile={md.phone() ? true : false}
+						isMobile={isMobile}
 						changeRoute={this.changeRoute}
+						setVisiblePage={this.setVisiblePage}
 					/>
 
 					{this.state.userRole !== 'guest' ? <UserInfo /> : <p></p>}
@@ -160,22 +160,13 @@ class App extends Component {
 										setVisiblePage={this.setVisiblePage}
 										visiblePage={this.state.visiblePage}
 									/>)
-								case 'cloudStorage': return (
-									this.state.userRole === 'admin' || this.state.userRole === 'user' ?
-										<CloudStorage
-											changeUserRole={this.changeUserRole}
-											isMobile={md.phone() ? true : false}
-											userRole={this.state.userRole}
-										/>
-										:
-										<Login
-											callBackend={this.callBackend}
-											changeUserRole={this.changeUserRole}
-											allowCookies={this.state.allowCookies}
-											isMobile={md.phone() ? true : false}
-											user={this.state.user}
-											userRole={this.state.userRole}
-										/>
+								case 'skills': return (
+									<Skills
+										allowCookies={this.state.allowCookies}
+										isMobile={md.phone() ? true : false}
+										user={this.state.user}
+										userRole={this.state.userRole}
+									/>
 								);
 								case 'about': return (
 									<About

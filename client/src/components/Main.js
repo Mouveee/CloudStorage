@@ -43,7 +43,6 @@ class Main extends React.Component {
         id='App-mainPage'
         className={classMain}
       >
-
         <SideBar
           isMainRoute={true}
           isMobile={this.props.isMobile}
@@ -55,7 +54,6 @@ class Main extends React.Component {
           {/* self invoking function, switch cases handle routing */}
           {(() => {
             switch (this.props.visiblePage) {
-
               case 'main':
                 return <EntryPage
                   changeRoute={this.props.changeRoute}

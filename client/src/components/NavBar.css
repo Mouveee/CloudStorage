@@ -28,7 +28,8 @@
 .App-navBar.visible.App-mobile {
 	position: fixed;
 	top: 64px;
-	left:20%;
+	left: 50%;
+	transform: translateX(-50%);
 	height: calc(16px);
 	font-size: calc(14px + 1vmin);
 	z-index: 1;
@@ -37,13 +38,13 @@
 
 .App-navItem {
 	vertical-align: middle;
-	margin:1em;
+	margin: 1em;
 	display: inline;
 	user-select: none;
 	transition: 300ms;
 }
 
-.App-navItem.App-mobile{
+.App-navItem.App-mobile {
 	margin: 0.8em;
 }
 

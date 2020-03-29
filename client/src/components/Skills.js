@@ -3,6 +3,7 @@ import * as React from 'react';
 //TODO: create new css file for list
 // import './Main.css';
 
+import './Main.css';
 import './Skills.css';
 
 import fader from '../HOC/Fader';

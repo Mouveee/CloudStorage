@@ -3,27 +3,28 @@ import "react-app-polyfill/stable";
 import React, { Component } from "react";
 import Fullscreen from "react-full-screen";
 
-import './App.css'
-
 import MobileDetect from 'mobile-detect';
 
 //custom components, hopefully well written
 import About from './components/About.js';
-import AllowCookies from './components/AllowCookies.js'
-import CloudStorage from './components/CloudStorage.js'
+import AllowCookies from './components/AllowCookies.js';
+import Biography from './components/Biography.js';
+import EntryPage from './components/EntryPage.js';
 import Header from './components/Header.js';
-import Login from './components/Login.js'
-import Main from './components/Main.js';
 import NavBar from './components/NavBar.js';
 import NotFound from './components/NotFound.js';
+import SideBar from './components/SideBar.js';
+import Skills from './components/Skills.js';
 import UserInfo from './components/UserInfo.js';
+
+import './App.css';
 
 const md = new MobileDetect(
 	window.navigator.userAgent
 );
-const isMobile = md.phone() ? true : false;
-const mobileClass = isMobile ? ' App-mobile' : '';
 
+//conditional importing css for mobile or desktop
+const isMobile = md.phone() ? true : false;
 document.title = 'Marco Huwig Web Development';
 
 class App extends Component {
@@ -32,55 +33,51 @@ class App extends Component {
 
 		this.state = {
 			allowCookies: document.cookie.search('cookiesAllowed=true') !== -1 ? false : true,
-			askedForCookie: this.allowCookies ? true : false,
+			askedForCookies: this.allowCookies ? true : false,
 			askedForFullscreen: isMobile ? false : true,
 			fullScreen: false,
 			loggedInUser: '',
+			mobileClass: isMobile ? ' App-mobile' : '',
 			route: 'main',
 			user: null,
 			userRole: 'guest', //admin, user, guest 
 			visible: false,
-			visiblePage: 'main'
 		};
 
 		this.changeRoute.bind(this);
 		this.setCookieAllowance.bind(this);
-		this.setVisiblePage.bind(this);
 	}
 
 	componentDidMount = () => {
-		setTimeout(() => {
-			this.setState({ visible: true })
-		}, 800);
+		setTimeout(() => this.setState({ visible: true }), 800);
 	}
 
-	callBackend = async (destination, requestBody) => {
-		const response = await fetch(destination, {
-			method: "POST", // *GET, POST, PUT, DELETE, etc.
-			mode: "cors", // no-cors, cors, *same-origin
-			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-			credentials: "include", // include, *same-origin, omit
-			headers: {
-				"Content-Type": `application/json`,
-				Accept: "*/*",
-				// "Authorization": `Basic ${btoa(`${requestBody.userName}:${requestBody.password}`)}`
-				// 'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			redirect: "follow", // manual, *follow, error
-			referrer: "no-referrer", // no-referrer, *client
-			body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
-		}).then(response => { return response });
+	// callBackend = async (destination, requestBody) => {
+	// 	const response = await fetch(destination, {
+	// 		method: "POST", // *GET, POST, PUT, DELETE, etc.
+	// 		mode: "cors", // no-cors, cors, *same-origin
+	// 		cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+	// 		credentials: "include", // include, *same-origin, omit
+	// 		headers: {
+	// 			"Content-Type": `application/json`,
+	// 			Accept: "*/*",
+	// 			// "Authorization": `Basic ${btoa(`${requestBody.userName}:${requestBody.password}`)}`
+	// 			// 'Content-Type': 'application/x-www-form-urlencoded',
+	// 		},
+	// 		redirect: "follow", // manual, *follow, error
+	// 		referrer: "no-referrer", // no-referrer, *client
+	// 		body: JSON.stringify(requestBody) // body data type must match "Content-Type" header
+	// 	}).then(response => { return response });
 
-		return response
-	}
+	// 	return response
+	// }
 
-	changeRoute = async route => {
-		//to be sure no action is triggered unintentionally
-		// document.removeEventListener('keypress');
-
-		this.setState({ visible: false })
-		setTimeout(() => this.setState({ route: route }), 500);
-		setTimeout(() => this.setState({ visible: true }), 550);
+	changeRoute = route => {
+		if (route !== this.state.route) {
+			this.setState({ visible: false })
+			setTimeout(() => this.setState({ route: route }), 500);
+			setTimeout(() => this.setState({ visible: true }), 550);
+		}
 	}
 
 	changeUserRole = role => {
@@ -101,19 +98,11 @@ class App extends Component {
 		this.setState({ fullScreen: true });
 	}
 
-	setVisiblePage = route => {
-		if (this.state.visiblePage !== route) {
-			this.setState({ visible: false });
-			setTimeout(() => { this.setState({ visiblePage: route }); console.log(`visible page set to: ${this.state.visiblePage}`) }, 600);
-			setTimeout(() => this.setState({ visible: true }), 650);
-		}
-	}
-
 	render() {
-		const classOfMainContainer = this.state.visible ? 'visible' : 'invisible';
+		const classOfMainContainer = `${this.state.visible ? 'visible' : 'invisible'}${this.state.mobileClass}`;
 
 		return (
-			<div className={`App-container ${mobileClass}`}>
+			<div className={'App-container'}>
 				{(() => {
 					if (!this.state.askedForCookies
 						&& this.state.userRole === 'guest'
@@ -133,51 +122,52 @@ class App extends Component {
 					enabled={this.state.fullScreen}
 				>
 					<Header
-						isMobile={md.phone() ? true : false}
+						isMobile={isMobile}
 						changeRoute={this.changeRoute}
 					/>
 
 					<NavBar
-						isMobile={md.phone() ? true : false}
+						isMobile={isMobile}
 						changeRoute={this.changeRoute}
+						setVisiblePage={this.setVisiblePage}
+					/>
+
+					<SideBar
+						isMainRoute={true}
+						isMobile={isMobile}
+						changeRoute={this.changeRoute}
+						visiblePage={this.state.visiblePage}
 					/>
 
 					{this.state.userRole !== 'guest' ? <UserInfo /> : <p></p>}
 
 					{/* this will be slowly faded in when changing this.state.visible */}
-					<div id='App-mainContainer' className={classOfMainContainer + mobileClass}>
-
+					<div id='App-mainContainer' className={classOfMainContainer}>
 						{(() => {
 							switch (this.state.route) {
 								case 'main': return (
-									<Main
-										isMobile={isMobile}
+									<EntryPage
+										isMobile={isMobile ? true : false}
 										changeRoute={this.changeRoute}
-										setVisiblePage={this.setVisiblePage}
 										visiblePage={this.state.visiblePage}
-									/>)
-								case 'cloudStorage': return (
-									this.state.userRole === 'admin' || this.state.userRole === 'user' ?
-										<CloudStorage
-											changeUserRole={this.changeUserRole}
-											isMobile={isMobile}
-											userRole={this.state.userRole}
-										/>
-										:
-										<Login
-											callBackend={this.callBackend}
-											changeUserRole={this.changeUserRole}
-											allowCookies={this.state.allowCookies}
-											isMobile={isMobile}
-											user={this.state.user}
-											userRole={this.state.userRole}
-										/>
-								);
+									/>
+								)
+								case 'skills': return (
+									<Skills
+										isMobile={isMobile ? true : false}
+										changeRoute={this.changeRoute}
+										visiblePage={this.state.visiblePage}
+									/>
+								)
 								case 'about': return (
 									<About
-										isMobile={isMobile}
+										isMobile={isMobile ? true : false}
 										changeRoute={this.changeRoute}
-										setVisiblePage={this.setVisiblePage}
+									/>
+								)
+								case 'biography': return (
+									<Biography
+										isMobile={isMobile}
 									/>
 								)
 								default: return (<NotFound />)
