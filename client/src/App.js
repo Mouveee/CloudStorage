@@ -41,11 +41,13 @@ class App extends Component {
 			route: 'main',
 			user: null,
 			userRole: 'guest', //admin, user, guest 
+			sideBarVisible: true,
 			visible: false,
 		};
 
 		this.changeRoute.bind(this);
 		this.setCookieAllowance.bind(this);
+		this.setSideBarVisibility.bind(this);
 	}
 
 	componentDidMount = () => {
@@ -75,6 +77,7 @@ class App extends Component {
 	changeRoute = route => {
 		if (route !== this.state.route) {
 			this.setState({ visible: false })
+			this.setSideBarVisibility();
 			setTimeout(() => this.setState({ route: route }), 500);
 			setTimeout(() => this.setState({ visible: true }), 550);
 		}
@@ -96,6 +99,20 @@ class App extends Component {
 
 	setFullScreen = () => {
 		this.setState({ fullScreen: true });
+	}
+
+	setSideBarVisibility = () => {
+		const sideBar = document.getElementById('App-sideBar');
+		if (this.state.sideBarVisible) {
+			sideBar.className = `${this.state.mobileClass}`
+			console.log(sideBar.className)
+		} else {
+			sideBar.className = `visible ${this.state.mobileClass}`;
+			console.log(sideBar.className);
+		}
+
+		this.setState({ sideBarVisible: !this.state.sideBarVisible });
+		console.log(this.state.sideBarVisible)
 	}
 
 	render() {
@@ -129,13 +146,14 @@ class App extends Component {
 					<NavBar
 						isMobile={isMobile}
 						changeRoute={this.changeRoute}
-						setVisiblePage={this.setVisiblePage}
+						setSideBarVisibility={this.setSideBarVisibility}
 					/>
 
 					<SideBar
 						isMainRoute={true}
 						isMobile={isMobile}
 						changeRoute={this.changeRoute}
+						setSideBarVisibility={this.setSideBarVisibility}
 						visiblePage={this.state.visiblePage}
 					/>
 

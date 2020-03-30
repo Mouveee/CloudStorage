@@ -22,8 +22,11 @@ class SideBar extends React.Component {
 		return (
 			<div id='App-sideBar' className={faderClass + this.state.mobileClass}>
 				<div
-					className='App-sideBarItem mobile'
-					onClick={() => this.props.changeRoute('biography')}
+					className={'App-sideBarItem' + this.state.mobileClass}
+					onClick={() => {
+						this.props.changeRoute('biography');
+						this.props.setSideBarVisibility();
+					}}
 				>
 					Über mich
 				</div>

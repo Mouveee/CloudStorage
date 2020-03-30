@@ -79,18 +79,6 @@ a {
 	position: relative;
 }
 
-#App-subPageContainer {
-	transition: 600ms;
-}
-
-#App-subPageContainer.visible {
-	opacity: 1;
-}
-
-#App-subPageContainer.invisible {
-	opacity: 0;
-}
-
 .App-mainText {
 	text-align: justify
 }

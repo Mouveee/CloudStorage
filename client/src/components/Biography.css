@@ -2,7 +2,7 @@
   border-top: 1px solid ghostwhite;
   border-right: 1px solid ghostwhite;
   border-radius: 60px;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
   height: 15vh;
   width: 100%;
   text-align: justify;
@@ -28,7 +28,6 @@
 }
 
 .App-bioPic {
-  /* display: inline; */
   object-fit: cover;
   float: left;
   border-radius: 100%;
@@ -39,16 +38,21 @@
 }
 
 .App-bioPic.App-mobile {
-  width: calc(36px + 0.5vmin);
-  height: calc(36px + 0.5vmin);
+  width: calc(42px + 0.5vmin);
+  height: calc(42px + 0.5vmin);
   padding: 2px;
   margin-right: 12px;
 }
 
 .App-bioBorder {
+  margin: auto;
+  margin-top: 90px;
   width: 65%;
   height: 1px;
   background-color: lightgray;
-  margin: auto;
   bottom: 0;
+}
+
+.App-bioBorder.App-mobile{
+  margin-top: 1.5em;
 }
