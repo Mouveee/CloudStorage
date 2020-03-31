@@ -13,13 +13,13 @@ button:hover {
 }
 
 .App-clickable {
-	color: darkgray;
+	color: blue;
 	transition: 400ms;
 }
 
 .App-clickable:hover {
 	cursor: pointer;
-	color: blue;
+	color: darkblue;
 }
 
 .App-container {

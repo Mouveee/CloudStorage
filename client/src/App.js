@@ -77,7 +77,7 @@ class App extends Component {
 	changeRoute = route => {
 		if (route !== this.state.route) {
 			this.setState({ visible: false })
-			this.setSideBarVisibility();
+			if (!this.state.sideBarVisible) this.setSideBarVisibility();
 			setTimeout(() => this.setState({ route: route }), 500);
 			setTimeout(() => this.setState({ visible: true }), 550);
 		}

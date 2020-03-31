@@ -24,7 +24,7 @@ class Biography extends React.Component {
     }
 
     return (
-      <div id='App-mainPage' className={classOfContainer + this.state.mobileClass}>
+      <div id='App-mainPage' className={classOfContainer + this.state.mobileClass + ' App-bio'}>
         <div className={'App-bioEntry' + this.state.mobileClass}>
           <div className={'App-bioContent' + this.state.mobileClass}>
             <img src={vsc} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>

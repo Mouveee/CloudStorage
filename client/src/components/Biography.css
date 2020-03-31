@@ -1,3 +1,8 @@
+.App-bio {
+  margin-top: 2em;
+  padding-bottom: 2em;
+}
+
 .App-bioEntry {
   border-top: 1px solid ghostwhite;
   border-right: 1px solid ghostwhite;
@@ -53,6 +58,6 @@
   bottom: 0;
 }
 
-.App-bioBorder.App-mobile{
+.App-bioBorder.App-mobile {
   margin-top: 1.5em;
 }
