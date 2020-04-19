@@ -5,6 +5,8 @@ import Fullscreen from "react-full-screen";
 
 import MobileDetect from 'mobile-detect';
 
+import scrollToComponent from 'react-scroll-to-component';
+
 //custom components, hopefully well written
 import About from './components/About.js';
 import AllowCookies from './components/AllowCookies.js';
@@ -77,6 +79,12 @@ class App extends Component {
 	changeRoute = route => {
 		if (route !== this.state.route) {
 			this.setState({ visible: false })
+
+			if (isMobile) {
+				console.log('scrolling')
+				scrollToComponent(this.Header);
+			}
+
 			if (!this.state.sideBarVisible) this.setSideBarVisibility();
 			setTimeout(() => this.setState({ route: route }), 500);
 			setTimeout(() => this.setState({ visible: true }), 550);
@@ -138,16 +146,12 @@ class App extends Component {
 				<Fullscreen
 					enabled={this.state.fullScreen}
 				>
-					<Header
-						isMobile={isMobile}
-						changeRoute={this.changeRoute}
-					/>
-
-					<NavBar
-						isMobile={isMobile}
-						changeRoute={this.changeRoute}
-						setSideBarVisibility={this.setSideBarVisibility}
-					/>
+					<section ref={(section) => { this.Header = section; }}>
+						<Header
+							isMobile={isMobile}
+							changeRoute={this.changeRoute}
+						/>
+					</section>
 
 					<SideBar
 						isMainRoute={true}
@@ -192,7 +196,11 @@ class App extends Component {
 							}
 						})()}
 
-
+						<NavBar
+							isMobile={isMobile}
+							changeRoute={this.changeRoute}
+							setSideBarVisibility={this.setSideBarVisibility}
+						/>
 
 					</div>
 				</Fullscreen >

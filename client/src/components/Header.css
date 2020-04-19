@@ -17,7 +17,7 @@
 	user-select: none;
 	transition: 400ms ease-in-out;
 	clear: both;
-	z-index:-999;
+	z-index: -999;
 	height: 100px;
 	pointer-events: none;
 }
@@ -26,16 +26,15 @@
 	opacity: 1;
 }
 
-#App-header.visible.App-mobile{
-	position:fixed;
-	top:0;
-	left:0;
-	height: 46px;
+#App-header.visible.App-mobile {
+	top: 0;
+	left: 0;
+	height: 118px;
 }
 
 #App-headerDiv {
 	position: absolute;
-	left:8vw;
+	left: 8vw;
 	display: inline-block;
 	text-align: center;
 	top: 0;
@@ -45,28 +44,31 @@
 	height: calc(128px + 1vmin);
 }
 
-#App-headerDiv.App-mobile{
+#App-headerDiv.App-mobile {
 	top: 4%;
-	transform: translate(4%,4%);
+	transform: translate(4%, 4%);
 	/* margin-top: 4vh; */
-	height:46px;
+	height: 82px;
 }
 
-#App-headerVideo{
+#App-headerVideo {
 	position: absolute;
 	left: 0px;
-	width: 100%    !important;
-  height: calc(90px + 1vmin)   !important;
-  z-index:-1; /* Causes the video to sit behind your heading */
-  object-position:bottom; /* Causes video to be centred against the header */
-	object-fit:cover; /* Causes video to cover/stretch to the header */
+	width: 100% !important;
+	height: 100% !important;
+	z-index: -1;
+	/* Causes the video to sit behind your heading */
+	object-position: bottom;
+	/* Causes video to be centred against the header */
+	object-fit: cover;
+	/* Causes video to cover/stretch to the header */
 	transform: rotateY(180deg);
-	opacity:1;
+	opacity: 1;
 }
 
-#App-headerVideo.App-mobile{
-	top:0;
-	height: calc(60px + 1vmin) !important;
+#App-headerVideo.App-mobile {
+	height: 148px;
+	top: 0;
 }
 
 .App-caption {
@@ -78,25 +80,24 @@
 	z-index: 999;
 }
 
-.App-caption.App-mobile{
-	margin:0;
-	font-size: calc(28px + 1vmin);
+.App-caption.App-mobile {
+	margin: 0;
+	font-size: calc(32px + 1vmin);
 }
 
 .App-subHeader {
-	display:inline;
-	z-index:999;
+	display: inline;
+	z-index: 999;
 	font-size: calc(26px + 1vmin);
 	line-break: strict;
 	text-align: right;
 	margin: 0;
-	margin-left:0.5em;
+	margin-left: 0.5em;
 	margin-bottom: 1em;
 }
 
-.App-subHeader.App-mobile{
+.App-subHeader.App-mobile {
 	margin-top: 0;
 	display: block;
 	font-size: calc(12px + 1vmin);
-}	
-
+}

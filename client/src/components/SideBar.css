@@ -20,6 +20,7 @@
 }
 
 #App-sideBar.App-mobile {
+	display: none;
 	border-radius: 0;
 	border-right: none;
 	font-size: calc(14px + 1vmin);

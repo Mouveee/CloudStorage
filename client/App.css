@@ -7,19 +7,17 @@ button:hover {
 	cursor: pointer;
 }
 
-
-
-.App-btnFull{
-	position:fixed;
-	bottom:0;
+.App-btnFull {
+	position: fixed;
+	bottom: 0;
 }
 
-.App-clickable{
+.App-clickable {
 	color: darkgray;
 	transition: 400ms;
 }
 
-.App-clickable:hover{
+.App-clickable:hover {
 	cursor: pointer;
 	color: blue;
 }
@@ -33,8 +31,8 @@ button:hover {
 	pointer-events: all;
 }
 
-.fullscreen.fullscreen-enabled{
-	background-color:white;
+.fullscreen.fullscreen-enabled {
+	background-color: white;
 }
 
 #App-mainContainer {
