@@ -59,7 +59,7 @@ class EntryPage extends React.Component {
             sowie verwandten Tools, Libraries und Frameworks. Diese Seite wurde zum Beispiel
             mit <i>React</i> programmiert.
             Eine detailliertere Auflistung meiner Kenntnisse und Erfahrungen findest Du unter
-            {' '}<i className='App-clickable' onClick={() => this.props.setVisiblePage('skills')}>Kenntnisse</i>.
+            {' '}<i className='App-clickable' onClick={() => this.props.changeRoute('skills')}>Kenntnisse</i>.
             <br></br>
             Als Web Developer besteht ein Großteil meiner Aufgaben in der Konzeptionierung und Gestaltung von Websites
             und deren praktischer Umsetzung in Codeform im Frontend, sowie in der Entwicklung von REST-APIs und

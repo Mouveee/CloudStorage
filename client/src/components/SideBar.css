@@ -20,19 +20,18 @@
 }
 
 #App-sideBar.App-mobile {
-	display: none;
+	left: 0;
 	border-radius: 0;
 	border-right: none;
 	font-size: calc(14px + 1vmin);
 	width: 100%;
-	height: calc(24px + 1vmin);
-	background-color: rgb(0, 0, 30);
-	color: white;
-	left: 0;
+	background-color: white;
+	color: gray;
 	text-align: center;
-	bottom: 0;
 	padding: 0.2em;
-	position: fixed;
+	position: static;
+	bottom: 0;
+	justify-content: center;
 }
 
 #App-sideBar.visible {
@@ -61,8 +60,9 @@
 }
 
 .App-sideBarItem.App-mobile {
+	position: static;
 	margin: 0;
-	padding-left: 0;
-	color: white;
+	padding: 0;
+	color: gray;
 	width: 20vw;
 }

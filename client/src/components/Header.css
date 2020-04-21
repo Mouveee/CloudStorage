@@ -29,7 +29,7 @@
 #App-header.visible.App-mobile {
 	top: 0;
 	left: 0;
-	height: 118px;
+	height: 148px;
 }
 
 #App-headerDiv {
@@ -49,13 +49,14 @@
 	transform: translate(4%, 4%);
 	/* margin-top: 4vh; */
 	height: 82px;
+	width: 80%;
 }
 
 #App-headerVideo {
 	position: absolute;
 	left: 0px;
 	width: 100% !important;
-	height: 100% !important;
+	height: calc(90px + 1vmin) !important;
 	z-index: -1;
 	/* Causes the video to sit behind your heading */
 	object-position: bottom;
@@ -67,7 +68,7 @@
 }
 
 #App-headerVideo.App-mobile {
-	height: 148px;
+	height: 148px !important;
 	top: 0;
 }
 
@@ -82,7 +83,7 @@
 
 .App-caption.App-mobile {
 	margin: 0;
-	font-size: calc(32px + 1vmin);
+	font-size: calc(36px + 1vmin);
 }
 
 .App-subHeader {
@@ -97,7 +98,7 @@
 }
 
 .App-subHeader.App-mobile {
-	margin-top: 0;
+	margin-top: 4px;
 	display: block;
-	font-size: calc(12px + 1vmin);
+	font-size: calc(20px + 1vmin);
 }

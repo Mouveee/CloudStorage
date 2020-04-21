@@ -4,7 +4,6 @@
 	"private": true,
 	"dependencies": {
 		"@auth0/auth0-spa-js": "^1.7.0",
-		"axios": "^0.19.2",
 		"filepond": "^4.13.4",
 		"mobile-detect": "^1.4.4",
 		"react": "^16.13.1",

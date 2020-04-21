@@ -3,9 +3,11 @@
 	src: url("../fonts/ColabThi.otf");
 }
 
-/* all about Navigation Bar */
-
 .App-navBar {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 100px;
 	display: inline-block;
 	font-family: fancyFont;
 	font-size: calc(16px + 1vmin);
@@ -26,6 +28,9 @@
 }
 
 .App-navBar.visible.App-mobile {
+	transform: translateX(0);
+	top: 0;
+	position: static;
 	border-top: 1px solid gray;
 	height: calc(16px);
 	font-size: calc(14px + 1vmin);

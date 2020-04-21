@@ -34,11 +34,13 @@ button:hover {
 }
 
 #App-mainContainer {
+	padding-top: 3em;
 	background-color: white;
 	transition: 300ms;
 }
 
 #App-mainContainer.App-mobile {
+	padding-top: 0;
 	z-index: -2;
 	overflow-y: scroll;
 	transition: 600ms;

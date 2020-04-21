@@ -153,13 +153,6 @@ class App extends Component {
 						/>
 					</section>
 
-					<SideBar
-						isMainRoute={true}
-						isMobile={isMobile}
-						changeRoute={this.changeRoute}
-						setSideBarVisibility={this.setSideBarVisibility}
-						visiblePage={this.state.visiblePage}
-					/>
 
 					{this.state.userRole !== 'guest' ? <UserInfo /> : <p></p>}
 
@@ -200,6 +193,14 @@ class App extends Component {
 							isMobile={isMobile}
 							changeRoute={this.changeRoute}
 							setSideBarVisibility={this.setSideBarVisibility}
+						/>
+
+						<SideBar
+							isMainRoute={true}
+							isMobile={isMobile}
+							changeRoute={this.changeRoute}
+							setSideBarVisibility={this.setSideBarVisibility}
+							visiblePage={this.state.visiblePage}
 						/>
 
 					</div>
