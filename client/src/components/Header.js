@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import './Header.css';
 
-import myVideo from "../vids/head.mp4";
+import myVideo from '../vids/head.mp4';
+import myVideoMobile from '../vids/headMobile.mp4';
 
 class Header extends Component {
 	constructor(props) {
@@ -31,7 +32,7 @@ class Header extends Component {
 		return (
 			<header id='App-header' className={classVisibility + this.state.mobileClass} >
 				<video autoPlay muted loop id="App-headerVideo" className={this.state.mobileClass}>
-					<source src={myVideo} type="video/mp4"></source>
+					<source src={this.props.isMobile ? myVideoMobile : myVideo} type="video/mp4"></source>
 					<p>Video nicht geladen :(</p>
 				</video>
 				<div id="App-headerDiv" className={this.state.mobileClass}>

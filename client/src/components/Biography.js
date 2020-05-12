@@ -24,11 +24,12 @@ class Biography extends React.Component {
     }
 
     return (
-      <div id='App-mainPage' className={classOfContainer + this.state.mobileClass + ' App-bio'}>
+      <div id='App-mainPage' className={this.state.mobileClass + ' App-bio'}>
         <div className={'App-bioEntry' + this.state.mobileClass}>
           <div className={'App-bioContent' + this.state.mobileClass}>
             <img src={vsc} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
-              Ich schreibe ich gerne Code. Ich lösche Code wenn er besser geschrieben werden kann. Ich schreibe neuen Code
+              Ich schreibe ich gerne Code. Ich lösche Code wenn er überflüssig ist. O Reilly Bücher
+              sind so lehrreich wie unterhaltsam.
             <div className={'App-bioBorder' + this.state.mobileClass}></div>
           </div>
         </div>
@@ -36,8 +37,8 @@ class Biography extends React.Component {
         <div className={'App-bioEntry' + this.state.mobileClass}>
           <div className={'App-bioContent' + this.state.mobileClass}>
             <img src={books} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
-              Ich hatte schon immer großes Interesse an Literatur, besonders Haruki Murakami
-              oder Shirley Jackson gehören zu meinen Favoriten.
+              Ich hatte schon immer großes Interesse an Literatur, besonders Haruki Murakami, James Graham Ballard
+              und Shirley Jackson gehören zu meinen Lieblingsautoren.
             <div className={'App-bioBorder' + this.state.mobileClass}></div>
           </div>
         </div>
@@ -46,7 +47,7 @@ class Biography extends React.Component {
           <div className={'App-bioContent' + this.state.mobileClass}>
             <img src={guitar} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
               Ich liebe es, Musik zu machen, zu hören und auf Vinyl zu sammeln. Ob nun auf der Gitarre
-              oder mit Ableton Live.
+              oder mit Ableton Live. Elektronisch oder handgemacht.
           </div>
         </div>
       </div>

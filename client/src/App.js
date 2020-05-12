@@ -113,14 +113,11 @@ class App extends Component {
 		const sideBar = document.getElementById('App-sideBar');
 		if (this.state.sideBarVisible) {
 			sideBar.className = `${this.state.mobileClass}`
-			console.log(sideBar.className)
 		} else {
 			sideBar.className = `visible ${this.state.mobileClass}`;
-			console.log(sideBar.className);
 		}
 
 		this.setState({ sideBarVisible: !this.state.sideBarVisible });
-		console.log(this.state.sideBarVisible)
 	}
 
 	render() {
@@ -202,7 +199,6 @@ class App extends Component {
 							setSideBarVisibility={this.setSideBarVisibility}
 							visiblePage={this.state.visiblePage}
 						/>
-
 					</div>
 				</Fullscreen >
 			</div >

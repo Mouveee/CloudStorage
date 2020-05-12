@@ -71,12 +71,16 @@ h3.App-mobile {
 }
 
 .App-listPoint.App-mobile {
-  background-color: ghostwhite;
+  background-color: rgb(0,0,30);
+  color: white;
+  border-radius: 8px;
 }
 
 .App-listPoint.App-mobile li {
   padding: 8px;
   border: none;
+  color: white;
+  font-size: 18px;
 }
 
 .App-subList {

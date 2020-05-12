@@ -3,14 +3,12 @@
 }
 
 .App-bio {
-  /* margin-top: 2em; */
-  padding-bottom: 2em;
+  padding-bottom: 8em;
 }
 
 .App-bioEntry {
   border-top: 1px solid ghostwhite;
   border-right: 1px solid ghostwhite;
-  border-radius: 60px;
   margin-bottom: 3em;
   height: 15vh;
   text-align: justify;
@@ -19,8 +17,7 @@
 
 .App-bioEntry.App-mobile {
   padding: 4px;
-  margin-bottom: 0.1em;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .App-bioContent {
@@ -45,8 +42,8 @@
 }
 
 .App-bioPic.App-mobile {
-  width: calc(42px + 0.5vmin);
-  height: calc(42px + 0.5vmin);
+  width: calc(80px + 0.5vmin);
+  height: calc(80px + 0.5vmin);
   padding: 2px;
   margin-right: 12px;
 }

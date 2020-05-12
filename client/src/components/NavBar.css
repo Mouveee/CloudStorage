@@ -31,11 +31,12 @@
 	transform: translateX(0);
 	top: 0;
 	position: static;
-	border-top: 1px solid gray;
-	height: calc(16px);
+	border-top: 1px solid lightgray;
+	border-bottom: none;
 	font-size: calc(14px + 1vmin);
 	z-index: 1;
 	padding-bottom: 12px;
+	width: 75%;
 }
 
 .App-navItem {
@@ -47,7 +48,9 @@
 }
 
 .App-navItem.App-mobile {
-	margin: 0.8em;
+	display: block;
+	padding-bottom: 0.8em;
+	border-bottom: 1px solid lightgray;
 }
 
 .App-navItem:hover {

@@ -29,7 +29,7 @@
 #App-header.visible.App-mobile {
 	top: 0;
 	left: 0;
-	height: 148px;
+	height: 146px;
 }
 
 #App-headerDiv {
@@ -68,7 +68,7 @@
 }
 
 #App-headerVideo.App-mobile {
-	height: 148px !important;
+	height: 146px !important;
 	top: 0;
 }
 
