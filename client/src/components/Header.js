@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import './Header.css';
 
 import myVideo from '../vids/head.mp4';
-import myVideoMobile from '../vids/headMobile.mp4';
+import myVideoMobile from '../vids/headMobileVideo.mp4';
 
 class Header extends Component {
 	constructor(props) {
