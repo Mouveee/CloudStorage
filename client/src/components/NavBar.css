@@ -15,8 +15,8 @@
 	height: auto;
 	color: gray;
 	opacity: 0;
-	padding-top: 0.3em;
-	padding-bottom: 0.3em;
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
 	transition: 1600ms;
 	background-color: white;
 	border-bottom: solid 1px lightgray;
@@ -47,10 +47,18 @@
 	transition: 300ms;
 }
 
+.App-navItem.hiddenNavItem {
+	display: none;
+}
+
 .App-navItem.App-mobile {
 	display: block;
 	padding-bottom: 0.8em;
 	border-bottom: 1px solid lightgray;
+}
+
+.App-navItem.App-mobile.hiddenNavItem {
+	display: none;
 }
 
 .App-navItem:hover {

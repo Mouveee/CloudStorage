@@ -34,15 +34,15 @@ button:hover {
 }
 
 #App-mainContainer {
-	padding-top: 3em;
+	padding-top: 2em;
 	background-color: white;
 	transition: 300ms;
 }
 
 #App-mainContainer.App-mobile {
+	position: static;
 	padding-top: 0;
 	z-index: -2;
-	overflow-y: scroll;
 	transition: 600ms;
 	text-align: center;
 	width: 100%;
@@ -73,8 +73,9 @@ a {
 	-ms-user-select: none;
 	user-select: none;
 	overflow-y: none;
-	margin: 3em auto auto;
+	margin: 2em auto auto;
 	position: relative;
+	margin-bottom: 3em;
 }
 
 .App-mainText {

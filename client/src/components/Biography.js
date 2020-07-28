@@ -17,38 +17,39 @@ class Biography extends React.Component {
   }
 
   render() {
-    let classOfContainer = '';
-
-    if (this.state.visible) {
-      classOfContainer += 'App-mainVisibile';
-    }
-
     return (
       <div id='App-mainPage' className={this.state.mobileClass + ' App-bio'}>
         <div className={'App-bioEntry' + this.state.mobileClass}>
+
+
           <div className={'App-bioContent' + this.state.mobileClass}>
             <img src={vsc} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
-              Ich schreibe ich gerne Code. Ich lösche Code wenn er überflüssig ist. O Reilly Bücher
-              sind so lehrreich wie unterhaltsam.
-            <div className={'App-bioBorder' + this.state.mobileClass}></div>
+            Ich schreibe gerne Code. Ich warte und faktoriere gerne Code. Ich lösche Code wenn er überflüssig ist. Ich konzeptioniere und setze gerne
+            User Interfaces um.
           </div>
+
+          <div className={'App-bioBorder' + this.state.mobileClass}></div>
         </div>
 
         <div className={'App-bioEntry' + this.state.mobileClass}>
           <div className={'App-bioContent' + this.state.mobileClass}>
             <img src={books} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
-              Ich hatte schon immer großes Interesse an Literatur, besonders Haruki Murakami, James Graham Ballard
-              und Shirley Jackson gehören zu meinen Lieblingsautoren.
-            <div className={'App-bioBorder' + this.state.mobileClass}></div>
+            Ich hatte schon immer großes Interesse an Literatur, besonders Haruki Murakami, James Graham Ballard
+            und Shirley Jackson gehören zu meinen Lieblingsautoren.
           </div>
+
+          <div className={'App-bioBorder' + this.state.mobileClass}></div>
         </div>
 
         <div className={'App-bioEntry' + this.state.mobileClass}>
           <div className={'App-bioContent' + this.state.mobileClass}>
             <img src={guitar} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
-              Ich liebe es, Musik zu machen, zu hören und auf Vinyl zu sammeln. Ob nun auf der Gitarre
-              oder mit Ableton Live. Elektronisch oder handgemacht.
+            Ich liebe es, Musik zu machen, zu hören und auf Vinyl zu sammeln. Elektronisch oder handgemacht.
+            Auf der Gitarre
+            oder mit Ableton Live. Oder beidem.
           </div>
+
+          <div className={'App-bioBorder' + this.state.mobileClass + ' invisible'}></div>
         </div>
       </div>
     )

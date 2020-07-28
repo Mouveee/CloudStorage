@@ -1,62 +1,51 @@
 #app-mainPage {
-  margin-top: 0;
-}
-
-.App-bio {
-  padding-bottom: 8em;
+  margin-top: 1em;
 }
 
 .App-bioEntry {
-  border-top: 1px solid ghostwhite;
-  border-right: 1px solid ghostwhite;
   margin-bottom: 3em;
-  height: 15vh;
-  text-align: justify;
-  float: right;
+  height: 120px;
 }
 
 .App-bioEntry.App-mobile {
-  padding: 4px;
-  font-size: 18px;
+  margin-bottom: 7em;
+  height: 120px;
 }
 
 .App-bioContent {
-  height: 15vh;
   text-align: left;
-  padding: 2em;
+  width: 80%;
 }
 
 .App-bioContent.App-mobile {
-  padding: 8px;
-  height: 100%;
+  text-align: block;
+  width: 100%;
 }
 
 .App-bioPic {
-  object-fit: cover;
+  height: 120px;
+  width: 120px;
   float: left;
-  /* border-radius: 100%; */
-  width: calc(100px + 0.5vmin);
-  height: calc(100px + 0.5vmin);
-  padding: 4px;
-  margin-right: 24px;
+  margin-right: 1em;
 }
 
 .App-bioPic.App-mobile {
-  width: calc(80px + 0.5vmin);
-  height: calc(80px + 0.5vmin);
-  padding: 2px;
-  margin-right: 12px;
-}
-
-.App-bioBorder {
-  margin: auto;
-  margin-top: 90px;
-  width: 65%;
-  height: 1px;
-  background-color: lightgray;
-  bottom: 0;
+  display: inline;
+  margin-bottom: 1em;
+  margin-right: 1em;
 }
 
 .App-bioBorder.App-mobile {
-  margin-top: 1.5em;
+  left: 50%;
+  margin-top: 3em;
+  display: block;
+  height: 1px;
+  width: 98%;
+  background-color: gray;
+  top: 160px;
+}
+
+.invisible {
+  visibility: hidden;
+  margin-bottom: -2em;
 }

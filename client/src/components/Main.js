@@ -5,7 +5,6 @@ import fader from '../HOC/Fader'
 
 import Biography from './Biography.js';
 import EntryPage from './EntryPage.js';
-import SideBar from './SideBar.js';
 import Skills from './Skills.js';
 
 import './Main.css';
@@ -17,7 +16,7 @@ class Main extends React.Component {
     this.state = {
       mobileClass: this.props.isMobile ? ' App-mobile' : '',
       visible: false,
-      route: this.props.visiblePage //main, biography, skills 
+      route: this.props.visiblePage //main, biography, skills, about 
     }
 
     this.timeOut = null;
@@ -43,13 +42,6 @@ class Main extends React.Component {
         id='App-mainPage'
         className={classMain}
       >
-        <SideBar
-          isMainRoute={true}
-          isMobile={this.props.isMobile}
-          setVisiblePage={this.props.setVisiblePage}
-          visiblePage={this.state.visiblePage}
-        />
-
         <section id='App-subPageContainer' className={classSub}>
           {/* self invoking function, switch cases handle routing */}
           {(() => {

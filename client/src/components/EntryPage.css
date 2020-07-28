@@ -42,6 +42,7 @@
   height: 50%;
   font-size: 18px;
   padding-left: 0;
+  text-align: justify;
 }
 
 #App-subHeaderEntrypage {
@@ -59,3 +60,4 @@
   font-size: calc(18px + 1vmin);
   margin-top: -0.1em;
 }
+

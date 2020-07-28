@@ -6,6 +6,8 @@ import * as React from 'react';
 import './Main.css';
 import './Skills.css';
 
+import msExam from '../img/MS_EXAM.png';
+
 import fader from '../HOC/Fader';
 
 class Skills extends React.Component {
@@ -33,6 +35,7 @@ class Skills extends React.Component {
 
   render() {
     let mainClass = 'App-skillList';
+    let msExamClass = `App-msExam${this.state.mobileClass}`;
 
     if (this.props.isMobile) {
       mainClass += 'mobile';
@@ -44,6 +47,7 @@ class Skills extends React.Component {
         <ul className={'App-skillList' + this.state.mobileClass}>
           <li className={'App-listPoint' + this.state.mobileClass} >
             <h3 className={this.state.mobileClass}>Javascript</h3>
+
             <ul className={'App-subList' + this.state.mobileClass}>
               <li>
                 React
@@ -57,6 +61,7 @@ class Skills extends React.Component {
               </li>
             </ul>
           </li>
+
           <li className={'App-listPoint' + this.state.mobileClass}>
             <h3 className={this.state.mobileClass}>CSS3</h3>
             <ul className={'App-subList' + this.state.mobileClass}>
@@ -68,6 +73,7 @@ class Skills extends React.Component {
             </li>
             </ul>
           </li>
+
           <li className={'App-listPoint' + this.state.mobileClass}>
             <h3 className={this.state.mobileClass}>HTML5</h3>
             <ul className={'App-subList' + this.state.mobileClass}>
@@ -76,6 +82,7 @@ class Skills extends React.Component {
               </li>
             </ul>
           </li>
+
           <li className={'App-listPoint' + this.state.mobileClass} id="App-microsoftEntry">
             <h3 className={this.state.mobileClass}>MS Cloud Services</h3>
             <ul className={'App-subList' + this.state.mobileClass}>
@@ -96,6 +103,7 @@ class Skills extends React.Component {
             </li>
             </ul>
           </li>
+
           <li className={'App-listPoint' + this.state.mobileClass}>
             <h3 className={this.state.mobileClass}>Weitere Spracherfahrung</h3>
             <ul className={'App-subList' + this.state.mobileClass}>
@@ -105,15 +113,35 @@ class Skills extends React.Component {
               <li>Java</li>
             </ul>
           </li>
+
           <li className={'App-listPoint' + this.state.mobileClass}>
             <h3 className={this.state.mobileClass}>Datenbanken</h3>
             <ul className={'App-subList' + this.state.mobileClass}>
               <li>
                 MySQL
-            </li>
+              </li>
               <li>
                 MongoDB
             </li>
+            </ul>
+          </li>
+
+          <li className={'App-listPoint' + this.state.mobileClass}>
+            <h3 className={this.state.mobileClass}>MS Exam 70-480</h3>
+            <ul className={'App-subList' + this.state.mobileClass}>
+              <li>
+                Programming in HTML5 with JavaScript and CSS3
+              </li>
+            </ul>
+            <img src={msExam} className={msExamClass} alt=':('></img>
+          </li>
+
+          <li className={'App-listPoint' + this.state.mobileClass}>
+            <h3 className={this.state.mobileClass}>Fremdsprachen</h3>
+            <ul className={'App-subList' + this.state.mobileClass}>
+              <li>
+                Enlisch, sehr gut in Wort und Schrift
+              </li>
             </ul>
           </li>
         </ul>

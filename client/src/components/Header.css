@@ -98,6 +98,7 @@
 }
 
 .App-subHeader.App-mobile {
+	text-align: left;
 	margin-top: 4px;
 	display: block;
 	font-size: calc(20px + 1vmin);

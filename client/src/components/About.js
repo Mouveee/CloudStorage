@@ -17,7 +17,6 @@ export default function About(props) {
       <div><br></br></div>
       <div>66117 Saarbrücken</div>
 
-      <div><small>2020</small></div>
 
       <a className="App-clickable" href='mailto:huwig.marco@gmail.com'>huwig.marco@gmail.com</a>
     </div>

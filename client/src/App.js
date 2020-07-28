@@ -15,9 +15,7 @@ import EntryPage from './components/EntryPage.js';
 import Header from './components/Header.js';
 import NavBar from './components/NavBar.js';
 import NotFound from './components/NotFound.js';
-import SideBar from './components/SideBar.js';
 import Skills from './components/Skills.js';
-import UserInfo from './components/UserInfo.js';
 
 import './App.css';
 
@@ -41,19 +39,18 @@ class App extends Component {
 			loggedInUser: '',
 			mobileClass: isMobile ? ' App-mobile' : '',
 			route: 'main',
-			user: null,
-			userRole: 'guest', //admin, user, guest 
-			sideBarVisible: true,
 			visible: false,
 		};
 
 		this.changeRoute.bind(this);
 		this.setCookieAllowance.bind(this);
-		this.setSideBarVisibility.bind(this);
 	}
 
 	componentDidMount = () => {
-		setTimeout(() => this.setState({ visible: true }), 800);
+		setTimeout(() => {
+			this.setState({ visible: true })
+			document.getElementById('App-main').classList.add('hiddenNavItem')
+		}, 800)
 	}
 
 	// callBackend = async (destination, requestBody) => {
@@ -85,7 +82,6 @@ class App extends Component {
 				scrollToComponent(this.Header);
 			}
 
-			if (!this.state.sideBarVisible) this.setSideBarVisibility();
 			setTimeout(() => this.setState({ route: route }), 500);
 			setTimeout(() => this.setState({ visible: true }), 550);
 		}
@@ -93,7 +89,6 @@ class App extends Component {
 
 	changeUserRole = role => {
 		this.setState({ userRole: role })
-		console.log('role changed to: ' + this.state.userRole)
 	}
 
 	setCookieAllowance = (allowed) => {
@@ -107,17 +102,6 @@ class App extends Component {
 
 	setFullScreen = () => {
 		this.setState({ fullScreen: true });
-	}
-
-	setSideBarVisibility = () => {
-		const sideBar = document.getElementById('App-sideBar');
-		if (this.state.sideBarVisible) {
-			sideBar.className = `${this.state.mobileClass}`
-		} else {
-			sideBar.className = `visible ${this.state.mobileClass}`;
-		}
-
-		this.setState({ sideBarVisible: !this.state.sideBarVisible });
 	}
 
 	render() {
@@ -149,9 +133,6 @@ class App extends Component {
 							changeRoute={this.changeRoute}
 						/>
 					</section>
-
-
-					{this.state.userRole !== 'guest' ? <UserInfo /> : <p></p>}
 
 					{/* this will be slowly faded in when changing this.state.visible */}
 					<div id='App-mainContainer' className={classOfMainContainer}>
@@ -189,15 +170,8 @@ class App extends Component {
 						<NavBar
 							isMobile={isMobile}
 							changeRoute={this.changeRoute}
+							route={this.state.route}
 							setSideBarVisibility={this.setSideBarVisibility}
-						/>
-
-						<SideBar
-							isMainRoute={true}
-							isMobile={isMobile}
-							changeRoute={this.changeRoute}
-							setSideBarVisibility={this.setSideBarVisibility}
-							visiblePage={this.state.visiblePage}
 						/>
 					</div>
 				</Fullscreen >
@@ -208,15 +182,3 @@ class App extends Component {
 
 export default App;
 
-
-		// use if needed
-		// console.log(md.mobile() ? 'running on mobile ' + md.mobile() : 'no mobile');          // 'Sony'
-		// console.log(md.phone() ? 'phone type: ' + md.phone() : 'this is not a telephone');           // 'Sony'
-		// console.log(md.tablet());          // null
-		// console.log(md.userAgent());       // 'Safari'
-		// console.log(md.os() ? 'os: ' + md.os() : `couldn't determine os...`);              // 'AndroidOS'
-		// console.log(md.is('iPhone'));      // false
-		// console.log(md.is('bot'));         // false
-		// console.log(md.version('Webkit'));         // 534.3
-		// console.log(md.versionStr('Build'));       // '4.1.A.0.562'
-		// console.log(md.match('playstation|xbox')); // false
