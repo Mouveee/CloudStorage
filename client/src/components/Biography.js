@@ -21,10 +21,9 @@ class Biography extends React.Component {
       <div id='App-mainPage' className={this.state.mobileClass + ' App-bio'}>
         <div className={'App-bioEntry' + this.state.mobileClass}>
 
-
           <div className={'App-bioContent' + this.state.mobileClass}>
             <img src={vsc} className={'App-bioPic' + this.state.mobileClass} alt='missing pic'></img>
-            Ich schreibe gerne Code. Ich warte und faktoriere gerne Code. Ich lösche Code wenn er überflüssig ist. Ich konzeptioniere und setze gerne
+            Ich schreibe gerne Code. Ich überarbeite und faktoriere gerne Code. Ich lösche Code wenn er überflüssig ist. Ich konzeptioniere und setze gerne
             User Interfaces um.
           </div>
 

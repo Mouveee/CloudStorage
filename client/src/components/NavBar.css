@@ -55,6 +55,7 @@
 	display: block;
 	padding-bottom: 0.8em;
 	border-bottom: 1px solid lightgray;
+	font-size: 20px;
 }
 
 .App-navItem.App-mobile.hiddenNavItem {

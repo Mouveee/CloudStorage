@@ -6,9 +6,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
   user-select: none;
+  padding-top: 98px;
 }
 
 .App-about.App-mobile {
+  margin-top: 48px;
   font-size: 18px;
   transform: translate(0%, 0%);
   left: 0;
@@ -17,5 +19,5 @@
   width: 90%;
   height: 100%;
   padding: 25px;
-  padding-bottom: 160px;
+  padding-bottom: 100px;
 }

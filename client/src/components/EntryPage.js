@@ -62,15 +62,18 @@ class EntryPage extends React.Component {
             Eine detailliertere Auflistung meiner Kenntnisse und Erfahrungen findet sich unter
             {' '}<i className='App-clickable' onClick={() => this.props.changeRoute('skills')}>Kenntnisse</i>.
             <br></br>
+            {this.state.mobileClass ? <br></br> : null}
             Als Web Developer besteht ein Großteil meiner Aufgaben in der Konzeptionierung und Gestaltung von Websites
             und deren praktischer Umsetzung in Codeform im Frontend, sowie in der Entwicklung von REST-APIs und
             Datenverarbeitung im Backend.
             Ich sehe mich dabei als klassischen Problemlöser: Der Kunde hat ein Problem, meine Aufgabe ist es dieses zu analysieren,
             seinen Ursprung zu finden und es schließlich zu lösen.
             <br></br>
+            {this.state.mobileClass ? <br></br> : null}
             Neben der Webentwicklung beschäftige ich mich intensiv mit digital erstellter Musik und Sounddesign mit <i>Ableton Live</i> und bin
             begeisterter Leser von Romanen.
             <br></br>
+            {this.state.mobileClass ? <br></br> : null}
             Ich bin erreichbar unter meiner <i><a type="email" className="App-clickable" href="mailto:huwig.marco@gmail.com">E-Mail Adresse </a></i>
             oder in den <i className="App-clickable" onClick={() => this.props.changeRoute('about')}>Kontaktdaten</i>.
           </div>

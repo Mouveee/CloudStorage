@@ -114,6 +114,7 @@ h3.App-mobile {
 }
 
 .App-msExam.App-mobile {
+  margin-top: 1em;
   width: calc(68px + 0.2vmin);
   height: calc(68px + 0.2vmin);
 }

@@ -99,7 +99,7 @@ a {
 #App-mainPage.App-mobile {
 	position: fixed;
 	top: 0;
-	font-size: calc(16px + 0.5vh);
+	font-size: 20px;
 	transition: 600ms ease-in-out;
 	margin: auto;
 	width: 90%;
@@ -110,7 +110,7 @@ a {
 	position: relative;
 	text-align: center;
 	padding-bottom: 3em;
-	padding-top: 1em;
+	padding-top: 0.5em;
 }
 
 #App-subPageContainer.App-mobile {

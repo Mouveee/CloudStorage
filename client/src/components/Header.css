@@ -48,7 +48,7 @@
 	top: 4%;
 	transform: translate(4%, 4%);
 	/* margin-top: 4vh; */
-	height: 82px;
+	height: 78px;
 	width: 80%;
 }
 
@@ -68,7 +68,7 @@
 }
 
 #App-headerVideo.App-mobile {
-	height: 146px !important;
+	height: 138px !important;
 	top: 0;
 }
 
