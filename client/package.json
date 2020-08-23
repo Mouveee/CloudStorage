@@ -12,7 +12,7 @@
 		"react-full-screen": "^0.2.5",
 		"react-player": "^1.15.3",
 		"react-router-dom": "^5.2.0",
-		"react-scripts": "^3.4.1",
+		"react-scripts": "^3.4.3",
 		"react-scroll-to-component": "^1.0.2",
 		"typescript": "^3.9.7"
 	},
