@@ -111,6 +111,7 @@ class Skills extends React.Component {
               <li>C++</li>
               <li>C#</li>
               <li>Java</li>
+              <li>PHP</li>
             </ul>
           </li>
 
